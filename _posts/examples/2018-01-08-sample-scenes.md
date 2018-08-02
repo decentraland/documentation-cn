@@ -1,12 +1,12 @@
 ---
 date: 2018-01-06
-title: 示例
+title:  示例
 description: 使用 SDK 的一些代码和示例
 categories:
-  - documentation
+  - examples
 type: Document
-set: building-scenes
-set_order: 8
+set: examples
+set_order: 1
 ---
 
 
