@@ -4,8 +4,6 @@ title: 介绍
 description: Decentraland 是基于以太坊的虚拟现实平台。
 redirect_from:
   - /login?redirect=docs
-  - /docs
-  - /docs/
 categories:
   - Decentraland
 type: Document

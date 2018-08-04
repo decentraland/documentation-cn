@@ -9,11 +9,11 @@ set: building-scenes
 set_order: 7
 ---
 
-## 开始前
+## 预备工作
 
 确保以下内容：
 
-- 场景的 `scene.json` 文件设置了正确的属性，包括 Metamask 地址，以及要上传场景的 LAND 地块。
+- 场景的 `scene.json` 文件设置了正确的属性，包括 Metamask 地址，以及场景要上传的 LAND 地块。
 
 > 注意：CLI 会在创建场景时提示您提供此信息，但您也可以随时手动修改该文件。
 
@@ -25,7 +25,7 @@ set_order: 7
 
 * 您拥有必要数量的相邻 LAND 地块。 否则，您可以在[虚拟市场](({{ site.baseurl }}{% post_url /marketplace/2018-01-01-marketplace %}))中购买 LAND。
 
-## 为了发布您的场景：
+## 发布您的场景：
 
 1. 确保最近更改的场景已经在本地完成构建。如果还没有，请运行 `npm run build` 。
 2. 使用跟您的土地相关联的地址来登录 Metamask 帐户。
