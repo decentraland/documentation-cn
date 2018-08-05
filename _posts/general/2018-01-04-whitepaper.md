@@ -1,6 +1,6 @@
 ---
 date: 2018-01-01
-title: Whitepaper
+title: 白皮书
 redirect_from:
   - /docs/whitepaper
 description: Read more about the philosophy and design of Decentraland in our white paper.
@@ -11,8 +11,8 @@ set: general
 set_order: 3
 ---
 
-The original Decentraland white paper written by Esteban Ordano, Ariel Meilich, Yemel Jardi, and Manuel Araoz can be found using the link below.
+原始的 Decentraland 白皮书由 Esteban Ordano，Ariel Meil​​ich，Yemel Jardi 和 Manuel Araoz 编写，并可在以下的链接中找到。
 
-This white paper presents a detailed explanation of the original philosophical motivations behind the Decentraland project, along with a rigorous discussion of the proposed technical and economic approaches to building Decentraland. Please keep in mind that the Decentraland project is continually evolving, and some of the approaches outlined in the white paper have been modified.
+本白皮书详细阐述了 Decentraland 项目背后的原始哲学动机，严密讨论了建立 Decentraland 的技术和经济方法。请记住，Decentraland 项目正在不断发展之中，白皮书中概述的一些方法已有修改。
 
-* [Decentraland White Paper](https://decentraland.org/whitepaper.pdf)
+* [Decentraland 白皮书](https://decentraland.org/whitepaper.pdf)

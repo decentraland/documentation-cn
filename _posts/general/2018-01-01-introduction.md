@@ -1,11 +1,9 @@
 ---
 date: 2018-01-01
 title: 介绍
-description: Decentraland is a virtual reality platform powered by Ethereum.
+description: Decentraland 是基于以太坊的虚拟现实平台。
 redirect_from:
   - /login?redirect=docs
-  - /docs
-  - /docs/
 categories:
   - Decentraland
 type: Document

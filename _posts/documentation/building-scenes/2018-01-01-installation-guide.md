@@ -1,7 +1,7 @@
 ---
 date: 2018-01-01
-title: Installation Guide
-description: Step-by-step guide to installing the SDK
+title: 安装指南
+description: 安装 SDK 的分步指南
 categories:
   - documentation
 type: Document
@@ -55,7 +55,7 @@ npm i -g --unsafe-perm decentraland
 `npm install --global --production windows-build-tools`
 ...等 Visual Studio Build Tools 和 Python 安装程序都显示 “Successfully installed xxxx”。成功安装后，您将返回到命令提示符。
 
-1. 运行以下命令安装 CLI ：
+3. 运行以下命令安装 CLI ：
 `npm install -g decentraland`
 
 安装完成后，就可全局使用 `dcl` 命令。
@@ -82,6 +82,6 @@ npm i -g --unsafe-perm decentraland
 
 要将 CLI 更新到最新支持的版本，请运行以下命令：
 
-``bash
+```bash
 npm update -g decentraland
 ```

@@ -9,21 +9,36 @@ set: building-scenes
 set_order: 7
 ---
 
+## 预备工作
 
-为了发布您的场景：
+确保以下内容：
+
+- 场景的 `scene.json` 文件设置了正确的属性，包括 Metamask 地址，以及场景要上传的 LAND 地块。
+
+> 注意：CLI 会在创建场景时提示您提供此信息，但您也可以随时手动修改该文件。
+
+- 您的场景符合所有[场景限制](({{ site.baseurl }}{% post_url /sdk-reference/2018-01-06-scene-limitations %}))。 每次运行场景预览时，大多数限制都会得到验证。
+
+* 您已正确安装了 IPFS。 为此，请按照[这些步骤](https://ipfs.io/docs/install/)进行操作。
+
+* 您有一个 [Metamask](https://metamask.io/) 帐户，并为其分配了 LAND 地块。该帐户还必须持有最低金额以支付交易费。
+
+* 您拥有必要数量的相邻 LAND 地块。 否则，您可以在[虚拟市场](({{ site.baseurl }}{% post_url /marketplace/2018-01-01-marketplace %}))中购买 LAND。
+
+## 发布您的场景：
 
 1. 确保最近更改的场景已经在本地完成构建。如果还没有，请运行 `npm run build` 。
 2. 使用跟您的土地相关联的地址来登录 Metamask 帐户。
 3. 按照[这里的说明](https://ipfs.io/docs/getting-started/)启动 IPFS 守护程序。
 4. 最后，在场景的文件夹中运行 `dcl deploy`。
 
+如果这是您第一次将此场景上传到选定的地块，在文件上传完成后 Metamask 将要求您批准支付矿工费的交易。您只有在首次部署内容时才需付款，因为只有在将内容链接到 IPNS（IPFS 的命名服务）时，才会更新 LAND 的智能合约。
+
 `dcl deploy` 除了将您的内容上传到 IPFS 之外，还会更新您地块内容。
 
 目前，作为提高性能和访问者体验的措施，您的内容将在 Decentraland 的主要 IPFS 服务器上保存，以确保渲染您的地块所需的数据始终可用。
 
-> 部署内容时，不需支付以太坊矿工费。只有在将内容链接到 IPNS（IPFS 的命名服务）时，才会更新 LAND 上的智能合约。
-
-虽然此命令将您的场景部署到了您的地块，要注意的是目前用户还无法使用 Decentraland 浏览探索，因此您的内容还无法在虚拟世界里展示。
+> 注意：虽然此命令将您的场景部署到了您的地块，要注意的是目前用户还无法使用 Decentraland 浏览探索，因此您的内容还无法在虚拟世界里展示。
 
 ## 什么是IPFS？
 
