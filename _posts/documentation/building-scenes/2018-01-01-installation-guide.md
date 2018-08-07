@@ -25,7 +25,6 @@ Decentraland CLI 通过 [npm](https://www.npmjs.com/get-npm?utm_source=house&utm
 * [IPFS](https://dist.ipfs.io/#go-ipfs)
 * [Python 2.7.x](https://www.python.org/downloads/)
 
-
 ## 在 Mac OS 上安装 CLI
 
 在Mac OS上，只需运行以下命令：
