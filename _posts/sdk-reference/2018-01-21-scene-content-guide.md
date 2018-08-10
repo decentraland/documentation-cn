@@ -309,7 +309,7 @@ async render() {
 
 {% endraw %}
 
-#### Basic materials 基本材料
+#### Basic materials 基本材质
 
 Instead of the `<material />` entity, you can define a material through the `<basic-material />` entity. This creates materials that are shadeless and are not affected by light. This is useful for creating user interfaces that should be consistenlty bright, it can also be used to give your scene a more minimalistic look.
 

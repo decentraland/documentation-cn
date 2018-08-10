@@ -1,9 +1,9 @@
 ---
 date: 2018-01-01
-title: Entity reference
+title: 实体参考指南
 redirect_from:
   - /docs/entities
-description: Entities and the available interfaces for constructing entities.
+description: 实体和构造实体的可用接口
 categories:
   - sdk-reference
 type: Document
@@ -12,14 +12,23 @@ set_order: 4
 ---
 
 ## Introduction
+## 简介
 
 Entities are the basic unit for building everything in Decentraland scenes, think of them as the equivalent of Elements in a DOM tree in web development. All entities share the same base constructor, they all have a tag, attributes, and children entitiies.
 
+实体是 Decentraland 场景中构建所有内容的基本单元，可以将它们视为 Web 开发中 DOM 树中元素的等效元素。所有实体共享相同的基本构造函数，它们具有 tag、属性和子实体。
+
 `<entity>` is the base element of Decentraland, all elements are built by extending the base `entity` object. An `<entity>` can contain several components, each component introduces attributes that modify the entity in different ways. For example, you can include the `color` component on an entity to set its color, or include the `withCollisions` component to make it collidable.
+
+`<entity>` 是 Decentraland 的基本元素，所有元素都是继承基础的 `entity` 对象。 `<entity>` 可以包含多个组件，每个组件引入以不同方式修改实体的属性。 例如，您可以在实体上包含`color` 组件来设置其颜色，或者包含 `withCollisions` 组件以使其不可穿越。
 
 > Tip: When editing the code via a source code editor (like Visual Studio Code or Atom), you can see the list of components supported by a type of entity. Typically, this is done by placing the cursor in the entity and pressing _Ctrl + Space bar_.
 
+> 提示：通过源代码编辑器（如Visual Studio Code 或 Atom）编辑代码时，您可以看到某种实体支持的组件列表。 通过将光标放在实体中并按 _Ctrl + Space bar_ 就能显示。
+
 An entity can have other entities as children, these inherit the components from the parent. If a parent entity is positioned, scaled or rotated, its children are also affected. Thanks to this, we can arrange entities into trees.
+
+实体可以将其他实体作为子实体，这些实体从父实体继承组件。 如果父实体被定位、缩放或旋转，其子项也会受到影响。这样，我们就可以以树形结构来管理实体。
 
 ```ts
 interface IEntity {
@@ -36,6 +45,8 @@ interface IEntity {
 
 Creates a cube geometry.
 
+创建立方体。
+
 Example:
 
 {% raw %}
@@ -47,6 +58,7 @@ Example:
 {% endraw %}
 
 Interface reference:
+接口参考：
 
 ```tsx
 interface BoxEntity extends BaseEntity {
@@ -62,6 +74,7 @@ interface BoxEntity extends BaseEntity {
 ## Sphere
 
 Creates a sphere geometry.
+创建球体。
 
 Example:
 
@@ -74,6 +87,7 @@ Example:
 {% endraw %}
 
 Interface reference:
+接口参考：
 
 ```tsx
 interface SphereEntity extends BaseEntity {
@@ -89,6 +103,7 @@ interface SphereEntity extends BaseEntity {
 ## Plane
 
 Creates a plane geometry.
+创建平面。
 
 Example:
 
@@ -105,6 +120,7 @@ Example:
 {% endraw %}
 
 Interface reference:
+接口参考：
 
 {% raw %}
 
@@ -127,7 +143,10 @@ interface PlaneEntity extends BaseEntity {
 
 Creates a cone geometry. A cylinder is defined as a cone with the same base and top radius.
 
+创建圆锥（cone）。 圆柱体（Cylinder）定义为具有相同底部和顶部半径的圆锥体。
+
 Example cone:
+圆锥示例：
 
 ```tsx
 <cone
@@ -140,6 +159,7 @@ Example cone:
 ```
 
 Example cylinder:
+圆柱体示例：
 
 ```tsx
 <cylinder
@@ -153,6 +173,8 @@ Example cylinder:
 ```
 
 Interface reference:
+接口参考：
+
 
 ```tsx
 interface CylinderEntity extends BaseEntity {
@@ -189,15 +211,24 @@ interface CylinderEntity extends BaseEntity {
 ```
 
 ## glTF models
+## glTF 模型
+
 
 [glTF](https://www.khronos.org/gltf) (GL Transmission Format) is an open project by Khronos providing a common,
 extensible format for 3D assets that is both efficient and highly interoperable with modern web technologies.
 
-The `gltf-model` entity loads a 3D model using a glTF file. It supports both `.gltf` or `.glb` extensions.
+[glTF](https://www.khronos.org/gltf) (GL传输格式)是Khronos 的一个开源项目，它提供了一个通用的、高效又可与现代 Web 技术高度互操作的可扩展的 3D 资产格式。
 
-> `.gltf` is a more human-readable format, `.glb` is a more compact version of the same.
+The _gltf-model_ entity loads a 3D model using a glTF file. It supports both _.gltf_ or _.glb_ extensions.
+
+_gltf-model_实体使用 glTF 文件加载 3D 模型。它支持 _.gltf_ 或 _.glb_ 扩展名。
+
+> _.gltf_ is a more human-readable format, _.glb_ is a more compact version of the same.
+
+> _.gltf_ 使用了人类易读的格式，而 _.glb_ 是它的压缩版本。
 
 Simple example:
+简单的例子：
 
 {% raw %}
 
@@ -212,6 +243,7 @@ Simple example:
 {% endraw %}
 
 Example with animations:
+动画示例：
 
 {% raw %}
 
@@ -234,6 +266,7 @@ Example with animations:
 {% endraw %}
 
 Interface reference:
+接口参考：
 
 ```tsx
 interface GltfEntity extends BaseEntity {
@@ -271,11 +304,17 @@ interface SkeletalAnimation {
 
 > Note: Keep in mind that all models and their textures must be within the parameters of the [scene limitations]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-06-scene-limitations %}).
 
+> 注意：请记住，所有模型及其纹理必须在[场景限制]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-06-scene-limitations %})范围内。
+
 ## Base Entity
+## 基本实体
 
 The `BaseEntity` interface is the most flexible of all, as it comes with no predefined components and lets you set values for any of the possible components.
 
+`BaseEntity` 接口是最灵活的，因为它没有预定义的组件，可以让你为任何可能的组件设置值。
+
 Example:
+示例：
 
 {% raw %}
 
@@ -287,7 +326,11 @@ Example:
 
 You add a base entity to a scene via the XML tag `<entity>`. You can add an entity with no components to a scene to act as a container. The `<entity>` element has no components by default, so it's invisible and has no direct effect on the scene, but it can be positioned, scaled, and rotated and it can contain other child entities in it. Child entities are scaled, rotated, and positioned relative to the parent entity.
 
+您可以通过 XML 标记 `<entity>` 将基本实体添加到场景中。 可以将没有组件的实体添加到场景中以充当容器。 `<entity>` 元素默认没有组件，因此它是不可见的并且对场景没有直接影响，但它可以被定位、缩放和旋转，并且它可以包含其他子实体。子实体相对于父实体进行缩放、旋转和定位。
+
 In dynamic scenes, it's also useful to include entities with no components as wrappers to group entities into a single object that can then be passed as an input for certain functions.
+
+在动态场景中，使用没有组件的实体将一组实体封装成一个对象也是有用的，它可以成为一些函数的输入参数。
 
 Interface reference:
 
@@ -429,6 +472,8 @@ export type SoundComponent = {
 > WARNING: We only support the `obj-model` interface for legacy compatibility. We will probably get rid of it in the future, please use GLTF when
 > possible.
 
+> 注意：目前作为遗留功能支持 obj 模型，但我们有可能在未来不再支持。请尽量使用 GLTF。
+
 Example:
 
 ```tsx
@@ -436,6 +481,7 @@ Example:
 ```
 
 Interface reference:
+接口参考：
 
 ```tsx
 interface ObjEntity extends BaseEntity {
@@ -450,7 +496,11 @@ interface ObjEntity extends BaseEntity {
 
 Materials are defined as separate entities in a scene, this prevents material definitions from being duplicated, keeping the scene's code lighter.
 
+材质被定义为场景中的单独实体，这可以预防重复定义材质，简化场景中的代码。
+
 Materials can then be applied to any entity that is a child of MaterialEntity (which is itself a child of BaseEntity). All primitives and plane entities can have a material, which is set by adding a `material` component to it.
+
+然后可以将材质应用于 MaterialEntity（它本身就是BaseEntity 的子类）的子类的任何实体。所有基本实体和平面实体都可以使用材质，可以通过向其添加 `material` 组件来设置。
 
 Example:
 
@@ -467,7 +517,10 @@ Example:
 
 This example shows the definition of a new material and then a shpere entity that uses it.
 
+此示例定义一个新的材质，然后将它应用于球体。
+
 Interface reference:
+接口参考：
 
 ```tsx
 export type MaterialDescriptorEntity = {
@@ -642,10 +695,15 @@ export type BasicMaterialEntity = {
 ```
 
 ## Creating custom interfaces
+## 创建自定义接口
 
 You can create your own interface to create entities with customized default behavior and characteristics. To define the interface, create a new _.tsx_ file that includes all the components and methods needed to construct and handle the entity.
 
+您可以创建自己的接口来创建具有自定义默认行为和特征的实体。 要定义接口，请创建一个新的 _.tsx_ 文件，其中包含构造和处理实体所需的所有组件和方法。
+
 For example, the sample below defines an entity type `button`:
+
+例如，下面的示例定义了一个实体类型 `button`：
 
 {% raw %}
 
@@ -674,11 +732,15 @@ export const Button = (props: IProps) => {
 
 Before you can use this entity type, save it as a _.tsx_ file and import it to _scene.tsx_:
 
+在使用此实体类型之前，请将其保存为 _.tsx_ 文件并将其导入 _scene.tsx_：
+
 ```tsx
 import { Button } from "./src/Button"
 ```
 
 After importing the file, you can add buttons to a scene by simply writing the following:
+
+导入文件后，只需编写以下内容即可向场景添加按钮：
 
 {% raw %}
 
