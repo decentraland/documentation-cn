@@ -95,9 +95,9 @@ For additional terms, definitions, and explanations, please refer to our [comple
 
 ## SDK 安装
 
-The SDK includes a lot of different parts and components. For detailed, step-by-step instructions on how to download and install everything in the SDK, please refer to the [SDK Quick Start Guide]({{ site.baseurl }}{% post_url /building-scenes/2018-01-01-installation-guide %}).
+The SDK includes a lot of different parts and components. For detailed, step-by-step instructions on how to download and install everything in the SDK, please refer to the [SDK Quick Start Guide]({{ site.baseurl }}{% post_url documentation/building-scenes/2018-01-01-installation-guide %}).
 
-SDK 中包含许多不同的部件和组件。有关如何下载和安装 SDK 的详细分步说明，请参阅 [SDK 快速入门指南]({{ site.baseurl }}{% post_url /building-scenes/2018-01-01-installation-guide %})。
+SDK 中包含许多不同的部件和组件。有关如何下载和安装 SDK 的详细分步说明，请参阅 [SDK 快速入门指南]({{ site.baseurl }}{% post_url documentation/building-scenes/2018-01-01-installation-guide %})。
 
 #### CLI
 
@@ -109,9 +109,9 @@ After generating your new Decentraland scene locally on your own machine, you ca
 
 在您自己的机器上本地生成新的 Decentraland 场景后，您就可以使用您喜欢的文本编辑器编辑场景。在本地测试场景后，您可以使用 CLI 将内容上传到 IPFS。
 
-For more step-by-step instructions on installing the CLI, please read our [SDK Quick Start Guide]({{ site.baseurl }}{% post_url /building-scenes/2018-01-01-installation-guide %}) or the [CLI Tutorial](https://docs.decentraland.org/v1.0/docs/command-line-interface)
+For more step-by-step instructions on installing the CLI, please read our [SDK Quick Start Guide]({{ site.baseurl }}{% post_url documentation/building-scenes/2018-01-01-installation-guide %}) or the [CLI Tutorial](https://docs.decentraland.org/v1.0/docs/command-line-interface)
 
-有关安装 CLI 的更多分步说明，请阅读我们的 [SDK 快速入门指南]({{ site.baseurl }}{% post_url /building-scenes/2018-01-01-installation-guide %})或 [CLI 教程](https://docs.decentraland.org/v1.0/docs/command-line-interface)。
+有关安装 CLI 的更多分步说明，请阅读我们的 [SDK 快速入门指南]({{ site.baseurl }}{% post_url documentation/building-scenes/2018-01-01-installation-guide %})或 [CLI 教程](https://docs.decentraland.org/v1.0/docs/command-line-interface)。
 
 #### API
 

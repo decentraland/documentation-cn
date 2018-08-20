@@ -54,9 +54,14 @@ set_order: 6
 
 ## Shader 着色器支持
 
-并非所有着色器都可导入 Decentraland 的模型。 如果您正在使用 Blender，您可以使用：
+并非所有着色器都可导入 Decentraland 的模型。 如果您正在使用 Blender，确保使用以下的一种方式：
   
-- 使用 Blender Render，支持所有的着色器，例如漫反射，镜面反射，透明度等。
-- 使用 Cycles 渲染器，您*只能*使用 PBR（基于物理的渲染）。 这是通过使用 `Principled BSDF` 着色器完成的。 此着色器非常灵活，它包含漫反射，粗糙度，金属度和辐射等属性，允许您配置材质与光的交互方式。
+- 标准材质：支持任何着色器，例如漫反射，镜面反射，透明度等。
 
-> Cycles 渲染器的其他着色器均不受支持。
+  > 提示：使用 Blender 时，这些是 _Blender Render_ 渲染支持的材质。
+
+- PBR（基于物理的渲染）材质：此着色器非常灵活，因为它包含漫反射，粗糙度，金属度和辐射等属性，允许您配置材质与光的交互方式。
+
+  > 提示：使用 Blender 时，可以通过设置 _Cycles_ 渲染器并添加 _Principled BSDF_ 着色器来使用 PBR 材质。请注意，Cycles 渲染器的其他着色器均不受支持。
+
+请参阅[实体接口]({{ site.baseurl }}{% post_url /sdk-reference/2018-06-21-entity-interfaces %})查看材质可以配置的所有属性列表。
