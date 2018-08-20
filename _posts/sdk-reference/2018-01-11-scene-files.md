@@ -1,7 +1,7 @@
 ---
 date: 2018-01-10
-title: Files in a scene
-description: Default files created in a new scene
+title: 场景中的文件
+description: 新建场景生成的缺省文件
 categories:
   - documentation
 type: Document

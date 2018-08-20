@@ -12,6 +12,5 @@ type: Video
 set: marketplace
 set_order: 1
 ---
-Video tutorial introducing the Decentraland Marketplace, with step-by-step instructions on how to get started buying, selling, and managing your LAND.
 
 Decentraland 虚拟市场的视频教程，一步步详细解说如何开始买卖和管理您的 LAND。

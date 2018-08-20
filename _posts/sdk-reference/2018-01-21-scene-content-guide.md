@@ -54,8 +54,6 @@ Decentraland 中的三维场景是基于 [Entity-Component](https://en.wikipedia
 
 {% endraw %}
 
-To display a value that isn't of type _string_ in a text entity, use the `toString()` function to convert its type to _string_.
-
 要在文本实体中显示非 _string_ 类型的值，请使用 `toString()` 函数将其类型转换为 _string_。
 
 {% raw %}
@@ -172,8 +170,6 @@ To display a value that isn't of type _string_ in a text entity, use the `toStri
 {% endraw %}
 
 #### 面向用户
-
-You can set an entity to act as a _billboard_, this means that it will always rotate to face the user. This was a common technique used in 3D games of the 90s, where most entities were planes that always faced the player, but the same can be used with and 3D model. This is also very handy to add to `text` entities, since it makes them always legible.
 
 您可以设置一个实体为_billboard_，这意味着它将始终旋转以面向用户。这是 90 年代 3D 游戏中常用的技术，当时大多数实体都是面朝玩家的平面，但是 3D 模型同样可以。这对于 `text` 实体非常方便，因为这将让它始终清晰易读。
 
@@ -324,9 +320,7 @@ async render() {
 
 {% endraw %}
 
-#### Basic materials 基本材质
-
-Instead of the `<material />` entity, you can define a material through the `<basic-material />` entity. This creates materials that are shadeless and are not affected by light. This is useful for creating user interfaces that should be consistenlty bright, it can also be used to give your scene a more minimalistic look.
+#### 基本材质
 
 您可以使用 `<basic-material />` 而不是 `<material />` 实体定义材质。 这样就可以制成无阴影且不受光影响的材质。 这对于创建应该保持一致的用户界面非常有用，它还可以用于为场景提供更简约的外观。
 
@@ -364,8 +358,6 @@ Instead of the `<material />` entity, you can define a material through the `<ba
 {% endraw %}
 
 在上面的示例中，材质的图像位于 `materials` 文件夹中，该文件夹位于场景项目文件夹的根目录。
-
-> Tip: We recommend keeping your models separate in a `/models` folder inside your scene.
 
 > 提示：我们建议您将模型分开放在场景中的 `/models` 文件夹中。
 
@@ -452,8 +444,6 @@ glTF 模型还可以包括自己的纹理，材质，collider（碰撞）和动�
 
 `src` 属性指向声音文件的位置。
 
-In the example above, the audio file is located in a `sounds` folder, which is located at root level of the scene project folder.
-
 在上面的示例中，音频文件位于 `sounds` 文件夹中，此文件夹位于场景项目文件夹的根目录中。
 
 > 提示：我们建议您将声音文件保存在场景内的 `/sounds` 文件夹中。
@@ -476,7 +466,6 @@ same for video??
 
 ## Video
 
-You can add video to your scene by including a `video` entity.
 您可以通过添加 `video` 实体将视频添加到场景中。
 
 {% raw %}
@@ -525,8 +514,6 @@ _video_ 实体需要在 `src` 中选择一个视频，可以是本地文件，�
   - 在 Blender 等外部工具中编辑模型以包含 _collider 对象_。 collider 必须命名为 _x_collider_，其中 _x_ 是模型的名称。 因此，对于名为 house 的模型，必须将 collider 命名为_house_collider_。
 
 _collider_ 是一组平面或几何形状，用于定义模型的哪些部分发生碰撞。这样可以有更多的控制并降低对系统的要求，因为碰撞网格通常比原始模型更简单（具有更少的顶点）。
-
-See [3D models considerations]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-09-external-3d-models %}) for more details on what colliders are and how to add them.
 
 有关 collider 是什么以及如何添加的更多详细信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-09-external-3d-models %})。
 
