@@ -56,9 +56,6 @@ set_order: 1
 
 #### 动态实体数量
 
-In this example, that's described in greater detail in a [blogpost](https://blog.decentraland.org/developer-tutorial-creating-a-dynamic-flock-of-hummingbirds-8c2cd41f8296), a new bird appears and starts flying randomly around the scene each time you click on a tree. It's a good example of how to build multiple entities from an array and of how to handle 3D model animations.
-[Link](https://github.com/decentraland/sample-scene-array-of-entities/blob/master/README.md)
-
 这个例子中，在 [博客](https://blog.decentraland.org/developer-tutorial-creating-a-dynamic-flock-of-hummingbirds-8c2cd41f8296) 中有更详细的描述，每次点击树都会有一只新的鸟出现并开始在场景中随机飞行。这是如何从数组构建多个实体以及如何处理 3D 模型动画的一个很好的示例。
 [链接](https://github.com/decentraland/sample-scene-array-of-entities/blob/master/README.md)
 
@@ -81,9 +78,6 @@ In this example, that's described in greater detail in a [blogpost](https://blog
 [链接](https://github.com/decentraland/sample-scene-Block-Dog)
 
 #### 国际象棋游戏
-
-This example, that's described in greater detail in a [blogpost](https://blog.decentraland.org/developer-tutorial-port-a-redux-chess-game-to-decentraland-49f509b2eba6), takes an existing 2D chess game and builds a 3D scene around it in decentraland. The game can only start when two players have accepted to join the game, and each can only interact with the scene when it's their turn.
-[link](https://github.com/cazala/decentraland-redux-chess-app)
 
 这个例子在[博客](https://blog.decentraland.org/developer-tutorial-port-a-redux-chess-game-to-decentraland-49f509b2eba6)中有更详细的描述，取自现有的 2D 国际象棋游戏，然后在 decentraland 3D 场景中构建。只有在两个玩家接受加入游戏，游戏才会开始，并且每个玩家只有在轮到他们时才能与场景互动。
 [链接](https://github.com/cazala/decentraland-redux-chess-app)
