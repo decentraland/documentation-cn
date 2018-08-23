@@ -116,6 +116,7 @@ For more details and a full reference of what's possible with this library, see 
 
 Another way to perform operations on the Ethereum blockchain is through the ethereum controller. This controller is packaged with the SDK, so you don't need to run any manual instalations. You must first import it into your scene:
 
+
 1.  Import the `EthereumController` to the .tsx file:
 
 {% raw %}
