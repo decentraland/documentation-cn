@@ -23,7 +23,51 @@ state = {
 }
 ```
 
-首次渲染场景时，必须为每个状态变量赋予初始值。您可以通过声明自定义接口来定义状态对象的类型。这样做是可选的，但我们建议这样做，特别是对于复杂的场景，因为它有助于验证输入并使得调试更为容易。
+状态应该只 **包含** 数据，没有逻辑或方法。我们不建议将具有自己方法的对象实例分配给状态中的变量。所有场景的逻辑都应该在您的自定义类中执行，该类扩展了 [scriptable scene]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %}) 类。
+
+首次渲染场景时，必须为每个状态变量赋予初始值。
+
+构成场景状态的变量应该是代表场景的最小可能集合，不应该保存冗余信息。要确定是否应将某数据作为状态的一部分，问一下自己下面几个问题：
+
+- 此信息会随时间而变化吗？如果没有，它应该声明为常量而不是状态。
+- 在实例化场景类时是否传递了此信息，如果是这样，它可能应该是 `Props` 而不是状态的一部分。
+- 你是否可以通过计算其他状态变量或属性就可以得到这些信息吗？如果是，您应该考虑每次计算它而不是将其存储在状态中。 请记住，这会对场景性能产生影响，因此在某些情况下，最好在场景状态下存储更多信息。
+
+## 本地和远程场景
+
+**本地场景**将场景状态存储在本地，作为 `ScriptableScene` 对象的一部分。 例如，使用 Decentraland CLI 创建场景时， _Basic_ 和 _Interactive_ 选项的默认场景都是本地场景。
+
+{% raw %}
+
+```tsx
+export default class Scene extends ScriptableScene {
+  state = {
+    buttonState: 0,
+    isDoorClosed: false,
+    queboxPosition: { x: 0, y: 0, z: 0 }
+  }
+
+  // (...)
+}
+```
+
+{% endraw %}
+
+本地场景完全在用户的本地客户端中运行。当场景状态中的变量值发生更改时，它仅更改客户端中的本地表示，并且不会传播到场景的其他用户。这意味着每个用户可能对场景的外观有不同的感知，即使用户可能看到彼此移动。
+
+例如，如果用户打开门，其他用户将不会看到此门打开，因为用户只能影响他们自己的本地场景状态。
+
+**远程场景**将场景状态存储在远程服务器中。本地客户端从此服务器检索信息以便在场景中呈现场景。当场景状态中的变量值更改时，此更改将被推送到远程服务器以更新其场景状态的表示。 然后，场景的所有用户将根据存储在远程服务器中的场景状态在本地渲染其场景，因此所有用户都将看到更改。
+
+回到前面的例子：在远程场景中，如果用户打开门，所有其他用户也应该能看到此门打开。
+
+## 自定义场景状态接口
+
+您可以通过声明自定义接口来定义状态对象的类型。这样做是可选的，但我们建议使用它，特别是对于复杂的场景，因为它有助于验证输入并更容易调试。
+
+下面的示例为场景状态定义了一个自定义接口，并将其传递给 scriptable scene 对象。
+
+{% raw %}
 
 ```tsx
 export interface IState {
@@ -43,58 +87,19 @@ export default class Scene extends ScriptableScene<any, IState> {
 }
 ```
 
+{% endraw %}
+
 `ScriptableScene` 类可选地接受两个参数：属性（在这种情况下为 `any`，因为没有使用）和场景状态，在这种情况下必须匹配自定义接口中描述的类型 `IState`。
 
-您选择构成场景状态的变量应该是代表场景的最小可能集合，您不应该添加冗余信息。确定是否将一条信息作为状态的一部分，可以问一下以下的几个问题：
+## 取得状态值
 
-- 此信息会随时间而变化吗？如果没有，它可能不应该是状态的一部分。
-- 在实例化场景类时是否传递了此信息，如果是这样，它可能应该是 `Props` 而不是状态的一部分。
-- 你是否可以通过计算其他状态变量或属性就可以得到这些信息吗？如果是，请不要包括。
+您可以从场景对象中的任何位置引用状态变量的值。
 
+#### 本地场景中
 
-## 设置状态
+在 _本地_ 场景中，状态存储在场景对象本身中，因此您可以从 `this.state.<variable name>` 获取。
 
-您可以在场景对象的任何方法中设置状态变量的值。为此，请使用 `this.setState`，如下所示：
-
-```tsx
-async buttonPressed(){
-  this.setState({buttonState : 1 })
-}
-```
-
-每次更新场景的状态时，都会调用 `render()` 函数使用新状态渲染场景。
-
->注意：为了防止场景每次都被渲染，你可以使用 [`shouldSceneUpdate()` 函数]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %})， 这样它会只根据某些规则有条件地运行 `Render()` 函数。
-
-如果状态包含多个变量并且 `setState()` 语句只影响其中一个变量，那么它将保持所有其他变量不变。
-
-重要的是，每次更改状态时，都要通过 `setState` 函数执行，不要直接设置值。否则将导致场景周期出现问题。
-
-```tsx
-// Wrong
-this.state.buttonState = 1
-
-// Correct
-this.setState({ buttonState: 1 })
-```
-
-When dealing with arrays in the scene state, you can't update a single element in the array at a time. You must set a new value for the variable consiting of an entire new array, including any elements that haven't changed.
-
-处理场景状态中的数组时，不能一次更新数组中的单个元素。 您必须为整个新数组的变量设置新值，包括未更改的任何元素。
-
-## 强制更新
-
-If you always change the scene state through `setState()`, the rendering of your scene should always be in sync with the scene state. However, for exceptional cases you might need to refresh the rendering of the scene manually. To do this, call the `forceUdate()` method.
-
-如果始终通过 `setState()` 更改场景状态，则场景的渲染始终与场景状态同步。 但是，对于特殊情况，您可能需要手动刷新场景的渲染。为此，请调用 `forceUdate()` 方法。
-
-```
-this.forceUpdate()
-```
-
-### 状态引用
-
-您可以通过 `this.state.<variable name>` 从场景对象中的任何位置引用状态变量的值。
+{% raw %}
 
 ```tsx
 async checkDoor(){
@@ -102,7 +107,9 @@ async checkDoor(){
 }
 ```
 
-在下面的示例中，`render()`方法绘制动态场景，其中实体的位置基于状态中的变量。一旦该变量的值发生变化，渲染的场景也会发生变化。
+{% endraw %}
+
+在下面的示例中，`render()` 方法绘制动态场景，其中实体的位置基于状态中的变量。 一旦该变量的值发生变化，渲染的场景也会发生变化。
 
 {% raw %}
 
@@ -118,20 +125,82 @@ async render() {
 
 {% endraw %}
 
-要调试场景，可以使用 `console.log(this.state)` 在场景执行的关键时刻记录整个场景状态。您还可以使用`console.log` 来记录状态中的特定变量。
+#### 远程场景中
+
+在 _远程_ 场景中，状态存储在远程服务器中。由名为 _State.ts_ 的文件处理。通过调用 `getState()` 函数获得状态，该函数在 _State.ts_ 中定义。
 
 {% raw %}
 
 ```tsx
-async sceneDidMount() {  
-  this.subscribeTo("pointerDown", e => {
-    console.log(this.state)
-  })
-  // (...)
+async checkDoor(){
+  return getState().isDoorClosed
 }
 ```
 
 {% endraw %}
+
+
+## 设置状态
+
+您可以使用 `setState()` 设置状态变量的值。
+
+`setState()` 只影响由它显式调用的变量。如果场景状态中还有其他未命名的变量，则保持不变。
+
+处理场景状态中的数组时，不能一次只更新数组中的单个元素。您必须为整个新数组的变量设置新值，包括其它未更改的元素。
+
+每次更新场景的状态时，都会调用 `render()` 函数使用新的状态渲染场景。
+
+> 注意：为了防止场景每次都被渲染，你可以使用 [`shouldSceneUpdate()` 函数]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %})， 这样它会只根据某些规则有条件地运行 `Render()` 函数。
+
+#### 本地场景中
+
+在 _local_ 场景中，状态存储在 scriptable scene 对象中，因此您可以使用 `this.setState()` 来设置，如下所示：
+
+```tsx
+async buttonPressed(){
+  this.setState({
+    buttonState : 1,
+    isDoorClosed: false
+    })
+}
+```
+
+#### 远程场景中
+
+在 _远程_ 场景中，状态存储在远程服务器中。并由名为 _State.ts_ 的文件处理。您可以通过调用 _State.ts_ 中定义的 `setState()` 函数来设置状态。
+
+```tsx
+async buttonPressed(){
+  setState({
+    buttonState : 1,
+    isDoorClosed: false
+    })
+}
+```
+
+#### 始终使用 setState()
+
+重要的是，每次更改状态时，都要通过 `setState` 函数执行，不要直接设置值。否则将导致场景的生命周期出现问题。
+
+```tsx
+// Wrong
+this.state.buttonState = 1
+
+// Correct for local scenes
+this.setState({ buttonState: 1 })
+
+// Correct for remote scenes
+setState({ buttonState: 1 })
+```
+
+## 强制更新
+
+如果始终通过 `setState()` 更改场景状态，则场景的渲染始终与场景状态同步。 但是，对于特殊情况，您可能需要手动刷新场景的渲染。为此，请调用 `forceUdate()` 方法。
+
+```
+this.forceUpdate()
+```
+
 
 ## 从子组件引用状态
 

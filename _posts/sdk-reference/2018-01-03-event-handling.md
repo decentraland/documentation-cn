@@ -77,7 +77,7 @@ export default class LastClicked extends ScriptableScene {
 {% raw %}
 
 ```tsx
-import { createElement, ScriptableScene } from 'metaverse-api'
+import { createElement, ScriptableScene } from "metaverse-api"
 
 export default class RedButton extends ScriptableScene {
   state = {
@@ -85,7 +85,7 @@ export default class RedButton extends ScriptableScene {
   }
 
   async sceneDidMount() {
-    this.eventSubscriber.on('redButton_click', ()) => {
+    this.eventSubscriber.on("redButton_click", ()) => {
       this.setState({ buttonState: !this.state.buttonState })
       console.log(this.state.buttonState)
     })

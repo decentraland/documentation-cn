@@ -1,6 +1,6 @@
 ---
-title: Marketplace
-description: API reference and tutorials for the Marketplace.
+title: 虚拟市场
+description: 虚拟市场的 API 参考和教程
 color: '#D5D2FF'
 accent_color: '#8D85FF'
 order: 3

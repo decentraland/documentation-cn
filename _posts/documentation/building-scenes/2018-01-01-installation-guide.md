@@ -25,7 +25,6 @@ Decentraland CLI 通过 [npm](https://www.npmjs.com/get-npm?utm_source=house&utm
 * [IPFS](https://dist.ipfs.io/#go-ipfs)
 * [Python 2.7.x](https://www.python.org/downloads/)
 
-
 ## 在 Mac OS 上安装 CLI
 
 在Mac OS上，只需运行以下命令：
@@ -85,3 +84,16 @@ npm i -g --unsafe-perm decentraland
 ```bash
 npm update -g decentraland
 ```
+
+## 更新场景的 SDK 版本
+
+通过更新 CLI，您用它新创建的场景将使用最新版本的 SDK。在更新 CLI 之前创建的项目将继续使用创建它们时所用的 SDK 版本。更升级，唯一方法是手动更新场景中的 SDK 版本。
+
+更新 Decentraland SDK 版本：
+
+1. 在场景文件夹中打开文件 _package-lock.josn_。
+2. 查找正在使用的 _metaverse_api_ 版本，并手动将其更改为最新版本的 SDK。
+
+> 提示：如果您不确定最新版本是哪个，请查看[发行说明]{{ site.baseurl }}{% post_url /releases/sdk/2018-01-01-4.0.0 %})。
+
+>注意：使用 `npm` 查看已安装的 SDK 版本有可能跟预览场景时使用的 SDK 版本不一致。要了解所使用的版本的唯一方法是查看 _package-lock.josn_ 文件。
