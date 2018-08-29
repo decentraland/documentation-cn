@@ -1,4 +1,5 @@
---- ---
+--- 
+---
 <style>
   .docs-header {
     height: 48px;
@@ -30,11 +31,11 @@
       文档
     </h2>
     <div class="docs-top-search">
-        <div class="docs-top-languages">
-            <a href="http://docs.decentraland.org" class="translate-link-en" data-event-category="Translate to English" data-event-action="click">English</a>
-        </div>
-			{% include search.html %}
-		</div>
+      <div class="docs-top-languages">
+        <a href="http://docs.decentraland.org" class="translate-link-en" data-event-category="Translate to English" data-event-action="click">English</a>
+      </div>
+      {% include search.html %}
+    </div>
   </section>
   <section>
     <h1 class="docs-intro-title">
@@ -51,9 +52,12 @@
     </div>
     <div class="docs-listing">
       <ul class="listing">
-        {% assign sets = site.sets | sort: 'order' %} {% for set in sets %} {% assign series_posts = site.posts | where: "set", set.slug
-        | sort: 'set_order' %} {% assign post = series_posts[0] %} {% assign size = series_posts | size %} {% if size > 0
-        %}
+        {% assign sets = site.sets | sort: 'order' %} 
+        {% for set in sets %} 
+          {% assign series_posts = site.posts | where: "set", set.slug | sort: 'set_order' %} 
+          {% assign post = series_posts[0] %} 
+          {% assign size = series_posts | size %} 
+          {% if size > 0 %}
         <li>
           <a class="docs-wrapper" href="{{ post.url }}">
             <div class="icon" style="background-color: {{set.color}}; background-image: url({{ site.baseurl }}/images/sets/{{set.img}})">{%
@@ -67,11 +71,13 @@
             </article>
           </a>
         </li>
-        {% endif %} {% endfor %}
+        {% endif %} 
+        {% endfor %}
       </ul>
     </div>
 
-    {% include help.html %} {% include override-color.html accent_color="#ff0044" %}
+    {% include help.html %} 
+    {% include override-color.html accent_color="#ff0044" %}
   </section>
 
 </div>
