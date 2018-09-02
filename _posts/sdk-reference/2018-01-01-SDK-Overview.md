@@ -57,7 +57,7 @@ Decentraland 中的**场景**是在一个或多个 LAND 地块上渲染的 3D �
 
 ## SDK 安装
 
-SDK 中包含许多不同的部件和组件。有关如何下载和安装 SDK 的详细分步说明，请参阅 [SDK 快速入门指南]({{ site.baseurl }}{% post_url documentation/building-scenes/2018-01-01-installation-guide %})。
+SDK 中包含许多不同的部件和组件。有关如何下载和安装 SDK 的详细分步说明，请参阅 [SDK 快速入门指南]({{ site.baseurl }}{% post_url getting-started/2018-01-01-installation-guide %})。
 
 #### CLI
 
@@ -65,15 +65,15 @@ Decentraland 命令行界面（CLI）能让您在不使用区块钱链和 IPFS�
 
 在您自己的机器上本地生成新的 Decentraland 场景后，您就可以使用您喜欢的文本编辑器编辑场景。在本地测试场景后，您可以使用 CLI 将内容上传到 IPFS。
 
-有关安装 CLI 的更多分步说明，请阅读我们的 [SDK 快速入门指南]({{ site.baseurl }}{% post_url documentation/building-scenes/2018-01-01-installation-guide %})或 [CLI 教程](https://docs.decentraland.org/v1.0/docs/command-line-interface)。
+有关安装 CLI 的更多分步说明，请阅读我们的 [SDK 快速入门指南]({{ site.baseurl }}{% post_url getting-started/2018-01-01-installation-guide %})或 [CLI 教程](https://docs.decentraland.org/v1.0/docs/command-line-interface)。
 
 #### API
 
-`metaverse-api`（通常称为 API）是一个 TypeScript 包，其中包含辅助函数库，能让您创建交互式单人游戏和多人游戏体验。除了有助于促进用户或其他应用程序之间的内部交易的方法之外，API 还包括允许您在 LAND 上创建和操作对象的方法。
+`decentraland-api`（以前被称为 `metaverse-api`，通常称为 API）是一个 TypeScript 包，其中包含辅助函数库，能让您创建交互式单人游戏和多人游戏体验。除了有助于促进用户或其他应用程序之间的内部交易的方法之外，API 还包括允许您在 LAND 上创建和操作对象的方法。
 
 ## API 元素
 
-API 包含 `metaverse-api` 包中的所有内容。包含了编写 TypeScript 场景时所需的所有类和辅助方法，无论场景是静态的，动态的还是远程的。
+API 包含 `decentraland-api` 包中的所有内容。包含了编写 TypeScript 场景时所需的所有类和辅助方法，无论场景是静态的，动态的还是远程的。
 
 我们以实体组件系统进行场景开发来设计 Decentraland API，其中**实体**包括用户将能够在其Web 浏览器中与之交互的所有资产（如音频文件，视频文件和 3D 对象），**组件**充当客户端的底层函数与您编写的脚本之间的桥梁，以控制场景中的实体。
 

@@ -2,15 +2,17 @@
 date: 2018-01-01
 title: 场景预览
 description: 您可以在场景预览中看到的内容
+redirect_from:
+  - /documentation/preview-scene/
 categories:
-  - documentation
+  - getting-started
 type: Document
-set: building-scenes
-set_order: 4
+set: getting-started
+set_order: 3
 tag: introduction
 ---
 
-一旦你[构建了一个新场景]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-03-create-scene %}) 或下载了[示例场景]({{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %}) ，你就可以在本地预览。
+一旦你[构建了一个新场景]({{ site.baseurl }}{% post_url /getting-started/2018-01-03-create-scene %}) 或下载了[示例场景]({{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %}) ，你就可以在本地预览。
 
 ## 开始前
 
@@ -20,7 +22,7 @@ tag: introduction
 npm install -g decentraland
 ```
 
-有关在 Windows 和 Linux 系统上安装的更多详细信息和特定说明，请参阅[安装指南]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-01-installation-guide %})。
+有关在 Windows 和 Linux 系统上安装的更多详细信息和特定说明，请参阅[安装指南]({{ site.baseurl }}{% post_url /getting-started/2018-01-01-installation-guide %})。
 
 
 ## 预览本地场景
@@ -74,7 +76,7 @@ dcl start
 
 ## 上传场景到 decentraland
 
-一旦您对您的场景感到满意，您可以上传并将其发布到 Decentraland，具体操作请参阅[发布]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-07-publishing %}) 。
+一旦您对您的场景感到满意，您可以上传并将其发布到 Decentraland，具体操作请参阅[发布]({{ site.baseurl }}{% post_url /getting-started/2018-01-07-publishing %}) 。
 
 ## 预览命令的参数
 
@@ -83,7 +85,7 @@ dcl start
 - `--no-browser` 阻止预览打开新浏览器选项卡。
 - `--port` 分配一个特定的端口来运行场景。否则，它将使用任何可用的端口。
 
-> 要预览为早期版本 SDK 构建的旧场景，必须在项目中安装最新版本的`metaverse-api` 和 `metaverse-rpc` 包。 可以使用命令 `dcl -v` 检查 CLI 版本。
+> 要预览为早期版本 SDK 构建的旧场景，必须在项目中安装最新版本的`decentraland-api` 和 `decentraland-rpc` 包。 可以使用命令 `dcl -v` 检查 CLI 版本。
 
 ## 场景预览的基本用法
 
@@ -133,6 +135,10 @@ dcl start
 如果您的场景超出任何[场景限制]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-06-scene-limitations %})，例如，如果其中包含太多三角形，场景不会被渲染。如果发生这种情况，将在场景所在的空间中显示警告标志。
 
 如果实体位于或超出场景的限制，实体将红色闪烁以指示此种情况。场景中的任何内容都不能超出场景限制。场景在本地还可以渲染，但部署到 Decentraland 时会被阻止。
+
+您还可以在代码中添加 `console.log()` 和 `console.trace()` 命令，以便打印信息到 JavaScript 控制台。
+
+在实时与场景交互时，您还可以使用开发人员工具菜单中的 `sources` 选项卡添加断点并暂停程序执行。
 
 ## 查看 collision 碰撞网格
 
