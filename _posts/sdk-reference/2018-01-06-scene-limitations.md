@@ -32,31 +32,31 @@ From a scene's code, you can query both the limitations that apply to the scene 
 
  #### 获得场景限制
 
-`this.querySceneLimits()` 可以获取场景的限制。它根据 _scene.json_ 文件中场景占用的地块数计算场景的限制。此命令返回的值不会随时间变化，因为场景的大小是不变的。
+`this.entityController.querySceneLimits()` 可以获取场景的限制。它根据 _scene.json_ 文件中场景占用的地块数计算场景的限制。此命令返回的值不会随时间变化，因为场景的大小是不变的。
 
-`this.querySceneLimits()` 是异步的，所以我们建议用 `await` 语句调用。
+`querySceneLimits()` 是异步的，所以我们建议用 `await` 语句调用。
 
-`this.querySceneLimits()` 函数返回具有以下属性的 promise 对象，所有属性都是 _number_。
+`querySceneLimits()` 函数返回具有以下属性的 promise 对象，所有属性都是 _number_。
 
 {% raw %}
 
  ```tsx
- //get limits object
- const limits = await this.querySceneLimits()
+ // get limits object
+ const limits = await this.entityController.querySceneLimits()
 
- //print maximum triangles
+ // print maximum triangles
  console.log(limits.triangles)
 
- //print maximum entities
+ // print maximum entities
  console.log(limits.entities)
 
- //print maximum bodies
+ // print maximum bodies
  console.log(limits.bodies)
 
- //print maximum materials
+ // print maximum materials
  console.log(limits.materials)
 
- //print maximum textures
+ // print maximum textures
  console.log(limits.textures)
  ```
 
@@ -66,17 +66,17 @@ From a scene's code, you can query both the limitations that apply to the scene 
 
 #### 获取当前使用情况
 
-就像您可以通过代码检查场景的最大允许值一样，您也可以检查场景当前使用的值。运行 `this.querySceneMetrics()` 可以做到这一点。当场景呈现不同的内容时，此命令返回的值会随着时间的不同而变化。
+就像您可以通过代码检查场景的最大允许值一样，您也可以检查场景当前使用的值。运行 `this.entityController.querySceneMetrics()` 可以做到这一点。当场景呈现不同的内容时，此命令返回的值会随着时间的不同而变化。
 
-`this.querySceneMetrics()` 是异步的，因此我们建议使用 `await` 语句调用。
+`querySceneMetrics()` 是异步的，因此我们建议使用 `await` 语句调用。
 
-`this.querySceneMetrics()` 函数返回具有以下属性的 promise 对象，所有属性都是 _number_。
+`querySceneMetrics()` 函数返回具有以下属性的 promise 对象，所有属性都是 _number_。
 
  {% raw %}
 
  ```tsx
  //get metrics object
- const limits = await this.querySceneMetrics()
+ const limits = await this.entityController.querySceneMetrics()
 
  //print maximum triangles
  console.log(limits.triangles)
