@@ -112,6 +112,8 @@ set_order: 1
 
 [Code](https://github.com/decentraland/sample-scene-Block-Dog)
 
+[Explore the scene](https://dcl-project-yffwbatldi.now.sh/?position=42%2C42)
+
 #### 国际象棋游戏
 
 这个例子在[博客](https://blog.decentraland.org/developer-tutorial-port-a-redux-chess-game-to-decentraland-49f509b2eba6)中有更详细的描述，取自现有的 2D 国际象棋游戏，然后在 decentraland 3D 场景中构建。只有在两个玩家接受加入游戏，游戏才会开始，并且每个玩家只有在轮到他们时才能与场景互动。
