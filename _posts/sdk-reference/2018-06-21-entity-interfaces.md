@@ -396,6 +396,11 @@ interface BaseEntity {
   id?: string
 
   /**
+    * The function that handles the click interaction event
+    */
+   onClick?: (e: IEvents["click"]) => void
+
+  /**
    * Used to differentiate similar entities in lists
    */
   key?: string | number
@@ -533,7 +538,7 @@ Example:
   <material
     id="reusable_material"
     albedo-color="materials/wood.png"
-    roughness="0.5"
+    roughness={0.5}
     />
   <sphere
     material="#reusable_material"
@@ -725,7 +730,7 @@ export type BasicMaterialEntity = {
 {% raw %}
 
 ```tsx
-import { createElement, Vector3Component } from "metaverse-api"
+import { createElement, Vector3Component } from "decentraland-api"
 
 export interface IProps {
   position: Vector3Component

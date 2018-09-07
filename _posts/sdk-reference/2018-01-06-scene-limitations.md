@@ -11,7 +11,7 @@ set_order: 6
 
 为了提高虚拟实境的性能，我们建立每个场景必须遵循的限制。 如果一个场景超出这些限制，将不加载地块，预览将显示错误消息。
 
-## 实体约束
+## 场景限制规则
 
 以下是场景中允许的最大元素数：
 
@@ -24,9 +24,87 @@ set_order: 6
 - **纹理:** `log2(n+1) x 10` 场景中的纹理量。 包括作为模型的一部分导入的纹理。
 - **高度:** `log2(n+1) x 20` 以米为单位的高度。
 
-运行预览时，任何超出地块边界的内容在渲染时都会以红色突出显示。
+## 通过代码查询场景限制
 
-渲染地块时，超出地块边界的任何静态内容都将替换为错误消息。 跨越地块边界的所有动态实体都将从渲染场景中删除。
+From a scene's code, you can query both the limitations that apply to the scene and how much the scene is currently using. This is especially useful with scenes where the content changes dynamically. For example, in a scene where you add a new entity each time the user clicks, you could stop adding entities when you reach the scene limits.
+
+从场景的代码中，您可以查询适用于场景的限制以及场景当前使用的数量。这对于其内容动态更改的场景尤其有用。例如，在每次用户单击就添加新实体的场景中，您就可以在达到场景限制时停止添加实体。
+
+ #### 获得场景限制
+
+`this.querySceneLimits()` 可以获取场景的限制。它根据 _scene.json_ 文件中场景占用的地块数计算场景的限制。此命令返回的值不会随时间变化，因为场景的大小是不变的。
+
+`this.querySceneLimits()` 是异步的，所以我们建议用 `await` 语句调用。
+
+`this.querySceneLimits()` 函数返回具有以下属性的 promise 对象，所有属性都是 _number_。
+
+{% raw %}
+
+ ```tsx
+ //get limits object
+ const limits = await this.querySceneLimits()
+
+ //print maximum triangles
+ console.log(limits.triangles)
+
+ //print maximum entities
+ console.log(limits.entities)
+
+ //print maximum bodies
+ console.log(limits.bodies)
+
+ //print maximum materials
+ console.log(limits.materials)
+
+ //print maximum textures
+ console.log(limits.textures)
+ ```
+
+{% endraw %}
+
+例如，如果您的场景只有一块地，则 `limits.triangles` 应该是 `10000`。
+
+#### 获取当前使用情况
+
+就像您可以通过代码检查场景的最大允许值一样，您也可以检查场景当前使用的值。运行 `this.querySceneMetrics()` 可以做到这一点。当场景呈现不同的内容时，此命令返回的值会随着时间的不同而变化。
+
+`this.querySceneMetrics()` 是异步的，因此我们建议使用 `await` 语句调用。
+
+`this.querySceneMetrics()` 函数返回具有以下属性的 promise 对象，所有属性都是 _number_。
+
+ {% raw %}
+
+ ```tsx
+ //get metrics object
+ const limits = await this.querySceneMetrics()
+
+ //print maximum triangles
+ console.log(limits.triangles)
+
+ //print maximum entities
+ console.log(limits.entities)
+
+ //print maximum bodies
+ console.log(limits.bodies)
+
+ //print maximum materials
+ console.log(limits.materials)
+
+ //print maximum textures
+ console.log(limits.textures)
+ ```
+
+ {% endraw %}
+
+ For example, if your scene is only rendering one box entity at the time, logging `limits.entities` should print `1`.
+
+ ## 场景边界
+
+ 运行预览时，位于土块边界外的任何内容在渲染时都会以红色突出显示。如果内容超出这些边界，将不允许将场景部署到 Decentraland。
+
+ ## Shader 着色器限制
+
+ 在 decentraland 中使用的3D模型必须使用支持的着色器和材质。有关支持的着色器列表，请参阅[3D模型注意事项]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-09-external-3d-models %}) 。
 
 ## 纹理大小限制
 
@@ -50,18 +128,4 @@ set_order: 6
 512x512
 ```
 
-> 虽然任意大小的纹理在 alpha 版本中能起作用，但引擎会在控制台中显示警报。 我们将在即将发布的版本中强制执行此限制，并且无效的纹理大小将停止工作。
-
-## Shader 着色器支持
-
-并非所有着色器都可导入 Decentraland 的模型。 如果您正在使用 Blender，确保使用以下的一种方式：
-  
-- 标准材质：支持任何着色器，例如漫反射，镜面反射，透明度等。
-
-  > 提示：使用 Blender 时，这些是 _Blender Render_ 渲染支持的材质。
-
-- PBR（基于物理的渲染）材质：此着色器非常灵活，因为它包含漫反射，粗糙度，金属度和辐射等属性，允许您配置材质与光的交互方式。
-
-  > 提示：使用 Blender 时，可以通过设置 _Cycles_ 渲染器并添加 _Principled BSDF_ 着色器来使用 PBR 材质。请注意，Cycles 渲染器的其他着色器均不受支持。
-
-请参阅[实体接口]({{ site.baseurl }}{% post_url /sdk-reference/2018-06-21-entity-interfaces %})查看材质可以配置的所有属性列表。
+> 虽然任意大小的纹理在 alpha 版本中能起作用，但渲染引擎会在控制台中显示警报。 我们将在即将发布的版本中强制执行此限制，并且无效的纹理大小设置将停止工作。

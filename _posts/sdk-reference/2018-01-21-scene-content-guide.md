@@ -64,155 +64,6 @@ Decentraland 中的三维场景是基于 [Entity-Component](https://en.wikipedia
 
 {% endraw %}
 
-
-## 实体定位
-
-所有实体都可以有一个_位置_，_旋转_和_比例_。这些可以很容易地设置为组件，如下所示：
-
-
-{% raw %}
-```tsx
-<box
-    position={{ x: 5, y: 3, z: 5 }}
-    rotation={{ x: 180, y: 90, z: 0 }}
-    scale={0.5}
-  />
-```
-{% endraw %}
-
-- `position` *3D 矢量*，用来设置三个轴上的位置。
-- `rotation` 也是 *3D 矢量*，但每个组件代表该轴的旋转。
-- `scale` 可以是 *数字* 或 *3D矢量*，用于轴的不同缩放比例。
-
-> 提示：在本地预览场景时，一个指南针出现在场景的(0,0,0)点，每个轴上都有标签。
-
-当实体嵌套在另一个实体中时，子实体从父项继承组件。这意味着如果父实体被定位，缩放或旋转，其子项也会受到影响。子实体的位置，旋转和比例值不会覆盖父母的位置，旋转和比例值，而是由两者组合而成。
-
-您可以用一个不可见的基本实体来组合其他实体，并将它们作为一个组来定义位置。
-
-{% raw %}
-```tsx
-  <entity
-      position={{ x: 0, y: 0, z: 1 }}
-      rotation={{ x: 45, y: 0, z: 0 }}
-  >
-    <box position={{ x: 10, y: 0, z: 0 }} scale={2} />
-    <box position={{ x: 10, y: 10, z: 0 }} scale={1} />
-    <box position={{ x: 0, y: 10, z: 0 }} scale={2} />
-  </entity>
-```
-{% endraw %}
-
-您还可以为整个 <scene/> 实体设置位置，旋转和缩放，这将影响场景中的所有内容。
-
-##### 过渡
-
-在动态场景中，您可以配置实体以影响其移动方式。默认情况下，对实体的所有更改都会表现为从一个状态突然转换到另一个状态。添加过渡组件，可以使更改变得更加渐进和自然。
-
-下面的示例展示了一个平滑旋转的 box 实体。
-
-{% raw %}
-```tsx
- <box 
-    rotation={currentRotation}
-    transition={{ rorotation: { duration: 1000, timing: "ease-in" }}}
-  />
-```
-{% endraw %}
-
-> 注意：过渡组件并不会使 box 旋转，它只是设置作为事件的结果实体的旋转值发生变化时的旋转方式。
-
-可以添加 transition 组件以影响实体的以下属性：
-
-* position
-* rotation
-* scale
-* color
-
-请注意，每个过渡属性都是分开配置的。
-
-{% raw %}
-```tsx
- <box 
-    rotation={currentRotation}
-    color={currentColor}
-    scale={currentScale}
-    transition={ 
-        { rotation: { duration: 1000, timing: "ease-in" }}
-        { color: { duration: 3000, timing: "exponential-in" }}
-        { scale: { duration: 300, timing: "bounce-in" }}
-        }
-  />
-```
-{% endraw %}
-
-过渡组件允许您设置：
-
-- delay：在更改开始发生之前等待的毫秒数。
-- duration：从更改开始到结束时的毫秒数。
-- Timing：选择一个过渡函数。例如，可以用 `linear`, `ease-in`, `ease-out`, `exponential-in` 或 `bounce-in` 等选项。
-
-在下面的示例中，在组合了 box 的不可见实体的旋转上设置了过渡。由于 box 不在父实体的中心，使得 box 的旋转看起来如同开门一样。
-
-{% raw %}
-```tsx
-
-<entity 
-    rotation={currentRotation}  
-    transition={{ rotation: { duration: 1000, timing: "ease-in" }}}>
-        <box 
-          id="door" 
-          scale={{ x: 1, y: 2, z: 0.05 }} 
-          position={{ x: 0.5, y: 1, z: 0 }} 
-        />
-</entity>
-```
-{% endraw %}
-
-#### 面向用户
-
-您可以设置一个实体为_billboard_，这意味着它将始终旋转以面向用户。这是 90 年代 3D 游戏中常用的技术，当时大多数实体都是面朝玩家的平面，但是 3D 模型同样可以。这对于 `text` 实体非常方便，因为这将让它始终清晰易读。
-
-{% raw %}
-
-```tsx
-<box color={currentColor} billboard={7} />
-```
-
-{% endraw %}
-
-您必须在以下模式中选择数字:
-
-- 0: 任何轴都不运动
-- 1: 仅在 **X** 轴上移动，其他轴上的旋转是固定的。
-- 2: 仅在 **Y** 轴上运动，其他轴的旋转是固定的。
-- 4: 仅在 **Z** 轴上运动，其他轴的旋转是固定的。
-- 7: 绕轴旋转，跟随用户。
-
-如果实体同时设置了旋转和 billboard，它将使用 billboard 设置。
-
-#### 转向一个位置
-
-您可以使用 _lookAt_ 将实体设置为面向场景中的特定位置。 这是一种在不处理角度的情况下设置实体旋转的方法。
-
-{% raw %}
-
-```tsx
-<box
-  color={currentColor}
-  lookAt={{ x: 2, y: 1, z: 3 }}
-  transition={{ lookAt: { duration: 500 } }}
-/>
-```
-
-{% endraw %}
-
-此设置需要一个 `Vector3Component` 值，用来表示它朝向场景中的某点的坐标。 例如，您可以将此值设置为场景状态中的一个随另外实体位置变化的变量。
-
-您可以使用过渡来使 lookAt 引起的转动更平滑，更自然。
-
-如果实体配置了特定旋转和 lookAt 设置，则使用 lookAt 的旋转设置。
-
 ## 颜色
 
 颜色以十六进制值设置。要设置实体的颜色，只需将其 `color` 组件设置为相应的十六进制值即可。
@@ -241,7 +92,7 @@ Decentraland 中的三维场景是基于 [Entity-Component](https://en.wikipedia
 <material
   id="reusable_material"
   albedoTexture="materials/wood.png"
-  roughness="0.5"
+  roughness={0.5}
 />
 <sphere material="#reusable_material" />
 ```
@@ -361,9 +212,9 @@ async render() {
 
 > 提示：我们建议您将模型分开放在场景中的 `/models` 文件夹中。
 
-glTF 模型还可以包括自己的纹理，材质，collider（碰撞）和动画。 有关详细信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-09-external-3d-models %})。
+glTF 模型还可以包括自己的纹理，材质，collider（碰撞）和动画。 有关详细信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /getting-started/2018-01-09-external-3d-models %})。
 
-请记住，所有模型、它们的着色器和它们的纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-06-scene-limitations %})的范围内。
+请记住，所有模型、它们的着色器和它们的纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /getting-started/2018-01-06-scene-limitations %})的范围内。
 
 > 注意：obj 模型作为遗留功能也支持，但可能不会支持很长时间。请使用 `<obj-model>` 添加实体。
 
@@ -371,7 +222,7 @@ glTF 模型还可以包括自己的纹理，材质，collider（碰撞）和动�
 
 可以使用文本编辑器打开具有 .gltf 扩展名的文件以查看其内容。在那里，您可以找到模型中包含的动画列表以及它们的命名方式。通常，动画名称由其骨架名称，下划线及其动画名称组成。 例如 `myArmature_animation1`。
 
-在导入 Decentraland 场景前，有关如何为 3D 模型创建动画的信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-09-external-3d-models %})。
+在导入 Decentraland 场景前，有关如何为 3D 模型创建动画的信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /getting-started/2018-01-09-external-3d-models %})。
 
 通过将 _skeletalAnimation_ 设置添加到 gltf 模型并设置它的一个剪辑的 `playing` 属性为 `true` 来激活动画。
 
@@ -499,7 +350,7 @@ _video_ 实体需要在 `src` 中选择一个视频，可以是本地文件，�
 {% raw %}
 
 ```tsx
-<box position={{ x: 10, y: 0, z: 0 }} scale={2} ignoreCollisions={false} />
+<box position={{ x: 10, y: 0, z: 0 }} scale={2} withCollisions={true} />
 ```
 
 {% endraw %}
@@ -508,14 +359,14 @@ _video_ 实体需要在 `src` 中选择一个视频，可以是本地文件，�
 
 默认情况下，所有实体都禁用了碰撞。根据实体的类型，碰撞的启用方式如下：
 
-- 对于大多数实体，包括*基元*（盒子，球体等），平面和基本实体，可以通过将 `ignoreCollisions` 组件设置为 `false` 来启用。
+- 对于大多数实体，包括*基元*（盒子，球体等），平面和基本实体，可以通过将 `withCollisions` 组件设置为 `true` 来启用。
 - 要在 *glTF模型* 中启用碰撞，您可以：
-  - 覆盖一个不可见的实体，将`ignoreCollisions`组件设置为 `true`。
+  - 覆盖一个不可见的实体，将`withCollisions`组件设置为 `true`。
   - 在 Blender 等外部工具中编辑模型以包含 _collider 对象_。 collider 必须命名为 _x_collider_，其中 _x_ 是模型的名称。 因此，对于名为 house 的模型，必须将 collider 命名为_house_collider_。
 
 _collider_ 是一组平面或几何形状，用于定义模型的哪些部分发生碰撞。这样可以有更多的控制并降低对系统的要求，因为碰撞网格通常比原始模型更简单（具有更少的顶点）。
 
-有关 collider 是什么以及如何添加的更多详细信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-09-external-3d-models %})。
+有关 collider 是什么以及如何添加的更多详细信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /getting-started/2018-01-09-external-3d-models %})。
 
 当前碰撞设置不会影响与其他实体间的交互，实体始终可以重叠。碰撞设置仅影响实体与游戏中的玩家的交互方式。
 

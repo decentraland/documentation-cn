@@ -1,7 +1,7 @@
 ---
 date: 2018-01-05
-title: 场景状态
-description: 如何更新和取回场景的状态变量
+title: 状态管理
+description: 如何更新和读取场景状态变量
 categories:
   - sdk-reference
 type: Document
@@ -41,7 +41,7 @@ state = {
 
 ```tsx
 export default class Scene extends ScriptableScene {
-  state = {
+  state: IState = {
     buttonState: 0,
     isDoorClosed: false,
     queboxPosition: { x: 0, y: 0, z: 0 }
@@ -156,6 +156,8 @@ async checkDoor(){
 
 在 _local_ 场景中，状态存储在 scriptable scene 对象中，因此您可以使用 `this.setState()` 来设置，如下所示：
 
+{% raw %}
+
 ```tsx
 async buttonPressed(){
   this.setState({
@@ -165,9 +167,13 @@ async buttonPressed(){
 }
 ```
 
+{% endraw %}
+
 #### 远程场景中
 
 在 _远程_ 场景中，状态存储在远程服务器中。并由名为 _State.ts_ 的文件处理。您可以通过调用 _State.ts_ 中定义的 `setState()` 函数来设置状态。
+
+{% raw %}
 
 ```tsx
 async buttonPressed(){
@@ -178,9 +184,23 @@ async buttonPressed(){
 }
 ```
 
-#### 始终使用 setState()
+{% endraw %}
+
+## 强制更新
+
+如果全部使用 `setState()` 更改场景状态，那么渲染的场景始终会与场景状态同步。 但是，对于特殊情况，可能需要调用 `forceUdate()` 方法手动刷新场景。
+
+ ```
+ this.forceUpdate()
+ ```
+
+## 你必须避免的做法
+
+#### 始终使用 setState() 来更改状态
 
 重要的是，每次更改状态时，都要通过 `setState` 函数执行，不要直接设置值。否则将导致场景的生命周期出现问题。
+
+{% raw %}
 
 ```tsx
 // Wrong
@@ -193,13 +213,31 @@ this.setState({ buttonState: 1 })
 setState({ buttonState: 1 })
 ```
 
-## 强制更新
+{% endraw %}
 
-如果始终通过 `setState()` 更改场景状态，则场景的渲染始终与场景状态同步。 但是，对于特殊情况，您可能需要手动刷新场景的渲染。为此，请调用 `forceUdate()` 方法。
+#### 避免多次调用 setState
 
-```
-this.forceUpdate()
-```
+每次调用 `setState()` 时，也会触发 `render()` 函数。 因此，多次调用 `setState()` ，会运行几次不必要的场景渲染。因为这些渲染中都是异步的，所以最后的渲染有可能来自较旧的场景状态，使得渲染的场景过时。
+
+ {% raw %}
+
+ ```tsx
+ // Wrong
+ async buttonPressed(){
+   setState({ buttonState : 1 })
+   setState({ isDoorClosed: false })
+ }
+
+ // Correct
+ async buttonPressed(){
+   setState({
+     buttonState : 1,
+     isDoorClosed: false
+     })
+ }
+ ```
+ 
+ {% endraw %}
 
 
 ## 从子组件引用状态

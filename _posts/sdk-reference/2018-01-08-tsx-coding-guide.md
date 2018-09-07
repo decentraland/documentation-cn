@@ -1,12 +1,12 @@
 ---
 date: 2018-01-08
-title: TypeScript 编码指南
+title: TypeScript 开发技巧
 description: 场景开发技巧
 categories:
   - documentation
 type: Document
 set: sdk-reference
-set_order: 8
+set_order: 12
 ---
 
 Decentraland SDK 通过 TypeScript（.tsx）文件使用。本节介绍了构建场景时可以利用的一些提示和技巧。 这里讨论的内容与 SDK 的功能没有直接关系，而是有关如何使用 TypeScript 语言和如何尽量摆脱上下文相关。
@@ -31,6 +31,20 @@ this.subscribeTo("pointerDown", e => {
 
 ![](/images/media/console_log.png)
 
+您还可以使用 `console.trace()` 查看至某个代码点的整个执行的命令列表。
+
+{% raw %}
+
+```tsx
+this.subscribeTo("pointerDown", e => {
+  console.trace()
+})
+```
+
+{% endraw %}
+
+`console.trace()` 命令打印在执行此行之前，按顺序调用的函数列表。
+
 ## 创建全局常量
 
 您可以在_.tsx_文件的根级别定义全局常量。定义后，就可以在整个文件中引用它。
@@ -40,7 +54,7 @@ this.subscribeTo("pointerDown", e => {
 {% raw %}
 
 ```tsx
-import { createElement, ScriptableScene } from "metaverse-api"
+import { createElement, ScriptableScene } from "decentraland-api"
 
 const updateRate = 300
 const myColors = [
@@ -144,7 +158,7 @@ interface IState {
 
 ```tsx
 export default class ArtPiece extends ScriptableScene<any, IState> {
-  state = {
+  state: IState = {
     pedestalColor: "#3d30ec",
     dogAngle: 0,
     donutAngle: 0
@@ -179,7 +193,7 @@ TypeScript 提供了各种方法，用来控制什么时候执行代码。
 
 scriptableScene 对象带有许多默认函数，这些函数在场景生命周期的不同时间执行，例如`sceneDidMount()`在场景开始时调用一次，每次场景状态改变时调用`render()` 。 有关详细信息，请参阅[scriptable scene]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %})。
 
-实体可以包含_transition_组件以使任何更改逐渐发生，这非常类似于 CSS 中的过渡。 有关详细信息，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-21-scene-content-guide %})。
+实体可以包含_transition_组件以使任何更改逐渐发生，这非常类似于 CSS 中的过渡。 有关详细信息，请参阅[实体定位]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-12-entity-positioning %})。
 
 #### 启动基于时间的循环
 
@@ -369,7 +383,7 @@ renderLeaves(){
     <plane
       position={{ x: leaf.x , y: leaf.y, z:leaf.z }}
       scale={0.2}
-      key={leafIndex.toString()}
+      key={"leaf" + leafIndex.toString()}
     />
   )
 }
@@ -393,7 +407,7 @@ renderLeaves(){
       <plane
         position={{ x: leaf.x , y: leaf.y, z: leaf.z }}
         scale={0.2}
-        key={leafIndex.toString()}
+        key={"leaf" + leafIndex.toString()}
       />
     )
 }
@@ -418,7 +432,7 @@ renderLeaves() {
       <plane
         position={{ x: leaf.x, y: leaf.y, z: leaf.z }}
         scale={0.2}
-        key={leafIndex.toString()}
+        key={"leaf" + leafIndex.toString()}
       />
     )
   })
@@ -433,13 +447,21 @@ renderLeaves() {
 
 `forEach()` 函数执行后没有使用 `return` 语句。 如果有的话，它会覆盖`this.state.fallingLeaves` 数组的内容。相反，我们创建一个名为 `leaves` 的新数组并将元素加入，然后我们返回最后的完整数组。
 
+As you can see from comparing this example to the prevous ones , it's a lot simpler to use `map()` to render entities from a list.
+
+比较这个例子和前面的例子可以看出，在列表中渲染实体用 `map()` 要简单得多。
+
 > 注意：请记住，在处理场景状态中的变量时，您无法通过直接设置来更改其值。您必须始终通过`this.setState()` 操作更改场景状态变量的值。
 
 ## 动态化 render 函数
 
 `render()` 函数绘制用户在场景中看到的内容。在其最简单的形式中，它的`return`语句包含类似于具有固定值的一组实体的文字 XML 定义。让场景交互的一个重要部分是使渲染函数改变其输出以响应场景状态的变化。
 
-虽然 render() 的`return`语句中的典型内容可能类似于纯 XML，但`{}`之间的所有内容 使用 TypeScript 处理。这意味着您可以使用大括号中断 XML 的标记和属性语法，以便在您选择的任何位置添加 JSX 逻辑。
+虽然 render() 的`return`语句中的典型内容可能类似于纯 XML，但`{}`之间的所有内容 使用 TypeScript 处理。这意味着您可以使用大括号中断 XML 的标记和属性语法，以便在您选择的任何位置添加 JSX 表达式。
+
+`return` 语句中所有表达式的最终结果必须始终是一组嵌套的 `isSimplifiedObject` 实体，嵌套在 `scene` 实体中。
+
+> 注意：您可以自由添加 TypeScript _expressions 表达式_ 组成 `return` 值，但不能添加 _statements 语句_。不同之处在于表达式始终具有返回值，但语句可能不会。你不能使用 `if/else` 或 `switch/case`，因为那些是语句，但是你可以通过调用函数来处理。
 
 #### render 中变量的引用
 
@@ -506,6 +528,8 @@ async render() {
 
 在第二个例子中，箱子的 _y_ 位置是根据 `liftBox` 的值确定的，其转换的时间是基于`bounce` 的值。 请注意，这两个条件表达式都添加在已经作为 TypeScript 处理的代码的部分中，因此不需要附加 `{ }`。
 
+> 注意：在这些例子中，我们使用 `? / :` 表达式处理条件逻辑。 你不能在这个上下文中使用 `if` 和 `else`，因为那些是语句，并且语句不支持作为 `return` 值的一部分。
+
 #### 定义未确定数量的实体
 
 对于实体数量不固定的场景，可以使用数组表示这些实体及其属性，然后在 `render()` 函数中使用`map`操作。
@@ -519,6 +543,7 @@ async render() {
       { this.state.secuence.map(num =>
         <box
           position={{ x: num * 2, y: 1, z: 1 }}
+          key={"box" + num.toString()}
         />
       }
     </scene>
@@ -530,6 +555,13 @@ async render() {
 
 此函数使用 `map` 为`secuence` 数组中的每个元素创建一个箱子实体，并使用此数组中存储的数字来设置每个这些箱子的 x 坐标。这使您可以通过更改场景状态中的 `secuence` 变量来动态更改出现的箱子数和位置。
 
+从列表中渲染实体时的一些最佳实践：
+
+ - 使用 `array.map` 来遍列列表
+ - 不要使用 `for` 循环
+ - 为每个实体提供唯一的 `key`
+ - 避免使用数组索引作为实体的 key
+  
 #### 保持 render 函数可读
 
 render() 函数的输出可以包括对其他函数的调用。 由于每次更新场景状态时都会调用render()，因此这里的所有函数也会被 render() 调用。
@@ -566,6 +598,72 @@ renderObstacles() {
       position={{ x: num * 2, y: 1, z: 1 }}
     />
   )
+}
+```
+
+{% endraw %}
+
+
+## this 运算符
+
+大多数情况下，当你在场景中使用 `this` 时，它指的是正在运行场景的 [scriptable scene 对象]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %})实例。
+
+但是，函数中 `this` 的含义与调用函数的位置有关，而与函数的定义位置无关。 取决于它的调用位置，相同的函数中的 `this` 有可能具有不同的意义。 如果函数被定义为场景的一部分，但是它被实体的 onClick 组件调用，则函数中运算符 `this` 的任何使用都将引用函数本身，而不是 scriptable scene 对象。
+
+如果您需要引用场景状态或场景中的其他功能，这有时可能会出现问题。 要避免此问题，可以将函数定义为 lambda，也可以通过在`onClick` 值中定义的 lambda 来调用函数。
+
+{% raw %}
+
+```tsx
+import * as DCL from "decentraland-api"
+
+export interface IState {
+  clickCounter: number
+}
+
+export default class clickTest extends DCL.ScriptableScene<any, IState> {
+  state: IState = {
+    clickCounter: 0
+  }
+
+  // is defined as a lambda
+  clickBox = () => {
+    this.setState({ clickCounter: (this.state.clickCounter += 1) })
+    console.log(this.state.clickCounter)
+  }
+
+  // called via a lambda in the onClick
+  clickBox2() {
+    this.setState({ clickCounter: (this.state.clickCounter += 1) })
+    console.log(this.state.clickCounter)
+  }
+
+  // this function is called in a way where 'this' doesn't refer to the scene object
+  clickBox3() {
+    console.log(this)
+  }
+
+  async render() {
+    return (
+      <scene>
+        <box
+          id="function defined as lambda"
+          position={{ x: 3, y: 1, z: 1 }}
+          onClick={this.clickBox}
+        />
+        <box
+          id="lambda in onClick"
+          position={{ x: 1, y: 1, z: 1 }}
+          onClick={() => this.clickBox2}
+        />
+        <box
+          id="`this` doesn't refer to the scene object"
+          position={{ x: 5, y: 1, z: 1 }}
+          onClick={this.clickBox3}
+        />
+      </scene>
+    )
+  }
 }
 ```
 

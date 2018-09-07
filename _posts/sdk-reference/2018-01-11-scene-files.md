@@ -31,7 +31,7 @@ set_order: 11
 
 {% raw %}
 ```tsx
-import { ScriptableScene, createElement } from "metaverse-api";
+import { ScriptableScene, createElement } from "decentraland-api";
 
 // The ScriptableScene class is a React-style component.
 export default class MyScene extends ScriptableScene<any, any> {
@@ -57,10 +57,10 @@ export default class MyScene extends ScriptableScene<any, any> {
 
 此文件向 NPM 提供信息，使其能够识别项目，以及处理项目的依赖项。 Decentraland 场景需要两个包：
 
-* `metaverse-api`, which allows the scene to communicate with the world engine.
+* `decentraland-api`, which allows the scene to communicate with the world engine.
 * `typescript`, to compile the file `scene.tsx` to javascript.
 
-* `metaverse-api`，它允许场景与虚拟世界引擎进行通信。
+* `decentraland-api`，它允许场景与虚拟世界引擎进行通信。
 * `typescript`，将文件 `scene.tsx` 编译为 javascript。
 
 > 创建静态场景时不需要 `typescript` 包。它只有在构建远程和交互式场景时才需要。
@@ -69,7 +69,7 @@ export default class MyScene extends ScriptableScene<any, any> {
 
 这是 Decentraland 构建配置文件。
 
-我们提供了一个名为 `metaverse-compiler` 的工具，它来自于 `metaverse-api` 包。这个工具负责读取 `build.json` 文件并以客户端可以运行的方式编译场景。它唯一真正做的是使用 WebPack 将 Typescript 代码捆绑到 WebWorker 中。
+我们提供了一个名为 `metaverse-compiler` 的工具，它来自于 `decentraland-api` 包。这个工具负责读取 `build.json` 文件并以客户端可以运行的方式编译场景。它唯一真正做的是使用 WebPack 将 Typescript 代码捆绑到 WebWorker 中。
 
 > 您还可以使用 CLI 为多人游戏体验创建 Node.js 服务器。
 
@@ -110,7 +110,7 @@ export default class MyScene extends ScriptableScene<any, any> {
 ```
 
 
-After [creating a new scene]({{ site.baseurl }}{% post_url /documentation/building-scenes/2018-01-03-create-scene %}) using the CLI, the scene folder will have a series of files with default content. The file structure and content will vary depending on the type of scene you selected (_basic_, _interactive_, _remote_, or _static_).
+After [creating a new scene]({{ site.baseurl }}{% post_url /getting-started/2018-01-03-create-scene %}) using the CLI, the scene folder will have a series of files with default content. The file structure and content will vary depending on the type of scene you selected (_basic_, _interactive_, _remote_, or _static_).
 
 ## Default files in a local scene
 
@@ -133,7 +133,7 @@ Below is a basic example of a _scene.tsx_ file:
 {% raw %}
 
 ```tsx
-import { ScriptableScene, createElement } from "metaverse-api"
+import { ScriptableScene, createElement } from "decentraland-api"
 
 // The ScriptableScene class is a React-style component.
 export default class MyScene extends ScriptableScene<any, any> {
@@ -164,7 +164,7 @@ metadata is optional for previewing the scene locally, but part of it is needed 
 
 This file provides information to NPM that allows it to identify the project, as well as handle the project's dependencies. Decentraland scenes need two packages:
 
-- **metaverse-api**: allows the scene to communicate with the world engine.
+- **decentraland-api**: allows the scene to communicate with the world engine.
 - **typescript**: used to compile the file _scene.tsx_ to javascript.
 
 #### package-lock.json
@@ -206,7 +206,7 @@ Below is a basic example of a _RemoteScene.tsx_ file:
 {% raw %}
 
 ```tsx
-import * as DCL from "metaverse-api"
+import * as DCL from "decentraland-api"
 import { setState, getState } from "./State"
 
 // The ScriptableScene class is a React-style component.
@@ -271,7 +271,7 @@ metadata is optional for previewing the scene locally, but part of it is needed 
 
 This file provides information to NPM that allows it to identify the project, as well as handle the project's dependencies. Decentraland scenes need two packages:
 
-- **metaverse-api**: allows the scene to communicate with the world engine.
+- **decentraland-api**: allows the scene to communicate with the world engine.
 - **typescript**: used to compile the file _scene.tsx_ to javascript.
 
 #### package-lock.json
@@ -323,7 +323,7 @@ Since the root scene element is a transform node, it can also be translated, sca
 
 This file provides information to NPM that allows it to identify the project, as well as handle the project's dependencies. Decentraland static scenes need this package:
 
-**metaverse-api**: allows the scene to communicate with the world engine.
+**decentraland-api**: allows the scene to communicate with the world engine.
 
 ## Recommended file locations
 
