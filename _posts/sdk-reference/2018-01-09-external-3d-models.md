@@ -15,6 +15,78 @@ set_order: 9
 
 请记住，所有模型，着色器和纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-06-scene-limitations %})的参数范围内。
 
+## 材质
+
+#### Shader 着色器支持
+
+并非所有着色器都可导入 Decentraland 的模型。 如果您正在使用 Blender，确保使用以下的一种方式：
+
+- 标准材质：支持任何着色器，例如漫反射，镜面反射，透明度等。
+
+  > 提示：使用 Blender 时，这些是 Blender Render 渲染支持的材质。
+
+- PBR（基于物理的渲染）材质：此着色器非常灵活，因为它包含漫反射，粗糙度，金属度和辐射等属性，允许您配置材质与光的交互方式。
+
+  > 提示：使用 Blender 时，可以通过设置 Cycles 渲染器并添加 Principled BSDF 着色器来使用 PBR 材质。请注意，Cycles 渲染器的其他着色器均不受支持。
+
+请参阅 [实体接口]({{ site.baseurl }}{% post_url /sdk-reference/2018-06-21-entity-interfaces %}) 查看材质可以配置的所有属性列表
+
+#### 纹理
+
+纹理可以嵌入到导出的 glTF 文件中，也可以从外部文件中引用。 这两种方式都是支持的。
+
+<!--
+
+There are different kinds of textures you can use in a 3D model:
+
+- albedo textures: don't use light
+- alpha textures: determine only the transparency regions and its degree
+- bump texture: Stores surface normal data used to displace a mesh in a texture. Used with BPR.
+- emisiveTexture
+- refractionTexture
+
+
+
+link to content guide to show how you set materials for primitives
+
+what extensions are supported for image files?
+anything special to use alpha
+
+what special layers PBR uses?
+
+show how to change a model with an unsopported shader. Delete material, create new and assign the same texture it used to have
+
+-->
+
+#### 纹理大小限制
+
+纹理大小必须使用与以下数字匹配的宽度和高度数字（以像素为单位）：
+
+```
+1, 2, 4, 8, 16, 32, 64, 128, 256, 512
+```
+
+> 该序列由 2 的幂组成：f(x) = 2 ^ x。 512 是我们允许的纹理大小的最大数量。 这在其他渲染引擎中也是相当普遍的要求，它与图形处理器内部优化有关。
+
+宽度和高度不需要具有相同的数字，但它们都必需属于此序列中。
+
+**纹理的建议大小为 512x512**，我们发现这是通过国内网络传输的最佳尺寸，并提供合理的加载/品质体验。
+
+其他有效尺寸的示例:
+
+```
+32x32
+64x32
+512x256
+512x512
+```
+
+> 虽然任意大小的纹理在 alpha 版本中能起作用，但引擎会在控制台中显示警报。 我们将在即将发布的版本中强制执行此限制，并且无效的纹理大小将停止工作。
+
+#### 材质的最佳实践
+
+- 如果场景中包含有多个使用相同纹理的模型，请将纹理引用为外部文件，而不是将其嵌入到 3D 模型中。因为嵌入的纹理会在每个模型中复制，从而增加场景的大小。
+
 ## 支持的 3D 模型格式
 
 Decentraland 中的所有 3D 模型都必须采用 glTF 格式。 [glTF](https://www.khronos.org/gltf) (GL Transmission Format) 是 Khronos 的一个开源项目，为 3D 资产提供了一种通用的，可扩展的格式，既高效又可与现代网络技术进行高度互操作。
@@ -120,25 +192,25 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 1. 根据模型的形状和要移动的部分来创建 armature (骨架) 。你要做的是添加一个初始骨骼然后从这个骨骼顶点伸出其它骨骼。armature (骨架)中的骨头定义可以铰接的点。骨架必须与网格重叠。
 
-![](/images/media/armature_hummingbird1.png)
+    ![](/images/media/armature_hummingbird1.png)
 
 2. 使得骨架和网络为同一物体的子资源。
 
 3. 按照您计划移动的方式旋转骨骼时，检查网格是否自然移动。如果网格的某些部分以不希望的方式拉伸，请使用 weight paint 来更改模型的哪些部分受到骨架中骨骼的影响。
 
-![](/images/media/animations_hummingbird_wp1.png)
+    ![](/images/media/animations_hummingbird_wp1.png)
 
-![](/images/media/animations_hummingbird_wp2.png)
+    ![](/images/media/animations_hummingbird_wp2.png)
 
 > 注意：Babylon.js 报告了一个错误，网格的某些面没有渲染当它们与骨架中的任何骨骼无关时。因此，如果您绘制一些weight 为 0 的面，然后为模型设置动画，您可能会看到这些面消失。为了解决这个问题，我们建议确保每个面至少与骨架的一个骨骼相关，并且 weight 至少为 0.01。
 
 4. 将骨架移动到所需姿势，所有骨骼都可以旋转或缩放。然后锁定你要控制的动画的骨骼的旋转和比例。
 
-![](/images/media/armature_hummingbird2.png)
+    ![](/images/media/armature_hummingbird2.png)
 
 5. 切换到动画中的其他帧，将骨架定位到新姿势并再次锁定。对要设置的所有关键帧重复此过程以描述动画。
 
-![](/images/media/armature_hummingbird_animation.png)
+    ![](/images/media/armature_hummingbird_animation.png)
 
 6. 默认情况下，您定义的所有帧之间将从一个姿势线性转换到下一个姿势。您还可以将这些过渡配置为 exponentially, ease-in, bounce 等。
 
@@ -159,44 +231,3 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 - 确保模型在导出时只有一个骨架。有时，当您将另一个动画导入到您正在编辑模型的程序时，它会引入一个骨架的副本。您希望模型的所有动画都由相同的基础骨架执行。
 
 - 导出 _glTF_ 模型时，请确保导出所有对象和动画。某些导出器默认只导出 _当前选择的物体_。
-
-<!--
-
-## Materials
-
-
-textures can be embedded in the gltf or referenced from a file
-
-
-albedo textures: don't use light
-
-transparent materials, use alpha
-
-
-- materials (todo lo que hay en content guide es lo que seteas en los entities)
-
-Not all materials are supported by Decentraland.
-
-
-hay dos tipos de matierol, “standard materials” que es lo mismo que “blender render”
-
-- diffuse / specular
-  y dps los PBR (phisically based rendering)
-
-- textures
-  aclarar tamaños
-  capaz extensiones de archivos
-  capaz alpha
-  capas especiales para pbr
-
-animations y materials son “assets” para unity
-un collider es ponele un “component”
-
-#### Best practices for materials
-
-- If your scene includes several models that use the same texture, it's useful to reference the texture as an external file. If the texture was embedded, it would be duplicated and add to the scene's weight.
-
-
-
-
--->

@@ -2,17 +2,19 @@
 date: 2018-01-06
 title: Decentraland MVP 构建指南
 description: 使用 SDK 制作您的第一个 MVP 场景或体验的建议指南
+redirect_from:
+  - /documentation/mvp-guidelines/
 categories:
-  - documentation
+  - getting-started
 type: Document
-set: building-scenes
+set: getting-started
 set_order: 9
 ---
 
 本文档的目的是帮助和指导您在 Decentraland 中完成构建初始体验和环境的过程。我们将这些初始体验和环境称为最小可行产品（MVP）。
 
 
-**在创建 MVP 时，您需要考虑两个重点领域：**
+**在为您的场景创建 MVP 时，您需要重点考虑这两个方面：**
 
 1. 项目中基本的用户体验和功能
 2. 创建一个构建您的体验并迭代改进的基本“渠道”，如团队工作流程和内容管理系统。

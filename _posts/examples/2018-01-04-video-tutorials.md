@@ -37,7 +37,7 @@ It then also goes over how you can activate these animations in a Decentraland s
 
 This tutorial shows how you can add a collider to a 3D model. Colliders prevent users of your scene from walking through things. They are separate objects that are invisible but occupy space and stand in for what are often more geometrically complex objects.
 
-{%  include youtube.html video_id='LfrekdeEK2I'  %}
+{%  include youtube.html video_id='UrByRRwfGjY'  %}
 
 ## Advanced coding in Decentraland scenes
 
@@ -83,3 +83,13 @@ This tutorial shows how you can build a simple yet fully functional game in Dece
 This tutorial includes a [written guide](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-a-simple-tower-defense-game) to acompany the video.
 
 {%  include youtube.html video_id='XPcMaGtX37k'  %}
+
+#### 狗、猫、老鼠和奶酪游戏
+
+**基于堆栈的有限状态机，带有 a\* 的路径查找，随机内容生成，自定义事件处理**
+
+本教程展示了如何构建一个更复杂的场景，包括捕食者和猎物，它们可以在老鼠、猫或狗中互换。 每只动物都有一个基于堆栈的有限状态机（FSM）来管理它的 AI。 每只动物都使用 a\* 路径算法来绕过障碍物和其他动物。
+
+本教程包含有配合视频的[书面指南](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-dog-cat-mouse-cheese-using-a-fsm)。
+
+{%  include youtube.html video_id='Ur9YyycvhEE'  %}

@@ -2,10 +2,12 @@
 date: 2018-01-06
 title: 发布场景
 description: 如何发布我的项目?
+redirect_from:
+  - /documentation/publishing/
 categories:
-  - documentation
+  - getting-started
 type: Document
-set: building-scenes
+set: getting-started
 set_order: 7
 ---
 
@@ -28,7 +30,7 @@ set_order: 7
 ## 发布您的场景：
 
 1. 确保最近更改的场景已经在本地完成构建。如果还没有，请运行 `npm run build` 。
-2. 使用跟您的土地相关联的地址来登录 Metamask 帐户。
+2. 使用跟您的 Decentraland 土地相关联的地址来登录 Metamask 帐户。地址必需配置在文件 _scene.json_ 中。
 3. 按照[这里的说明](https://ipfs.io/docs/getting-started/)启动 IPFS 守护程序。
 4. 最后，在场景的文件夹中运行 `dcl deploy`。
 
@@ -39,6 +41,32 @@ set_order: 7
 目前，作为提高性能和访问者体验的措施，您的内容将在 Decentraland 的主要 IPFS 服务器上保存，以确保渲染您的地块所需的数据始终可用。
 
 > 注意：虽然此命令将您的场景部署到了您的地块，要注意的是目前用户还无法使用 Decentraland 浏览探索，因此您的内容还无法在虚拟世界里展示。
+
+## Publish from a physical Ledger device
+
+Instead of storing your LAND tokens in a Metamask account, you may find it more secure to store them in a [Ledger](https://www.ledger.com/) device that's phyisically plugged in to your computer.
+
+If you're using one of these, the process of uploading content to your LAND is slightly different.
+
+1.  To make sure the scene has been locally built with your latest changes, run `npm run build`.
+2.  Plug your Ledger device in. Your parcels in Decentraland should be associated with that same wallet. The same public address should be listed in the scene's _scene.json_ file.
+3.  Start up an IPFS daemon by following [these instructions](https://ipfs.io/docs/getting-started/).
+4.  Run `dcl deploy --https` from the scene's folder. This will open a tab on your browser where you need to confirm this action.
+    > Note: Currently, the certificate is self-signed, so your browser might give you a warning before launching the page. The warning is displayed only because the certificate is self-signed by your machine, please ignore it and carry on.
+5.  The Ledger device will then ask you for a confirmation, which you must give by pushing the device's buttons.
+
+## 使用 Ledger 硬件钱包发布
+
+将 LAND 存储在插入计算机的 [Ledger](https://www.ledger.com/) 硬件钱包中比存储在 Metamask 帐户更安​​全。
+
+如果您使用了其中的一种钱包，则上传的过程略有不同。
+
+1. 要确保在修改场景后已经在本地构建过场景，请运行`npm run build`。
+2. 将您的 Ledger 设备插入。您在 Decentraland 的地块应该与这个钱包相关联。并且与场景的 _scene.json_ 文件中配置的一样。
+3. 按照[说明](https://ipfs.io/docs/getting-started/)启动IPFS守护程序。
+4. 从场景的文件夹中运行`dcl deploy --https`。这将在您的浏览器上打开一个选项卡，您需要确认此操作。
+   > 注意：目前，证书是自签名的，因此您的浏览器可能会在启动页面之前向您发出警告。仅显示警告，因为证书是由您的机器自行签名的，请忽略它并继续。
+5. 然后，Ledger 设备将要求您进行确认，您必须通过按下设备的按钮进行确认。
 
 ## 什么是IPFS？
 

@@ -15,11 +15,15 @@ set_order: 3
 
 通常，场景响应事件的一个好方法是在 `sceneDidMount()` 方法中设置监听器。有关何时执行此方法的更多信息请查看 [可编程场景]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %}) 。
 
+{% raw %}
+
 ```tsx
 async sceneDidMount() {
   this.eventSubscriber.on(`pointerDown`, () => console.log("pointer down"))
 }
 ```
+
+{% endraw %}
 
 若要调试场景，可以使用 `console.log()` 来跟踪事件的发生或验证事件的参数是否符合预期。
 
@@ -27,11 +31,68 @@ async sceneDidMount() {
 
 点击可以由鼠标、触摸屏、VR 控制器或其他设备引起，并且生成的事件没有任何区别。当游戏中用户化身向前投射的光线指向一个有效的实体并被用户单击时，会创建一个 `click` 事件。
 
-> 注意：只有具有 id 的实体才能生成 click 事件。click 的最大有效距离是距离实体 10 米。
+> 注意：click 的最大有效距离是距离实体 10 米。
 
-#### 点击事件
+#### onCLick
 
-一般的 `click` 事件表示所有对有效实体执行的点击。 该事件有两个参数：
+The easiest way to handle click events is to add an `onClick` component to the entity itself. With this in place, there's no need to add an event subscriber for click events from this entity, that's already implicitly handled.
+
+处理点击事件的最简单方法是向实体本身添加一个 `onClick` 组件。 有了这个，就不需要对来自该实体的点击添加事件订阅，它会被隐式处理。
+
+You can declare what to do in the event of a click by writing a lambda in the `onClick` itself, or you can call a separate function to keep the render method more legible.
+
+您可以在 `onClick` 中编写 lambda 表达式来声明单击事件时要执行的操作，为了 render 方法更清晰，您也可以调用单独的函数。
+
+{% raw %}
+
+```tsx
+<box
+  onClick={() => console.log('Clicked!')}
+  position={{ x: 5, y: 1, z: 5 }}
+  scale={{ x: 2, y: 2, z: 1 }}
+/>
+```
+
+{% endraw %}
+
+如果你从 onClick 中调用一个函数，那么对 `this` 操作符的任何引用都会引用函数本身，而不是[scriptable scene 对象]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %})。 如果您需要引用场景状态或场景中的其他函数，那就可能会出现问题。 要避免此问题，您可以将函数定义为 lambda，也可以通过 `onClick` 值中定义的 lambda 调用函数（如上例所示）。 有关如何解决此问题的更完整示例，请参阅[TypeScript 编码指南]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-08-tsx-coding-guide %})。
+
+click 事件对象作为您在 `onClick` 中调用的函数的参数传递。 此事件对象包含以下可由您的函数访问的参数：
+
+- `elementId`: 被点击的实体的 ID（如果实体有 id）。
+- `pointerId`: 点击用户 ID。
+
+{% raw %}
+
+```tsx
+import { ScriptableScene, createElement } from "decentraland-api/src"
+
+export default class Scene extends ScriptableScene {
+  async render() {
+    return (
+      <scene>
+        <box
+          position={{ x: 5, y: 0, z: 5 }}
+          id="myBox"
+          onClick={e => {
+            console.log(`elementId: ` + e.elementId)
+            console.log(`pointerId: ` + e.pointerId)
+          }}
+        />
+      </scene>
+    )
+  }
+}
+```
+
+{% endraw %}
+
+此示例在每次单击 box 实体时显示 click 事件的两个参数值。
+
+#### 普通点击事件
+
+普通的 `click` 事件表示所有对有效实体执行的点击。 只有具有 id 的实体才能生成 click 事件，
+click 事件对象包含以下参数：
 
 - `elementId`: 被点击的实体的 Id .
 - `pointerId`: 实施点击的用户的 Id .
@@ -39,7 +100,7 @@ async sceneDidMount() {
 {% raw %}
 
 ```tsx
-import { createElement, ScriptableScene } from "metaverse-api"
+import { createElement, ScriptableScene } from "decentraland-api"
 
 export default class LastClicked extends ScriptableScene {
   state = {
@@ -77,7 +138,7 @@ export default class LastClicked extends ScriptableScene {
 {% raw %}
 
 ```tsx
-import { createElement, ScriptableScene } from "metaverse-api"
+import { createElement, ScriptableScene } from "decentraland-api"
 
 export default class RedButton extends ScriptableScene {
   state = {
@@ -112,7 +173,7 @@ export default class RedButton extends ScriptableScene {
 {% raw %}
 
 ```tsx
-import { createElement, ScriptableScene } from "metaverse-api"
+import { createElement, ScriptableScene } from "decentraland-api"
 
 export default class BigButton extends ScriptableScene {
   state = {
@@ -159,7 +220,7 @@ export default class BigButton extends ScriptableScene {
 {% raw %}
 
 ```tsx
-import { createElement, ScriptableScene } from "metaverse-api"
+import { createElement, ScriptableScene } from "decentraland-api"
 
 export default class BoxFollower extends ScriptableScene {
   state = {
@@ -199,7 +260,7 @@ export default class BoxFollower extends ScriptableScene {
 {% raw %}
 
 ```tsx
-import { createElement, ScriptableScene } from "metaverse-api"
+import { createElement, ScriptableScene } from "decentraland-api"
 
 export default class ConeHead extends ScriptableScene {
   state = {

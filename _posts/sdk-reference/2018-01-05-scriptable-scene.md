@@ -31,7 +31,7 @@ export interface IState {
 }
 
 export default class Scene extends ScriptableScene<any, IState> {
-  state = {
+  state: IState = {
     buttonState: 0,
     isDoorClosed: false,
     queboxPosition: { x: 0, y: 0, z: 0 }
@@ -74,18 +74,18 @@ export default class Scene extends ScriptableScene<Props, State> {
 下面是一个包含类和生命周期方法的示例。
 
 ```tsx
-import { ScriptableScene, createElement } from "metaverse-api"
+import { ScriptableScene, createElement } from "decentraland-api"
 
-interface State {
+interface IState {
   counter: number
 }
 
 interface Props {}
 
-export default class Scene extends ScriptableScene<Props, State> {
+export default class Scene extends ScriptableScene<Props, IState> {
   eventSubscriber: EventSubscriber
   timer: number
-  state: State = { counter: 0 }
+  state: IState = { counter: 0 }
 
   /**
    * Called immediately after the scene is mounted. You must start your
@@ -179,7 +179,7 @@ export default class Scene extends ScriptableScene<Props, State> {
 
 ## 客户端场景
 
-客户端场景，也称为“本地场景”，由 `metaverse-compiler` 编译到 WebWorker 中。 `scene.json` 指向编译的 `scene.js` 文件。
+客户端场景，也称为“本地场景”，由 `decentraland-compiler` 编译到 WebWorker 中。 `scene.json` 指向编译的 `scene.js` 文件。
 
 WebWorker的入口点在 `build.json` 中定义：
 
@@ -206,7 +206,7 @@ WebWorker的入口点在 `build.json` 中定义：
 
 ## 低级 API
 
-`scriptableScene` 对象与后台交互的协议和内部结构在 [metaverse-rpc](https://github.com/decentraland/metaverse-rpc) 中有说明。
+`scriptableScene` 对象与后台交互的协议和内部结构在 [decentraland-rpc](https://github.com/decentraland/decentraland-rpc) 中有说明。
 
 理解 `entityController` 注入类的方式很重要。
 
@@ -218,7 +218,7 @@ WebWorker的入口点在 `build.json` 中定义：
     }
     ```
 
-2. 使用 [transport](https://github.com/decentraland/metaverse-rpc#transports) 作为参数创建您定义的场景类的实例。
+2. 使用 [transport](https://github.com/decentraland/decentraland-rpc#transports) 作为参数创建您定义的场景类的实例。
 3. 一旦创建了类，它需要来自主机（引擎）的 `EntityController` 实例，这是一个异步调用。
 4. 主机响应该请求，创建相应的代理并分配给属性 `entityController`。
 5. 一旦满足所有要求，场景对象就会调用 `sceneDidMount()` 方法。 此时，您可以确认在类实例中加载了所需的 API。

@@ -2,11 +2,13 @@
 date: 2018-01-01
 title: 安装指南
 description: 安装 SDK 的分步指南
+redirect_from:
+  - /documentation/installation-guide/
 categories:
-  - documentation
+  - getting-started
 type: Document
-set: building-scenes
-set_order: 0
+set: getting-started
+set_order: 2
 ---
 
 在 Decentraland 上构建开发场景，您首先需要安装命令行接口（CLI）。
