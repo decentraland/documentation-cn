@@ -19,7 +19,7 @@ set_order: 7
 
 > 注意：CLI 会在创建场景时提示您提供此信息，但您也可以随时手动修改该文件。
 
-- 您的场景符合所有[场景限制](({{ site.baseurl }}{% post_url /sdk-reference/2018-01-06-scene-limitations %}))。 每次运行场景预览时，大多数限制都会得到验证。
+- 您的场景符合所有[场景限制](({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %}))。 每次运行场景预览时，大多数限制都会得到验证。
 
 * 您已正确安装了 IPFS。 为此，请按照[这些步骤](https://ipfs.io/docs/install/)进行操作。
 

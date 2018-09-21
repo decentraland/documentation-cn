@@ -2,10 +2,12 @@
 date: 2018-06-12
 title: 场景内容指南
 description: 场景中如何导入 3D 模型
+redirect_from:
+  - /sdk-reference/scene-content-guide/
 categories:
-  - sdk-reference
+  - development-guide
 type: Document
-set: sdk-reference
+set: development-guide
 set_order: 2
 tag: introduction
 ---
@@ -34,7 +36,7 @@ Decentraland 中的三维场景是基于 [Entity-Component](https://en.wikipedia
 <box position={vector} color="#ff00aa" scale={2} />
 ```
 
-有关这些实体的更多详细信息，请参阅[实体接口]({{ site.baseurl }}{% post_url /sdk-reference/2018-06-21-entity-interfaces %}) 。
+有关这些实体的更多详细信息，请参阅[实体接口]({{ site.baseurl }}{% post_url /development-guide/2018-06-21-entity-interfaces %}) 。
 
 > 提示：通过源代码编辑器（如 Visual Studio Code）编辑代码时，您能看到毎种实体支持的组件列表。通常，可以把光标放在实体中并输入 *Ctrl + 空格* 来实现。
 
@@ -102,6 +104,12 @@ Decentraland 中的三维场景是基于 [Entity-Component](https://en.wikipedia
 在上面的示例中，材质的图像位于 `materials` 文件夹中，该文件夹位于场景项目文件夹的根目录。
 
 导入包含嵌入材质的 glTF 模型时，会隐式地将材质导入到场景中。在这种情况下，场景不需要声明 `<material/>` 实体。
+
+Not all shaders are supported by the Decentraland engine. For example, all blender render materials should be supported, in Cycles render only PBR (phisically based rendering) materials are supported.
+
+并不是所有的 shaders 都受到 Decentraland 引擎的支持。例如，支持所有 blender 渲染材质，Cycles 仅支持 PBR（基于 phisically 渲染）材质。
+
+有关材质中可配置的所有属性列表，请参阅[实体参考指南]({{ site.baseurl }}{% post_url /development-guide/2018-06-21-entity-interfaces %})。 请记住，所有材质和纹理必须在[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})的参数范围内。
 
 #### 纹理贴图
 

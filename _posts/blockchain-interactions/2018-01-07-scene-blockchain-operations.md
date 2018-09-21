@@ -1,15 +1,17 @@
 ---
 date: 2018-01-07
-title: Blockchain operations
+title: Scene blockchain operations
 description: Learn what the SDK offers for performing operations with the Ethereum blockchain
+redirect_from:
+  - /sdk-reference/blockchain-operations/
 categories:
-  - sdk-reference
+  - blockchain-interactions
 type: Document
-set: sdk-reference
+set: blockchain-interactions
 set_order: 7
 ---
 
-By interacting with the Ethereum blochchain you can, for example, require that a user pays a fee before actioning something in your scene. The SDK is currently experimenting with different ways to interface with the Ethereum blockchain. Currently there are three ways you can achieve this:
+By interacting with the Ethereum blockchain you can, for example, require that a user pays a fee before activating something in your scene. The SDK is currently experimenting with different ways to interface with the Ethereum blockchain. Currently there are three ways you can achieve this:
 
 - Using the Web3 API
 - Using the `ethjs` library
@@ -26,10 +28,11 @@ The example below imports the `UserIdentity` library and runs `getUserPublicKey(
 {% raw %}
 
 ```tsx
-import { createElement, inject, UserIdentity } from "metaverse-api/src"
+import { createElement, inject, UserIdentity } from "decentraland-api/src"
 
 export default class Scene extends ScriptableScene<any, any> {
-  @inject("Identity") userIdentity: UserIdentity
+  @inject("Identity")
+  userIdentity: UserIdentity
 
   state = {
     publicKey: ""
@@ -79,7 +82,7 @@ Below is a sample that uses this API to get the contents of a block in the block
 {% raw %}
 
 ```tsx
-import { createElement, ScriptableScene } from "metaverse-api"
+import { createElement, ScriptableScene } from "decentraland-api"
 import Web3 = require("web3")
 
 export default class EthereumProvider extends ScriptableScene {
@@ -114,8 +117,7 @@ For more details and a full reference of what's possible with this library, see 
 
 ## The Ethereum Controller
 
-Another way to perform operations on the Ethereum blockchain is through the ethereum controller. This controller is packaged with the SDK, so you don't need to run any manual instalations. You must first import it into your scene:
-
+Another way to perform operations on the Ethereum blockchain is through the ethereum controller. This controller is packaged with the SDK, so you don't need to run any manual installations. You must first import it into your scene:
 
 1.  Import the `EthereumController` to the .tsx file:
 
@@ -127,7 +129,7 @@ import {
   ScriptableScene,
   EthereumController,
   inject
-} from "metaverse-api"
+} from "decentraland-api"
 ```
 
 {% endraw %}
@@ -138,7 +140,8 @@ import {
 
 ```tsx
 export default class myScene extends ScriptableScene {
-  @inject("experimentalEthereumController") eth: EthereumController
+  @inject("experimentalEthereumController")
+  eth: EthereumController
   // (...)
 }
 ```
@@ -159,7 +162,7 @@ this.eth.requirePayment(receivingAddress, amount, currency)
 
 {% endraw %}
 
-The function requires that you specify an Ethereum wallet address to receive the payment, an ammount for the transaction and a specific currency to use (for example, MANA or ETH).
+The function requires that you specify an Ethereum wallet address to receive the payment, an amount for the transaction and a specific currency to use (for example, MANA or ETH).
 
 If accepted by the user, the function returns the hash number of the transaction that has been started.
 
@@ -190,9 +193,13 @@ The example above listens for clicks on a `door` entity. When clicked, the user 
 
 #### Using the Ethereum test network
 
-While testing your scene, to avoid transfering real MANA currency, you can use the _Ethereum Ropsten test network_ and transfer fake MANA instead.
+While testing your scene, to avoid transferring real MANA currency, you can use the _Ethereum Ropsten test network_ and transfer fake MANA instead.
 
-To use the test network you must set your Metamask Chrome extension to use the _Ropsten test network_ instead of _Main network_. You must also own MANA in the Ropsten blockchain, which you can aquire for free from Decentraland.
+To use the test network you must set your Metamask Chrome extension to use the _Ropsten test network_ instead of _Main network_.
+
+You must also own MANA in the Ropsten blockchain. To obtain free Ropsten mana in the test network, go to our [MANA faucet](https://faucet.decentraland.today/).
+
+> Tip: To run the transaction of transferring Ropsten MANA to your wallet, you will need to pay a gas fee in Ropsten Ether. If you don't have Ropsten Ether, you can obtain it for free from various external faucets like [this one](https://faucet.ropsten.be/).
 
 To preview your scene using the test network, add the `DEBUG` property to the URL you're using to access the scene preview on your browser. For example, if you're accessing the scene via `http://127.0.0.1:8000/?position=0%2C-1`, you should set the URL to `http://127.0.0.1:8000/?DEBUG&position=0%2C-1`.
 
@@ -312,7 +319,7 @@ console.log(‘Is the message correct?’, isEqual)
 {% raw %}
 
 ```tsx
-import { inject, EthereumController, createElement, ScriptableScene } from 'metaverse-api'
+import { inject, EthereumController, createElement, ScriptableScene } from 'decentraland-api'
 import { eth } from 'decentraland-eth'
 
 const messageToSign = `# DCL Signed message
