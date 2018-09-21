@@ -2,10 +2,12 @@
 date: 2018-01-08
 title: TypeScript 开发技巧
 description: 场景开发技巧
+redirect_from:
+  - /documentation/tsx-coding-guide/
 categories:
-  - documentation
+  - development-guide
 type: Document
-set: sdk-reference
+set: development-guide
 set_order: 12
 ---
 
@@ -191,9 +193,9 @@ When having the code for your scene distributed amongst multiple separate files 
 
 TypeScript 提供了各种方法，用来控制什么时候执行代码。
 
-scriptableScene 对象带有许多默认函数，这些函数在场景生命周期的不同时间执行，例如`sceneDidMount()`在场景开始时调用一次，每次场景状态改变时调用`render()` 。 有关详细信息，请参阅[scriptable scene]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %})。
+scriptableScene 对象带有许多默认函数，这些函数在场景生命周期的不同时间执行，例如`sceneDidMount()`在场景开始时调用一次，每次场景状态改变时调用`render()` 。 有关详细信息，请参阅[scriptable scene]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %})。
 
-实体可以包含_transition_组件以使任何更改逐渐发生，这非常类似于 CSS 中的过渡。 有关详细信息，请参阅[实体定位]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-12-entity-positioning %})。
+实体可以包含_transition_组件以使任何更改逐渐发生，这非常类似于 CSS 中的过渡。 有关详细信息，请参阅[实体定位]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %})。
 
 #### 启动基于时间的循环
 
@@ -606,7 +608,7 @@ renderObstacles() {
 
 ## this 运算符
 
-大多数情况下，当你在场景中使用 `this` 时，它指的是正在运行场景的 [scriptable scene 对象]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %})实例。
+大多数情况下，当你在场景中使用 `this` 时，它指的是正在运行场景的 [scriptable scene 对象]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %})实例。
 
 但是，函数中 `this` 的含义与调用函数的位置有关，而与函数的定义位置无关。 取决于它的调用位置，相同的函数中的 `this` 有可能具有不同的意义。 如果函数被定义为场景的一部分，但是它被实体的 onClick 组件调用，则函数中运算符 `this` 的任何使用都将引用函数本身，而不是 scriptable scene 对象。
 

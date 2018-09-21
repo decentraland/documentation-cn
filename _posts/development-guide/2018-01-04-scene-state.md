@@ -2,14 +2,16 @@
 date: 2018-01-05
 title: 状态管理
 description: 如何更新和读取场景状态变量
+redirect_from:
+  - /sdk-reference/scene-state/
 categories:
-  - sdk-reference
+  - development-guide
 type: Document
-set: sdk-reference
+set: development-guide
 set_order: 4
 ---
 
-场景状态由一系列随时间变化的变量组成。状态因场景中[events]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-03-event-handling %})事件的出现而发生变化。当状态改变时，这将重新触发场景使用新的状态渲染。
+场景状态由一系列随时间变化的变量组成。状态因场景中[events]({{ site.baseurl }}{% post_url /development-guide/2018-01-03-event-handling %})事件的出现而发生变化。当状态改变时，这将重新触发场景使用新的状态渲染。
 
 ![](/images/media/events_state_diagram.jpeg)
 
@@ -23,7 +25,7 @@ state = {
 }
 ```
 
-状态应该只 **包含** 数据，没有逻辑或方法。我们不建议将具有自己方法的对象实例分配给状态中的变量。所有场景的逻辑都应该在您的自定义类中执行，该类扩展了 [scriptable scene]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %}) 类。
+状态应该只 **包含** 数据，没有逻辑或方法。我们不建议将具有自己方法的对象实例分配给状态中的变量。所有场景的逻辑都应该在您的自定义类中执行，该类扩展了 [scriptable scene]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %}) 类。
 
 首次渲染场景时，必须为每个状态变量赋予初始值。
 
@@ -150,7 +152,7 @@ async checkDoor(){
 
 每次更新场景的状态时，都会调用 `render()` 函数使用新的状态渲染场景。
 
-> 注意：为了防止场景每次都被渲染，你可以使用 [`shouldSceneUpdate()` 函数]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %})， 这样它会只根据某些规则有条件地运行 `Render()` 函数。
+> 注意：为了防止场景每次都被渲染，你可以使用 [`shouldSceneUpdate()` 函数]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %})， 这样它会只根据某些规则有条件地运行 `Render()` 函数。
 
 #### 本地场景中
 

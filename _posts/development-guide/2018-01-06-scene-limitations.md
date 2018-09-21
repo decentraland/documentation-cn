@@ -2,10 +2,12 @@
 date: 2018-01-06
 title: 场景限制
 description: 我可以在场景中放多少东西？
+redirect_from:
+  - /documentation/scene-limitations/
 categories:
-  - documentation
+  - development-guide
 type: Document
-set: sdk-reference
+set: development-guide
 set_order: 6
 ---
 
@@ -104,7 +106,7 @@ From a scene's code, you can query both the limitations that apply to the scene 
 
  ## Shader 着色器限制
 
- 在 decentraland 中使用的3D模型必须使用支持的着色器和材质。有关支持的着色器列表，请参阅[3D模型注意事项]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-09-external-3d-models %}) 。
+ 在 decentraland 中使用的3D模型必须使用支持的着色器和材质。有关支持的着色器列表，请参阅[3D模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}) 。
 
 ## 纹理大小限制
 

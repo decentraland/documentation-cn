@@ -2,18 +2,20 @@
 date: 2018-01-05
 title: 事件处理
 description: 了解场景中可能发生的事件以及如何捕捉它们
+redirect_from:
+  - /sdk-reference/event-handling/
 categories:
-  - sdk-reference
+  - development-guide
 type: Document
-set: sdk-reference
+set: development-guide
 set_order: 3
 ---
 
-当用户与场景中的实体交互时，会生成几种类型的事件。这些事件会对场景[状态(state)]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-04-scene-state %})产生影响，并触发一个新的场景渲染。
+当用户与场景中的实体交互时，会生成几种类型的事件。这些事件会对场景[状态(state)]({{ site.baseurl }}{% post_url /development-guide/2018-01-04-scene-state %})产生影响，并触发一个新的场景渲染。
 
 ![](/images/media/events_state_diagram.jpeg)
 
-通常，场景响应事件的一个好方法是在 `sceneDidMount()` 方法中设置监听器。有关何时执行此方法的更多信息请查看 [可编程场景]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %}) 。
+通常，场景响应事件的一个好方法是在 `sceneDidMount()` 方法中设置监听器。有关何时执行此方法的更多信息请查看 [可编程场景]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %}) 。
 
 {% raw %}
 
@@ -47,7 +49,7 @@ You can declare what to do in the event of a click by writing a lambda in the `o
 
 ```tsx
 <box
-  onClick={() => console.log('Clicked!')}
+  onClick={() => console.log("Clicked!")}
   position={{ x: 5, y: 1, z: 5 }}
   scale={{ x: 2, y: 2, z: 1 }}
 />
@@ -55,7 +57,7 @@ You can declare what to do in the event of a click by writing a lambda in the `o
 
 {% endraw %}
 
-如果你从 onClick 中调用一个函数，那么对 `this` 操作符的任何引用都会引用函数本身，而不是[scriptable scene 对象]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-05-scriptable-scene %})。 如果您需要引用场景状态或场景中的其他函数，那就可能会出现问题。 要避免此问题，您可以将函数定义为 lambda，也可以通过 `onClick` 值中定义的 lambda 调用函数（如上例所示）。 有关如何解决此问题的更完整示例，请参阅[TypeScript 编码指南]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-08-tsx-coding-guide %})。
+如果你从 onClick 中调用一个函数，那么对 `this` 操作符的任何引用都会引用函数本身，而不是[scriptable scene 对象]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %})。 如果您需要引用场景状态或场景中的其他函数，那就可能会出现问题。 要避免此问题，您可以将函数定义为 lambda，也可以通过 `onClick` 值中定义的 lambda 调用函数（如上例所示）。 有关如何解决此问题的更完整示例，请参阅[TypeScript 编码指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-08-tsx-coding-guide %})。
 
 click 事件对象作为您在 `onClick` 中调用的函数的参数传递。 此事件对象包含以下可由您的函数访问的参数：
 

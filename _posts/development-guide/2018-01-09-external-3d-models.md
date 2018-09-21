@@ -2,18 +2,20 @@
 date: 2018-01-09
 title: 3D 模型考虑因素
 description: 外部 3D 模型支持哪些资产和组件，将它们导入 Decentraland 之前如何配置
+redirect_from:
+  - /sdk-reference/external-3d-models/
 categories:
-  - sdk-reference
+  - development-guide
 type: Document
-set: sdk-reference
+set: development-guide
 set_order: 9
 ---
 
 3D 模型以 glTF 格式导入到 decentraland 中。这些模型可以包含许多支持的功能。本节介绍如何使它们与Decentraland 兼容及最佳实践。
 
-有关如何在 Decentraland 场景中配置 3D 模型的位置，比例，激活动画等的信息，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-21-scene-content-guide %})。
+有关如何在 Decentraland 场景中配置 3D 模型的位置，比例，激活动画等的信息，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
 
-请记住，所有模型，着色器和纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-06-scene-limitations %})的参数范围内。
+请记住，所有模型，着色器和纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})的参数范围内。
 
 ## 材质
 
@@ -29,7 +31,7 @@ set_order: 9
 
   > 提示：使用 Blender 时，可以通过设置 Cycles 渲染器并添加 Principled BSDF 着色器来使用 PBR 材质。请注意，Cycles 渲染器的其他着色器均不受支持。
 
-请参阅 [实体接口]({{ site.baseurl }}{% post_url /sdk-reference/2018-06-21-entity-interfaces %}) 查看材质可以配置的所有属性列表
+请参阅 [实体接口]({{ site.baseurl }}{% post_url /development-guide/2018-06-21-entity-interfaces %}) 查看材质可以配置的所有属性列表
 
 #### 纹理
 
@@ -138,7 +140,7 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 我们建议您将楼梯 Collider 设为斜坡物体，这样可以在上下行走时提供更好的体验。当他们爬上你的楼梯时，它会显得平滑上升或下降，而不是要他们毎步“跳跃”着走。
 
-使用斜坡对象还可以避免创建不必要的几何图形，从而为其他更复杂的模型节省空间。请记住，在计算[场景限制]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-06-scene-limitations %})时会考虑 Collider 几何体
+使用斜坡对象还可以避免创建不必要的几何图形，从而为其他更复杂的模型节省空间。请记住，在计算[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})时会考虑 Collider 几何体
 
 1. 创建一个类似于原始楼梯的大小和比例的斜坡形状的新对象。
 
@@ -178,7 +180,7 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 关于动画必须具有的名称没有具体规则。您可以通过使用文本编辑器打开 _.gltf_ 文件的内容来验证导出模型中动画的名称。通常，动画名称由其 armature 名称，下划线及其动画名称组成。例如`myArmature_animation1`。
 
-您可以在 _glTF 模型中包含任意数量的动画。在将模型加载到 Decentraland 场景时，默认情况下，_glTF_ 模型中的所有动画都是不可用的。有关如何激活和处理场景中动画的说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-21-scene-content-guide %})。
+您可以在 _glTF 模型中包含任意数量的动画。在将模型加载到 Decentraland 场景时，默认情况下，_glTF_ 模型中的所有动画都是不可用的。有关如何激活和处理场景中动画的说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
 
 > 注意：目前无法更改场景中显示的动画的帧速率，速度固定为默认设置。要更改动画的速度，您必须更改帧数。
 
@@ -216,7 +218,7 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 要在 Blender 中为同一模型创建多个动画，必须选择 “Dope-Sheet” 视图，然后打开“动作编辑器”。您也可以从“Dope-Sheet”视图编辑动画，例如，您可以调整两个关键帧之间的距离。
 
-将模型添加到 Decentraland 场景时，必须通过配置 _gltf-model_ 实体来激活动画。有关说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-21-scene-content-guide %})。
+将模型添加到 Decentraland 场景时，必须通过配置 _gltf-model_ 实体来激活动画。有关说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
 
 #### 动画的最佳实践
 
