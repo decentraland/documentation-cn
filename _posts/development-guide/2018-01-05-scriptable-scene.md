@@ -2,10 +2,12 @@
 date: 2018-01-05
 title: ScriptableScene 对象
 description: 学习如何设计 ScriptableScene 及其事件。
+redirect_from:
+  - /sdk-reference/scriptable-scene/
 categories:
-  - sdk-reference
+  - development-guide
 type: Document
-set: sdk-reference
+set: development-guide
 set_order: 5
 ---
 
@@ -44,7 +46,7 @@ export default class Scene extends ScriptableScene<any, IState> {
 
 您可以通过在场景对象中的任何位置通过 `this.scene.<variableName>` 来访问场景的状态。
 
-有关如何使用场景状态的更多信息，请参阅[场景状态]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-04-scene-state %})。
+有关如何使用场景状态的更多信息，请参阅[场景状态]({{ site.baseurl }}{% post_url /development-guide/2018-01-04-scene-state %})。
 
 ## 属性
 
@@ -214,7 +216,8 @@ WebWorker的入口点在 `build.json` 中定义：
    
     ```tsx
     class ScriptableScene extends Script {
-      @inject("EntityController") entityController: EntityController = null
+      @inject("EntityController") 
+      entityController: EntityController = null
     }
     ```
 
