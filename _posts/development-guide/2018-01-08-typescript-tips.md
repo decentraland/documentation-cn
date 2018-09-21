@@ -1,7 +1,7 @@
 ---
 date: 2018-01-08
-title: TypeScript 开发技巧
-description: 场景开发技巧
+title: TypeScript tips
+description: Tips and tricks for coding scenes
 redirect_from:
   - /documentation/tsx-coding-guide/
 categories:
@@ -49,7 +49,7 @@ this.subscribeTo("pointerDown", e => {
 
 ## 创建全局常量
 
-您可以在_.tsx_文件的根级别定义全局常量。定义后，就可以在整个文件中引用它。
+您可以在*.tsx*文件的根级别定义全局常量。定义后，就可以在整个文件中引用它。
 
 这对于在场景中多次使用且需要一致性的值非常有用。这样可以更轻松地维护代码，因为您只需要更改一行。
 
@@ -84,7 +84,7 @@ export default class myScene extends ScriptableScene {
 
 ## 定义自定义数据类型
 
-您可以在_.tsx_文件中定义自己的自定义数据类型，这些对于使用仅能够在场景中保存特定值的变量非常有用。使用自定义类型可使代码更具可读性。如果您正在使用Visual Studio Code 或 Atom 等高级代码编辑器，由于代码编辑器提供了自动完成选项和验证，因此它还可以使代码编写更容易。
+您可以在*.tsx*文件中定义自己的自定义数据类型，这些对于使用仅能够在场景中保存特定值的变量非常有用。使用自定义类型可使代码更具可读性。如果您正在使用 Visual Studio Code 或 Atom 等高级代码编辑器，由于代码编辑器提供了自动完成选项和验证，因此它还可以使代码编写更容易。
 
 {% raw %}
 
@@ -190,12 +190,11 @@ When having the code for your scene distributed amongst multiple separate files 
 
 ## 执行时间控制
 
-
 TypeScript 提供了各种方法，用来控制什么时候执行代码。
 
 scriptableScene 对象带有许多默认函数，这些函数在场景生命周期的不同时间执行，例如`sceneDidMount()`在场景开始时调用一次，每次场景状态改变时调用`render()` 。 有关详细信息，请参阅[scriptable scene]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %})。
 
-实体可以包含_transition_组件以使任何更改逐渐发生，这非常类似于 CSS 中的过渡。 有关详细信息，请参阅[实体定位]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %})。
+实体可以包含*transition*组件以使任何更改逐渐发生，这非常类似于 CSS 中的过渡。 有关详细信息，请参阅[实体定位]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %})。
 
 #### 启动基于时间的循环
 
@@ -276,7 +275,7 @@ const importantValue = await this.runImportantProcess()
 
 `await` 只能在异步函数的上下文中使用，否则会冻结场景执行的主线程，这是绝对不可取的。
 
-如果您熟悉C＃语言，您会发现 TypeScript 中的异步函数跟它一致。默认情况下，函数同步运行，但您可以通过在定义名称前添加 `async` 来使它们异步运行。
+如果您熟悉 C＃语言，您会发现 TypeScript 中的异步函数跟它一致。默认情况下，函数同步运行，但您可以通过在定义名称前添加 `async` 来使它们异步运行。
 
 > 提示：如果您想了解 JavaScript promises, async and await 背后的原因，我们建议您阅读[这篇文章](https://zeit.co/blog/async-and-await)。
 
@@ -286,7 +285,7 @@ const importantValue = await this.runImportantProcess()
 
 因为你必须总是通过 `.setState()` 方法更新场景状态，所以你不能只使用像 `.push()` 或 `pop()` 这样的数组方法来直接改变这个变量。您必须调用`setState()` 并传入实现更改后的完整数组。
 
-如果您需要复制一个要修改的数组，请确保完全克隆它，而不仅仅是引用它的值。否则更改该数组也会影响原始数组。要复制数组的值而不是数组本身，请使用_展开运算符_（三个点）。
+如果您需要复制一个要修改的数组，请确保完全克隆它，而不仅仅是引用它的值。否则更改该数组也会影响原始数组。要复制数组的值而不是数组本身，请使用*展开运算符*（三个点）。
 
 {% raw %}
 
@@ -299,7 +298,6 @@ const newArray = [...this.state.myArray]
 #### 加入数组
 
 在数组末尾添加新元素：
-
 
 {% raw %}
 
@@ -520,7 +518,7 @@ async render() {
           transition={{ position:
             { duration: 300, timing: this.state.bounce? "bounce-in" : "linear" }
           }}
-      />  
+      />
     </scene>
   )
 }
@@ -559,14 +557,14 @@ async render() {
 
 从列表中渲染实体时的一些最佳实践：
 
- - 使用 `array.map` 来遍列列表
- - 不要使用 `for` 循环
- - 为每个实体提供唯一的 `key`
- - 避免使用数组索引作为实体的 key
-  
+- 使用 `array.map` 来遍列列表
+- 不要使用 `for` 循环
+- 为每个实体提供唯一的 `key`
+- 避免使用数组索引作为实体的 key
+
 #### 保持 render 函数可读
 
-render() 函数的输出可以包括对其他函数的调用。 由于每次更新场景状态时都会调用render()，因此这里的所有函数也会被 render() 调用。
+render() 函数的输出可以包括对其他函数的调用。 由于每次更新场景状态时都会调用 render()，因此这里的所有函数也会被 render() 调用。
 
 这样做可以使 render() 中的代码更具可读性。在简单的场景中，推荐在 `render()` 函数中定义场景的所有实体，但是当处理不同数量的实体或可以被视为数组的大量实体时，通常放在 render() 函数外处理。
 
@@ -604,7 +602,6 @@ renderObstacles() {
 ```
 
 {% endraw %}
-
 
 ## this 运算符
 
