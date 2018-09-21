@@ -57,7 +57,7 @@ You can declare what to do in the event of a click by writing a lambda in the `o
 
 {% endraw %}
 
-如果你从 onClick 中调用一个函数，那么对 `this` 操作符的任何引用都会引用函数本身，而不是[scriptable scene 对象]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %})。 如果您需要引用场景状态或场景中的其他函数，那就可能会出现问题。 要避免此问题，您可以将函数定义为 lambda，也可以通过 `onClick` 值中定义的 lambda 调用函数（如上例所示）。 有关如何解决此问题的更完整示例，请参阅[TypeScript 编码指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-08-tsx-coding-guide %})。
+如果你从 onClick 中调用一个函数，那么对 `this` 操作符的任何引用都会引用函数本身，而不是[scriptable scene 对象]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %})。 如果您需要引用场景状态或场景中的其他函数，那就可能会出现问题。 要避免此问题，您可以将函数定义为 lambda，也可以通过 `onClick` 值中定义的 lambda 调用函数（如上例所示）。 有关如何解决此问题的更完整示例，请参阅[TypeScript 编码指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-08-typescript-tips %})。
 
 click 事件对象作为您在 `onClick` 中调用的函数的参数传递。 此事件对象包含以下可由您的函数访问的参数：
 
