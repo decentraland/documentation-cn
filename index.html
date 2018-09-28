@@ -1,4 +1,4 @@
---- 
+---
 ---
 <style>
   .docs-header {
@@ -32,7 +32,8 @@
     </h2>
     <div class="docs-top-search">
       <div class="docs-top-languages">
-        <a href="http://docs.decentraland.org" class="translate-link-en" data-event-category="Translate to English" data-event-action="click">English</a>
+        <a href="http://docs.decentraland.org" class="translate-link-en" data-event-category="Translate to English"
+          data-event-action="click">English</a>
       </div>
       {% include search.html %}
     </div>
@@ -42,7 +43,7 @@
       开始构建虚拟世界
     </h1>
     <p class="docs-intro-desc">
-      了解有关 Decentaland、SDK 和 Dapp 支持内容。或者直接开始<a href="{{ site.baseurl }}/documentation/create-scene/">创造你的第一个场景</a>！
+      了解有关 Decentaland、SDK 和 Dapp 支持内容。或者直接开始<a href="{{ site.baseurl }}/getting-started/create-scene/">创造你的第一个场景</a>！
     </p>
     <div class="docs-header">
       <a class="index-trigger no-smooth" href="{{site.baseurl}}/archive" style="">
@@ -52,12 +53,12 @@
     </div>
     <div class="docs-listing">
       <ul class="listing">
-        {% assign sets = site.sets | sort: 'order' %} 
-        {% for set in sets %} 
-          {% assign series_posts = site.posts | where: "set", set.slug | sort: 'set_order' %} 
-          {% assign post = series_posts[0] %} 
-          {% assign size = series_posts | size %} 
-          {% if size > 0 %}
+        {% assign sets = site.sets | sort: 'order' %}
+        {% for set in sets %}
+        {% assign series_posts = site.posts | where: "set", set.slug | sort: 'set_order' %}
+        {% assign post = series_posts[0] %}
+        {% assign size = series_posts | size %}
+        {% if size > 0 %}
         <li>
           <a class="docs-wrapper" href="{{ post.url }}">
             <div class="icon" style="background-color: {{set.color}}; background-image: url({{ site.baseurl }}/images/sets/{{set.img}})">{%
@@ -71,12 +72,12 @@
             </article>
           </a>
         </li>
-        {% endif %} 
+        {% endif %}
         {% endfor %}
       </ul>
     </div>
 
-    {% include help.html %} 
+    {% include help.html %}
     {% include override-color.html accent_color="#ff0044" %}
   </section>
 

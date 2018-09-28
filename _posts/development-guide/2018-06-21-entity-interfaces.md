@@ -5,9 +5,9 @@ redirect_from:
   - /docs/entities
 description: 实体和构造实体的可用接口
 categories:
-  - sdk-reference
+  - development-guide
 type: Document
-set: sdk-reference
+set: development-guide
 set_order: 4
 ---
 
@@ -345,7 +345,7 @@ interface SkeletalAnimation {
 }
 ```
 
-> 注意：请记住，所有模型及其纹理必须在[场景限制]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-06-scene-limitations %})范围内。
+> 注意：请记住，所有模型及其纹理必须在[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})范围内。
 
 ## 基本实体
 

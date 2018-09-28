@@ -21,58 +21,56 @@ set_order: 1
 
 [Code](https://github.com/decentraland/sample-scene-static)
 
-[Explore the scene](https://dcl-project-aobsbnmsdl.now.sh/?position=0%2C-1)
-
+[查看场景](https://dcl-project-aobsbnmsdl.now.sh/?position=0%2C-1)
 
 ### 动态动画
 
-通过此动态动画，我们演示了如何将简单的数据绑定到场景中的对象中。[移动，旋转和缩放]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-21-scene-content-guide %})等属性都可以绑定到状态属性中。
+通过此动态动画，我们演示了如何将简单的数据绑定到场景中的对象中。[移动，旋转和缩放]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})等属性都可以绑定到状态属性中。
 
 [Code](https://github.com/decentraland/sample-scene-dynamic-animation)
 
-[Explore the scene](https://dcl-project-fkmccoyvhb.now.sh/?position=0%2C-1)
+[查看场景](https://dcl-project-fkmccoyvhb.now.sh/?position=0%2C-1)
 
 ### 交互式内容
 
-这个简单的示例场景展示了一个可以打开和关闭的门。单击门会产生一个 [event 事件]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-03-event-handling %})，来更改场景的状态。场景的状态然后改变门的旋转度，由于使用了 transition 过渡效果，门会平稳旋转。
+这个简单的示例场景展示了一个可以打开和关闭的门。单击门会产生一个 [event 事件]({{ site.baseurl }}{% post_url /development-guide/2018-01-03-event-handling %})，来更改场景的状态。场景的状态然后改变门的旋转度，由于使用了 transition 过渡效果，门会平稳旋转。
 
 [Code](https://github.com/decentraland/sample-scene-script)
 
-[Explore the scene](https://dcl-project-inksbqgcjj.now.sh/?position=-41%2C-113)
+[查看场景](https://dcl-project-inksbqgcjj.now.sh/?position=-41%2C-113)
 
 ### 骨骼动画
 
-在场景中，您可以加载交互式 [GLTF 模型]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-21-scene-content-guide %})并触发其动画。这是如何做到这一点的一个例子。 
+在场景中，您可以加载交互式 [GLTF 模型]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})并触发其动画。这是如何做到这一点的一个例子。
 
 [Code](https://github.com/decentraland/sample-scene-skeletal-animation)
 
-[Explore the scene](https://dcl-project-tiroqwvfop.now.sh/?position=0%2C1)
+[查看场景](https://dcl-project-tiroqwvfop.now.sh/?position=0%2C1)
 
 ## 中级示例
 
 ### 声音支持
 
-这个例子的特点是一个发出[声音]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-21-scene-content-guide %})的实体，注意音量是如何随着距离的增加而减小的。它还包括一个动态的 GLTF 对象和一个随机改变颜色的地板。
+这个例子的特点是一个发出[声音]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})的实体，注意音量是如何随着距离的增加而减小的。它还包括一个动态的 GLTF 对象和一个随机改变颜色的地板。
 
 [Code](https://github.com/decentraland/sample-scene-sound-support)
 
-[Explore the scene](https://dcl-project-lolxizhsmy.now.sh/?position=-1%2C-1)
+[查看场景](https://dcl-project-lolxizhsmy.now.sh/?position=-1%2C-1)
 
 #### 点唱机：按钮和声音
 
 这个例子，在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-creating-a-music-jukebox)中有更详细的描述，你可以操作点唱机。每个按钮播放不同的歌曲。按钮是动画的，点击一个按钮会取消之前点击的其他按钮。
-	
 [Code](https://github.com/decentraland/sample-scene-jukebox)
 
-[Explore the scene](https://dcl-project-nvahvjzeiz.now.sh/?position=42%2C42)
+[查看场景](https://dcl-project-nvahvjzeiz.now.sh/?position=42%2C42)
 
 #### 视频支持
 
-在此示例中，您可以与两个视频播放器进行交互。一个将视频加载到场景的资源中，另一个使用外部源来加载。您还可以暂停、停止和更改视频播放器的音量。 
+在此示例中，您可以与两个视频播放器进行交互。一个将视频加载到场景的资源中，另一个使用外部源来加载。您还可以暂停、停止和更改视频播放器的音量。
 
 [Code](https://github.com/decentraland/sample-scene-video-support)
 
-[Explore the scene](https://dcl-project-ffueiuubku.now.sh/?position=0%2C-1)
+[查看场景](https://dcl-project-ffueiuubku.now.sh/?position=0%2C-1)
 
 #### 多人游戏
 
@@ -88,17 +86,17 @@ set_order: 1
 
 [Code](https://github.com/decentraland/sample-scene-array-of-entities/blob/master/README.md)
 
-[Explore the scene](https://dcl-project-xdoolmuwqt.now.sh/?position=0%2C-1)
+[查看场景](https://dcl-project-xdoolmuwqt.now.sh/?position=0%2C-1)
 
 ## 高级示例
 
 #### 简单记忆游戏
 
-在这个例子中，在[博客](https://blog.decentraland.org/building-a-memory-game-using-decentralands-sdk-87ee35968f8d)中有更详细的描述，你玩的是一个“西蒙说”的游戏。这个游戏是如何将更复杂的逻辑添加到场景中以及如何根据用户与其交互方式更改其状态的一个很好的示例。 
+在这个例子中，在[博客](https://blog.decentraland.org/building-a-memory-game-using-decentralands-sdk-87ee35968f8d)中有更详细的描述，你玩的是一个“西蒙说”的游戏。这个游戏是如何将更复杂的逻辑添加到场景中以及如何根据用户与其交互方式更改其状态的一个很好的示例。
 
 [Code](https://github.com/decentraland/sample-scene-memory-game)
 
-[Explore the scene](https://dcl-project-asliohkpyt.now.sh/?position=0%2C0)
+[查看场景](https://dcl-project-asliohkpyt.now.sh/?position=0%2C0)
 
 #### 付款使用
 
@@ -112,7 +110,7 @@ set_order: 1
 
 [Code](https://github.com/decentraland/sample-scene-Block-Dog)
 
-[Explore the scene](https://dcl-project-yffwbatldi.now.sh/?position=42%2C42)
+[查看场景](https://dcl-project-yffwbatldi.now.sh/?position=42%2C42)
 
 #### 国际象棋游戏
 
@@ -129,3 +127,7 @@ set_order: 1
 #### 狗、猫、老鼠和奶酪
 
 这个例子，在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-dog-cat-mouse-cheese-using-a-fsm)中有更详细的描述，展示了如何构建一个更复杂的场景，包括捕食者和猎物，它们可以在老鼠、猫或狗中互换。每只动物都有一个基于堆栈的有限状态机（FSM）来管理它的 AI。 每只动物都使用 a\* 路径算法来绕过障碍物和其他动物。
+
+[Code](https://github.com/decentraland/sample-scene-dog-cat-mouse-cheese)
+
+[查看场景](https://dcl-project-bfvkjmdtyf.now.sh/?position=42%2C43)

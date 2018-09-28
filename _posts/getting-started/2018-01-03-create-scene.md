@@ -12,7 +12,7 @@ set_order: 1
 tag: introduction
 ---
 
-在 Decentraland，场景是地产或 LAND 的内容的表现。 所有场景都由[实体]({{ site.baseurl }}{% post_url /sdk-reference/2018-06-21-entity-interfaces %})组成，它们代表场景中的所有元素并构成树形结构，非常类似于 Web 开发中 DOM 树中的元素。
+在 Decentraland，场景是地产或 LAND 的内容的表现。 所有场景都由[实体]({{ site.baseurl }}{% post_url /development-guide/2018-06-21-entity-interfaces %})组成，它们代表场景中的所有元素并构成树形结构，非常类似于 Web 开发中 DOM 树中的元素。
 
 ## CLI 安装
 
@@ -26,7 +26,7 @@ npm install -g decentraland
 
 ## 创建文件结构
 
-可以使用我们的 CLI 工具来自动创建初始的场景模板。为此，请在空文件目录中运行 `dcl init`。有关如何安装和使用 CLI 的详细信息，请参阅[SDK概述]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-01-SDK-Overview %})。
+可以使用我们的 CLI 工具来自动创建初始的场景模板。为此，请在空文件目录中运行 `dcl init`。
 
 `dcl init` 命令在当前工作目录中创建包含一个 **场景** 的 Decentraland **项目**。
 它提示你回答一系列可选问题，如关于场景所有权的以及Decentraland 最终上传的位置，然后它要求你选择一个场景模板。根据您选择的选项，CLI 构建具有不同默认内容的不同文件结构。
@@ -38,7 +38,7 @@ npm install -g decentraland
 - **远程场景**：在 TypeScript 文件中定义，具有与本地场景基本相同的示例，但不同之处在于场景状态存储在与 WebSockets 通信的远程服务器中。因此，所有用户都看到相同的渲染场景。要测试场景，可以同时在本地运行服务器和客户端。 
 - **静态场景**：单独一个 glTF 模型定义在 **XML** 文件中。不能将任何动态或交互式内容添加到这类场景中，它只能显示静态实体。
 
-有关在场景中创建的默认文件的概述，请参阅[场景内容]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-11-scene-files %})。
+有关在场景中创建的默认文件的概述，请参阅[场景内容]({{ site.baseurl }}{% post_url /development-guide/2018-01-11-scene-files %})。
 
 ## 预览你的场景
 
@@ -60,7 +60,7 @@ dcl start
 - 在 _远程_ 场景中，您可以通过编辑 _RemoteScene.tsx_ 文件和 _State.tsx_ 来创建场景的逻辑。
 - 在 _静态_ 场景中，您可以在 _scene.xml_ 文件中创建场景的内容。
 
-有关向场景添加内容的简单说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /sdk-reference/2018-01-21-scene-content-guide %}) 。
+有关向场景添加内容的简单说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %}) 。
 
 
 ## 发布场景

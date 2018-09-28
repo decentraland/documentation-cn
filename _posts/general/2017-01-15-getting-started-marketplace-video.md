@@ -9,7 +9,7 @@ resources:
   - name: Marketplace
     link: https://market.decentraland.today
 type: Video
-set: marketplace
+set: general
 set_order: 1
 ---
 

@@ -2,12 +2,13 @@
 date: 2018-01-01
 title: 概述
 redirect_from:
+  - /decentraland/marketplace/
   - /docs/land-manager
-description: LAND 虚拟市场 
+description: LAND 虚拟市场
 categories:
-  - Decentraland
+  - blockchain-interactions
 type: Document
-set: marketplace
+set: blockchain-interactions
 set_order: 1
 ---
 
