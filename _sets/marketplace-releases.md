@@ -1,6 +1,6 @@
 ---
-title: Marketplace Release Notes
-description: Release notes for the latest versions of the Marketplace.
+title: 虚拟市场发行说明
+description: 有关虚拟市场最新版的说明
 color: '#ff00ff'
 order: 6
 ---
