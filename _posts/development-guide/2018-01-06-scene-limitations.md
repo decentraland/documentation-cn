@@ -28,8 +28,6 @@ set_order: 6
 
 ## 通过代码查询场景限制
 
-From a scene's code, you can query both the limitations that apply to the scene and how much the scene is currently using. This is especially useful with scenes where the content changes dynamically. For example, in a scene where you add a new entity each time the user clicks, you could stop adding entities when you reach the scene limits.
-
 从场景的代码中，您可以查询适用于场景的限制以及场景当前使用的数量。这对于其内容动态更改的场景尤其有用。例如，在每次用户单击就添加新实体的场景中，您就可以在达到场景限制时停止添加实体。
 
  #### 获得场景限制
@@ -98,15 +96,15 @@ From a scene's code, you can query both the limitations that apply to the scene 
 
  {% endraw %}
 
- For example, if your scene is only rendering one box entity at the time, logging `limits.entities` should print `1`.
+例如，如果您的场景只用了一块地，则 limits.triangles 显示为 10000。
 
- ## 场景边界
+## 场景边界
 
- 运行预览时，位于土块边界外的任何内容在渲染时都会以红色突出显示。如果内容超出这些边界，将不允许将场景部署到 Decentraland。
+运行预览时，位于土块边界外的任何内容在渲染时都会以红色突出显示。如果内容超出这些边界，将不允许将场景部署到 Decentraland。
 
- ## Shader 着色器限制
+## Shader 着色器限制
 
- 在 decentraland 中使用的3D模型必须使用支持的着色器和材质。有关支持的着色器列表，请参阅[3D模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}) 。
+在 decentraland 中使用的3D模型必须使用支持的着色器和材质。有关支持的着色器列表，请参阅[3D模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}) 。
 
 ## 纹理大小限制
 

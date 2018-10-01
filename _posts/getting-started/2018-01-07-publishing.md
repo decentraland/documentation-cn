@@ -42,22 +42,9 @@ set_order: 7
 
 > 注意：虽然此命令将您的场景部署到了您的地块，要注意的是目前用户还无法使用 Decentraland 浏览探索，因此您的内容还无法在虚拟世界里展示。
 
-## Publish from a physical Ledger device
-
-Instead of storing your LAND tokens in a Metamask account, you may find it more secure to store them in a [Ledger](https://www.ledger.com/) device that's phyisically plugged in to your computer.
-
-If you're using one of these, the process of uploading content to your LAND is slightly different.
-
-1.  To make sure the scene has been locally built with your latest changes, run `npm run build`.
-2.  Plug your Ledger device in. Your parcels in Decentraland should be associated with that same wallet. The same public address should be listed in the scene's _scene.json_ file.
-3.  Start up an IPFS daemon by following [these instructions](https://ipfs.io/docs/getting-started/).
-4.  Run `dcl deploy --https` from the scene's folder. This will open a tab on your browser where you need to confirm this action.
-    > Note: Currently, the certificate is self-signed, so your browser might give you a warning before launching the page. The warning is displayed only because the certificate is self-signed by your machine, please ignore it and carry on.
-5.  The Ledger device will then ask you for a confirmation, which you must give by pushing the device's buttons.
-
 ## 使用 Ledger 硬件钱包发布
 
-将 LAND 存储在插入计算机的 [Ledger](https://www.ledger.com/) 硬件钱包中比存储在 Metamask 帐户更安​​全。
+将 LAND 存储在插入计算机的 [Ledger](https://www.ledger.com/) 硬件钱包中比存储在 Metamask 帐户更安全。
 
 如果您使用了其中的一种钱包，则上传的过程略有不同。
 
@@ -70,7 +57,7 @@ If you're using one of these, the process of uploading content to your LAND is s
 
 ## 什么是IPFS？
 
-[IPFS](https://ipfs.io/)(星际文件系统的简称)是一个超媒体协议和一个用于分发文件的 P2P网络。文件系统是由内容来寻址的，这意味着文件是由其内容，而不是由随意的文件名称来识别。
+[IPFS](https://ipfs.io/) (星际文件系统的简称)是一个超媒体协议和一个用于分发文件的 P2P网络。文件系统是由内容来寻址的，这意味着文件是由其内容，而不是由随意的文件名称来识别。
 
 我们使用 IPFS 以类似于 BitTorrent 的方式托管和分发所有场景内容，从而保持Decentraland 网络的分散。为了获得更好的性能，我们运行了一个“ IPFS 网关”，这意味着Decentraland 正在托管着区块链中引用的大部分内容（在使用某些过滤之后），以改善用户探索世界的体验。
 
