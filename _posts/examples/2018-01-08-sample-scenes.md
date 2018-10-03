@@ -106,7 +106,7 @@ set_order: 1
 
 #### Block Dog
 
-这个例子在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-basic-ai-with-block-dog)中有更详细的描述，你可以控制一只宠物狗。 狗有自己的随机地自主行为。它也会跟着你走来走去，或坐在那里，当你点击碗时就会去喝水。
+这个例子在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-basic-ai-with-block-dog)中有更详细的描述，你可以控制一只宠物狗。 狗有自己的随机地自主行为。它也会跟着你走来走去，点击会做坐下，当你点击碗时就会去喝水。
 
 [Code](https://github.com/decentraland/sample-scene-Block-Dog)
 

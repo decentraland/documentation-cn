@@ -156,7 +156,7 @@ dcl start
 
 如果您的场景使用了以太坊网络上的交易，例如，提示需要支付一笔 MANA 才能打开一扇门，你可以在预览场景时避免使用真实货币。
 
-为此，您必须使用_以太 Ropsten 测试网络_来发送伪 MANA。 要使用测试网络，您必须将 Metamask Chrome 扩展程序设置为使用 _Ropsten test network_ 而不是 _Main network_。 并且在 Ropsten 区块链中拥有 MANA，你可以从Decentraland 免费获得。
+为此，您必须使用_以太 Ropsten 测试网络_来发送伪 MANA。 要使用测试网络，您必须将 Metamask Chrome 扩展程序设置为使用 _Ropsten test network_ 而不是 _Main network_。 并且在 Ropsten 区块链中拥有 MANA，你可以从 Decentraland 免费获得。
 
 要使用测试网络预览场景，请将 `DEBUG` 属性添加到浏览器上访问场景预览的 URL 上。 如，如果您通过 `http://127.0.0.1:8000/?position=0%2C-1` 访问场景，则应将 URL 设置为 `http://127.0.0.1:8000/?DEBUG&position=0%2C-1`。
 

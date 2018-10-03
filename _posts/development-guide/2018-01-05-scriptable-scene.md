@@ -196,7 +196,7 @@ WebWorker的入口点在 `build.json` 中定义：
 ]
 ```
 
-> **注意：** 文件 `scene.tsx` 必须包含场景类的 `export default` 语句。 引擎的加载程序需要此语句来实例化场景。
+> **注意：** 文件 `scene.tsx` 必须包含场景类的 `export default` 语句。 引擎的加载程序需要此声明来实例化场景。
 
 ## 服务器端场景
 

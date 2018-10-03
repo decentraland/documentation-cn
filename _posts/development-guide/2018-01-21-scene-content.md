@@ -103,9 +103,9 @@ Decentraland 中的三维场景是基于 [Entity-Component](https://en.wikipedia
 
 在上面的示例中，材质的图像位于 `materials` 文件夹中，该文件夹位于场景项目文件夹的根目录。
 
-导入包含嵌入材质的 glTF 模型时，会隐式地将材质导入到场景中。在这种情况下，场景不需要声明 `<material/>` 实体。
+当一个实体使用材质时，你必须在材质的 id 之前引用一个 `＃`。 因此，如果材质的 id 是 `reusable_material`，则必须将实体上的`material` 设置为 `#reusable_material`。
 
-Not all shaders are supported by the Decentraland engine. For example, all blender render materials should be supported, in Cycles render only PBR (phisically based rendering) materials are supported.
+导入包含嵌入材质的 glTF 模型时，会隐式地将材质导入到场景中。在这种情况下，场景不需要声明 `<material />` 实体。
 
 并不是所有的 shaders 都受到 Decentraland 引擎的支持。例如，支持所有 blender 渲染材质，Cycles 仅支持 PBR（基于 phisically 渲染）材质。
 
@@ -156,6 +156,8 @@ async render() {
 
 通过纹理贴图，更改所有帧中相同纹理的选定区域。可以创建动画精灵 Animated Sprite 效果。
 
+要使用动画精灵，您可以安装和使用[Decentraland sprite helpers](https://github.com/decentraland/dcl-sprites) node 包。 并在提供的链接中阅读有关如何使用它的文档。
+
 #### 透明材质
 
 要使材质透明，必须将 Alpha 通道添加到用于纹理的图像中。 `material` 实体默认忽略纹理图像的 alpha 通道，所以需要设置以下一种：
@@ -181,7 +183,7 @@ async render() {
 
 #### 基本材质
 
-您可以使用 `<basic-material />` 而不是 `<material />` 实体定义材质。 这样就可以制成无阴影且不受光影响的材质。 这对于创建应该保持一致的用户界面非常有用，它还可以用于为场景提供更简约的外观。
+您可以使用 `<basic-material />` 而不是 `<material />` 实体定义材质。 这样就可以制成无阴影且不受光影响的材质。 这对于创建应始终明亮的用户界面非常有用，它还可以用于为场景提供更简约的外观。
 
 {% raw %}
 
@@ -244,9 +246,13 @@ glTF 模型还可以包括自己的纹理，材质，collider（碰撞）和动�
   scale={0.5}
   src="models/shark_anim.gltf"
   skeletalAnimation={[
-    { clip: "shark_skeleton_bite", playing: false },
     {
-      clip: "shark_skeleton_swim",
+      clip: "shark_bite",
+      weight: 0.8,
+      playing: false
+    },
+    {
+      clip: "shark_swim",
       weight: 0.2,
       playing: true
     }
@@ -261,6 +267,12 @@ glTF 模型还可以包括自己的纹理，材质，collider（碰撞）和动�
 通过设置 `loop` 属性，可以将动画设置为连续循环。如果设置 `loop:false` 那么动画只会在激活时被调用一次。
 
 `weight` 属性允许单个模型一次执行多个动画，计算动画中所有运动的加权平均值。 `weight` 的值决定了给定动画的重要程度。
+
+所有活动动画的 `weight` 值应始终加起来为 1。如果它加起来小于 1，the weighted average will be referencing the default position of the armature for the remaining part of the calculation.
+
+例如，在上面的代码示例中，如果只有 _shark_swim_ 处于活动状态且 `weight` 为 0.2，then the swimming movements are quite subtle, only 20% of what the animation says it should move. The other 80% of what's averaged represents the default position of the armature.
+
+`weight` 属性可以以有趣的方式使用，例如 _shark_swim_ 的 `weight` 属性可以与鲨鱼游动的速度成比例地设置，因此您不需要为快速和慢速游泳创建多个动画。您还可以在开始和停止动画时逐渐更改 `weight` 值，以使其过渡更为自然，并避免从一个姿势跳到另一个姿势。
 
 #### 免费 3D 模型库
 
