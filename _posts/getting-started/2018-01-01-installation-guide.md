@@ -94,7 +94,9 @@ npm update -g decentraland
 更新 Decentraland SDK 版本：
 
 1. 在场景文件夹中打开文件 _package-lock.json_。
-2. 查找正在使用的 _metaverse_api_ 版本，并手动将其更改为最新版本的 SDK。
+2. 查找正在使用的 _decentraland-api_ 或 _metaverse_api_ 版本，并手动将其更改为最新版本的 SDK。
+
+   在旧版本中，API 名为 _metaverse-api_，在较新版本中，则是 _decentraland-api_。
 
 > 提示：如果您不确定最新版本是哪个，请查看[发行说明]{{ site.baseurl }}{% post_url /releases/sdk/2018-01-01-4.0.0 %})。
 
