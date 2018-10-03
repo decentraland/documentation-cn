@@ -78,6 +78,8 @@ set_order: 1
 
 [Code](https://github.com/decentraland/sample-scene-server)
 
+[查看场景](https://dcl-project-fprfrtlboa.now.sh/?position=0%2C0)
+
 注：类似的例子在[博客](https://blog.decentraland.org/sdk-highlight-building-an-underwater-landscape-5bfcce73ff35)中有更详细的讨论。
 
 #### 动态实体数量
@@ -123,6 +125,8 @@ set_order: 1
 这个例子在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-a-simple-tower-defense-game)中有更详细的描述，它展示了一个简单的塔防游戏。游戏生成随机路径，并沿着该路径随机放置陷阱。然后生成敌人实体并遵循此路径过来，除非您激活陷阱以阻止它们。该游戏支持多个玩家，有一个记分牌，并有一个重置按钮，可以随时重启游戏。
 
 [Code](https://github.com/decentraland/sample-scene-tower-defense-game)
+
+[查看场景](https://dcl-project-iavfhvaswv.now.sh/?position=0%2C-1)
 
 #### 狗、猫、老鼠和奶酪
 
