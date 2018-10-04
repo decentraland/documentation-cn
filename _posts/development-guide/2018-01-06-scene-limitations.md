@@ -26,9 +26,9 @@ set_order: 6
 - **纹理:** `log2(n+1) x 10` 场景中的纹理量。 包括作为模型的一部分导入的纹理。
 - **高度:** `log2(n+1) x 20` 以米为单位的高度。
 
-## 通过代码查询场景限制
+  > 注意：用户头像和用户从场景外带来的任何项目都不在这些限制内。
 
-From a scene's code, you can query both the limitations that apply to the scene and how much the scene is currently using. This is especially useful with scenes where the content changes dynamically. For example, in a scene where you add a new entity each time the user clicks, you could stop adding entities when you reach the scene limits.
+## 通过代码查询场景限制
 
 从场景的代码中，您可以查询适用于场景的限制以及场景当前使用的数量。这对于其内容动态更改的场景尤其有用。例如，在每次用户单击就添加新实体的场景中，您就可以在达到场景限制时停止添加实体。
 
@@ -98,15 +98,15 @@ From a scene's code, you can query both the limitations that apply to the scene 
 
  {% endraw %}
 
- For example, if your scene is only rendering one box entity at the time, logging `limits.entities` should print `1`.
+例如，如果您的场景只用了一块地，则 limits.triangles 显示为 10000。
 
- ## 场景边界
+## 场景边界
 
- 运行预览时，位于土块边界外的任何内容在渲染时都会以红色突出显示。如果内容超出这些边界，将不允许将场景部署到 Decentraland。
+运行预览时，位于土块边界外的任何内容在渲染时都会以红色突出显示。如果内容超出这些边界，将不允许将场景部署到 Decentraland。
 
- ## Shader 着色器限制
+## Shader 着色器限制
 
- 在 decentraland 中使用的3D模型必须使用支持的着色器和材质。有关支持的着色器列表，请参阅[3D模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}) 。
+在 decentraland 中使用的3D模型必须使用支持的着色器和材质。有关支持的着色器列表，请参阅[3D模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}) 。
 
 ## 纹理大小限制
 
@@ -131,3 +131,9 @@ From a scene's code, you can query both the limitations that apply to the scene 
 ```
 
 > 虽然任意大小的纹理在 alpha 版本中能起作用，但渲染引擎会在控制台中显示警报。 我们将在即将发布的版本中强制执行此限制，并且无效的纹理大小设置将停止工作。
+
+## 文件数量限制
+
+部署场景时，超过 100 个文件不能上传到 IPFS，因为场景中包含太多文件会导致在客户端中加载时间过长。
+
+如果场景文件夹中有超过 100 个文件，加载场景时其中许多文件可能没有直接使用。您可以使 CLI 忽略场景文件夹中的特定文件，并在 _dclignore_ 文件中指定不将它们上传到 IPFS。在[场景文件]({{ site.baseurl }}{% post_url /development-guide/2018-01-11-scene-files %})中了解有关更多信息。

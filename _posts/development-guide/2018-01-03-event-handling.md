@@ -289,3 +289,81 @@ export default class ConeHead extends ScriptableScene {
 {% endraw %}
 
 上面的场景使用 `subscribeTo` 函数来启动一个监听器来跟踪用户的转向。 当用户向不同方向看时，场景将当前角度存储在状态变量 `rotation` 中。 此示例将此角度的 X 轴再添加 90 度，以使输出更有趣。 该角度被用来定位一个面朝用户并模仿用户的圆锥体。
+
+## 创建自定义事件
+
+对于包含复杂逻辑的场景如游戏等，创建自定义事件是有意义的。例如，在游戏中，您可以定义一个名为 _lose_ 的自定义事件，在玩家输掉时发送，然后您可以在发生此事件时触发不同的函数。
+
+要启用自定义事件，您必须首先创建自定义事件 subscriber 并将其导入场景，如下所述。
+
+#### 创建一个事件管理器
+
+为了保持场景代码的清晰，将事件管理器放在自己的文件中，我们建议使用 `ts\EventManager.ts`。
+
+{% raw %}
+
+```tsx
+import { EventSubscriber } from "decentraland-api"
+
+export namespace EventManager {
+  let eventSubscriber: EventSubscriber
+
+  export function init(_eventSubscriber: EventSubscriber) {
+    eventSubscriber = _eventSubscriber
+  }
+
+  export function emit(eventType: string, ...params: any[]) {
+    eventSubscriber.emit(eventType, ...params)
+  }
+}
+```
+
+{% endraw %}
+
+事件管理器有两个简单的函数，一个用于初始化订阅者，另一个用于触发事件的实例。
+
+#### 订阅事件
+
+在场景中，您需要先初始化事件订阅者，然后才能使用它。 我们建议在 `sceneDidMount()` 函数中执行此操作，以便在加载场景后立即开始工作。 不要忘记将您在 `EventManager.ts` 中定义的事件订阅者导入到 `scene.tsx` 文件中。
+
+{% raw %}
+
+```tsx
+ sceneDidMount() {
+    EventManager.init(this.eventSubscriber);
+    ...
+  }
+```
+
+{% endraw %}
+
+下面的示例初始化事件订阅者，然后订阅自定义事件 _lose_，这是在用户输掉游戏时发出的。每当 _lose_ 事件发生时，都会调用 `userLost()` 函数。
+
+{% raw %}
+
+```tsx
+ sceneDidMount() {
+    EventManager.init(this.eventSubscriber);
+    this.eventSubscriber.on('lose', e => this.userLost());
+  }
+```
+
+{% endraw %}
+
+#### 触发自定义事件
+
+您可以在场景代码的任何部分触发自定义事件。可以使用事件订阅者的 `emit()` 公共函数。如果场景代码的其他部分订阅了您正在发出的事件，则将在发出事件时执行相应的代码。
+
+{% raw %}
+
+```tsx
+ harmUser(){
+    this.setState({health: this.state.health -= 1})
+    if (this.state.health <= 0)
+    {
+      EventManager.emit("lose")
+    }
+  }
+```
+
+{% endraw %}

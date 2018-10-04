@@ -17,6 +17,93 @@ set_order: 9
 
 请记住，所有模型，着色器和纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})的参数范围内。
 
+
+## 支持的 3D 模型格式
+
+Decentraland 中的所有 3D 模型都必须采用 glTF 格式。 [glTF](https://www.khronos.org/gltf) (GL Transmission Format) 是 Khronos 的一个开源项目，为 3D 资产提供了一种通用的，可扩展的格式，既高效又可与现代网络技术进行高度互操作。
+
+glTF 模型可以具有 _.gltf_ 或 _.glb_ 扩展名。 glTF 文件是可读的，您可以在文本编辑器中打开它并像 JSON 文件一样读取它。例如，可以用来验证动画是否已正确附加并检查其名称。 glb 文件是二进制文件，所以它们不可读，但是文件要小得多，这对场景的性能有好处。
+
+我们建议您在处理场景时使用 _.gltf_，但在上传时切换到 _.glb_。
+
+以下内容可以嵌入 _glTF_ 文件中或从外部引用：
+
+- 纹理可以嵌入或从外部图像文件引用。
+- 有关几何、动画和模型的其他缓冲区相关方面的二进制数据可以嵌入或使用外部 _.bin_ 文件引用。
+
+> 注意：动画_必须_嵌入在_glTF_文件中以在 Decentraland 中使用。
+
+#### 在 Blender 中导出 glTF
+
+默认情况下，Blender 不支持 glTF 格式导出，但可以安装插件来支持 glTF 格式导出。
+
+1. 首先下载[Khronos Exporter](https://github.com/KhronosGroup/glTF-Blender-Exporter)
+2. 解压缩 _.zip_ 文件，然后将 `scripts/addons/io_scene_gltf2` 目录复制到 Blender 安装目录的`scripts / addons` 文件夹下。
+3. 激活插件：在 Blender 中打开 _User Preferences ..._。 在 _Add-ons_ 选项卡中，启用 **Import-Export: glTF 2.0 format**。 不要忘记单击 _Save User Settings_。
+    > 注意：如果已安装有另外的 glTF 2.0 导出插件，请先将其禁用。 只能同时使用一个。   
+
+导出包含多个动画的 3D 模型时，请确保所有动画都嵌入到模型中。 为此，请打开 _NLA editor_ 并单击 _Stash_ 将每个动画添加到模型中。
+
+导出带动画的模型时，建议使用以下导出设置：
+
+![](/images/media/blender-export-settings-animations.png)
+
+#### 从 3D Studio Max 导出 glTF
+
+默认情况下，3D Studio Max 不支持 glTF 格式导出，但可以安装插件来支持。
+
+1. [在此链接](https://github.com/BabylonJS/Exporters/tree/master/3ds%20Max) 下载插件。
+2. 按照[说明](http://doc.babylonjs.com/resources/3dsmax#how-to-install-the-3ds-max-plugin) 安装插件。
+3. 按[此说明](http://doc.babylonjs.com/resources/3dsmax_to_gltf)使用插件导出 glTF 文件。
+
+#### 从 Maya 中导出 glTF
+
+默认情况下，Maya 不支持 glTF 格式导出，但可以安装插件来获得支持。
+
+1. 按照[这些说明](http://doc.babylonjs.com/resources/maya)安装插件。
+2. 按[此说明](http://doc.babylonjs.com/resources/maya_to_gltf#pbr-materials) 导出 glTF .
+
+> 注意：作为替代方案，您也可以尝试[此插件](https://github.com/WonderMediaProductions/Maya2glTF)。
+
+#### 从 Unity 导出 glTF
+
+默认情况下，Unity 不支持 glTF 格式导出，但可以安装插件来获得支持。
+
+[从此下载插件](https://github.com/sketchfab/Unity-glTF-Exporter).
+
+> 注意：作为替代方案，您也可以尝试[此插件](https://assetstore.unity.com/packages/tools/utilities/collada-exporter-for-unity2017-99793)
+
+#### 从 SketchUp 导出 glTF
+
+默认情况下，SketchUp 不支持 glTF 格式导出，但可以安装插件来获得支持。
+
+[从此下载插件](https://extensions.sketchup.com/en/content/gltf-exporter).
+
+#### 预览 glTF 模型
+
+在将 glTF 模型导入场景之前预览 glTF 模型内容的快速简便方法是使用[Babylon.js Sandbox](https://sandbox.babylonjs.com/)。 只需将 glTF 文件（及其 _.bin_ 文件，如果有的话）拖放到画布中即可查看模型。
+
+在 sandbox 中，要查看模型中嵌入的动画，可以从下拉菜单中选择要显示的动画。
+
+![](/images/media/babylon-sandbox.png)
+
+#### 为什么使用 glTF
+
+与旧的只支持 vertices 顶点、normals 法线、纹理坐标和基本材质的 _OBJ format_ 格式相比，
+
+glTF 提供了一组更强大的功能，包括：
+
+- 分层对象
+- 骨骼结构和动画
+- 更强大的材质和着色器
+- 场景信息（光源，相机）
+
+> 注意：作为遗留功能，Decentraland 场景支持 _.obj_ 模型，但以后可能不再支持。
+
+与 _COLLADA_ 相比，支持的功能非常相似。但是，因为 glTF 专注于提供“传输格式”而不是编辑器格式，它与 Web 技术更具互操作性。
+
+考虑这个类比：.PSD（Adobe Photoshop）格式有助于编辑 2D 图像，但必须将图像转换为 .JPG 才能使用。同样，在网络上，COLLADA 可用于编辑 3D 资源，但要在传输的同时进行渲染， glTF 是一种更简单的方式。
+
 ## 材质
 
 #### Shader 着色器支持
@@ -88,33 +175,9 @@ show how to change a model with an unsopported shader. Delete material, create n
 #### 材质的最佳实践
 
 - 如果场景中包含有多个使用相同纹理的模型，请将纹理引用为外部文件，而不是将其嵌入到 3D 模型中。因为嵌入的纹理会在每个模型中复制，从而增加场景的大小。
-
-## 支持的 3D 模型格式
-
-Decentraland 中的所有 3D 模型都必须采用 glTF 格式。 [glTF](https://www.khronos.org/gltf) (GL Transmission Format) 是 Khronos 的一个开源项目，为 3D 资产提供了一种通用的，可扩展的格式，既高效又可与现代网络技术进行高度互操作。
-
-glTF 模型可以具有 _.gltf_ 或 _.glb_ 扩展名。 glTF 文件是可读的，您可以在文本编辑器中打开它并像 JSON 文件一样读取它。例如，可以用来验证动画是否已正确附加并检查其名称。 glb 文件是二进制文件，所以它们不可读，但是文件要小得多，这对场景的性能有好处。
-
-我们建议您在处理场景时使用 _.gltf_，但在上传时切换到 _.glb_。
-
-> 注意：使用 Blender 创建或编辑 3D 模型时，需要一个加载项来导出 glTF 文件。对于不包含动画的模型，我们建议您安装 [Kronos group](https://github.com/KhronosGroup/glTF-Blender-Exporter) 附加组件。要导出包含动画的 glTF，您应该安装 [Kupoman](https://github.com/Kupoman/blendergltf) 附加组件。
-
-#### 为什么我们使用 glTF
-
-与旧的只支持顶点，法线，纹理坐标和基本材质的 _OBJ format_ 格式相比，
-
-glTF 提供了一组更强大的功能，包括：
-
-- 分层对象
-- 骨骼结构和动画
-- 更强大的材质和着色器
-- 场景信息（光源，相机）
-
-> 注意：作为遗留功能，Decentraland 场景支持 _.obj_ 模型，但以后可能不再支持。
-
-与 _COLLADA_ 相比，支持的功能非常相似。但是，因为 glTF 专注于提供“传输格式”而不是编辑器格式，它与 Web 技术更具互操作性。
-
-考虑这个类比：.PSD（Adobe Photoshop）格式有助于编辑 2D 图像，但必须将图像转换为 .JPG 才能使用。同样，在网络上，COLLADA 可用于编辑 3D 资源，但在传输的同时进行渲染 glTF 上是一种更简单的方式。
+   > 注意：在引用未嵌入的纹理的文件后，请确保不会移动或重命名该文件，否则将丢失对该文件的引用。 该文件也必须位于场景文件夹中，以便与场景一起上传。
+- 阅读[本文](https://www.khronos.org/blog/art-pipeline-for-gltf)，详细了解在 glTF 模型中使用 PBR 纹理的完整流程。
+- 在[cgbookcase](https://cgbookcase.com/) 上可以找到免费高质量 PBR 纹理。
 
 ## Colliders
 
@@ -216,20 +279,33 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 6. 默认情况下，您定义的所有帧之间将从一个姿势线性转换到下一个姿势。您还可以将这些过渡配置为 exponentially, ease-in, bounce 等。
 
-要在 Blender 中为同一模型创建多个动画，必须选择 “Dope-Sheet” 视图，然后打开“动作编辑器”。您也可以从“Dope-Sheet”视图编辑动画，例如，您可以调整两个关键帧之间的距离。
+#### 在 Blender 中处理多个动画
 
-将模型添加到 Decentraland 场景时，必须通过配置 _gltf-model_ 实体来激活动画。有关说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
+在 Blender 中，要在一个模型中导出多个动画，需要在 _Dope-Sheet_ 动画摄影表创建多个 _actions 动作_。
+
+![](/images/media/blender-dope-sheet.png)
+
+您也可以在 Dope-Sheet 动画摄影表视图中编辑动画，例如您可以调整调整两个关键帧之间的距离。
+
+要预览不同的动作，请打开 _Action Editor 动作编辑器_（只有在 Dope Sheet 动画摄影表中才能访问）。
+
+![](/images/media/blender-action-editor.png)
+
+要导出多个动画，您需要使用 _NLA Editor_ 存储所有操作。 我们建议在单独的编辑器选项卡上打开 NLA 编辑器，同时保持 Dope Sheet 动画摄影表 也打开。
+
+![](/images/media/blender-nla-editor.png)
+
+在 NLA 编辑器中，选择要嵌入 glTF 模型的每个动作，然后单击 _Stash_。
+
+![](/images/media/blender-nla-editor2.png)
+
+将模型添加到 Decentraland 场景时，必须通过配置 _gltf-model_ 实体来激活动画。 有关说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
 
 #### 动画的最佳实践
 
 - 保持 armature 骨架简单，仅为要制作动画的模型部分创建骨骼。
-
 - 如果动画将在场景中循环，请确保最终姿势与起始姿势相同，以避免引起跳跃感。
-
 - 有时在动画中你可能只想控制骨架部分的运动，并保留其他骨骼未定义。这可以更容易地将动画组合在一起。
-
 - 场景中的动画角色不应该完全静止，即使他们没有做任何事情。最好创建一个“空闲”动画，以便于角色静止时使用。“空闲”动画可以包括一些细微的动作，比如呼吸和偶尔的一瞥。
-
 - 确保模型在导出时只有一个骨架。有时，当您将另一个动画导入到您正在编辑模型的程序时，它会引入一个骨架的副本。您希望模型的所有动画都由相同的基础骨架执行。
-
 - 导出 _glTF_ 模型时，请确保导出所有对象和动画。某些导出器默认只导出 _当前选择的物体_。

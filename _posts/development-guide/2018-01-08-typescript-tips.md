@@ -82,6 +82,49 @@ export default class myScene extends ScriptableScene {
 
 {% endraw %}
 
+## 定义枚举
+
+TypeScript 允许您定义自定义字符串枚举。这在场景中保存某些特定值的变量很有用。
+
+使用字符串枚举可以使代码更具可读性。 如果您正在使用 Visual Studio Code 或 Atom 等高级代码编辑器，它还可以使代码编写更容易，因为代码编辑器提供了自动完成选项和验证。
+
+例如，下面的示例定义了具有三个可能值的自定义枚举。然后，在为场景状态定义接口时，它使用枚举作为变量的类型。
+
+{% raw %}
+
+```tsx
+export enum Goal {
+  Idle,
+  Walk,
+  Sit
+}
+
+export interface IState {
+  dogGoal: Goal
+  dogPosition: Vector3Component
+  catGoal: Goal
+  catPosition: Vector3Component
+}
+```
+
+{% endraw %}
+
+每次要引用枚举中的值时，都必须使用 `<enum name>.<value>`。 例如，`Goal.Walk` 指的是来自`Goal` 枚举中的 `Walk` 值。
+
+{% raw %}
+
+```tsx
+  if (this.state.dogGoal == Goal.Walk){
+   this.setState(catGoal: Goal.Sit)
+  }
+```
+
+{% endraw %}
+
+您的代码编辑器会在您引用它时提示枚举的可选值，从而使您的场景更容易编写。
+
+![](/images/media/autocomplete_enum.png)
+
 ## 定义自定义数据类型
 
 您可以在*.tsx*文件中定义自己的自定义数据类型，这些对于使用仅能够在场景中保存特定值的变量非常有用。使用自定义类型可使代码更具可读性。如果您正在使用 Visual Studio Code 或 Atom 等高级代码编辑器，由于代码编辑器提供了自动完成选项和验证，因此它还可以使代码编写更容易。
@@ -105,38 +148,6 @@ state = {
 ```
 
 {% endraw %}
-
-为此变量设置值时，代码编辑器只会建议其类型的有效值。
-
-![](/images/media/autocomplete_types.png)
-
-<!---
-
-## Define a custom enum  ???
-
-With TypeScript, you can create custom string enums. These can be thought of as dictionaries that can only contain specific string fields.
-
-https://blog.decentraland.org/building-a-memory-game-using-decentralands-sdk-87ee35968f8d
-
-
-
-{% raw %}
-```tsx
-export enum characterStates {
-
-}
-```
-{% endraw %}
-
-[definition]
-
-You can then set this type as the type of a variable
-
-[scene state definition that sets this as a type]
-
-When using that variable, the code editor then
-[screenshot]
--->
 
 ## 场景状态接口
 
@@ -172,21 +183,100 @@ export default class ArtPiece extends ScriptableScene<any, IState> {
 
 {% endraw %}
 
-<!---
+## 导入外部库
 
-## Advanced 3D math operations
+您可以将大多数 JavaScript 库导入 _scene.tsx_ 文件。使用外部库可以帮助您进行高级数学运算，调用 API，运行预定义的 AI 脚本或任何场景需要的库。
 
-You can import javascript libraries to enable you to perform mathematical operations that the SDK doesn’t cover. For example, for vector operations, you can import
+例如，此行从 Babylonjs 库导入 Quaternion 和 Vector3。
 
-  babylon's library. only
+{% raw %}
 
-## Accessing variables globally
+```tsx
+import { Vector3, Quaternion } from "babylonjs"
+```
 
-When having the code for your scene distributed amongst multiple separate files with child objects, you need to take care of how to reference
+{% endraw %}
 
+对于大多数 3D 数学运算，我们建议导入 [Babylonjs](https://www.babylonjs.com/) 库，因为 Decentraland 的大部分 SDK 都使用它，具有更好的兼容性。其他具有类似功能的库也是可用的，并可以导入。
 
+在场景可以使用库之前，必须在场景文件夹中使用 _npm_ 进行安装。这很重要，因为当场景部署到 Decentraland 时，所有依赖项也必须上传。
 
--->
+对于导入象 Babylonjs 这类大型库时，建议仅导入场景所需的元素，而不是导入整个库。
+
+## 矢量数学运算
+
+decentraland 中的向量为 _Vector3Component_ 类型，这种类型非常轻量级，不包含任何方法。
+
+为避免手动进行矢量数学运算，我们建议从 Babylonjs 导入 _Vector3_ 类型。 这个类型带有许多方便的如缩放，减法等操作。
+
+要使用它，必须先在项目文件夹中安装 babylonjs。从场景主文件夹中的终端运行以下命令。
+
+```bash
+npm install babylonjs
+```
+
+然后，您就可以将 Babylon js 库中导入到场景的 _.tsx_ 文件中。
+
+{% raw %}
+
+```tsx
+import { Vector3 } from "babylonjs"
+```
+
+{% endraw %}
+
+导入到 _.tsx_ 文件后，可以在任何变量中使用 _Vector3_ 类。类的变量将可以访问所有类的方法。
+
+下面的示例处理 _Vector3_ 变量以及此类附带的一些函数。
+
+{% raw %}
+
+```tsx
+moveToGoal(){
+  const delta = this.state.goalPosition.subtract(this.state.dogPosition)
+  delta = delta.normalize().scale(.015)
+  this.setState(dogPosition: this.state.dogPosition.add(delta))
+}
+```
+
+{% endraw %}
+
+decentraland中 的实体可以用 _Vector3_ 类的变量来设置位置、旋转和比例。将变量应用于实体时，无需将变量转换为 _Vector3Component_ 类型。
+
+请记住，Decentraland 场景中的某些事件，如 `positionChanged` 事件，具有 _Vector3Component_ 类的属性。如果您希望在此使用 _Vector3_ 中的方法，则必须先更改其类型。
+
+## Handle animated 2D sprites处理动画2D精灵
+
+您可以在场景中添加 2D 动画，以节省三角形数量或作为审美选择。
+
+您通常希望将精灵动画应用于配置为 _billboard_ 的 _plane_ 实体。设置实体的 billboard 组件使其旋转以始终面向用户，在[实体定位]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %})中了解更多相关信息。
+
+我们建议使用 [Decentraland sprite helpers](https://github.com/decentraland/dcl-sprites) 这个 node 包。请运行以下命令安装：
+
+```
+npm i --save dcl-sprites
+```
+
+然后将库导入场景：
+
+```tsx
+import { createSpriteSheet } from "dcl-sprites"
+```
+
+有关如何使用的更多说明，请阅读 [library's documentation](https://github.com/decentraland/dcl-sprites) 。
+
+## Access data across objects跨对象访问数据
+
+当你的场景达到一定程度的复杂性时，可以方便地将代码分解为几个单独的对象，而不是将所有逻辑放在 [`scriptableScene` 类]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %}) 中。
+
+这样做的缺点是信息变得更难传递。如果您的所有逻辑都出现在 `scriptableScene` 类中，您可以使用[场景状态]({{ site.baseurl }}{% post_url /development-guide/2018-01-04-scene-state %})和场景属性跟踪所有信息。如果不是这样，那么就必须记住，您不能从 `scriptableScene` 类之外引用场景状态或场景属性。
+
+你可以：
+
+- 将主要 `scriptableScene` 类中的信息作为子对象的属性传递。
+- 使用像 [Redux](https://redux.js.org/) 这样的库来创建可以从任何地方引用的全局数据存储。
+
+有关详细信息，请参阅[scene state]({{ site.baseurl }}{% post_url /development-guide/2018-01-04-scene-state %})。
 
 ## 执行时间控制
 
@@ -235,6 +325,8 @@ setInterval(() => {
 
 #### 延迟执行
 
+###### setTimeout()
+
 `setTimeout()` 函数延迟语句或函数的执行。
 
 {% raw %}
@@ -248,6 +340,40 @@ setTimeout(f => {
 {% endraw %}
 
 setTimeout 函数要求您传递一个函数或语句来执行，然后是延迟执行的毫秒数。
+
+###### await sleep()
+
+延迟执行的一种更优雅的方法是创建一个 `sleep` 函数以供调用。这样做的好处是，如果您需要在进程中多次暂停执行，则不需要将多个语句嵌套在另一个中。
+
+将以下函数添加到 _scene.tsx_ 文件中：
+
+{% raw %}
+
+```tsx
+export function sleep(ms: number = 0) {
+  return new Promise(r => setTimeout(r, ms))
+}
+```
+
+{% endraw %}
+
+然后你可以从场景中的任意异步函数中调用 `sleep()` 函数，如下所示。
+
+{% raw %}
+
+```tsx
+  async updateAnimation(){
+    this.setState({playAnimation1:true, playAnimation2:false})
+    await sleep(5000)
+    this.setState({playAnimation1:false, playAnimation2:true})
+    await sleep(5000)
+    this.updateAnimation()
+  }
+```
+
+{% endraw %}
+
+> 注意：要使上述代码生效，您的 TypeScript 文件必须包含或导入 `sleep()` 函数的定义。
 
 #### 停止运行直到完成
 
@@ -463,6 +589,15 @@ As you can see from comparing this example to the prevous ones , it's a lot simp
 
 > 注意：您可以自由添加 TypeScript _expressions 表达式_ 组成 `return` 值，但不能添加 _statements 语句_。不同之处在于表达式始终具有返回值，但语句可能不会。你不能使用 `if/else` 或 `switch/case`，因为那些是语句，但是你可以通过调用函数来处理。
 
+#### 添加或删除实体
+
+您不必告诉引擎要采取什么操作来达到所需状态，而是告诉引擎您要渲染的新状态，其它的由引擎处理。 如果您熟悉 React 框架，您会注意到 Decentraland API 是根据相同的想法设计的。
+
+**因此，场景中没有 _add_ 或 _remove_ 实体的动作**。 相反，这是当你调用 `render()` 函数告诉它渲染一组不同的实体时隐式完成的。
+
+- 如果新集合包含之前未呈现的实体，则会隐式添加。
+- 如果新集合中缺少某个权利，则会隐式删除。
+
 #### render 中变量的引用
 
 更改某些内容呈现方式的最简单方法是从其中一个 XML 属性的值引用变量的值。
@@ -530,9 +665,9 @@ async render() {
 
 > 注意：在这些例子中，我们使用 `? / :` 表达式处理条件逻辑。 你不能在这个上下文中使用 `if` 和 `else`，因为那些是语句，并且语句不支持作为 `return` 值的一部分。
 
-#### 定义未确定数量的实体
+#### 从数组中渲染实体
 
-对于实体数量不固定的场景，可以使用数组表示这些实体及其属性，然后在 `render()` 函数中使用`map`操作。
+对于实体数量不固定的场景，可以使用数组表示这些实体及其属性，然后在 `render()` 函数中使用 `map` 操作。
 
 {% raw %}
 
@@ -540,7 +675,7 @@ async render() {
 async render() {
   return (
     <scene>
-      { this.state.secuence.map(num =>
+      { this.state.sequence.map(num =>
         <box
           position={{ x: num * 2, y: 1, z: 1 }}
           key={"box" + num.toString()}
@@ -561,6 +696,55 @@ async render() {
 - 不要使用 `for` 循环
 - 为每个实体提供唯一的 `key`
 - 避免使用数组索引作为实体的 key
+
+#### 从对象渲染实体
+
+当您想要跟踪集合中每个实体的多条信息时，将实体存储为对象很有用，其中对象的每个属性代表一个实体。
+
+我们建议为对象定义自定义类型，以验证数据是否以一致的方式存储。
+
+{% raw %}
+
+```tsx
+export type boxes = {
+  [key: string]: [Vector3Component, Vector3Component, boolean]
+}
+```
+
+{% endraw %}
+
+以下代码示例呈现场景状态中 _sequence_ 变量的 box 集合。
+
+{% raw %}
+
+```tsx
+ async render() {
+    return (
+      <scene>
+        { this.renderBoxes()}
+      </scene>
+    )
+  }
+
+  renderBoxes(){
+    let boxModels: any[] = []
+    for (var box in this.state.sequence) {
+      boxModels.push(
+        <box
+          key={"box"}
+          position={this.state.sequence[box][0]}
+          rotation={this.state.sequence[box][1]}
+          visible={this.state.sequence[box][2]}
+         />
+      )
+      return boxModels
+  }
+}
+```
+
+{% endraw %}
+
+在迭代对象中的属性时，`box` 指向属性键，这样可以通过 `this.state.sequence[box]` 访问该键下的值。
 
 #### 保持 render 函数可读
 
@@ -593,7 +777,7 @@ async render() {
 
 ```tsx
 renderObstacles() {
-  return this.state.secuence.map(num =>
+  return this.state.sequence.map(num =>
     <box
       position={{ x: num * 2, y: 1, z: 1 }}
     />

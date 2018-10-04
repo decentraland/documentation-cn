@@ -140,6 +140,10 @@ dcl start
 
 在实时与场景交互时，您还可以使用开发人员工具菜单中的 `sources` 选项卡添加断点并暂停程序执行。
 
+以下视频介绍了调试场景的不同方法：
+
+{%  include youtube.html video_id='UIJ_dGOFjKM'  %}
+
 ## 查看 collision 碰撞网格
 
 在查看预览时，您可以按 `c` 查看场景的 glTF 模型中加载的碰撞网格。这些通常是不可见的，用来确定玩家哪些地方可以通过，哪些不能通过。
@@ -156,7 +160,7 @@ dcl start
 
 如果您的场景使用了以太坊网络上的交易，例如，提示需要支付一笔 MANA 才能打开一扇门，你可以在预览场景时避免使用真实货币。
 
-为此，您必须使用_以太 Ropsten 测试网络_来发送伪 MANA。 要使用测试网络，您必须将 Metamask Chrome 扩展程序设置为使用 _Ropsten test network_ 而不是 _Main network_。 并且在 Ropsten 区块链中拥有 MANA，你可以从Decentraland 免费获得。
+为此，您必须使用_以太 Ropsten 测试网络_来发送伪 MANA。 要使用测试网络，您必须将 Metamask Chrome 扩展程序设置为使用 _Ropsten test network_ 而不是 _Main network_。 并且在 Ropsten 区块链中拥有 MANA，你可以从 Decentraland 免费获得。
 
 要使用测试网络预览场景，请将 `DEBUG` 属性添加到浏览器上访问场景预览的 URL 上。 如，如果您通过 `http://127.0.0.1:8000/?position=0%2C-1` 访问场景，则应将 URL 设置为 `http://127.0.0.1:8000/?DEBUG&position=0%2C-1`。
 
