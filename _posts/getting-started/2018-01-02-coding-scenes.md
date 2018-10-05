@@ -99,8 +99,6 @@ Decentraland 中的三维场景基于 [Entity-Component](https://en.wikipedia.or
 
 ## Render 函数
 
-All [scene objects]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %}) have a 'render()` method that outputs what users of your scene will see on their browser. This function must always output a hierarchical tree of entities that starts at the root level with a _scene_ entity.
-
 所有[场景对象]({{ site.baseurl }}{% post_url /development-guide/2018-01-05-scriptable-scene %}) 都有一个'render()`方法，用于输出场景的用户在他们的浏览器上看到的内容。此函数必须始终返回从根级别开始的分层实体树，其中包含 _scene_ 实体。
 
 {% raw %}
