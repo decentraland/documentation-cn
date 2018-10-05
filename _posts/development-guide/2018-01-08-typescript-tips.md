@@ -1,7 +1,7 @@
 ---
 date: 2018-01-08
-title: TypeScript tips
-description: Tips and tricks for coding scenes
+title: TypeScript 开发技巧
+description: 开发场景的诀窍和技巧
 redirect_from:
   - /documentation/tsx-coding-guide/
 categories:
@@ -11,7 +11,7 @@ set: development-guide
 set_order: 12
 ---
 
-Decentraland SDK 通过 TypeScript（.tsx）文件使用。本节介绍了构建场景时可以利用的一些提示和技巧。 这里讨论的内容与 SDK 的功能没有直接关系，而是有关如何使用 TypeScript 语言和如何尽量摆脱上下文相关。
+Decentraland SDK 使用 TypeScript（.tsx）文件。本节介绍了构建场景时可以利用的一些提示和技巧。 这里讨论的内容与 SDK 的功能没有直接关系，而是有关如何使用 TypeScript 语言和如何尽量摆脱上下文相关。
 
 ## 控制台输出
 
