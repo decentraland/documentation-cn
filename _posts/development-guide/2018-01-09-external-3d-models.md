@@ -118,7 +118,22 @@ glTF 提供了一组更强大的功能，包括：
 
   > 提示：使用 Blender 时，可以通过设置 Cycles 渲染器并添加 Principled BSDF 着色器来使用 PBR 材质。请注意，Cycles 渲染器的其他着色器均不受支持。
 
+
+下图显示了两个相同的模型，使用相同的颜色和纹理创建。左侧的模型使用所有_PBR_材质，其中一些包括 _metalness_，_transparency_ 和 _emissiveness_ 效果。 右侧的模型全部使用 _standard_ 材质，一些包括 _transparency_ 和 _emissiveness_ 效果。
+
+![](/images/media/materials_pbr_basic.png)  
+
 请参阅 [实体接口]({{ site.baseurl }}{% post_url /development-guide/2018-06-21-entity-interfaces %}) 查看材质可以配置的所有属性列表
+
+#### 透明和发光材料
+
+您可以将材质设置为 _transparent 透明_。 透明的程序取决于 _alpha_ 设置。为此，请设置材质的透明属性，然后将其 _alpha_ 设置为所需的量。_alpha_ 设为 1 将使材料完全不透明，0 的将会完全透明而不可见。
+
+你也可以制作 _emissive 发光_ 材料。发光材料能自己发光。请注意，在渲染时，实际上它们并不能照亮场景中的附近物体，似乎只是在它们周围有模糊的光晕。
+
+下图显示了使用标准材料创建的两个相同模型。 左侧的材料仅使用不透明材料，右侧的材料在其某些部分使用透明和发光材料。
+
+![](/images/media/materials_transparent_emissive.png)
 
 #### 纹理
 
@@ -178,6 +193,30 @@ show how to change a model with an unsopported shader. Delete material, create n
    > 注意：在引用未嵌入的纹理的文件后，请确保不会移动或重命名该文件，否则将丢失对该文件的引用。 该文件也必须位于场景文件夹中，以便与场景一起上传。
 - 阅读[本文](https://www.khronos.org/blog/art-pipeline-for-gltf)，详细了解在 glTF 模型中使用 PBR 纹理的完整流程。
 - 在[cgbookcase](https://cgbookcase.com/) 上可以找到免费高质量 PBR 纹理。
+
+## Meshes
+
+3D models have a _mesh_ composed of triangular _faces_. These faces meet each other on _edges_ (the lines along which they touch) and _vertices_ (the points where their corners join).
+
+#### Smooth geometries
+
+You can configure a mesh to be _smooth_. This tells the engine to render its shape as if there was an infinite number of intermediate faces rounding it off. This setting can greatly help you reduce the number of triangles needed to make a shape appear to be rounded.
+
+The image below shows two identical models with the same materials. They differ in that the one on the right has most of its geometry set to _smooth_.
+
+![](/images/media/meshes_smooth_vs_sharp.png)
+
+Note how you can see distinct faces on all of the cylindrical shapes of the model on the left, but not on the model on the right.
+
+This setting can be configured separately over individual _faces_, _edges_ and _vertices_ of a model. One same model could have some of its faces or edges set to _smooth_ and others to _sharp_
+
+#### Best practices for geometries
+
+- Be mindful of how many faces you add to your 3D models, as more faces make its rendering more demanding. See [scene limitations]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %}) for the limits imposed by a scene.
+- Make sure there are no hidden faces that can't be seen but that add to the triangle count.
+- For shapes that should have rounded sides, set them to be _smooth_ rather than adding additional faces.
+- Make sure the _normals_ of all faces are facing outwards instead of inwards. If there are faces in your model that seem not to be there when you render it, this is most likely the cause.
+
 
 ## Colliders
 
