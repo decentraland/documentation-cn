@@ -117,14 +117,6 @@ set_order: 9
 - 其他玩家可以加入并与虚拟世界或其他玩家互动。
 - 最后，您可以添加记住每个玩家进入场景、并跟踪玩家事件和活动的功能。
 
-## How to share your MVP
-
-Although the Decentraland world is not yet open to all, you can upload a scene preview to a server and easily share a link to it with people who can give you feedback.
-
-Even once Decentraland is made available to all, we still recommend testing changes with test users in a separate preview server first, before uploading a new version of your scene to Decentraland.
-
-Read [this blogpost](https://decentraland.org/blog/tutorials/developer-tutorial-deploy-and-share-live-scene-previews) for details on how to upload your scene preview to a free server.
-
 ## 怎样分享您的 MVP
 
 虽然 Decentraland 世界尚未向所有人开放，但您可以将场景预览上传到服务器，并轻松分享链接给可以给您反馈的人。
