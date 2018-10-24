@@ -194,33 +194,33 @@ show how to change a model with an unsopported shader. Delete material, create n
 - 阅读[本文](https://www.khronos.org/blog/art-pipeline-for-gltf)，详细了解在 glTF 模型中使用 PBR 纹理的完整流程。
 - 在[cgbookcase](https://cgbookcase.com/) 上可以找到免费高质量 PBR 纹理。
 
-## Meshes
 
-3D models have a _mesh_ composed of triangular _faces_. These faces meet each other on _edges_ (the lines along which they touch) and _vertices_ (the points where their corners join).
+## 网格
 
-#### Smooth geometries
+3D 模型是由三角形的 _面_ 组成的 _网格_。 这些面交叉形成 _边_（面跟面交叉形成的线）和 _点_ 。
 
-You can configure a mesh to be _smooth_. This tells the engine to render its shape as if there was an infinite number of intermediate faces rounding it off. This setting can greatly help you reduce the number of triangles needed to make a shape appear to be rounded.
+#### 平滑形状
 
-The image below shows two identical models with the same materials. They differ in that the one on the right has most of its geometry set to _smooth_.
+您可以将网格配置为 _smooth_。这告诉引擎在渲染形状时，如同是用无数个中间面围绕形成的。此设置可以极大地帮助您减少圆角形状的三角形数量。
+
+下图显示了具有相同材质的两个相同模型。不同之处在于，右侧的大部分 geometry 几何体设为 _smooth_。
 
 ![](/images/media/meshes_smooth_vs_sharp.png)
 
-Note how you can see distinct faces on all of the cylindrical shapes of the model on the left, but not on the model on the right.
+现在可以注意到，在左侧的模型的圆柱形状上能看到不同的面，但右侧的模型没有。
 
-This setting can be configured separately over individual _faces_, _edges_ and _vertices_ of a model. One same model could have some of its faces or edges set to _smooth_ and others to _sharp_
+可以在模型的各个 _faces 面_，_edges 边_ 和 _vertices 点_ 上单独配置此设置。同个模型可以将其某些面或边设置为 _smooth_，而将其他面设置为 _sharp_
 
-#### Best practices for geometries
+#### 形状的最佳实践
 
-- Be mindful of how many faces you add to your 3D models, as more faces make its rendering more demanding. See [scene limitations]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %}) for the limits imposed by a scene.
-- Make sure there are no hidden faces that can't be seen but that add to the triangle count.
-- For shapes that should have rounded sides, set them to be _smooth_ rather than adding additional faces.
-- Make sure the _normals_ of all faces are facing outwards instead of inwards. If there are faces in your model that seem not to be there when you render it, this is most likely the cause.
+- 注意您添加到 3D 模型中的面数，因为更多的面它的渲染要求更高。有关场景的限制，请参阅[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})。
+- 确保没有隐藏的面，它们虽然无法看到，但一样会增加三角形数量。
+- 对于应具有圆边的形状，请将它们设置为 _smooth_，而不是添加更多的面。
+- 确保所有面的 _normals 法线_ 朝外而不是朝内。在渲染时如果发现模型中有的面似乎不存在，则很可能是这个原因。
 
+## Colliders 碰撞
 
-## Colliders
-
-要启用 3D 模型与场景用户之间的碰撞，必须创建一个新对象作为 collider 。如果没有 collider，用户就可以如同模型不存在一样走过模型。出于性能原因，Colliders 通常比模型本身的几何形状简单得多。
+要启用 3D 模型与场景用户之间的碰撞，必须创建一个新对象作为 collider 。如果没有 collider，用户就可以如同模型不存在一样穿越过模型。出于性能原因，Colliders 通常比模型本身的几何形状简单得多。
 
 Colliders 目前不会影响模型和实体之间的相互作用，它们可以重叠。Colliders 仅影响模型与用户游戏化身的交互方式。
 

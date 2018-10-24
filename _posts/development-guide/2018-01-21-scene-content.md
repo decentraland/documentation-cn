@@ -113,7 +113,11 @@ Decentraland 中的三维场景是基于 [Entity-Component](https://en.wikipedia
 
 #### 纹理贴图
 
-使用材质的实体可以设置将特定区域的纹理贴到其表面。通过在纹理的二维图像上设置 _u_ 和 _v_ 坐标对应实体的顶点来实现。实体拥有的顶点越多，就需要在纹理上定义更多的 _uv_ 坐标，例如，plane 需要定义 8 个 _uv_ 点，两个面中的每面都需要 4 个点。
+使用材质的实体可以设置将特定区域的纹理贴到其表面。
+
+使用 [Decentraland sprite](https://github.com/decentraland/dcl-sprites) 库可以轻松进行纹理贴图。在上面的链接中阅读有关如何使用此库的文档。
+
+手工处理纹理贴图，可以通过在纹理的二维图像上设置 _u_ 和 _v_ 坐标对应实体的顶点来实现。实体拥有的顶点越多，就需要在纹理上定义更多的 _uv_ 坐标，例如，plane 需要定义 8 个 _uv_ 点，两个面中的每面都需要 4 个点。
 
 {% raw %}
 
@@ -155,8 +159,6 @@ async render() {
 {% endraw %}
 
 通过纹理贴图，更改所有帧中相同纹理的选定区域。可以创建动画精灵 Animated Sprite 效果。
-
-要使用动画精灵，您可以安装和使用[Decentraland sprite helpers](https://github.com/decentraland/dcl-sprites) node 包。 并在提供的链接中阅读有关如何使用它的文档。
 
 #### 透明材质
 
@@ -201,6 +203,22 @@ async render() {
 
 导入包含嵌入材质的 glTF 模型时，也会将材质隐式导入到场景中。 在这种情况下，场景不需要声明 `<material />` 实体。
 
+当纹理被拉伸或缩小到与原始纹理图像不同的大小时，有时会产生 artifacts 伪影。目前有各种[纹理过滤](https://en.wikipedia.org/wiki/Texture_filtering)算法，以不同方式对此进行修正。 _基本材料_ 实体默认使用 _bilinear_ 算法，但您可以通过设置 `samplingMode` 将其配置为使用 _nearest neighbor_ 或 _trilinear_ 算法。
+
+{% raw %}
+
+```tsx
+<basic-material
+  id="basic_material"
+  texture="materials/profile_avatar.png"
+  samplingMode={DCL.TextureSamplingMode.NEAREST}
+/>
+```
+
+{% endraw %}
+
+上面的示例使用最邻近算法。此设置非常适合像素艺术风格的图形，因为屏幕上看到的纹理较大而不是模糊。轮廓将保持清晰，
+
 ## 导入 3D 模型
 
 对于更复杂的形状，您可以在 Blender 等外部工具中构建 3D 模型，然后以 glTF 格式导入它们。 [glTF](https://www.khronos.org/gltf) (GL 传输格式) 是 Khronos 的一个开放项目，为 3D 资产提供了一种通用的，可扩展的格式，既高效又跟现代 web 技术具有高度交互性。
@@ -222,9 +240,9 @@ async render() {
 
 > 提示：我们建议您将模型分开放在场景中的 `/models` 文件夹中。
 
-glTF 模型还可以包括自己的纹理，材质，collider（碰撞）和动画。 有关详细信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /getting-started/2018-01-09-external-3d-models %})。
+glTF 模型还可以包括自己的纹理，材质，collider（碰撞）和动画。 有关详细信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})。
 
-请记住，所有模型、它们的着色器和它们的纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /getting-started/2018-01-06-scene-limitations %})的范围内。
+请记住，所有模型、它们的着色器和它们的纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})的范围内。
 
 > 注意：obj 模型作为遗留功能也支持，但可能不会支持很长时间。请使用 `<obj-model>` 添加实体。
 
@@ -232,7 +250,7 @@ glTF 模型还可以包括自己的纹理，材质，collider（碰撞）和动�
 
 可以使用文本编辑器打开具有 .gltf 扩展名的文件以查看其内容。在那里，您可以找到模型中包含的动画列表以及它们的命名方式。通常，动画名称由其骨架名称，下划线及其动画名称组成。 例如 `myArmature_animation1`。
 
-在导入 Decentraland 场景前，有关如何为 3D 模型创建动画的信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /getting-started/2018-01-09-external-3d-models %})。
+在导入 Decentraland 场景前，有关如何为 3D 模型创建动画的信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})。
 
 通过将 _skeletalAnimation_ 设置添加到 gltf 模型并设置它的一个剪辑的 `playing` 属性为 `true` 来激活动画。
 
@@ -386,7 +404,7 @@ _video_ 实体需要在 `src` 中选择一个视频，可以是本地文件，�
 
 _collider_ 是一组平面或几何形状，用于定义模型的哪些部分发生碰撞。这样可以有更多的控制并降低对系统的要求，因为碰撞网格通常比原始模型更简单（具有更少的顶点）。
 
-有关 collider 是什么以及如何添加的更多详细信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /getting-started/2018-01-09-external-3d-models %})。
+有关 collider 是什么以及如何添加的更多详细信息，请参阅[3D 模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})。
 
 当前碰撞设置不会影响与其他实体间的交互，实体始终可以重叠。碰撞设置仅影响实体与游戏中的玩家的交互方式。
 

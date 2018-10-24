@@ -15,10 +15,6 @@ set_order: 7
 
 确保以下内容：
 
-- 场景的 `scene.json` 文件设置了正确的属性，包括 Metamask 地址，以及场景要上传的 LAND 地块。
-
-> 注意：CLI 会在创建场景时提示您提供此信息，但您也可以随时手动修改该文件。
-
 - 您的场景符合所有[场景限制](({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %}))。 每次运行场景预览时，大多数限制都会得到验证。
 
 * 您已正确安装了 IPFS。 为此，请按照[这些步骤](https://ipfs.io/docs/install/)进行操作。
@@ -26,6 +22,34 @@ set_order: 7
 * 您有一个 [Metamask](https://metamask.io/) 帐户，并为其分配了 LAND 地块。该帐户还必须持有最低金额以支付交易费。
 
 * 您拥有必要数量的相邻 LAND 地块。 否则，您可以在[虚拟市场](({{ site.baseurl }}{% post_url /marketplace/2018-01-01-marketplace %}))中购买 LAND。
+
+* 如果要将单个场景部署到多个相邻地块，则必须先将它们合并到 _连块土地_ 中，然后才能部署到它们。有关如何创建连块土地的说明，请参阅[虚拟市场]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-01-01-marketplace %})。
+
+## 检查场景数据
+
+部署时，CLI 会从 _scene.json_ 读取场景部署位置等信息。
+
+打开场景的 _scene.json_ 文件并验证以下内容：
+
+- **Owner**: Needs to match your Ethereum wallet address. This same address needs to hold the LAND tokens, or have been granted permissions by the owner.
+
+- **Parcels**: The coordinates of the parcels that will be occupied by your scene
+
+- **Base**: The coordinates of the parcel that will be considered the [0,0] coordinate of the scene.
+
+- **Estate**: The ID of the estate you're deploying to. If you're deploying to a single parcel, this field isn't necessary.
+
+  > Note: To find your estate's id, open the estate's detail page in the Marketplace. The URL should include a number for the ID. For example if the URL is _market.decentraland.org/estates/84/detail_, the estate's ID is _84_.
+
+- **Owner**：需要与您的以太坊钱包地址相匹配。这个地址要求有 LAND 通证，或者已被所有者授予上传场景的权限。
+
+- **Parcels**：场景占用的地块坐标
+
+- **Base**：场景中视为[0,0]坐标的土地坐标。
+
+- **Estate**：部署连块土地的 ID。如果要部署到单块土地，则不需要此字段。
+
+  > 注意：要查看连块土地 ID，请在市场中打开该连块土地的详细信息页面。在 URL 中有包含 ID 编号。 例如，如果 URL 是 _market.decentraland.org/estates/84/detail_，则该连块土地的 ID 为 _84_。
 
 ## 发布您的场景：
 
