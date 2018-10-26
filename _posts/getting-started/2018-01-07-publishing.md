@@ -17,7 +17,7 @@ set_order: 7
 
 - 您的场景符合所有[场景限制](({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %}))。 每次运行场景预览时，大多数限制都会得到验证。
 
-* 您已正确安装了 IPFS。 为此，请按照[这些步骤](https://ipfs.io/docs/install/)进行操作。
+* 您已正确安装了 IPFS。 为此，请按照[这些步骤](https://ipfs.io/docs/install/)进行操作。查看[这些说明](https://ipfs.io/docs/getting-started/) 来测试是否成功安装。
 
 * 您有一个 [Metamask](https://metamask.io/) 帐户，并为其分配了 LAND 地块。该帐户还必须持有最低金额以支付交易费。
 
@@ -45,7 +45,7 @@ set_order: 7
 
 1. 确保最近更改的场景已经在本地完成构建。如果还没有，请运行 `npm run build` 。
 2. 使用跟您的 Decentraland 土地相关联的地址来登录 Metamask 帐户。地址必需配置在文件 _scene.json_ 中。
-3. 按照[这里的说明](https://ipfs.io/docs/getting-started/)启动 IPFS 守护程序。
+3. 通过运行 `ipfs daemon` 启动 IPFS 守护程序。
 4. 最后，在场景的文件夹中运行 `dcl deploy`。
 
 如果这是您第一次将此场景上传到选定的地块，在文件上传完成后 Metamask 将要求您批准支付矿工费的交易。您只有在首次部署内容时才需付款，因为只有在将内容链接到 IPNS（IPFS 的命名服务）时，才会更新 LAND 的智能合约。
