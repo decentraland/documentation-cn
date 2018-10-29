@@ -13,6 +13,10 @@ set_order: 6
 
 为了提高虚拟实境的性能，我们建立每个场景必须遵循的限制。 如果一个场景超出这些限制，将不加载地块，预览将显示错误消息。
 
+有关具体数量的领地的限制，可以查看以下表格：
+
+[参考表](https://docs.google.com/spreadsheets/d/1JTK8oVEASS2WXMg26D4cXV-xaCeB_dL2MUvhi7m3Cr0/edit#gid=0)
+
 ## 场景限制规则
 
 以下是场景中允许的最大元素数：
