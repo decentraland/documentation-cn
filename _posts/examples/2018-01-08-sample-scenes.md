@@ -47,7 +47,15 @@ set_order: 1
 
 [查看场景](https://dcl-project-tiroqwvfop.now.sh/?position=0%2C1)
 
-## 中级示例
+## 静态 XML 场景
+
+#### 静态 XML 场景
+
+这是完全静态场景的示例。它完全使用 XML 构建，这使得编写和编辑更容易，但不支持与用户的任何交互。
+
+[Code](https://github.com/decentraland/sample-scene-static-xml)
+
+## 多媒体
 
 ### 声音支持
 
@@ -72,6 +80,9 @@ set_order: 1
 
 [查看场景](https://dcl-project-ffueiuubku.now.sh/?position=0%2C-1)
 
+
+## 远程场景
+
 #### 多人游戏
 
 一个基于初级示例中门的例子，您可以通过打开和关闭门来与门互动，而另一个玩家则在同一个房间，可以看到门状态的改变。构建这个简单的示例是为了让您了解多用户环境是如何工作的，其中有多个用户与同一实体交互。
@@ -82,6 +93,16 @@ set_order: 1
 
 注：类似的例子在[博客](https://blog.decentraland.org/sdk-highlight-building-an-underwater-landscape-5bfcce73ff35)中有更详细的讨论。
 
+#### 塔防游戏
+
+这个例子在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-a-simple-tower-defense-game)中有更详细的描述，它展示了一个简单的塔防游戏。游戏生成随机路径，并沿着该路径在随机位置放置陷阱。然后生成的敌人实体并沿此路径杀过来，除非您激活陷阱阻止。该游戏支持多个玩家，有一个记分牌和一个重置按钮，可以随时重启游戏。
+
+[代码](https://github.com/decentraland/sample-scene-tower-defense-game)
+
+[查看场景](https://dcl-project-iavfhvaswv.now.sh/?position=0%2C-1)
+
+## 中级示例
+
 #### 动态实体数量
 
 这个例子中，在 [博客](https://blog.decentraland.org/developer-tutorial-creating-a-dynamic-flock-of-hummingbirds-8c2cd41f8296) 中有更详细的描述，每次点击树都会有一只新的鸟出现并开始在场景中随机飞行。这是如何从数组构建多个实体以及如何处理 3D 模型动画的一个很好的示例。
@@ -89,8 +110,6 @@ set_order: 1
 [Code](https://github.com/decentraland/sample-scene-array-of-entities/blob/master/README.md)
 
 [查看场景](https://dcl-project-xdoolmuwqt.now.sh/?position=0%2C-1)
-
-## 高级示例
 
 #### 简单记忆游戏
 
@@ -100,11 +119,15 @@ set_order: 1
 
 [查看场景](https://dcl-project-asliohkpyt.now.sh/?position=0%2C0)
 
+<!--
 #### 付款使用
 
 这是个基于初级示例中的门的例子，你只有支付 10 MANA 到特定的钱包，你才能打开这个门。这个示例展示了如何使用 SDK 来跟踪区块链交易。
 
 [Code](https://github.com/decentraland/sample-scene-payments)
+-->
+
+## 高级示例
 
 #### Block Dog
 
@@ -119,14 +142,6 @@ set_order: 1
 这个例子在[博客](https://blog.decentraland.org/developer-tutorial-port-a-redux-chess-game-to-decentraland-49f509b2eba6)中有更详细的描述，取自现有的 2D 国际象棋游戏，然后在 decentraland 3D 场景中构建。只有在两个玩家接受加入游戏，游戏才会开始，并且每个玩家只有在轮到他们时才能与场景互动。
 
 [Code](https://github.com/cazala/decentraland-redux-chess-app)
-
-#### 塔防游戏
-
-这个例子在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-a-simple-tower-defense-game)中有更详细的描述，它展示了一个简单的塔防游戏。游戏生成随机路径，并沿着该路径随机放置陷阱。然后生成敌人实体并遵循此路径过来，除非您激活陷阱以阻止它们。该游戏支持多个玩家，有一个记分牌，并有一个重置按钮，可以随时重启游戏。
-
-[Code](https://github.com/decentraland/sample-scene-tower-defense-game)
-
-[查看场景](https://dcl-project-iavfhvaswv.now.sh/?position=0%2C-1)
 
 #### 狗、猫、老鼠和奶酪
 

@@ -29,7 +29,7 @@ Decentraland CLI 通过 [npm](https://www.npmjs.com/get-npm?utm_source=house&utm
 
 ## 在 Mac OS 上安装 CLI
 
-在Mac OS上，只需运行以下命令：
+在 Mac OS上，打开终端应用并运行以下命令：
 
 ```bash
 npm install -g decentraland

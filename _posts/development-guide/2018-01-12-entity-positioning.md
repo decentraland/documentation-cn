@@ -152,7 +152,6 @@ The transition can be added to affect the following properties of an entity:
 - position
 - rotation
 - scale
-- color
 - lookAt
 
 Note that the transition for each of these properties is configured separately.
