@@ -119,11 +119,13 @@ set_order: 1
 
 [查看场景](https://dcl-project-asliohkpyt.now.sh/?position=0%2C0)
 
+<!--
 #### 付款使用
 
 这是个基于初级示例中的门的例子，你只有支付 10 MANA 到特定的钱包，你才能打开这个门。这个示例展示了如何使用 SDK 来跟踪区块链交易。
 
 [Code](https://github.com/decentraland/sample-scene-payments)
+-->
 
 ## 高级示例
 
