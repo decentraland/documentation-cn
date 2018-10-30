@@ -1,7 +1,7 @@
 ---
 date: 2018-06-12
 title: 场景内容指南
-description: 场景中如何导入 3D 模型
+description: 如何在场景中导入 3D 模型
 redirect_from:
   - /sdk-reference/scene-content-guide/
 categories:

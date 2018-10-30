@@ -2,26 +2,33 @@
 	<div class="footer-wrapper">
 		<div class="lang-nav-wrapper">
 			<div class="footer-lang-selector">
-				<select name="lang-selector" disabled id="lang">
+				<div class="lang-flag english"></div>
+				<select name="lang-selector" id="lang">
 					<option value="english">English</option>
+					<option value="chinese">中文</option>
 				</select>
 			</div>
 			<nav class="footer-nav">
 				<ul>
-					<li><a href="https://decentraland.org" target="_blank">主页</a></li>
-					<li><a href="https://blog.decentraland.org" target="_blank">博客</a></li>
+					<li><a href="https://decentraland.org" target="_blank">Home</a></li>
+					<li><a href="{{ site.privacy_url }}" target="_blank">Privacy Policy</a></li>
+					<li><a href="{{ site.tos_url }}" target="_blank">Terms of Use</a></li>
+					<li><a href="{{ site.content_url }}" target="_blank">Content Policy</a></li>
+					<li><a href="{{ site.ethics_url }}" target="_blank">Code of Ethics</a></li>
 				</ul>
 			</nav>
 		</div>
 		<div class="social-copyright-wrapper">
 			<ul class="footer-links">
 				{% for link in site.data.footer %}
-				<li><a {% if link.new_window %}target="_blank" {% endif %} href="{% include relative-src.html src=link.link %}" {% if
-					 link.social_icon %}class="{{ link.social_icon }}-icon" {% endif %}>
-						{% if link.social_icon %} {% include social-icon.html icon=link.social_icon %} {% endif %} {{ link.name }}</a></li>
+					<li><a {% if link.new_window %}target="_blank"{% endif %} href="{% include relative-src.html src=link.link %}" {% if link.social_icon %}class="{{ link.social_icon }}-icon"{% endif %}>
+						{% if link.social_icon %}
+							{% include social-icon.html icon=link.social_icon %}
+						{% endif %}
+						{{ link.name }}</a></li>
 				{% endfor %}
 			</ul>
-			<p class="copyright">&copy; {{ site.title }} {{ site.time | date: "%Y" }}. 版权所有.</p>
+			<div class="copyright">&copy; {{ site.title }} {{ site.time | date: "%Y" }}</div>
 		</div>
 	</div>
 </footer>

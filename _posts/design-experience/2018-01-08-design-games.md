@@ -3,9 +3,9 @@ date: 2018-01-08
 title: 游戏设计限制
 description: 在为 Decentraland 设计游戏时，您需要注意的地方。
 categories:
-  - getting-started
+  - design-experience
 type: Document
-set: getting-started
+set: design-experience
 set_order: 8
 ---
 

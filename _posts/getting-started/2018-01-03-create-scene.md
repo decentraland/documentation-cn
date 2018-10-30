@@ -87,4 +87,4 @@ dcl start
 
 ## 发布场景
 
-完成场景创建后，想要将其上传到 LAND，请参阅[发布]({{ site.baseurl }}{% post_url /getting-started/2018-01-07-publishing %})。
+完成场景创建后，想要将其上传到 LAND，请参阅[发布]({{ site.baseurl }}{% post_url /deploy/2018-01-07-publishing %})。

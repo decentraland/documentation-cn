@@ -1,11 +1,11 @@
 ---
 date: 2018-01-06
-title: Tutorials
-description: Blogposts walking you through how to create scenes in Decentraland.
+title: 教程
+description: 有关如何在 Decentraland 创建场景的博客文章
 categories:
   - examples
 type: Document
-set: examples
+set: tutorials
 set_order: 2
 ---
 

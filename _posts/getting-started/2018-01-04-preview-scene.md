@@ -78,7 +78,7 @@ dcl start
 
 ## 上传场景到 decentraland
 
-一旦您对您的场景感到满意，您可以上传并将其发布到 Decentraland，具体操作请参阅[发布]({{ site.baseurl }}{% post_url /getting-started/2018-01-07-publishing %}) 。
+一旦您对您的场景感到满意，您可以上传并将其发布到 Decentraland，具体操作请参阅[发布]({{ site.baseurl }}{% post_url /deploy/2018-01-07-publishing %}) 。
 
 ## 预览命令的参数
 

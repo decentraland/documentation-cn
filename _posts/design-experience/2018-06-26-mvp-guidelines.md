@@ -5,9 +5,9 @@ description: 使用 SDK 制作您的第一个 MVP 场景或体验的建议指南
 redirect_from:
   - /documentation/mvp-guidelines/
 categories:
-  - getting-started
+  - design-experience
 type: Document
-set: getting-started
+set: design-experience
 set_order: 9
 ---
 
@@ -138,7 +138,7 @@ set_order: 9
 
 **音频** 是场景氛围的另一个重要方面。 像风，蟋蟀，遥远的对话等背景声音，甚至音乐都是可以增加沉浸感和提供背景的非常有效的方式。您还可以更改音量水平与声源距离的关系，以便或多或少地强调声音的位置。
 
-阅读[游戏的设计限制]({{ site.baseurl }}{% post_url /getting-started/2018-01-08-design-games %})，详细了解其他一些注意事项。
+阅读[游戏的设计限制]({{ site.baseurl }}{% post_url /design-experience/2018-01-08-design-games %})，详细了解其他一些注意事项。
 
 将 MVP 视为众多原型中的一种，一旦建立了你的流程，你就可以用它来建立你的发布节奏。每个版本的关注点可能会有所不同，或者它可能是各个方面的混合体验。但是，您应该致力于提供更复杂的体验，每次都建立在最后一次的基础上进行迭代。
 
