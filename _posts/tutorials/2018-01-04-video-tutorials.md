@@ -1,7 +1,7 @@
 ---
 date: 2018-01-06
-title: Video Tutorials
-description: Videos walking you through how to create scenes in Decentraland.
+title: 视频教程
+description: 通过视频向您介绍如何在 Decentraland 中创建场景。
 categories:
   - examples
 type: Document

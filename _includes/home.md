@@ -86,17 +86,15 @@ export default class SampleScene extends DCL.ScriptableScene {
 ```
 {% endraw %}
 
-可以在这里更改任何你想要更改的内容，例如更改其中一个实体的 _x_ 位置。如果预览正在浏览器中运行，则在预览中可以看到相应的更改。
+可以在这里更改任何你想要更改的内容，例如更改其中一个实体的 _x_ 位置。如果预览正在浏览器中运行，则在预览中将能看到相应的更改。
 
-Download this 3D model of an avocado from [Google Poly](https://poly.google.com) in _glTF_ format. [link](https://poly.google.com/view/cgLBGFfm5FU)
-
-从 [Google Poly](https://poly.google.com) 以_glTF_格式下载鳄梨 3D 模型。[链接](https://poly.google.com/view/cgLBGFfm5FU)
+从 [Google Poly](https://poly.google.com) 以 _glTF_ 格式下载这个鳄梨的 3D 模型。[链接](https://poly.google.com/view/cgLBGFfm5FU)
 
 ![](/images/media/landing_avocado_gltf.png)
 
-Create a new folder under your scene’s directory named `/models`. Extract the downloaded files and place them all in that folder.
+在场景目录下建立一个新的目录 `/models`。提取下载的文件并将它们全部放在该文件夹中。
 
-In your scene’s code, add the following line in between the other XML entities:
+在场景的代码中，在 XML 实体之间添加以下行：
 
 {% raw %}
 
@@ -110,13 +108,14 @@ In your scene’s code, add the following line in between the other XML entities
 
 {% endraw %}
 
-Check your scene preview once again to see that the 3D model is now there too.
+再次检查场景预览，看看 3D 模型是否已经出现。
 
 ![](/images/media/landing_avocado_in_scene.png)
 
-Read [coding-scenes]({{ site.baseurl }}{% post_url /getting-started/2018-01-02-coding-scenes %}) for a high-level understanding of how Decentraland scenes function. Check [scene-content]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %}) for specifics about how to add content to a scene.
+要深入了解 Decentraland 场景的运作方式，请阅读[场景开发]({{ site.baseurl }}{% post_url /getting-started/2018-01-02-coding-scenes %})。了解有关如何向场景添加内容的详细信息，请查看[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
 
-## Scene examples
+
+## 场景示例
 
 <div class="examples">
   <a target="_blank" href="https://github.com/decentraland/sample-scene-script">
@@ -139,13 +138,13 @@ Read [coding-scenes]({{ site.baseurl }}{% post_url /getting-started/2018-01-02-c
   </a>
 </div>
 
-See [sample scenes]({{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %}) for more scene examples.
+有关更多场景示例，请参阅[场景示例]({{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %})。
 
-Also see [tutorials]({{ site.baseurl }}{% post_url /tutorials/2018-01-03-tutorials %}) for detailed instructions for building scenes like these.
+有关构建此类场景的详细说明，请参阅[教程]({{ site.baseurl }}{% post_url /tutorials/2018-01-03-tutorials %})。
 
-## Other useful information
+## 其他有用的信息
 
-- [Design constraints for games]({{ site.baseurl }}{% post_url /design-experience/2018-01-08-design-games %})
-- [TypeScript tips]({{ site.baseurl }}{% post_url /development-guide/2018-01-08-typescript-tips %})
-- [3D model consierations]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})
-- [Scene limitations]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})
+- [游戏设计限制]({{ site.baseurl }}{% post_url /design-experience/2018-01-08-design-games %})
+- [TypeScript 开发技巧]({{ site.baseurl }}{% post_url /development-guide/2018-01-08-typescript-tips %})
+- [3D 模型考虑因素]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})
+- [场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})

@@ -1,6 +1,6 @@
 ---
-title: Development guide
-description: Learn about the Decentraland API and what you can do with it.
+title: 开发指南
+description: 了解 Decentraland API 以及它可以做些什么。
 color: "#801CFF"
 accent_color: "#801CFF"
 order: 2

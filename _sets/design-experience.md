@@ -1,6 +1,6 @@
 ---
-title: Design experiences
-description: Read tips and recommendations about how to design the experiences you want to build in Decentraland.
+title: 设计经验
+description: 有关设计 Decentraland 体验的提示和建议。
 color: "#f4821e"
 accent_color: "#f4821e"
 order: 7

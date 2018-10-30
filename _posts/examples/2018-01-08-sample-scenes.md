@@ -1,6 +1,6 @@
 ---
 date: 2018-01-06
-title: 示例
+title: 场景示例
 description: 使用 SDK 的一些代码和示例
 categories:
   - examples
