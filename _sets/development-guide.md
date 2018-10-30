@@ -1,8 +1,8 @@
 ---
-title: 开发指南
-description: Decentraland API 使用介绍。
-color: "#FFE3D2"
-accent_color: "#85BEFF"
+title: Development guide
+description: Learn about the Decentraland API and what you can do with it.
+color: "#801CFF"
+accent_color: "#801CFF"
 order: 2
-img: api@3x.png
+img: development-guide.svg
 ---

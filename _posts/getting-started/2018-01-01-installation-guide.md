@@ -100,4 +100,4 @@ npm update -g decentraland
 
 > 提示：如果您不确定最新版本是哪个，请查看[发行说明]{{ site.baseurl }}{% post_url /releases/sdk/2018-01-01-4.0.0 %})。
 
->注意：使用 `npm` 查看已安装的 SDK 版本有可能跟预览场景时使用的 SDK 版本不一致。要了解所使用的版本的唯一方法是查看 _package-lock.josn_ 文件。
+>注意：使用 `npm` 查看已安装的 SDK 版本有可能跟预览场景时使用的 SDK 版本不一致。要了解所使用的版本的唯一方法是查看 _package-lock.json_ 文件。
