@@ -13,7 +13,7 @@ set_order: 2
 
 在 Decentraland 上构建开发场景，您首先需要安装命令行接口（CLI）。
 
-CLI 允许您在“链下”的开发环境中编译和预览场景。场景在本地测试后，您可以使用 CLI 将内容上传到 IPFS，并将其链接到自己的土地（LAND）上。
+CLI 允许您在“链下”的开发环境中编译和预览场景。场景在本地测试后，您可以使用 CLI 将内容上传到内容服务器，并将其链接到自己的土地（LAND）上。
 
 **请注意：** 目前，Decentraland SDK（捆绑在 CLI 安装之中）仅支持 TypeScript。
 
@@ -24,7 +24,6 @@ Decentraland CLI 通过 [npm](https://www.npmjs.com/get-npm?utm_source=house&utm
 在安装 CLI 之前，请安装以下的依赖项目：
 
 * [Node.js](https://github.com/decentraland/cli#nodejs-installation) (version 8)
-* [IPFS](https://dist.ipfs.io/#go-ipfs)
 * [Python 2.7.x](https://www.python.org/downloads/)
 
 ## 在 Mac OS 上安装 CLI
@@ -94,9 +93,7 @@ npm update -g decentraland
 更新 Decentraland SDK 版本：
 
 1. 在场景文件夹中打开文件 _package-lock.json_。
-2. 查找正在使用的 _decentraland-api_ 或 _metaverse_api_ 版本，并手动将其更改为最新版本的 SDK。
-
-   在旧版本中，API 名为 _metaverse-api_，在较新版本中，则是 _decentraland-api_。
+2. 查找正在使用的 _decentraland-api_ （旧版本上是 _metaverse_api_） 版本，并手动将其更改为最新版本的 SDK。
 
 > 提示：如果您不确定最新版本是哪个，请查看[发行说明]{{ site.baseurl }}{% post_url /releases/sdk/2018-01-01-4.0.0 %})。
 
