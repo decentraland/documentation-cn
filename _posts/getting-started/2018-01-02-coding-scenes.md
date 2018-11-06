@@ -22,19 +22,19 @@ set_order: 4
 - 生成 Decentraland 场景的默认 _项目_，包括渲染和运行内容所需的所有资源。
 - 在本地 Web 浏览器中构建、测试和预览场景内容 - 完全脱机，无需进行任何以太坊交易或拥有 LAND。
 - 使用 Decentraland API 编写 TypeScript 代码，为场景添加交互式和动态行为。
-- 将场景内容上传到 [IPFS](https://ipfs.io)。
-- 将您的 LAND 通证链接到您上传的内容的 IPFS URL。
+- 将场景内容上传到内容服务器。
+- 将您的 LAND 通证链接到您上传的内容的 URL 地址上。
 
 它包括以下组件：
 
-- **Decentraland CLI**（命令行界面）：可以在您自己的机器上本地生成新的 Decentraland 场景，预览它们并将它们上传到IPFS。
+- **Decentraland CLI**（命令行界面）：可以在您自己的机器上本地生成新的 Decentraland 场景，预览它们并将它们上传到内容服务器。
 - **Decentraland API**（以前称为 _Metaverse API_，通常也称为 _API_）：一个 TypeScript 包，其中包含可帮助您创建交互式体验的辅助方法库。可以用它创建和操作场景中的对象，并提供用户或其他应用程序之间的交易支持。
 
 - **场景示例**：从[场景示例]({{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %})中获取灵感并编写最佳实践。
 
 ## 必要条件
 
-要在本地开发场景，不需要拥有 LAND 通证。开发和测试场景可以完全脱机完成，无需将场景部署到以太坊网络（Decentraland 用于建立 LAND 的所有权的系统）或 IPFS（我们用于分发和传送内容的 P2P 网络）。
+要在本地开发场景，不需要拥有 LAND 通证。开发和测试场景可以完全脱机完成，无需将场景部署到以太坊网络（Decentraland 用于建立 LAND 的所有权的系统）或内容服务器。
 
 此 SDK 旨在供熟悉代码和终端使用的用户使用。您须要有：
 
