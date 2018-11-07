@@ -36,7 +36,6 @@ CLI 可以让你在本地编译和预览场景。场景在本地测试后，您�
 > **注意**: 在安装 CLI 之前，请安装以下的依赖项目：
 >
 > - [Node.js](https://github.com/decentraland/cli#nodejs-installation) (version 8)
-> - [IPFS](https://dist.ipfs.io/#go-ipfs)
 > - [Python 2.7.x](https://www.python.org/downloads/)
 
 请在命令行工具中运行以下命令安装 CLI：
@@ -69,16 +68,30 @@ dcl start
 
 {% raw %}
 ```tsx
-import * as DCL from 'decentraland-api'
+import * as DCL from "decentraland-api"
 
 export default class SampleScene extends DCL.ScriptableScene {
   async render() {
     return (
       <scene>
-        <box position={{ x: 5, y: 0.5, z: 5 }} rotation={{ x: 0, y: 45, z: 0 }} color="#4CC3D9" />
+        <box
+          position={{ x: 5, y: 0.5, z: 5 }}
+          rotation={{ x: 0, y: 45, z: 0 }}
+          color="#4CC3D9"
+        />
         <sphere position={{ x: 6, y: 1.25, z: 4 }} color="#EF2D5E" />
-        <cylinder position={{ x: 7, y: 0.75, z: 3 }} radius={0.5} scale={{ x: 0, y: 1.5, z: 0 }} color="#FFC65D" />
-        <plane position={{ x: 5, y: 0, z: 6 }} rotation={{ x: -90, y: 0, z: 0 }} scale={4} color="#7BC8A4" />
+        <cylinder
+          position={{ x: 7, y: 0.75, z: 3 }}
+          radius={0.5}
+          scale={{ x: 0, y: 1.5, z: 0 }}
+          color="#FFC65D"
+        />
+        <plane
+          position={{ x: 5, y: 0, z: 6 }}
+          rotation={{ x: -90, y: 0, z: 0 }}
+          scale={4}
+          color="#7BC8A4"
+        />
       </scene>
     )
   }
