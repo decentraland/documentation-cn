@@ -9,78 +9,78 @@ set: tutorials
 set_order: 3
 ---
 
-## A simple interactive scene
+## 简单的互动场景
 
-This simple tutorial walks you through creating a simple scene where user clicks can cause an entity to rotate.
+这个简单的教程将引导您创建一个简单的场景，并且用户的点击可以使实体旋转。
 
 {%  include youtube.html video_id='OtkrvHOHIDg'  %}
 
-## Using 3D models in Decentraland
+## 在 Decentraland 中使用 3D 模型
 
-#### Add predefined animations to a 3D model
+#### 将预定义动画添加到 3D 模型
 
-This tutorial shows you how you can download a feely licenced 3D model from Google Poly, and apply free animations that you can download from Mixamo to it.
+本教程向您展示如何从 Google Poly 下载免费许可的 3D 模型，并如何应用从 Mixamo 下载的免费动画。
 
-It then also goes over how you can activate these animations in a Decentraland scene.
+然后，讨论了如何在 Decentraland 场景中激活这些动画。
 
 {%  include youtube.html video_id='7RSsBmm-rVs'  %}
 
-#### Add animations to a 3D model in Blender
+#### 在 Blender 中将动画添加到 3D 模型中
 
-This tutorial shows how you can download a freely licenced 3D model from Google Poly, import it into Blender and then create an _armature_ to manually create your own _animations_ for it.
+本教程介绍如何从 Google Poly 下载免费许可的 3D 模型，将其导入 Blender，然后创建 _armature 骨骼动画_ 以手动创建自己的 _动画_。
 
-It then also goes over how you can activate these animations in a Decentraland scene.
+然后，它还讨论了如何在 Decentraland 场景中激活这些动画。
 
 {%  include youtube.html video_id='eiHI-B5cH4k'  %}
 
-#### Add a collider to a 3D model
+#### 将 collider （碰撞）添加到 3D 模型
 
-This tutorial shows how you can add a collider to a 3D model. Colliders prevent users of your scene from walking through things. They are separate objects that are invisible but occupy space and stand in for what are often more geometrically complex objects.
+本教程介绍如何将 collider 添加到 3D 模型中。 collider 会阻止场景用户穿过物体。 它们是不可见的独立物体，占据空间并且常常用来代替更复杂的几何物体。
 
 {%  include youtube.html video_id='UrByRRwfGjY'  %}
 
-## Advanced coding in Decentraland scenes
+## Decentraland 场景中的高级编码
 
-#### Jukebox
+#### 点唱机
 
-**Buttons, sound, and rendering from arrays**
+**按钮，声音和从数组中渲染**
 
-This tutorial shows how you can build a jukebox. It includes an array of animated buttons that can be interacted with, each button triggers the playing of a different song.
+本教程介绍如何设计点唱机。 它包括一系列可以与之交互的动画按钮，每个按钮触发不同歌曲的播放。
 
-This tutorial includes a [written guide](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-creating-a-music-jukebox) to acompany the video.
+为配合视频，本教程包含有[书面指南](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-creating-a-music-jukebox) 
 
 {%  include youtube.html video_id='_K8FUg0dl0c'  %}
 
-#### Block Dog
+#### 狗
 
-**Simple AI for character, event handling and using a state machine**
+**使用简单 AI 的角色，事件处理和状态机使用**
 
-This tutorial shows how you can handle some basic behaviors of character in a Decentraland scene. The dog in this scene does the following:
+本教程将介绍如何处理 Decentraland 场景中角色的一些基本行为。这个场景中的狗会做以下事情：
 
-- It randomly sits and stands up on its own.
-- If you click the dog, it switches from standing up to sitting down.
-- If you click the water bowl, it walks towards it and drinks.
-- If you step inside the bounds of the scene, the dog follows you and sits in front of you.
+- 自行随机坐下或站立。
+- 如果您单击狗，它会从站立变为坐下。
+- 如果你点击水碗，它走向它并喝水。
+- 如果你走进场景的边界，狗会跟着你，然后坐在你面前。
 
-This tutorial includes a [written guide](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-basic-ai-with-block-dog) to acompany the video.
+与视频配套，本教程还包含[书面指南](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-basic-ai-with-block-dog) 。
 
 {%  include youtube.html video_id='61ppyctd-88'  %}
 
-#### Tower defense game
+#### 塔防游戏
 
-**Random content generation, path following, event handling, rendering from arrays and keeping score**
+**随机内容生成、路径跟踪、事件处理、从数组中渲染和计分**
 
-This tutorial shows how you can build a simple yet fully functional game in Decentraland. It walks you through how to create a tower defense game that includes:
+本教程展示了如何在 Decentraland 构建一个简单但功能齐全的游戏。它告诉你如何创建一个塔防游戏，包括：
 
-- A randomly generated path
-- Traps that appear in random positions
-- A series of enemy entities that move down the generated path
-- A way to kill these enemies via traps
-- A score board
-- A reset button
-- Support for multiple players
+- 一个随机生成的路径
+- 随机位置出现的陷阱
+- 一系列沿着生成的路径向下移动的敌人实体
+- 一种通过陷阱杀死这些敌人的方法
+- 得分板
+- 复位按钮
+- 支持多个玩家
 
-This tutorial includes a [written guide](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-a-simple-tower-defense-game) to acompany the video.
+本教程包括一个[书面指南](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-a-simple-tower-defense-game) 与视频配套。
 
 {%  include youtube.html video_id='XPcMaGtX37k'  %}
 
