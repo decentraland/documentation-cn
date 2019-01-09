@@ -15,7 +15,7 @@ set_order: 6
 
 有关具体数量的领地的限制，可以查看以下表格：
 
-[参考表](https://docs.google.com/spreadsheets/d/1JTK8oVEASS2WXMg26D4cXV-xaCeB_dL2MUvhi7m3Cr0/edit#gid=0)
+[参考表](https://docs.google.com/spreadsheets/d/1BTm0C20PqdQDAN7vOQ6FpnkVncPecJt-EwTSNHzrsmg/edit#gid=0)
 
 ## 场景限制规则
 
@@ -23,9 +23,9 @@ set_order: 6
 
 > *n* 表示场景占用的地块数。
 
-- **三角形:** `log2(n+1) x 10000` 场景中所有模型的三角形总量。
-- **实体:** `log2(n+1) x 200` 场景中中实体数。
-- **支架:** `log2(n+1) x 300` 场景中的网格数量.
+- **三角形:** `n x 10000` 场景中所有模型的三角形总量。
+- **实体:** `n x 200` 场景中中实体数。
+- **支架:** `n x 300` 场景中的网格数量.
 - **材质:** `log2(n+1) x 20` 场景中的材质数量。 包括作为模型的一部分导入的材质。
 - **纹理:** `log2(n+1) x 10` 场景中的纹理量。 包括作为模型的一部分导入的纹理。
 - **高度:** `log2(n+1) x 20` 以米为单位的高度。
@@ -36,37 +36,59 @@ set_order: 6
 
 从场景的代码中，您可以查询适用于场景的限制以及场景当前使用的数量。这对于其内容动态更改的场景尤其有用。例如，在每次用户单击就添加新实体的场景中，您就可以在达到场景限制时停止添加实体。
 
+首先 import `EntityController`。
+
+```ts
+import { querySceneLimits } from "@decentraland/EntityController"
+```
+
+
  #### 获得场景限制
 
 `this.entityController.querySceneLimits()` 可以获取场景的限制。它根据 _scene.json_ 文件中场景占用的地块数计算场景的限制。此命令返回的值不会随时间变化，因为场景的大小是不变的。
 
 `querySceneLimits()` 是异步的，所以我们建议用 `await` 语句调用。
 
+```ts
+executeTask(async () => {
+  try {
+    const limits = await querySceneLimits()
+    log('limits' + limits)
+  }
+})
+```
+
 `querySceneLimits()` 函数返回具有以下属性的 promise 对象，所有属性都是 _number_。
 
-{% raw %}
 
- ```tsx
- // get limits object
- const limits = await this.entityController.querySceneLimits()
 
- // print maximum triangles
- console.log(limits.triangles)
+```tsx
+// import controller
+import { querySceneLimits } from '@decentraland/EntityController'
 
- // print maximum entities
- console.log(limits.entities)
 
- // print maximum bodies
- console.log(limits.bodies)
+// get limits object
+executeTask(async () => {
+  try {
+    const limits = await querySceneLimits()
 
- // print maximum materials
- console.log(limits.materials)
+    // print maximum triangles
+    log(limits.triangles)
 
- // print maximum textures
- console.log(limits.textures)
- ```
+    // print maximum entities
+    log(limits.entities)
 
-{% endraw %}
+    // print maximum bodies
+    log(limits.bodies)
+
+    // print maximum materials
+    log(limits.materials)
+
+    // print maximum textures
+    log(limits.textures)
+  }
+}
+```
 
 例如，如果您的场景只有一块地，则 `limits.triangles` 应该是 `10000`。
 
@@ -76,31 +98,45 @@ set_order: 6
 
 `querySceneMetrics()` 是异步的，因此我们建议使用 `await` 语句调用。
 
+```ts
+executeTask(async () => {
+  try {
+    const limits = await querySceneLimits()
+    log('limits' + limits)
+  }
+})
+```
+
 `querySceneMetrics()` 函数返回具有以下属性的 promise 对象，所有属性都是 _number_。
 
- {% raw %}
+ 
+```tsx
+// import controller
+import { querySceneMetrics } from '@decentraland/EntityController'
 
- ```tsx
- //get metrics object
- const limits = await this.entityController.querySceneMetrics()
 
- //print maximum triangles
- console.log(limits.triangles)
+// get limits object
+executeTask(async () => {
+  try {
+    const limits = await querySceneMetrics()
 
- //print maximum entities
- console.log(limits.entities)
+    // print maximum triangles
+    log(limits.triangles)
 
- //print maximum bodies
- console.log(limits.bodies)
+    // print maximum entities
+    log(limits.entities)
 
- //print maximum materials
- console.log(limits.materials)
+    // print maximum bodies
+    log(limits.bodies)
 
- //print maximum textures
- console.log(limits.textures)
- ```
+    // print maximum materials
+    log(limits.materials)
 
- {% endraw %}
+    // print maximum textures
+    log(limits.textures)
+  }
+}
+```
 
 例如，如果您的场景只用了一块地，则 limits.triangles 显示为 10000。
 
@@ -149,23 +185,3 @@ set_order: 6
 
 如果场景文件夹中有超过 100 个文件，加载场景时其中许多文件可能没有直接使用。您可以使 CLI 忽略场景文件夹中的特定文件，并在 _dclignore_ 文件中指定不将它们上传到 IPFS。在[场景文件]({{ site.baseurl }}{% post_url /development-guide/2018-01-11-scene-files %})中了解有关更多信息。
 -->
-
-## 参考表
-
-| 领地数 | 高度 (米) | 三角形数 | 实体数 | 网格数 | 材质 | 纹理 |
-| ------------- | --------------- | --------------- | -------------- | ------------ | --------------- | -------------- |
-| 1             | 20.00           | 10000           | 200            | 30           | 20              | 10             |
-| 2             | 31.70           | 15850           | 317            | 48           | 32              | 16             |
-| 3             | 40.00           | 20000           | 400            | 60           | 40              | 20             |
-| 4             | 46.44           | 23219           | 464            | 70           | 46              | 23             |
-| 5             | 51.70           | 25850           | 517            | 78           | 52              | 26             |
-| 6             | 56.15           | 28074           | 561            | 84           | 56              | 28             |
-| 7             | 60.00           | 30000           | 600            | 90           | 60              | 30             |
-| 8             | 63.40           | 31699           | 634            | 95           | 63              | 32             |
-| 9             | 66.44           | 33219           | 664            | 100          | 66              | 33             |
-| 10            | 69.19           | 34594           | 692            | 104          | 69              | 35             |
-| 20            | 87.85           | 43923           | 878            | 132          | 88              | 44             |
-| 30            | 99.08           | 49542           | 991            | 149          | 99              | 50             |
-| 40            | 107.15          | 53576           | 1072           | 161          | 107             | 54             |
-| 50            | 113.45          | 56724           | 1134           | 170          | 113             | 57             |
-| 100           | 133.16          | 66582           | 1332           | 200          | 133             | 67             |

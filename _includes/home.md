@@ -4,25 +4,25 @@
 ## 快捷菜单
 
 <div class="shortcuts">
-  <a href="{{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %}">
+  <a href="{{ site.baseurl }}{% post_url /getting-started/2018-01-02-coding-scenes %}">
     <div>
       <div class="image"><img src="/images/home/1.png"/></div>
-      <div class="title">场景内容</div>
-      <div class="description">有关构成场景的实体和组件的概述</div>
+      <div class="title">场景开发</div>
+      <div class="description">工具概述及 SDK 的基本概念</div>
     </div>
   </a>
-  <a href="{{ site.baseurl }}{% post_url /development-guide/2018-06-21-entity-interfaces %}">
+  <a href="">
     <div>
       <div class="image"><img src="/images/home/2.png"/></div>
-      <div class="title">实体参考指南</div>
-      <div class="description">有关构建 Decentraland 场景中最基本单元的完整参考</div>
+      <div class="title">组件和对象参考指南</div>
+      <div class="description">有关缺省组件和对象及相关函数的完整参考</div>
     </div>
   </a>
   <a href="{{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %}">
     <div>
       <div class="image"><img src="/images/home/3.png"/></div>
       <div class="title">场景实例</div>
-      <div class="description">帮助您入门的几个示例场景，激发您的创作激情</div>
+      <div class="description">帮助您入门的几个代码示例，激发您的创作激情</div>
     </div>
   </a>
 </div>
@@ -64,42 +64,63 @@ dcl start
 
 ## 编辑场景
 
-使用代码编辑器打开场景文件夹中的 `scene.tsx` 文件。
+使用代码编辑器打开场景文件夹中的 `src/game.ts` 文件。
 
-{% raw %}
 ```tsx
-import * as DCL from "decentraland-api"
+/// --- Set up a system ---
 
-export default class SampleScene extends DCL.ScriptableScene {
-  async render() {
-    return (
-      <scene>
-        <box
-          position={{ x: 5, y: 0.5, z: 5 }}
-          rotation={{ x: 0, y: 45, z: 0 }}
-          color="#4CC3D9"
-        />
-        <sphere position={{ x: 6, y: 1.25, z: 4 }} color="#EF2D5E" />
-        <cylinder
-          position={{ x: 7, y: 0.75, z: 3 }}
-          radius={0.5}
-          scale={{ x: 0, y: 1.5, z: 0 }}
-          color="#FFC65D"
-        />
-        <plane
-          position={{ x: 5, y: 0, z: 6 }}
-          rotation={{ x: -90, y: 0, z: 0 }}
-          scale={4}
-          color="#7BC8A4"
-        />
-      </scene>
-    )
+class RotatorSystem {
+  // this group will contain every entity that has a Transform component
+  group = engine.getComponentGroup(Transform)
+
+  update(dt: number) {
+    // iterate over the entities of the group
+    for (let entity of this.group.entities) {
+      // get the Transform component of the entity
+      const transform = entity.get(Transform)
+
+      // mutate the rotation
+      transform.rotate(Vector3.Up(), dt * 10) 
+    }
   }
 }
-```
-{% endraw %}
 
-可以在这里更改任何你想要更改的内容，例如更改其中一个实体的 _x_ 位置。如果预览正在浏览器中运行，则在预览中将能看到相应的更改。
+// Add a new instance of the system to the engine
+engine.addSystem(new RotatorSystem())
+
+/// --- Spawner function ---
+
+function spawnCube(x: number, y: number, z: number) {
+  // create the entity
+  const cube = new Entity()
+
+  // set a transform to the entity
+  cube.add(new Transform({ position: new Vector3(x, y, z) }))
+
+  // set a shape to the entity
+  cube.add(new BoxShape())
+
+  // add the entity to the engine
+  engine.addEntity(cube)
+
+  return cube
+}
+
+/// --- Spawn a cube ---
+
+const cube = spawnCube(5, 1, 5)
+
+cube.add(
+  new OnClick(() => {
+    cube.get(Transform).scale.z *= 1.1
+    cube.get(Transform).scale.x *= 0.9
+
+    spawnCube(Math.random() * 8 + 1, Math.random() * 8, Math.random() * 8 + 1)
+  })
+)
+```
+
+可以在这里更改任何你想要更改的内容，例如更改第一个 `cube` 实体的 _x_ 位置。如果预览正在浏览器中运行，则在预览中将能看到相应的更改。
 
 从 [Google Poly](https://poly.google.com) 以 _glTF_ 格式下载这个鳄梨的 3D 模型。[链接](https://poly.google.com/view/cgLBGFfm5FU)
 
@@ -107,46 +128,48 @@ export default class SampleScene extends DCL.ScriptableScene {
 
 在场景目录下建立一个新的目录 `/models`。提取下载的文件并将它们全部放在该文件夹中。
 
-在场景的代码中，在 XML 实体之间添加以下行：
-
-{% raw %}
+在场景的代码最后添加以下行：
 
 ```tsx
-<gltf-model
-  src="models/Avocado.gltf"
-  position={{ x: 3, y: 0.75, z: 2 }}
-  scale={10}
-/>
+let avocado = new Entity()
+avocado.add(new GLTFShape("models/avocado.gltf"))
+avocado.add(new Transform({ 
+    position: new Vector3(3, 1, 3), 
+    scale: new Vector3(10, 10, 10)
+    }))
+engine.addEntity(avocado)
 ```
-
-{% endraw %}
 
 再次检查场景预览，看看 3D 模型是否已经出现。
 
 ![](/images/media/landing_avocado_in_scene.png)
 
-要深入了解 Decentraland 场景的运作方式，请阅读[场景开发]({{ site.baseurl }}{% post_url /getting-started/2018-01-02-coding-scenes %})。了解有关如何向场景添加内容的详细信息，请查看[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
+The lines you just added create a new [entity]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}), give it a [shape]({{ site.baseurl }}{% post_url /development-guide/2018-02-6-shape-components %}) based on the 3D model you downloaded, and [set its position]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %}).
+
+Note that the avocado you added rotates, just like all other entities in the scene. That's because the `RotatorSystem` [system]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) defined in this scene is iterating over every entity in the scene and rotating it. 
+
+要深入了解 Decentraland 场景的运作方式，请阅读[场景开发]({{ site.baseurl }}{% post_url /getting-started/2018-01-02-coding-scenes %}) 。
 
 
 ## 场景示例
 
 <div class="examples">
-  <a target="_blank" href="https://github.com/decentraland/sample-scene-script">
+  <a target="_blank" href="https://github.com/decentraland-scenes/Hypno-wheels">
     <div>
-      <img src="/images/home/door.png"/>
-      <span>Door scene</span>
+      <img src="/images/home/example-hypno-wheel.png"/>
+      <span>Hypno wheels</span>
     </div>
   </a>
-  <a target="_blank" href="https://github.com/decentraland/sample-scene-array-of-entities">
+  <a target="_blank" href="https://github.com/decentraland-scenes/Hummingbirds">
     <div>
       <img src="/images/home/hummingbirds.png"/>
       <span>Hummingbirds</span>
     </div>
   </a>
-  <a target="_blank" href="https://github.com/decentraland/sample-scene-Block-Dog">
+  <a target="_blank" href="https://github.com/decentraland-scenes/Gnark-patrol">
     <div>
-      <img src="/images/home/blockdog.png"/>
-      <span>BlockDog</span>
+      <img src="/images/home/example-gnark.png"/>
+      <span>Gnark patrolling</span>
     </div>
   </a>
 </div>
@@ -158,6 +181,5 @@ export default class SampleScene extends DCL.ScriptableScene {
 ## 其他有用的信息
 
 - [游戏设计限制]({{ site.baseurl }}{% post_url /design-experience/2018-01-08-design-games %})
-- [TypeScript 开发技巧]({{ site.baseurl }}{% post_url /development-guide/2018-01-08-typescript-tips %})
 - [3D 模型考虑因素]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})
 - [场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})

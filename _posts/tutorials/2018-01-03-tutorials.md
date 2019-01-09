@@ -1,7 +1,7 @@
 ---
 date: 2018-01-06
-title: 教程
-description: 有关如何在 Decentraland 创建场景的博客文章
+title: Tutorials
+description: Blogposts walking you through how to create scenes in Decentraland.
 categories:
   - examples
 type: Document
@@ -9,6 +9,9 @@ set: tutorials
 set_order: 2
 ---
 
+Coming soon!
+
+<!--
 ## Simple interactive scene
 
 [Simple interactive scene](https://blog.decentraland.org/build-your-first-interactive-scene-using-the-sdk-5d6895ac78f0)
@@ -43,8 +46,9 @@ This blogpost describes the code of a "Simon Says" type game. This game is a goo
 
 This blogpost walks you through importing the logic of an existing 2D game built with Redux into a Decentraland scene.
 
-## 从场景调用 API
+## Call an API from a scene
 
- [Weather from an API](https://blog.decentraland.org/developer-tutorial-simulate-weather-in-decentraland-using-real-world-data-eb1162716d5b)
+[Weather from an API](https://blog.decentraland.org/developer-tutorial-simulate-weather-in-decentraland-using-real-world-data-eb1162716d5b)
 
-此博客文章介绍了如何从场景中调用天气 API 并据此显示不同的天气。
+This blogpost explains how to call a weather API from your scene to display different weather conditions based on that.
+-->

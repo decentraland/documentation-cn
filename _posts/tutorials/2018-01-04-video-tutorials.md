@@ -9,12 +9,15 @@ set: tutorials
 set_order: 3
 ---
 
+More coming soon!
+
+<!--
 ## 简单的互动场景
 
 这个简单的教程将引导您创建一个简单的场景，并且用户的点击可以使实体旋转。
 
 {%  include youtube.html video_id='OtkrvHOHIDg'  %}
-
+-->
 ## 在 Decentraland 中使用 3D 模型
 
 #### 将预定义动画添加到 3D 模型
@@ -39,6 +42,7 @@ set_order: 3
 
 {%  include youtube.html video_id='UrByRRwfGjY'  %}
 
+<!--
 ## Decentraland 场景中的高级编码
 
 #### 点唱机
@@ -93,3 +97,4 @@ set_order: 3
 本教程包含有配合视频的[书面指南](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-dog-cat-mouse-cheese-using-a-fsm)。
 
 {%  include youtube.html video_id='Ur9YyycvhEE'  %}
+-->
