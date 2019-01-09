@@ -8,7 +8,7 @@ categories:
   - getting-started
 type: Document
 set: getting-started
-set_order: 3
+set_order: 5
 tag: introduction
 ---
 
@@ -41,7 +41,7 @@ dcl start
 
 远程场景依赖外部服务器，存储场景的所有用户共享的状态，从而可以进行多人交互。
 
-要预览远程场景，必须首先在本地计算机中启动 WebSockets 服务器。
+预览远程场景的最简单方法是在本地运行服务器。
 
 在场景目录下运行以下 bash 命令：
 
@@ -52,7 +52,7 @@ npm install
 # npm will find your dependencies
 
 npm run build
-# npm will build the socket server
+# npm will build the server
 
 npm start
 # now the port is running
@@ -62,9 +62,9 @@ npm start
 
 检查场景中的 `scene.json` 文件是否设置了相同的 websocket 端口，否则请更改文件以使其与您正在运行的本地服务器端口相匹配。
 
-一旦 websocket 服务器启动并且场景正确指向它，就可以像启动本地场景一样启动预览。
+一旦服务器启动并且场景正确指向它，就可以像启动本地场景一样启动预览。
 
-从场景目录运行以下 bash 命令：
+回到场景目录运行以下 bash 命令：
 
 ```bash
 dcl start
@@ -86,8 +86,10 @@ dcl start
 
 - `--no-browser` 阻止预览打开新浏览器选项卡。
 - `--port` 分配一个特定的端口来运行场景。否则，它将使用任何可用的端口。
+- `--w` or `--no-watch` to not open watch for filesystem changes
+- `--c` or `--ci` To run the parcel previewer on a remote unix server
 
-> 要预览为早期版本 SDK 构建的旧场景，必须在项目中安装最新版本的`decentraland-api` 和 `decentraland-rpc` 包。 可以使用命令 `dcl -v` 检查 CLI 版本。
+> 要预览为早期版本 SDK 构建的旧场景，必须在项目中安装最新版本的`decentraland-ecs`。 可以使用命令 `dcl -v` 检查 CLI 版本。
 
 ## 场景预览的基本用法
 
@@ -95,7 +97,7 @@ dcl start
 
 查看预览时，可以按 Esc 键来释放鼠标，以正常使用。
 
-如果您的场景将消息输出到控制台（使用`console.log()`），您可以通过打开浏览器的 JavaScript 控制台来查看这些消息。例如，使用 Chrome 时，您可以通过“视图 > 开发者 > JavaScript控制台”来查看。
+如果您的场景将消息输出到控制台（使用 `log()`），您可以通过打开浏览器的 JavaScript 控制台来查看这些消息。例如，使用 Chrome 时，您可以通过“视图 > 开发者 > JavaScript控制台”来查看。
 
 预览的左上角会通知您以下内容：
 
@@ -138,13 +140,15 @@ dcl start
 
 如果实体位于或超出场景的限制，实体将红色闪烁以指示此种情况。场景中的任何内容都不能超出场景限制。场景在本地还可以渲染，但部署到 Decentraland 时会被阻止。
 
-您还可以在代码中添加 `console.log()` 和 `console.trace()` 命令，以便打印信息到 JavaScript 控制台。
+您还可以在代码中添加 `log()` 命令，以便打印信息到 JavaScript 控制台。
 
-在实时与场景交互时，您还可以使用开发人员工具菜单中的 `sources` 选项卡添加断点并暂停程序执行。
+You can also add `debugger` commands or use the `sources` tab in the developer tools menu to add breakpoints and pause execution while you interact with the scene in real time.
 
+<!---
 以下视频介绍了调试场景的不同方法：
 
 {%  include youtube.html video_id='UIJ_dGOFjKM'  %}
+-->
 
 ## 查看 collision 碰撞网格
 
@@ -152,7 +156,7 @@ dcl start
 
 ![](/images/media/collision-meshes.png)
 
-碰撞网格可以添加到外部 3D 建模工具（如 Blender）中的任何模型中。像房屋这样的大型模型通常包括碰撞网格，它们通常比原始形状更为简单，因为这样可以减少计算要求。楼梯通常使用简化的碰撞网格，如斜坡，便于攀爬，要不玩家必须每一步都跳起来才能走上去。
+碰撞网格可以添加到外部 3D 建模工具（如 Blender）中的任何模型中。像房屋这样的大型模型通常包括碰撞网格，它们通常比原始形状更为简单，因为这样可以减少计算要求。楼梯通常使用简化的碰撞网格，如斜坡，便于攀爬。更多细节，请查看 [外部 3D 模型]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}) 。
 
 ## 查看边界框
 

@@ -6,7 +6,7 @@ categories:
   - blockchain-interactions
 type: Document
 set: blockchain-interactions
-set_order: 1
+set_order: 2
 ---
 
 区块链本质上是一个去中心化的数据库，它分布在网络中的各个计算机中。 所有交易按“块”进行分组，并按顺序处理形成一条_链_。

@@ -26,39 +26,15 @@ Decentraland CLI 通过 [npm](https://www.npmjs.com/get-npm?utm_source=house&utm
 * [Node.js](https://github.com/decentraland/cli#nodejs-installation) (version 8)
 * [Python 2.7.x](https://www.python.org/downloads/)
 
-## 在 Mac OS 上安装 CLI
+## 安装 CLI
 
-在 Mac OS上，打开终端应用并运行以下命令：
+打开 _Terminal_ 应用并运行以下命令：
 
 ```bash
 npm install -g decentraland
 ```
 
 安装完成后，即可全局使用 `dcl` 命令。
-
-## 在 Linux 上安装 CLI
-
-
-如果要在基于 Linux 的操作系统上安装 CLI，请运行
-
-```bash
-npm i -g --unsafe-perm decentraland
-```
-
-安装完成后，就可全局使用 `dcl` 命令。
-
-## 在 Windows 上安装 CLI
-
-1. 找到命令提示符应用并选择 **以管理员身份运行**
-
-2. 运行以下命令安装 windows-build-tools：
-`npm install --global --production windows-build-tools`
-...等 Visual Studio Build Tools 和 Python 安装程序都显示 “Successfully installed xxxx”。成功安装后，您将返回到命令提示符。
-
-3. 运行以下命令安装 CLI ：
-`npm install -g decentraland`
-
-安装完成后，就可全局使用 `dcl` 命令。
 
 #### 可选：安装 Git
 
@@ -90,11 +66,13 @@ npm update -g decentraland
 
 通过更新 CLI，您用它新创建的场景将使用最新版本的 SDK。在更新 CLI 之前创建的项目将继续使用创建它们时所用的 SDK 版本。更升级，唯一方法是手动更新场景中的 SDK 版本。
 
+> Note: To migrate from versions that are older than 5.0 to 5.0 or newer, you're going to have to create a new scene project and migrate content manually.
+
 更新 Decentraland SDK 版本：
 
 1. 在场景文件夹中打开文件 _package-lock.json_。
-2. 查找正在使用的 _decentraland-api_ （旧版本上是 _metaverse_api_） 版本，并手动将其更改为最新版本的 SDK。
+2. 查找正在使用的 _decentraland-ecs_ 版本，并手动将其更改为最新版本的 SDK。
 
-> 提示：如果您不确定最新版本是哪个，请查看[发行说明]{{ site.baseurl }}{% post_url /releases/sdk/2018-01-01-4.0.0 %})。
+> 提示：如果您不确定最新版本是哪个，请查看发行说明。
 
->注意：使用 `npm` 查看已安装的 SDK 版本有可能跟预览场景时使用的 SDK 版本不一致。要了解所使用的版本的唯一方法是查看 _package-lock.json_ 文件。
+> 注意：使用 `npm` 查看已安装的 SDK 版本有可能跟预览特定场景时使用的 SDK 版本不一致。要了解所使用的版本的唯一方法是查看 _package-lock.json_ 文件。

@@ -13,7 +13,7 @@ set_order: 9
 
 3D 模型以 glTF 格式导入到 decentraland 中。这些模型可以包含许多支持的功能。本节介绍如何使它们与Decentraland 兼容及最佳实践。
 
-有关如何在 Decentraland 场景中配置 3D 模型的位置，比例，激活动画等的信息，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
+有关如何在 Decentraland 场景中配置 3D 模型的位置、缩放等的信息，请参阅[实体位置]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %})。
 
 请记住，所有模型，着色器和纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})的参数范围内。
 
@@ -123,8 +123,6 @@ glTF 提供了一组更强大的功能，包括：
 
 ![](/images/media/materials_pbr_basic.png)  
 
-请参阅 [实体接口]({{ site.baseurl }}{% post_url /development-guide/2018-06-21-entity-interfaces %}) 查看材质可以配置的所有属性列表
-
 #### 透明和发光材料
 
 您可以将材质设置为 _transparent 透明_。 透明的程序取决于 _alpha_ 设置。为此，请设置材质的透明属性，然后将其 _alpha_ 设置为所需的量。_alpha_ 设为 1 将使材料完全不透明，0 的将会完全透明而不可见。
@@ -146,7 +144,7 @@ There are different kinds of textures you can use in a 3D model:
 - albedo textures: don't use light
 - alpha textures: determine only the transparency regions and its degree
 - bump texture: Stores surface normal data used to displace a mesh in a texture. Used with BPR.
-- emisiveTexture
+- emissiveTexture
 - refractionTexture
 
 
@@ -313,7 +311,7 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 关于动画必须具有的名称没有具体规则。您可以通过使用文本编辑器打开 _.gltf_ 文件的内容来验证导出模型中动画的名称。通常，动画名称由其 armature 名称，下划线及其动画名称组成。例如`myArmature_animation1`。
 
-您可以在 _glTF 模型中包含任意数量的动画。在将模型加载到 Decentraland 场景时，默认情况下，_glTF_ 模型中的所有动画都是不可用的。有关如何激活和处理场景中动画的说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
+您可以在 _glTF 模型中包含任意数量的动画。在将模型加载到 Decentraland 场景时，默认情况下，_glTF_ 模型中的所有动画都是不可用的。有关如何激活和处理场景中动画的说明，请参阅[3D 模型动画]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %})。
 
 > 注意：目前无法更改场景中显示的动画的帧速率，速度固定为默认设置。要更改动画的速度，您必须更改帧数。
 
@@ -369,7 +367,7 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 <img src="/images/media/blender-nla-editor2.png" alt="Stash actions into glTF model" width="600"/>
 
-将模型添加到 Decentraland 场景时，必须通过配置 _gltf-model_ 实体来激活动画。 有关说明，请参阅[场景内容指南]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})。
+将模型添加到 Decentraland 场景时，必须通过配置 _gltf-model_ 实体来激活动画。 有关说明，请参阅[3D 模型动画]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %})。
 
 #### 动画的最佳实践
 

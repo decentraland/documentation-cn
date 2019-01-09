@@ -56,10 +56,6 @@ set_order: 4
 
 TypeScript 是 JavaScript 的一个超集，因此如果您熟悉 JavaScript，您会发现它们几乎相同，但是 TypeScript 允许您使用面向对象的编程和类型声明。自动完成和类型检查等功能可以加快开发时间，并能创建可靠的代码库。这些功能是优秀的开发体验的关键组成部分。
 
-<!--
-See [TypeScript tips]({{ site.baseurl }}{% post_url /development-guide/2018-01-08-typescript-tips %}) for best practices and recommendations for writing Decentraland scenes using TypeScript.
--->
-
 #### XML
 
 对于仅呈现静态内容且不具有交互性的场景，可以使用 [XML](https://en.wikipedia.org/wiki/XML)。学习和使用 XML 会比较容易。
