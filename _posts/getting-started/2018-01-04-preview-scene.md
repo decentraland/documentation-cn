@@ -89,7 +89,7 @@ dcl start
 - `--w` or `--no-watch` to not open watch for filesystem changes
 - `--c` or `--ci` To run the parcel previewer on a remote unix server
 
-> 要预览为早期版本 SDK 构建的旧场景，必须在项目中安装最新版本的`decentraland-ecs`。 可以使用命令 `dcl -v` 检查 CLI 版本。
+> 要预览使用早期版本 SDK 构建的场景，必须在项目中安装最新版本的`decentraland-ecs`。 可以使用命令 `dcl -v` 检查 CLI 版本。
 
 ## 场景预览的基本用法
 
@@ -142,7 +142,7 @@ dcl start
 
 您还可以在代码中添加 `log()` 命令，以便打印信息到 JavaScript 控制台。
 
-You can also add `debugger` commands or use the `sources` tab in the developer tools menu to add breakpoints and pause execution while you interact with the scene in real time.
+在您实时与场景交互时，您还可以添加 `debugger` 命令或使用开发人员工具菜单中的 `sources` 选项卡来添加断点暂停执行。
 
 <!---
 以下视频介绍了调试场景的不同方法：
