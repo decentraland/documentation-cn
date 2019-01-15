@@ -1,7 +1,7 @@
 ---
 date: 2018-01-06
-title: 场景示例
-description: 使用 SDK 的一些代码和示例
+title: Sample scenes
+description: Code and scene examples using our SDK
 categories:
   - examples
 type: Document
@@ -9,144 +9,235 @@ set: examples
 set_order: 1
 ---
 
-为了帮助您快速入门，并阐明可以使用 SDK 构建的各种体验类型，我们将一些代码和场景示例放在一起。
+To get you up and running, and to illustrate what kind of experiences you can build using the SDK, we’ve put together some code and scene examples.
 
-其中一些场景具有指向部署在远程服务器上的场景版本的链接。 你可以在那里与它进行交互，就像你在本地运行 `dcl start` 一样。
+Some of these scenes feature a link to a version of the scene that's deployed on a remote server. There you can interact with it just as if you were running `dcl start` locally.
 
-## 初级示例
+## Static XML Scenes
 
-### 静态场景
+#### Static XML Scene
 
-这是个完全静态的场景示例。用来展示如何使用 blender 或 [Sketchfab](https://sketchfab.com/) 等资源构建您的第一个静态 Decentraland 场景。
+A completely static scene. It's built entirely using XML, which makes it easier to write and edit, but doesn't support any changes over time or interactions with the user.
 
-[Code](https://github.com/decentraland/sample-scene-static)
-
-[查看场景](https://dcl-project-aobsbnmsdl.now.sh/?position=0%2C-1)
-
-### 动态动画
-
-通过此动态动画，我们演示了如何将简单的数据绑定到场景中的对象中。[移动，旋转和缩放]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})等属性都可以绑定到状态属性中。
-
-[Code](https://github.com/decentraland/sample-scene-dynamic-animation)
-
-[查看场景](https://dcl-project-fkmccoyvhb.now.sh/?position=0%2C-1)
-
-### 交互式内容
-
-这个简单的示例场景展示了一个可以打开和关闭的门。单击门会产生一个 [event 事件]({{ site.baseurl }}{% post_url /development-guide/2018-01-03-event-handling %})，来更改场景的状态。场景的状态然后改变门的旋转度，由于使用了 transition 过渡效果，门会平稳旋转。
-
-[Code](https://github.com/decentraland/sample-scene-script)
-
-[查看场景](https://dcl-project-inksbqgcjj.now.sh/?position=-41%2C-113)
-
-### 骨骼动画
-
-在场景中，您可以加载交互式 [GLTF 模型]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})并触发其动画。这是如何做到这一点的一个例子。
-
-[Code](https://github.com/decentraland/sample-scene-skeletal-animation)
-
-[查看场景](https://dcl-project-tiroqwvfop.now.sh/?position=0%2C1)
-
-## 静态 XML 场景
-
-#### 静态 XML 场景
-
-这是完全静态场景的示例。它完全使用 XML 构建，这使得编写和编辑更容易，但不支持与用户的任何交互。
+![](/images/media/example-static.png)
 
 [Code](https://github.com/decentraland/sample-scene-static-xml)
 
-## 多媒体
 
-### 声音支持
+## Essentials
 
-这个例子的特点是一个发出[声音]({{ site.baseurl }}{% post_url /development-guide/2018-01-21-scene-content %})的实体，注意音量是如何随着距离的增加而减小的。它还包括一个动态的 GLTF 对象和一个随机改变颜色的地板。
+#### Hypno wheels
 
-[Code](https://github.com/decentraland/sample-scene-sound-support)
+This simple scene features a couple of wheels that you can spin by clicking them. 
 
-[查看场景](https://dcl-project-lolxizhsmy.now.sh/?position=-1%2C-1)
+- rotate an entity
+- glTF models
+- click events
+- textures
+- custom components 
+- component groups
 
-#### 点唱机：按钮和声音
+![](/images/media/example-hypno-wheel.png)
 
-这个例子，在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-creating-a-music-jukebox)中有更详细的描述，你可以操作点唱机。每个按钮播放不同的歌曲。按钮是动画的，点击一个按钮会取消之前点击的其他按钮。
-[Code](https://github.com/decentraland/sample-scene-jukebox)
+[Code](https://github.com/decentraland-scenes/Hypno-wheels)
 
-[查看场景](https://dcl-project-nvahvjzeiz.now.sh/?position=42%2C42)
+[Explore the scene]()
 
-#### 视频支持
+#### Shark animation
 
-在此示例中，您可以与两个视频播放器进行交互。一个将视频加载到场景的资源中，另一个使用外部源来加载。您还可以暂停、停止和更改视频播放器的音量。
+This simple scene shows how to add animations to a `GLTFComponent` and handle click events.
 
-[Code](https://github.com/decentraland/sample-scene-video-support)
+- glTF models
+- animations
+- click events
 
-[查看场景](https://dcl-project-ffueiuubku.now.sh/?position=0%2C-1)
+![](/images/media/example-shark-animation.png)
+
+[Code](https://github.com/decentraland-scenes/Shark-animation)
+
+[Explore the scene]()
+
+#### Open the door
+
+A simple interactive scene with a door that can be opened and closed.
+
+- `Slerp()` function for rotation
+- click events
+- materials
+- parent entities
+- custom components 
+- component groups
+
+![](/images/home/door.png)
+
+[Code](https://github.com/decentraland-scenes/Open-door)
+
+[Explore the scene]()
+
+#### Sliding door
+
+A simple interactive scene with a two-sided door that can be opened by clicking.
+
+- `Lerp()` function for moving
+- click events
+- materials
+- parent entities
+- custom components 
+- component groups
+
+![](/images/media/example-sliding-doors.png)
+
+[Code](https://github.com/decentraland-scenes/Sliding-door)
+
+[Explore the scene]()
+
+#### Jukebox
+
+A scene where you can play different songs by pressing buttons on a jukebox.
+
+- audio
+- glTF models
+- `Lerp()` function for moving
+- click events
+- materials
+- parent entities
+- custom components 
+- component groups
+
+![](/images/media/example-jukebox.png)
+
+[Code](https://github.com/decentraland-scenes/Jukebox)
+
+[Explore the scene]()
 
 
-## 远程场景
+#### Dance floor
+A scene with animations, sound, and tiles on the floor that randomly change color to the beat.
 
-#### 多人游戏
+- audio
+- glTF models
+- animations
+- materials
+- custom components 
+- component groups
 
-一个基于初级示例中门的例子，您可以通过打开和关闭门来与门互动，而另一个玩家则在同一个房间，可以看到门状态的改变。构建这个简单的示例是为了让您了解多用户环境是如何工作的，其中有多个用户与同一实体交互。
+![](/images/media/example-dance-floor.png)
 
-[Code](https://github.com/decentraland/sample-scene-server)
+[Code](https://github.com/decentraland-scenes/Dance-floor)
 
-[查看场景](https://dcl-project-fprfrtlboa.now.sh/?position=0%2C0)
+[Explore the scene]()
 
-注：类似的例子在[博客](https://blog.decentraland.org/sdk-highlight-building-an-underwater-landscape-5bfcce73ff35)中有更详细的讨论。
+#### Memory game
 
-#### 塔防游戏
+A Simon Says game, with click interactions and sequenced actions. The game generates a random sequence of colors and you must click buttons to match those.
 
-这个例子在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-a-simple-tower-defense-game)中有更详细的描述，它展示了一个简单的塔防游戏。游戏生成随机路径，并沿着该路径在随机位置放置陷阱。然后生成的敌人实体并沿此路径杀过来，除非您激活陷阱阻止。该游戏支持多个玩家，有一个记分牌和一个重置按钮，可以随时重启游戏。
+- glTF models
+- materials
+- click events
+- custom components 
+- component groups
 
-[代码](https://github.com/decentraland/sample-scene-tower-defense-game)
+![](/images/media/example-memory-game.png)
 
-[查看场景](https://dcl-project-iavfhvaswv.now.sh/?position=0%2C-1)
 
-## 中级示例
+[Code](https://github.com/decentraland-scenes/Memory-game)
 
-#### 动态实体数量
+[Explore the scene]()
 
-这个例子中，在 [博客](https://blog.decentraland.org/developer-tutorial-creating-a-dynamic-flock-of-hummingbirds-8c2cd41f8296) 中有更详细的描述，每次点击树都会有一只新的鸟出现并开始在场景中随机飞行。这是如何从数组构建多个实体以及如何处理 3D 模型动画的一个很好的示例。
+## Movement
 
-[Code](https://github.com/decentraland/sample-scene-array-of-entities/blob/master/README.md)
+#### Hummingbirds
 
-[查看场景](https://dcl-project-xdoolmuwqt.now.sh/?position=0%2C-1)
+A scene where hummingbirds spawn when you click a tree. Each bird moves on its own to random positions.
 
-#### 简单记忆游戏
+![](/images/home/hummingbirds.png)
 
-在这个例子中，在[博客](https://blog.decentraland.org/building-a-memory-game-using-decentralands-sdk-87ee35968f8d)中有更详细的描述，你玩的是一个“西蒙说”的游戏。这个游戏是如何将更复杂的逻辑添加到场景中以及如何根据用户与其交互方式更改其状态的一个很好的示例。
+[Code](https://github.com/decentraland-scenes/Hummingbirds)
 
-[Code](https://github.com/decentraland/sample-scene-memory-game)
+[Explore the scene]()
 
-[查看场景](https://dcl-project-asliohkpyt.now.sh/?position=0%2C0)
+#### Gnark patrolling
 
-<!--
-#### 付款使用
+A scene that shows a character walking along a fixed path, using lerp over each segment of the path. If you approach it, it will switch to yelling at you.
 
-这是个基于初级示例中的门的例子，你只有支付 10 MANA 到特定的钱包，你才能打开这个门。这个示例展示了如何使用 SDK 来跟踪区块链交易。
+![](/images/media/example-gnark.png)
 
-[Code](https://github.com/decentraland/sample-scene-payments)
--->
+[Code](https://github.com/decentraland-scenes/Gnark-patrol)
 
-## 高级示例
+[Explore the scene]()
+
+
+## Network connections
+
+#### Weather simulation
+
+A scene that checks a weather API for the weather in a location and displays that weather condition, showing rain, thunder or snowflakes
+Use real weather data from different locations by changing the coordinates, or change the value of the “fakeWeather” variable to see different weather conditions manifest.
+
+- Call external REST API
+
+![](/images/media/example-weather.png)
+
+[Code](https://github.com/decentraland-scenes/Weather-simulation)
+
+[Explore the scene]()
+
+#### Remote door
+
+A scene that uses a server and a REST API to sync a scene state amongst multiple users. It’s built around the basic “open the door” example.
+
+- Create a REST server
+- Call REST API
+
+![](/images/home/door.png)
+
+[Code](https://github.com/decentraland-scenes/Remote-door)
+
+[Explore the scene]()
+
+
+#### Remote mural
+
+A scene that uses a server and a REST API to sync a scene state amongst multiple users. You can paint pixels in a mural that other users can see. The colors of each pixel are stored in a remote server.
+
+- Create a REST server
+- Call REST API
+
+![](/images/media/example-remote-mural.png)
+
+
+[Code](https://github.com/decentraland-scenes/Remote-mural)
+
+[Explore the scene]()
+
+## Advanced
 
 #### Block Dog
 
-这个例子在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-basic-ai-with-block-dog)中有更详细的描述，你可以控制一只宠物狗。 狗有自己的随机地自主行为。它也会跟着你走来走去，点击会做坐下，当你点击碗时就会去喝水。
+A scene with a simple AI character. It randomly chooses what action to take: follow you, sit or remain idle. You can also tell it to sit or stand up by clicking it, or tell it to drink water by clicking its bowl.
 
-[Code](https://github.com/decentraland/sample-scene-Block-Dog)
+![](/images/home/blockdog.png)
 
-[查看场景](https://dcl-project-yffwbatldi.now.sh/?position=42%2C42)
+[Code](https://github.com/decentraland-scenes/Block-dog)
 
-#### 国际象棋游戏
+[Explore the scene]()
 
-这个例子在[博客](https://blog.decentraland.org/developer-tutorial-port-a-redux-chess-game-to-decentraland-49f509b2eba6)中有更详细的描述，取自现有的 2D 国际象棋游戏，然后在 decentraland 3D 场景中构建。只有在两个玩家接受加入游戏，游戏才会开始，并且每个玩家只有在轮到他们时才能与场景互动。
+#### Tower defense game (WIP)
 
-[Code](https://github.com/cazala/decentraland-redux-chess-app)
+A fully-fledged game where a random 2d path is generated along which enemies walk, and where traps are randomly placed. You need to activate the traps as the enemies advance along the path to kill them. It’s all about timing.
 
-#### 狗、猫、老鼠和奶酪
+![](/images/media/example-tower-defense.png)
 
-这个例子，在[视频教程](https://steemit.com/tutorial/@hardlydifficult/decentraland-tutorial-dog-cat-mouse-cheese-using-a-fsm)中有更详细的描述，展示了如何构建一个更复杂的场景，包括捕食者和猎物，它们可以在老鼠、猫或狗中互换。每只动物都有一个基于堆栈的有限状态机（FSM）来管理它的 AI。 每只动物都使用 a\* 路径算法来绕过障碍物和其他动物。
+[Code](https://github.com/decentraland-scenes/Tower-defense)
 
-[Code](https://github.com/decentraland/sample-scene-dog-cat-mouse-cheese)
+[Explore the scene]()
 
-[查看场景](https://dcl-project-bfvkjmdtyf.now.sh/?position=42%2C43)
+#### Castaway 2048 (WIP)
+
+A fully fledged game, based on the popular game 2048, where the values are represented by a series of gems of increasing values. Click and drag to displace the gems on the board and merge them into greater values till you reach 2048.
+
+![](/images/media/example-2048.png)
+
+[Code](https://github.com/decentraland-scenes/Castaway-2048)
+
+[Explore the scene]()

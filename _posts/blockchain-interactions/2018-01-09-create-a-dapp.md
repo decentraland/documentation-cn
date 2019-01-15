@@ -6,7 +6,7 @@ categories:
   - blockchain-interactions
 type: Document
 set: blockchain-interactions
-set_order: 9
+set_order: 20
 ---
 
 您可以创建自己的去中心化应用程序（dApps），来与 Decentraland 智能合约交互，从而使得功能实现更为精巧并更加用户友好。
