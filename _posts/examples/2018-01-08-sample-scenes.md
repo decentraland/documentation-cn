@@ -71,7 +71,6 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Open-door)
 
-[浏览场景]()
 
 #### 滑行门
 
@@ -139,7 +138,6 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Memory-game)
 
-[浏览场景]()
 
 ## 动作
 
@@ -190,7 +188,6 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Remote-door)
 
-[浏览场景]()
 
 #### 壁画
 
@@ -204,7 +201,6 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Remote-mural)
 
-[浏览场景]()
 
 ## 高级示例
 
@@ -226,7 +222,6 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Tower-defense)
 
-[浏览场景]()
 
 #### Castaway 2048（WIP）
 
@@ -235,5 +230,3 @@ set_order: 1
 ![](/images/media/example-2048.png)
 
 [代码](https://github.com/decentraland-scenes/Castaway-2048)
-
-[浏览场景]()
