@@ -1,7 +1,7 @@
 ---
 date: 2018-01-06
-title: Sample scenes
-description: Code and scene examples using our SDK
+title: 场景示例
+description: SDK 开发代码和场景示例
 categories:
   - examples
 type: Document
@@ -9,235 +9,231 @@ set: examples
 set_order: 1
 ---
 
-To get you up and running, and to illustrate what kind of experiences you can build using the SDK, we’ve put together some code and scene examples.
+为了帮助您快速入门，以及说明可以使用 SDK 构建的体验类型，我们将一些代码和场景示例放在这里。
 
-Some of these scenes feature a link to a version of the scene that's deployed on a remote server. There you can interact with it just as if you were running `dcl start` locally.
+其中一些场景还有部署在远程服务器上的链接。 点击后可以直接交互，就像在本地运行 `dcl start` 一样。
 
-## Static XML Scenes
+## 静态 XML 场景
 
-#### Static XML Scene
+#### 静态 XML 场景
 
-A completely static scene. It's built entirely using XML, which makes it easier to write and edit, but doesn't support any changes over time or interactions with the user.
+完全静态的场景。 使用 XML 构建，容易编写和编辑，但不支持随时间的任何变化或与用户的交互。
 
 ![](/images/media/example-static.png)
 
-[Code](https://github.com/decentraland/sample-scene-static-xml)
+[代码](https://github.com/decentraland/sample-scene-static-xml)
 
+## 基础
 
-## Essentials
+#### 催眠轮
 
-#### Hypno wheels
+这个简单的场景有几个轮子，可以点击让它们旋转。
 
-This simple scene features a couple of wheels that you can spin by clicking them. 
-
-- rotate an entity
-- glTF models
-- click events
-- textures
-- custom components 
-- component groups
+ - 旋转实体
+ - glTF 模型
+ - 点击事件
+ - 纹理
+ - 自定义组件
+ - 组件组
 
 ![](/images/media/example-hypno-wheel.png)
 
-[Code](https://github.com/decentraland-scenes/Hypno-wheels)
+[代码](https://github.com/decentraland-scenes/Hypno-wheels)
 
-[Explore the scene]()
+[浏览场景](https://hypno-wheels-owyfnqfimw.now.sh/?position=0%2C-1)
 
-#### Shark animation
+#### 动画鲨鱼
 
-This simple scene shows how to add animations to a `GLTFComponent` and handle click events.
+介绍了如何将动画添加到 `GLTFComponent` 并处理单击事件。
 
-- glTF models
-- animations
-- click events
+ - glTF 模型
+ - 动画
+ - 点击事件
 
 ![](/images/media/example-shark-animation.png)
 
-[Code](https://github.com/decentraland-scenes/Shark-animation)
+[代码](https://github.com/decentraland-scenes/Shark-animation)
 
-[Explore the scene]()
+[浏览场景](https://shark-animation-xriykgapld.now.sh/)
 
-#### Open the door
+#### 可打开的门
 
-A simple interactive scene with a door that can be opened and closed.
+一个简单的交互式场景，可以打开和关闭一扇门。
 
-- `Slerp()` function for rotation
-- click events
-- materials
-- parent entities
-- custom components 
-- component groups
+ - `Slerp()` 旋转功能
+ - 点击事件
+ - 材质
+ - 父实体
+ - 自定义组件
+ - 组件组
 
 ![](/images/home/door.png)
 
-[Code](https://github.com/decentraland-scenes/Open-door)
+[代码](https://github.com/decentraland-scenes/Open-door)
 
-[Explore the scene]()
+[浏览场景]()
 
-#### Sliding door
+#### 滑行门
 
-A simple interactive scene with a two-sided door that can be opened by clicking.
+带有双面门的简单交互式场景，可通过单击打开。
 
-- `Lerp()` function for moving
-- click events
-- materials
-- parent entities
-- custom components 
-- component groups
+ - `Lerp()` 移动功能
+ - 点击事件
+ - 材质
+ - 父实体
+ - 自定义组件
+ - 组件组
 
 ![](/images/media/example-sliding-doors.png)
 
-[Code](https://github.com/decentraland-scenes/Sliding-door)
+[代码](https://github.com/decentraland-scenes/Sliding-door)
 
-[Explore the scene]()
+[浏览场景](https://slidingdoor-fmydyuprjl.now.sh)
 
-#### Jukebox
+#### 点唱机
 
-A scene where you can play different songs by pressing buttons on a jukebox.
+一个通过按钮可以播放不同歌曲的场景。
 
-- audio
-- glTF models
-- `Lerp()` function for moving
-- click events
-- materials
-- parent entities
-- custom components 
-- component groups
+ - 音频
+ - glTF 模型
+ - `Lerp()` 移动功能
+ - 点击事件
+ - 材质
+ - 父实体
+ - 自定义组件
+ - 组件组
 
 ![](/images/media/example-jukebox.png)
 
-[Code](https://github.com/decentraland-scenes/Jukebox)
+[代码](https://github.com/decentraland-scenes/Jukebox)
 
-[Explore the scene]()
+[浏览场景]()
 
+#### 舞池
+一个有动画、声音和的变色地板的场景，地板会根据节拍随机改变颜色。
 
-#### Dance floor
-A scene with animations, sound, and tiles on the floor that randomly change color to the beat.
-
-- audio
-- glTF models
-- animations
-- materials
-- custom components 
-- component groups
+ - 音频
+ - glTF 模型
+ - 动画
+ - 材质
+ - 自定义组件
+ - 组件组
 
 ![](/images/media/example-dance-floor.png)
 
-[Code](https://github.com/decentraland-scenes/Dance-floor)
+[代码](https://github.com/decentraland-scenes/Dance-floor)
 
-[Explore the scene]()
+[浏览场景]()
 
-#### Memory game
+#### 记忆游戏
 
-A Simon Says game, with click interactions and sequenced actions. The game generates a random sequence of colors and you must click buttons to match those.
+一个“西蒙说”游戏，通过点击顺序互动。 游戏会生成随机的颜色序列，您必须单击匹配的相应按钮。
 
-- glTF models
-- materials
-- click events
-- custom components 
-- component groups
+ - glTF 模型
+ - 材质
+ - 点击事件
+ - 自定义组件
+ - 组件组
 
 ![](/images/media/example-memory-game.png)
 
+[代码](https://github.com/decentraland-scenes/Memory-game)
 
-[Code](https://github.com/decentraland-scenes/Memory-game)
+[浏览场景]()
 
-[Explore the scene]()
+## 动作
 
-## Movement
+#### 蜂鸟
 
-#### Hummingbirds
-
-A scene where hummingbirds spawn when you click a tree. Each bird moves on its own to random positions.
+单击树会生成蜂鸟。 每只鸟自己随机移动位置。
 
 ![](/images/home/hummingbirds.png)
 
-[Code](https://github.com/decentraland-scenes/Hummingbirds)
+[代码](https://github.com/decentraland-scenes/Hummingbirds)
 
-[Explore the scene]()
+[浏览场景](https://hummingbirds-ujovmbtmui.now.sh/)
 
-#### Gnark patrolling
+#### 巡逻的 Gnark
 
-A scene that shows a character walking along a fixed path, using lerp over each segment of the path. If you approach it, it will switch to yelling at you.
+一个沿着固定路径行走的角色，在路径上使用了 lerp 线性插值。 如果你接近它，它会转向对你大喊大叫。
 
 ![](/images/media/example-gnark.png)
 
-[Code](https://github.com/decentraland-scenes/Gnark-patrol)
+[代码](https://github.com/decentraland-scenes/Gnark-patrol)
 
-[Explore the scene]()
+[浏览场景](https://gnark-patrol-azhbtehsge.now.sh/)
 
 
-## Network connections
+## 网络联接
 
-#### Weather simulation
+#### 天气模拟
 
-A scene that checks a weather API for the weather in a location and displays that weather condition, showing rain, thunder or snowflakes
-Use real weather data from different locations by changing the coordinates, or change the value of the “fakeWeather” variable to see different weather conditions manifest.
+根据天气 API 及位置，显示天气状况，如下雨、打雷或下雪
+通过更改坐标来使用来自不同位置的真实天气数据，或更改 “fakeWeather” 变量的值以查看不同的天气状况。
 
-- Call external REST API
+- 调用 REST API
 
 ![](/images/media/example-weather.png)
 
-[Code](https://github.com/decentraland-scenes/Weather-simulation)
+[代码](https://github.com/decentraland-scenes/Weather-simulation)
 
-[Explore the scene]()
+[浏览场景](https://weather-yvahddfxgo.now.sh/)
 
-#### Remote door
+#### 一个支持多用户的门
 
-A scene that uses a server and a REST API to sync a scene state amongst multiple users. It’s built around the basic “open the door” example.
+使用服务器和 REST API 在多个用户之间同步场景状态。 基于“可打开的门”基础示例。
 
-- Create a REST server
-- Call REST API
+- 创建 REST 服务
+- 调用 REST API
 
 ![](/images/home/door.png)
 
-[Code](https://github.com/decentraland-scenes/Remote-door)
+[代码](https://github.com/decentraland-scenes/Remote-door)
 
-[Explore the scene]()
+[浏览场景]()
 
+#### 壁画
 
-#### Remote mural
+使用服务器和 REST API 在多个用户之间同步场景状态的场景。 您可以在壁画中绘制像素，同时其他用户也可以看到。 每个像素的颜色存储在远程服务器中。
 
-A scene that uses a server and a REST API to sync a scene state amongst multiple users. You can paint pixels in a mural that other users can see. The colors of each pixel are stored in a remote server.
-
-- Create a REST server
-- Call REST API
+- 创建 REST 服务
+- 调用 REST API
 
 ![](/images/media/example-remote-mural.png)
 
 
-[Code](https://github.com/decentraland-scenes/Remote-mural)
+[代码](https://github.com/decentraland-scenes/Remote-mural)
 
-[Explore the scene]()
+[浏览场景]()
 
-## Advanced
+## 高级示例
 
-#### Block Dog
+#### 狗
 
-A scene with a simple AI character. It randomly chooses what action to take: follow you, sit or remain idle. You can also tell it to sit or stand up by clicking it, or tell it to drink water by clicking its bowl.
+一个具有简单 AI 特征的场景。 它会随机选择要采取的行动：跟随你、坐下或保持闲置状态。 您也可以通过点击它来让它坐下或站起来，或者通过点击碗让它去喝水。
 
 ![](/images/home/blockdog.png)
 
-[Code](https://github.com/decentraland-scenes/Block-dog)
+[代码](https://github.com/decentraland-scenes/Block-dog)
 
-[Explore the scene]()
+[浏览场景](https://blockdog-wtciaozdbo.now.sh/?position=0%2C0)
 
-#### Tower defense game (WIP)
+#### 塔防游戏（WIP）
 
-A fully-fledged game where a random 2d path is generated along which enemies walk, and where traps are randomly placed. You need to activate the traps as the enemies advance along the path to kill them. It’s all about timing.
+一个完全成熟的游戏，会生成一个随机的 2d 路径，敌人会从那边过来，路径中会随机放置陷阱。 当敌人沿着路径过来时，需要激活陷阱，以杀死他们。 这是一个有关时间的场景。
 
 ![](/images/media/example-tower-defense.png)
 
-[Code](https://github.com/decentraland-scenes/Tower-defense)
+[代码](https://github.com/decentraland-scenes/Tower-defense)
 
-[Explore the scene]()
+[浏览场景]()
 
-#### Castaway 2048 (WIP)
+#### Castaway 2048（WIP）
 
-A fully fledged game, based on the popular game 2048, where the values are represented by a series of gems of increasing values. Click and drag to displace the gems on the board and merge them into greater values till you reach 2048.
+一款基于流行的游戏 2048 的完全成熟的游戏，由一系列增值的宝石代表成绩。 通过单击和拖放重新放置宝石将它们合并为更大的值，直到达到 2048。
 
 ![](/images/media/example-2048.png)
 
-[Code](https://github.com/decentraland-scenes/Castaway-2048)
+[代码](https://github.com/decentraland-scenes/Castaway-2048)
 
-[Explore the scene]()
+[浏览场景]()
