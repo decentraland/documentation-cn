@@ -1,7 +1,7 @@
 ---
 date: 2018-02-2
-title: Component groups
-description: Learn about how your scene keeps track of lists of entities that have components in common to make updating them easier.
+title: 组件组
+description: 如何在场景中跟踪具有相同组件的实体列表，以方便更新
 categories:
   - development-guide
 type: Document
@@ -9,43 +9,43 @@ set: development-guide
 set_order: 2
 ---
 
-Each component group keeps track of a list of entities that have all the required [components]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}). 
+组件组能够跟踪所有具有特定[组件]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %})的实体列表。
 
 ![](/images/media/ecs-big-picture-w-compgroup.png)
 
 
-The engine automatically updates this list every time that:
+在如下情形时，engine 引擎会自动更新列表：
 
-- A new entity is added to the engine
-- An entity is removed from the engine
-- An entity in the engine adds a new component
-- An entity in the engine removes a component
+- 向引擎添加新实体
+- 从引擎中删除实体
+- 向引擎中的实体添加新组件
+- 从引擎中的实体删除组件
 
-> Note: Only entities that are added to the engine are eligible for component groups. Entities that have been created but not added to the engine, or that have been removed from the engine, aren't listed in any group.
+> 注意：组件组只适用于添加到引擎的实体。 已创建但未添加到引擎的实体或已从引擎中删除的实体不会出现在组件组中。
 
-After the group is created, you don't need to add or remove entities manually from it, the engine takes care of that.
+创建组件组后，您无需手动添加或删除实体，引擎会负责处理。
 
 ```ts
 const myGroup = engine.getComponentGroup(Transform)
 ```
 
-[Systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) typically iterate over the entities in these groups in their update method, performing the same operations on each. Having a predefined group of valid entities is a great way to save resources, specially for functions that run on every frame like `update()`. If on every frame your system would have to iterate over every single entity in the scene looking for the ones it needs, that would be very time consuming.
+[系统]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %})通常在其更新方法中迭代这些组件组中的实体，对每个实体执行相同的操作。 拥有一组预定义的有效实体是节省资源的好方法，特别是对于像 `update()` 这样在每一帧上运行的函数。 如果在每个帧上系统必须在场景中的所有实体中寻找它需要的那个，那将会非常耗时。
 
-You can access the entities in a component group in the following way: if the group name is `myGroup`, calling `myGroup.entities` returns an array containing all the entities in it.
+您可以通过以下方式访问组件组中的实体：如果组名称为 `myGroup`，则调用 `myGroup.entities` 将返回包含其中所有实体的数组。
 
-> Note: Keep in mind that component groups take up space in the local memory of the user's machine. Usually, the benefit in speed you get from having a group is a tradeoff that is well worth it. However, for cases where you'd have a large group that you don't access all that often, it might be better to not have one.
+> 注意：请记住，组件组会占用用户计算机本地内存。 通常，从组件组中获得的速度好处是一个非常值得的权衡。 但是，如果您需要一个非常大的组却又不需要经常访问，那么最好不要建组。
 
-## Required components
+## 需要的组件
 
-When creating a component group, specify what components need to be present in every entity that's added to the group. You can list as many components as you want, the component group will only accept entities that have **all** of the listed components.
+创建组件组时，请指定添加到组中的每个实体需要存在的组件。 您可以根据需要选择任意数量的组件，组件组将只接受具有**所有**列出的组件的实体。
 
 ```ts
 const myGroup = engine.getComponentGroup(Transform, Physics, NextPosition)
 ```
 
-> Tip: If your scene includes several entities that have the same components, but you only want some of those in your component group, create a custom component to act as a [flag]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}#components-as-flags). This component doesn't need to have any properties in it. Add this component to the entities that you want the component group to handle.
+> 提示：如果您的场景包含多个具有相同组件的实体，但您只想要组件组中的一些实体，可以创建一个自定义组件作为[标记]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}#components-as-flags)。 该组件不需要包含任何属性。 只需将此组件添加到希望组件组处理的实体中。
 
-## Use component groups in a system
+## 在系统中使用组件组
 
 ```ts
 const myGroup = engine.getComponentGroup(Transform, Physics)
@@ -63,27 +63,27 @@ export class PhysicsSystem implements ISystem {
 }
 ```
 
-In the example above, `PhysicsSystem` iterates over the entities in `myGroup` as part of the `update()` function, that is executed on every frame of the game loop.
+在上面的例子中，在游戏循环的每一帧中，`PhysicsSystem` 都会执行 `update()` 函数，这个函数会遍历 `myGroup` 中的实体。
 
-- If the scene has several _ball_ entities, each with a `Position` and a `Physics` component, then they will be included in `myGroup`. `PhysicsSystem` will then update their position on every frame.
+- 如果场景有几个 _ball_ 实体，每个实体都有一个 `Position` 和一个 `Physics` 组件，那么它们将包含在 `myGroup` 中。 然后 `PhysicsSystem` 将在每一帧中更新它们的位置。
 
-- If your scene also has other entities like a _hoop_ and a _scoreBoard_ that only have a `Physics` component, then they won't be in `myGroup` and won't be affected by `PhysicsSystem`.
+- 如果你的场景还有其他实体，如 _hoop_ 和 _scoreBoard_ 只有一个 `Physics` 组件，那么它们不会在 `myGroup` 中，也不会受到 `PhysicsSystem` 的影响。
 
-## All entities
+## 所有实体
 
-You can access the full list of entities that have been added to the engine, regardless of what components they have, through `engine.entities`.
+您可以通过 `engine.entities` 得到已添加到引擎的所有实体，无论它们具有哪些组件。
 
 ```ts
 engine.entities
 ```
 
-## Change a component group while iterating
+## 在遍历时更改组件组
 
-Component groups are mutable. You shouldn't modify the component group while you're iterating over it, because that could have unwanted consequences.
+组件组是可变的。 在遍历组件组时，不应该修改组件组，因为这可能会产生意想不到的后果。
 
-For example, if you iterate over a component group to remove each entity from the engine, the act of removing an entity displaces the other entities in the array, which can lead to some entities being skipped.
+例如，如果迭代组件组以从引擎中删除每个实体，则删除实体的操作会重新定位阵列中的其他实体，可能导致某些实体没有被遍历。
 
-To overcome this problem, use the following code to remove all entities from the engine:
+要解决此问题，可以使用以下代码从引擎中删除所有实体：
 
 ```ts
 while (myGroup.entities.length) {
