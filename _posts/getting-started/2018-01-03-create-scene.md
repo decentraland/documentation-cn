@@ -37,9 +37,9 @@ npm install -g decentraland
 
 `dcl init` 命令在当前工作目录中创建包含一个 **场景** 的 Decentraland **项目**。
 
-> Tip: to create an [XML static scene]({{ site.baseurl }}{% post_url /development-guide/2018-01-13-xml-static-scenes %}), run instead `dcl init --boilerplate static`.
+> 提示：要创建[XML静态场景]({{ site.baseurl }}{% post_url /development-guide/2018-01-13-xml-static-scenes %})，请运行 `dcl init --boilerplatestatic`。
 
-The default scene is defined in a TypeScript file featuring an example with a door that can be opened. The scene features a basic state and handles click events.
+默认场景在 TypeScript 文件中定义，其中包含一个可以打开的门的示例。 场景具有基本状态并能处理点击事件。
 
 有关在场景中创建的默认文件的概述，请参阅[场景文件]({{ site.baseurl }}{% post_url /development-guide/2018-01-11-scene-files %})。
 
@@ -67,7 +67,7 @@ dcl start
 
 有关在场景预览中可以看到的内容以及如何运行远程场景预览的说明，请参阅[场景预览]({{ site.baseurl }}{% post_url /getting-started/2018-01-04-preview-scene %})。
 
-You can also deploy your scene to a third-party server by just running a command using the CLI. This is a great way to share your content with others, without them needing to install any of the development tools necessary to build the scene locally. See [Deploy to Now](({{ site.baseurl }}{% post_url /deploy/2018-01-01-deploy-to-now %})).
+您也可以通过使用 CLI 运行命令将场景部署到第三方服务器。这也是与他人共享场景的好方法，而无需安装任何本地构建场景所需的开发工具。 请参阅[Now 部署]({{ site.baseurl }}{% post_url /deploy/2018-01-01-deploy-to-now %})。
 
 ## 编辑你的场景
 

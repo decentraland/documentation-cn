@@ -1,7 +1,7 @@
 ---
 date: 2018-01-15
-title: Entities and components
-description: Learn the essentials about entities and components in a Decentraland scene
+title: 实体和组件
+description: Decentraland 场景中实体和组件的基本知识
 categories:
   - development-guide
 redirect_from:
@@ -17,32 +17,31 @@ set: development-guide
 set_order: 1
 ---
 
-Decentraland scenes are built around [_entities_, _components_ and _systems_](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system). This is a common pattern used the architecture of several game engines, that allows for easy composability and scalability.
+Decentraland 场景是基于[_entities（实体）_, _components（组件）_ 和 _systems（系统）_](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system)构建的。 这是很多游戏引擎架构常用的一种模式，可以轻松地实现可组合性和可扩展性。
 
 ![](/images/media/ecs-big-picture.png)
 
-## Overview
+## 概述
 
-_Entities_ are the basic unit for building everything in Decentraland scenes. All visible and invisible 3D objects and audio players in your scene will each be an entity. An entity is nothing more than a container that holds components. The entity itself has no properties or methods of its own, it simply groups several components together.
+_Entities（实体）_ 是 Decentraland 场景中所有内容的基本单位。 在场景中所有可见和不可见的 3D 对象和音频播放器都是实体。 实体不过是一个容纳组件的容器。 其本身没有自己的属性或方法，而只是将几个组件组合在一起。
 
-_Components_ define the traits of an entity. For example, a `transform` component stores the entity's coordinates, rotation and scale. A `BoxShape` component gives the entity a cube shape when rendered in the scene, a `Material` component gives the entity a color or texture. You could also create a custom `health` component to store an entity's remaining health value, and add it to entities that represent non-player enemies in a game.
+_Components（组件）_ 定义实体的特征。 例如，`transform` 组件确定了实体的坐标、旋转和比例。 `BoxShape` 组件在场景中渲染时使得实体显示为一个立方体形状，`Material` 组件为实体提供颜色或纹理。 您还可以创建一个自定义的 `health` 组件来存储实体的健康值，并可将其添加到游戏中一个非玩家敌人的实体中。
 
-If you're familiar with web development, think of entities as the equivalent of _Elements_ in a _DOM_ tree, and of components as _attributes_ of those elements.
+如果您熟悉 Web 开发，可以把实体看作 _DOM_ 树中的 _Elements_ ，并将组件作为这些元素的 _attributes_。
 
-> Note: In previous versions of the SDK, the _scene state_ was stored in an object that was separate from the entities themselves. As of version 5.0, the _scene state_ is directly embodied by the components that are used by the entities in the scene.
+> 注意：在以前版本的SDK中，_scene state（场景状态）_ 存储在与实体本身分开的对象中。 从版本 5.0 开始，_scene state_ 直接由场景中实体使用的组件来代替。
 
-![](/images/media/ecs-components.png)
+<img src="/images/media/ecs-components.png" alt="Armature" width="400"/>
 
-Components like `Transform`, `Material` or any of the _shape_ components are closely tied in with the rendering of the scene. If the values in these components change, that alone is enough to change how the scene is rendered in the next frame.
+诸如 `Transform`，`Material` 或者 _shape_ 类组件与场景的渲染紧密相关。 如果这些组件中的值发生变化，那么在下一帧中场景就会改变渲染。
 
-Components are meant to store data about their parent entity. They only store this data, they shouldn't modify it themselves. All changes to the values in the components are carried out by [Systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}). Systems are completely decoupled from the components and entities themselves. Entities and components are agnostic to what _systems_ are acting upon them.
+组件用于存储有关其父实体的数据。 它们只存储这些数据，不应自行修改。 组件中对值的所有更改都要由[Systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %})来进行。 Systems 完全与组件和实体本身分离。 实体和组件与 _systems_ 对其的操作无关。
 
-See [Component Reference]() for a reference of all the available constructors for predefined components.
+有关预定义组件的所有可用构造函数的参考，请参见[组件参考](https://github.com/decentraland/ecs-reference)。
 
+## 实体和组件的语法
 
-## Syntax for entities and components
-
-Entities and components are declared as TypeScript objects. The example below shows some basic operations of declaring, configuring and assigning these.
+实体和组件声明为 TypeScript 对象。 如下是一些实体创建、配置和加入 engine 的基本操作。
 
 ```ts
 // Create an entity
@@ -61,13 +60,13 @@ cube.add(new CubeShape())
 engine.addEntity(cube)
 ```
 
-Note: It's also possible to declare entities and components in [XML]({{ site.baseurl }}{% post_url /development-guide/2018-01-13-xml-static-scenes %}). Writing a scene in this way is easier but very limiting. You can't make the entities in the scene move or be interactive in any way.
+注意：也可以在[XML]({{ site.baseurl }}{% post_url /development-guide/2018-01-13-xml-static-scenes %})中声明实体和组件。 以这种方式编写场景更容易但功能非常有限。您无法使场景中的实体移动或以任何方式进行交互。
 
-## Add entities to the engine
+## 将实体添加到 engine（引擎）
 
-When you create a new entity, you're instancing an object and storing it in memory. A newly created entity isn't _rendered_ and it won't be possible for a user to interact with it until it's added to the _engine_.
+创建新实体，即实例化对象并将其存储在内存中。 在将其添加到 _engine（引擎）_ 之前，新创建的实体不会被渲染显示，并且用户也无法与其进行交互，。
 
-The engine is the part of the scene that sits in the middle and manages all of the other parts. It determines what entities are rendered and how users interact with them. It also coordinates what functions from [systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) are executed and when.
+engine 是场景的一部分，处于中间位置并且管理着所有其他事物。 它确定实体的渲染以及用户与它们的交互方式。 并决定执行 [systems]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) 中的哪些函数以及何时执行。
 
 ```ts
 // Create an entity
@@ -80,13 +79,13 @@ cube.add(new CubeShape())
 engine.addEntity(cube)
 ```
 
-In the example above, the newly created entity isn't viewable by users of your scene until it's added to the engine.
+在上面的示例中，在将其添加到引擎前，场景用户无法看到新创建的实体。
 
-> Note: Entities aren't added to [Component groups]({{ site.baseurl }}{% post_url /development-guide/2018-02-2-component-groups %}) either until they are added to the engine.
+> 注意：在实体被添加到引擎前，实体也不会被添加到[Component groups（组件组）]({{ site.baseurl }}{% post_url /development-guide/2018-02-2-component-groups %})中。
 
-It’s sometimes useful to preemptively create entities and not add them to the engine until they are needed. This is especially true for entities that have elaborate geometries that might otherwise take long to load.
+有时候可以预先创建实体并且在使用之前不添加到引擎中。尤其对于具有精细几何形状但可能需要很长时间才能加载的实体特别有用。
 
-When an entity is added to the engine, its `alive` property is implicitly set to _true_. You can check if an entity is currently added to the engine via this property.
+当实体添加到引擎时，它的 `alive` 属性被隐式设置为 _true_。 您可以用这个属性来确定实体是否已添加到引擎。
 
 ```ts
 if (myEntity.alive) {
@@ -94,23 +93,23 @@ if (myEntity.alive) {
 }
 ```
 
-## Remove entities from the engine
+## 从引擎中删除实体
 
-Entities that have been added to the engine can also be removed from it. When an entity is removed, it stops being rendered by the scene and users can no longer interact with it.
+已添加到引擎的实体也可以从中删除。 删除实体后，场景将不会再渲染，用户也无法再与其进行交互。
 
 ```ts
 // Remove an entity from the engine
 engine.removeEntity(cube)
 ```
 
-Note: Removed entities are also removed from all [Component groups]({{ site.baseurl }}{% post_url /development-guide/2018-02-2-component-groups %}). 
+注意：删除实体后，也会从所在的[组件组]({{ site.baseurl }}{% post_url /development-guide/2018-02-2-component-groups %})中删除。
 
-If your scene has a pointer referencing a removed entity, it will remain in memory, allowing you to still access and change its component's values and add it back.
+如果场景中有一个引用到已删除实体的指针，它会保留在内存中，您仍然可以访问并更改其组件的值，并在需要时重新添加到 engine。
 
-If a removed entity has child entities, you can determine what to do with them through the optional second and third arguments of the `.removeEntity()` function.
+如果删除的实体还带有子实体，则可以通过 `.removeEntity()` 函数的第二和第三个可选参数来确定如何处理它们。
 
-- `removeChildren`: Boolean to determine whether child entities are removed too. _false_ by default.
-- `newParent`: Set a new parent entity for all children of the removed entity.
+- `removeChildren`：布尔值，用于确定是否也删除了子实体。 默认 _false_。
+- `newParent`：为被删除实体的所有子实体设置一个新的父实体。
 
 ```ts
 /* These are the arguments being used:
@@ -121,15 +120,16 @@ If a removed entity has child entities, you can determine what to do with them t
 engine.removeEntity(cube, false, cube2)
 ```
 
-> Note: Keep in mind that the position, rotation and scale of a child entity is always relative to their parent. If the children of an entity aren't removed together with the parent, they will now be positioned relative to the scene (or to their new parent entity).
+> 注意：请记住，子实体的位置、旋转和比例始终相对于其父实体。 如果实体的子节点未与父节点一起移除，则它们现在将相对于场景（或其新的父实体）进行定位。
 
-## Nested entities
+## 嵌套实体
 
-An entity can have other entities as children. Thanks to this, we can arrange entities into trees, just like the HTML of a webpage.
+实体可以将其他实体作为子项。多亏了这一点，我们可以将实体安排到树中，就像网页的 HTML 一样。
 
-![](/images/media/ecs-nested-entities.png)
+<img src="/images/media/ecs-nested-entities.png" alt="nested entities" width="400"/>
 
-To set an entity as the parent of another, simply use `.setParent()`:
+
+要将实体设置为另一个实体的父节点，可以使用 `.setParent()`：
 
 ```ts
 // Create entities
@@ -140,7 +140,7 @@ parentEntity = new Entity()
 childEntity.setParent(parentEntity)
 ```
 
-Once a parent is assigned, it can be read off the child entity with `.getParent()`.
+一旦指定了父实体，就可以使用 `.getParent()` 从子实体中得到它。
 
 ```ts
 // Get parent from an entity
@@ -160,19 +160,19 @@ for(let id in parent.children){
 > Note: `.children` returns a library that lists all the child entities.
 -->
 
-If a parent entity has a `transform` component that affects its position, scale or rotation, its children entities are also affected.
+如果父实体具有影响其位置、缩放或旋转的 `transform` 组件，则其子实体也会受到影响。
 
-- For **position**, the parent's center is _0, 0, 0_
-- For **rotation** the parent's rotation is the quaternion _0, 0, 0, 1_ (equivalent to the Euler angles _0, 0, 0_)
-- For **scale**, the parent is considered to have a size of _1_. Any resizing of the parent affects scale and position in proportion.
+- **position**，位置，父实体的中心是 _0,0,0_
+- 对于**rotation**，旋转，父实体是四元数 _0,0,0,1_（相当于欧拉角 _0,0,0_）
+- 对于**scale**，缩放，父实体的大小为 _1_。 任何对父实体的调整都会按比例影响子实体的位置和缩放。
 
-Entities with no shape component are invisible in the scene. These can be used as wrappers to handle and position multiple entities as a group.
+没有形状（shape）组件的实体在场景中是不可见的。 但是可以包括子实体组，可以用来处理和定位多个实体。
 
-## Add a component to an entity
+## 将组件添加到实体
 
-When a component is added to an entity, the component's values affect the entity.
+将组件添加到实体时，组件的值会影响实体。
 
-One way of doing this is to first create the component instance, and then add it to an entity in a separate expression:
+执行此操作的一种方法是首先创建组件实例，然后将其添加到实体：
 
 ```ts
 // Create entity
@@ -188,7 +188,7 @@ myMaterial.albedoColor = Color3.Red()
 cube.add(myMaterial)
 ```
 
-You can otherwise use a single expression to both create a new instance of a component and add it to an entity:
+也可以使用一行代码来创建组件的新实例并将其添加到实体：
 
 ```ts
 // Create entity
@@ -201,33 +201,34 @@ cube.add(new Material())
 cube.get(Material).albedoColor = Color3.Red()
 ```
 
-> Note: In the example above, as you never define a pointer to the entity's material component, you need to refer to it through its parent entity using `.get()`.
+> 注意：在上面的示例中，由于未定义指向实体材质组件的指针，因此需要使用父实体的 `.get()` 函数取得。
 
-#### set or add
+#### set 或 add
 
-You can add a component to an entity either through `.set()` or `.add()`. The only difference between them is that a component assigned with `.set()` is overwritten whenever a component of the same kind is assigned to the entity.
+您可以通过 `.set()` 或 `.add()` 将组件添加到实体。它们之间的唯一区别是，使用 `.set()` 时，如果将相同类型的组件分配给实体，就会覆盖原组件。
 
-A component assigned with `.add()` can't be overwritten like that. To change it, you must first remove it before assigning a replacement component.
+使用 `.add()` 添加的组件不会被覆盖。要更改，必须先删除它，然后再添加要替换的组件。
 
-For example, if you first do `.set(new BoxShape())` on an entity entity and then do `.set(nwe SphereShape())` to the same entity, the shape will be overwritten. If you instead use `.add()` to assign the first shape, it won't be possible to overwrite it.
+例如，如果先在实体实体上执行 `.set(new BoxShape())`，然后又对同一实体执行 `.set(nwe SphereShape())`，则原形状将被覆盖。 如果改用 `.add()` 来指定形状，就没办法覆盖。
 
-## Remove a component from an entity
+## 从实体中删除组件
 
-To remove a component from an entity, simply use the entity's `remove()` method.
+从实体中删除组件，可以使用实体的 `remove()` 方法。
 
 ```ts
 myEntity.remove(Material)
 ```
 
-A removed component might still remain in memory even after removed. If your scene adds new components and removes them regularly, these removed components will add up and cause memory problems. It's advisable to instead use an [object pool](#pooling-entities-and-components) when possible to handle these components.
+删除的组件即使在删除后仍可能仍保留在内存中。 如果您的场景定期添加新组件然后删除，这些删除的组件将会累积并导致内存问题。 建议尽可能使用[对象池](#pooling-entities-and-components)来处理这些组件。
 
-If you try to remove a component that doesn't exist in the entity, this action won't raise any errors.
+如果您尝试删除实体中不存在的组件，则此操作不会引发任何错误。
 
-If a component was added using `.set()`, then it can be overwritten directly by a component of the same category, without needing to remove it first.
+如果使用 `.set()` 添加组件，则可以由同一类别的组件直接覆盖它，而无需先将其删除。
 
-## Access a component from an entity
+## 从实体访问组件
 
-You can reach components through their parent entity by using the entity's `.get()` function.
+您可以使用实体的 `.get()` 函数通过其父实体访问组件。
+
 
 ```ts
 // Create entity and component
@@ -243,16 +244,16 @@ let transform = cube.get(Transform)
 transform.position = (5, 0, 5)
 ```
 
-The `get()` function fetches a reference to the component object. If you change the values of what's returned by this function, you're changing the component itself. For example, in the example above, we're setting the `position` stored in the component to _(5, 0, 5)_.
+`get()` 函数取得组件对象的引用。 如果更改此函数返回的值，则表示您正在更改组件本身。 例如，在上面的例子中，我们将组件中存储的 `position` 设置为_(5, 0, 5)_。
 
 ```ts
 let XScale = cube.get(Transform).scale.x
 XScale = Math.random() * 10
 ```
 
-The example above directly modifies the value of the _x_ scale on the Transform component.
+上面的示例直接修改 Transform 组件上缩放值 _x_ 。
 
-If you're not entirely sure if the entity does have the component you're trying to retrieve, use `getOrNull()` or `getOrCreate()`
+如果你不能确定实体是否有需要的组件，请使用 `getOrNull()` 或 `getOrCreate()`
 
 ```ts
 //  getOrNull
@@ -262,19 +263,19 @@ scale = cube.getOrNull(Transform)
 scale = cube.getOrCreate(Transform)
 ```
 
-If the component you're trying to retrieve doesn't exist in the entity:
+如果您要检索的组件在实体中不存在：
 
-- `get()` returns an error.
-- `getOrNull()` returns `Null`.
-- `getOrCreate()` instances a new component in its place and retrieves it.
+ - `get()` 会返回错误。
+ - `getOrNull()` 返回 `Null`。
+ - `getOrCreate()` 会实例化一个新组件并返回。
 
-## Custom components
+## 自定义组件
 
-If you need to store information about an entity that isn't handled by the default components of the SDK (see [component reference]() ), then you can create a custom type of component on your scene.
+如果您需要存储实体的信息，但是这些信息未在 SDK 的默认组件中（请参阅[组件参考](https://github.com/decentraland/ecs-reference)），那么您可以创建自定义组件。
 
-Tip: Custom components can be defined in your scene's `.ts` file, but for larger projects we recommend defining them in a separate `ts` file and importing them.
+提示：可以在场景的 `.ts` 文件中定义自定义组件，但对于较大的项目，我们建议在单独的 `ts` 文件中定义它们然后导入。
 
-A component can store as many fields as you want.
+组件可以根据需要存储任意数据。
 
 ```ts
 @Component('wheelSpin')
@@ -284,9 +285,9 @@ export class WheelSpin {
 }
 ```
 
-Note that we're defining two names for the component: `wheelSpin` and `WheelSpin` in this case. The class name, the one in upper case, is the one you use to add the component to entities. The other name, the one in lowe case, can mostly be ignored, except if you want to use it as an [Interchangeable component](#interchangeable-components).
+在这里，我们在组件中定义了 `wheelSpin` 和 `WheelSpin`。 类名称（大写的名称）是用于将组件添加到实体。 另一个小写的名称，除了你想要将它用作[可互换组件](#interchangeable-components)之外，大多可以被忽略。
 
-Once defined, you can use the component in the entities of your scene:
+定义后，您可以在场景的实体中使用该组件：
 
 ```ts
 // Create entities
@@ -303,12 +304,11 @@ wheel.get(WheelSpin).speed = 10
 wheel2.get(WheelSpin).spinning = false
 ```
 
-Each entity that has the component added to it is instancing a new copy of it, holding specific data for that entity.
+添加组件的每个实体，都会实例化一个组件的新副本，用于保存该实体的特定数据。
 
+#### 构造函数
 
-#### Constructors
-
-Adding a constructor to a component allows you to configure its values in the same expression as you create an instance of it.
+组件的构造函数可以在创建实例时初始化组件值。
 
 ```ts
 @Component('wheelSpin')
@@ -322,7 +322,7 @@ export class WheelSpin {
 }
 ```
 
-If the component includes a constructor, you can use the following syntax:
+如果组件包含构造函数，则可以使用以下语法：
 
 ```ts
 // Create entity
@@ -332,11 +332,11 @@ wheel = new Entity()
 wheel.add(new WheelSpin(true, 10))
 ```
 
-> Tip: If you use a source code editor, when instancing a component that has a constructor, you can see what the parameters are by mousing over the expression.
+> 提示：如果使用代码编辑器，在实例化具有构造函数的组件时，可以通过将鼠标置于表达式上来查看参数。
 
 <!-- img -->
 
-You can make the parameters optional by setting default values on each. If there are default values and you don't declare the parameters when instancing a component, it will use the default.
+参数可以设置默认值，使得参数可选。 如果存在默认值，并且在实例化组件时未声明参数，则它将使用默认值。
 
 ```ts
 @Component('wheelSpin')
@@ -357,11 +357,11 @@ wheel = new Entity()
 wheel.add(new WheelSpin())
 ```
 
-#### Inheritance from other components
+#### 从其他组件继承
 
-You can create a component that's based on an existing one and leverage all of its existing methods and fields.
+您可以创建基于现有组件的组件，并利用其现有的所有方法和字段。
 
-The following example defines a _Velocity_ component, which inherits its fields and methods from the already existing _Vector3_ component.
+以下示例定义 _Velocity_ 组件，该组件从现有的 _Vector3_ 组件继承其字段和方法。
 
 ```ts
 @Component("velocity")
@@ -373,13 +373,13 @@ export class Velocity extends Vector3 {
 }
 ```
 
-#### Interchangeable components
+#### 可互换的组件
 
-Certain components intentionally can't coexist in a single entity. For example, an entity can't have both `BoxShape` and `PlaneShape`. If you assign one using `.set()`, you overwrite the other if present.
+某些组件不能在单个实体中共同存在。 例如，实体不能同时有 `BoxShape` 和 `PlaneShape` 组件。 如果使用 `.set()` 指定了一个，则另一个（如果存在）会被覆盖。
 
-You can create custom components that follow this same behavior against each other, where it only makes sense for each entity to have only one of them assigned.
+可以创建这一类自定义组件，每个实体只能分配其中一个组件。
 
-To define components that are interchangeable and that occupy a same _space_ in an entity, set the same name for both on the component's internal name:
+要定义可互换且在实体中占用相同 _空间_ 的组件，可以设置相同的内部名称：
 
 ```ts
 @Component("animal")
@@ -393,26 +393,26 @@ export class Cat {
 }
 ```
 
-In the example above, note that both components occupy the _animal_ space. Each entity in the scene can only have one _animal_ component assigned.
+在上面的示例中，请注意两个组件都使用 _animal_ 空间。 场景中的每个实体只能分配一个 _animal_ 组件。
 
-If you use `.set()` to assign a _Dog_ component to an entity that has a _Cat_ component, then the _Dog_ component will overwrite the _Cat_ component.
+如果使用 `.set()` 将 _Dog_ 组件分配给具有 _Cat_ 组件的实体，则 _Dog_ 组件将覆盖 _Cat_ 组件。
 
-## Components as flags
+## 将组件作为标记使用
 
-You may want to add a component that simply flags an entity to differentiate it from others, without using it to store any data. 
+您可以添加一个组件，该组件仅标记实体以将其与其他实体区分开来，而不使用它来存储任何数据。
 
-This is especially useful when using [Component groups]({{ site.baseurl }}{% post_url /development-guide/2018-02-2-component-groups %}). Since component groups list entities based on components they own, a simple flag component can tell entities apart from others.
+这在使用[组件组]({{ site.baseurl }}{% post_url /development-guide/2018-02-2-component-groups %})时尤其有用。 由于组件组基于它们拥有的组件列出实体，因此简单的标记组件可以将实体区分开来。
 
 ```ts
 @Component("myFlag")
 export class MyFlag {}
 ```
 
-## Pooling entities and components
+## 实体和组件池
 
-If you plan to spawn and despawn similar entities from your scene, it's often a good practice to keep a fixed set of entities in memory. Instead of creating new entities and deleting them, you could add and remove existing entities from the engine. This is an efficient way to deal with your user's memory.
+如果您在场景中生成和删除实体，那么在内存中保留一组固定的实体通常是一种很好的做法。 您可以在引擎中添加和删除现有实体，而不是创建新实体并删除它们。 这是处理用户内存的有效方法。
 
-Entities that are not added to the engine aren't rendered as part of the scene, but they are kept in memory, making them quick to load if needed. Their geometry doesn't add up to the maximum triangle count four your scene while they aren't being rendered.
+未添加到引擎的实体不会在场景中呈现出来，但它们会保留在内存中，以便在需要时快速加载。 因为它们不会被渲染，所以也不会累计到场景的最多三角形数限制中。
 
 ```ts
 // Define spawner singleton object
@@ -455,12 +455,12 @@ const spawner = {
 spawner.spawnEntity()
 ```
 
-When adding an entity to the engine, its `alive` field is implicitly set to `true`, when removing it, this field is set to `false`.
+将实体添加到引擎时，`alive` 会隐式设置为 `true`，删除时，此字段设置为 `false`。
 
-Using an object pool has the following benefits:
+使用对象池具有以下好处：
 
-- If your entity uses a complex 3D model or texture, it might take the scene some time to load it from the content server. If the entity is already in memory when it's needed, then that delay won't happen.
-- This is a solution to avoid a common problem, where each entity that's removed could remain lingering in memory after being removed, and these unused entities could add up till they become too many to handle. By recycling the same entities, you ensure this won't happen.
+ - 如果您的实体使用复杂的 3D 模型或纹理，从内容服务器加载可能会需要一段时间。 如果实体在需要时已经在内存中，则不会发生延迟。
+ - 这是一个避免常见问题的解决方案，被删除的实体在被删除后仍然可以在内存中保留，并且这些未使用的实体可能会在内存中累加，直到它们变得太多而无法处理。 通过回收相同的实体，您可以确保不会发生这种情况。
 
 <!--
 Similarly, if you plan to set and remove certain components from your entities, it's recommendable to create a pool of fixed components to add and remove rather than create new component instances each time.

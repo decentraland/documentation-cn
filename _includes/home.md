@@ -144,9 +144,9 @@ engine.addEntity(avocado)
 
 ![](/images/media/landing_avocado_in_scene.png)
 
-The lines you just added create a new [entity]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}), give it a [shape]({{ site.baseurl }}{% post_url /development-guide/2018-02-6-shape-components %}) based on the 3D model you downloaded, and [set its position]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %}).
+添加的行创建了一个新的[实体]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %})，然后给了它一个基于您下载的 3D 模型的[形状]({{ site.baseurl }}{% post_url /development-guide/2018-02-6-shape-components %})，并[设置了位置]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %})。
 
-Note that the avocado you added rotates, just like all other entities in the scene. That's because the `RotatorSystem` [system]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) defined in this scene is iterating over every entity in the scene and rotating it. 
+请注意，您添加的鳄梨会旋转，就像场景中的所有其他实体一样。 那是因为在这个场景中定义的 `RotatorSystem` [系统]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %})遍历了场景中的所有实体然后将它旋转。
 
 要深入了解 Decentraland 场景的运作方式，请阅读[场景开发]({{ site.baseurl }}{% post_url /getting-started/2018-01-02-coding-scenes %}) 。
 
