@@ -472,4 +472,15 @@ $(function () {
   // SCROLLABLE TABLES ==>
 
   $('.tutorial-main table').wrap('<div class="scrollable"></div>')
+
+  // TOPBAR ==>
+  $('.top .close').click(function() {
+    Cookies.set('topbar', true, { expires: 30 })
+    $('.top').removeClass('visible')
+  })
+
+  if (!Cookies.get('topbar')) {
+    $('.top').addClass('visible')
+  }
+
 })
