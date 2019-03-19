@@ -323,16 +323,15 @@ $(function () {
     $('.toggle[data-id="' + data + '"]').toggle('fast')
   })
 
-  const $window = $(window)
-  $window.bind('scroll', function () {
+  window.addEventListener('scroll', function () {
     const $languageSelector = $('.select-language.visible')
     const offset = $header.height() + $header.offset().top
     const threshold = ($languageSelector.length > 0)
       ? offset + $languageSelector.height()
       : offset
 
-    $sidebarDropdown.toggleClass('sticky', $window.scrollTop() > threshold)
-  })
+    $sidebarDropdown.toggleClass('sticky', window.scrollY > threshold)
+  }, { passive: true })
 
   // HEADINGS ==>
 
@@ -473,4 +472,15 @@ $(function () {
   // SCROLLABLE TABLES ==>
 
   $('.tutorial-main table').wrap('<div class="scrollable"></div>')
+
+  // TOPBAR ==>
+  $('.top .close').click(function() {
+    Cookies.set('topbar', true, { expires: 30 })
+    $('.top').removeClass('visible')
+  })
+
+  if (!Cookies.get('topbar')) {
+    $('.top').addClass('visible')
+  }
+
 })
