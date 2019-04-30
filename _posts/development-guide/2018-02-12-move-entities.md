@@ -1,7 +1,7 @@
 ---
 date: 2018-02-12
 title: 移动实体
-description: 如何随着时间的推移进行增量更改以逐渐移动、旋转和缩放实体
+description: 如何随着时间的推移逐渐移动、旋转和缩放实体
 categories:
   - development-guide
 type: Document
@@ -9,13 +9,13 @@ set: development-guide
 set_order: 12
 ---
 
-在场景中移动、旋转或调整实体大小，可以逐帧逐步更改实体的 `Transform` 组件中存储的 _position_, _rotation_ 和 _scale_ 值。此方法可用于基本形状（立方体，球体，平面等）以及 3D 模型（glTF）中。
+要在场景中移动、旋转或调整实体大小，可以逐帧逐渐更改实体的 `Transform` 组件中存储的 _position_, _rotation_ 和 _scale_ 值。这种方法可用在基本形状（立方体，球体，平面等）以及 3D 模型（glTF）中。
 
-可以在 [system]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) 的 `update()` 函数调用时，通过毎次少量移动实体来轻松地进行这些增量更改。
+可以在 [system]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) 的 `update()` 函数调用时，通过毎次少量移动实体来轻松地执行这些增量更改。
 
 ## 移动
 
-移动实体的最简单方法是使用 `translate()` 函数来更改存储在 `Transform` 组件中的 _position_ 值。
+移动实体的最简单方法是使用 `translate()` 函数来更改存储在 `Transform` 组件中的_ position_ 值。
 
 ```ts
 export class SimpleMove {
@@ -37,13 +37,13 @@ engine.addEntity(myEntity)
 
 在这个例子中，我们每帧移动实体 0.1 米。
 
-`Vector3.Forward()` 返回一个面向前方长度为 1 米的向量。这个例子中，我们然后用 `scale()` 将这个向量缩小到它的长度的 1/10。如果我们的场景每秒有 30 帧，则实体会以每秒 3 米的速度移动。
+`Vector3.Forward()` 返回面向前方长度为 1 米的向量。这个例子中，我们然后用 `scale()` 将这个向量缩小到它的长度的 1/10。如果我们的场景每秒有 30 帧，则实体会以每秒 3 米的速度移动。
 
 ## 根据延迟时间调整移动量
 
-如果运行场景的客户端跟不上帧速率。就有可能导致运动出现跳跃，因为并非所有帧都是均匀定时的，但每个帧都以相同的量移动实体。
+如果运行场景的客户端跟不上帧速率。就有可能导致运动出现跳跃，因为并非所有帧都是均匀定时的，但每帧移动实体的量是一样的。
 
-您可以使用 `dt` 参数来调整运动的比例来对这种不均匀的时间进行补偿。
+您可以使用 `dt` 参数来调整运动的比例来对这种不均匀的时间补偿。
 
 ```ts
 export class SimpleMove {
@@ -63,7 +63,6 @@ export class SimpleMove {
 旋转实体的最简单方法是使用 `rotate()` 函数逐步更改 Transform 组件中的值，并将其作为系统 `update()` 函数的一部分运行。
 
 `rotate()` 函数有两个参数：
-
 - 旋转的方向（_Vector3_）
 - 旋转量，[euler](https://en.wikipedia.org/wiki/Euler_angles) 度数（从 0 到 360）
 
@@ -146,12 +145,11 @@ const targetVector = Vector3.Forward()
 let newPos = Vector3.Lerp(originVector, targetVector, 0.6)
 ```
 
-
 线性插值算法在两个矢量之间的路径中找到与提供的量匹配的中间点。
 
 例如，如果原始向量是 _(0, 0, 0)_ 并且目标向量是 _(10, 0, 10)_：
 
-- 0 将返回 _(0, 0, 0)_
+- 数值使用 0 将返回 _(0, 0, 0)_
 - 使用 0.3 的数量将返回 _(3, 0, 3)_
 - 使用 1 的数量将返回 _(10, 0, 10)_
 
@@ -200,7 +198,6 @@ engine.addEntity(myEntity)
 要在两个角度之间平滑旋转，请使用 _slerp_（_球形_ 线性插值）算法。此算法与 _lerp_ 非常相似，但它处理四元数旋转。
 
 `slerp()` 函数有三个参数：
-
 - 旋转原点的[四元数](https://en.wikipedia.org/wiki/Quaternion)角度
 - 旋转目标的[四元数](https://en.wikipedia.org/wiki/Quaternion)角度
 - 数值，一个从 0 到 1 的值，表示要转换的比例。
@@ -255,7 +252,7 @@ engine.addEntity(myEntity)
 
 > 注意：您可以使用 `Vector3` 代替 `Lerp()` 函数表示旋转，但这意味着每帧需要将 `Vector3` 转换到 `Quaternion` 。因为旋转值在 `Transform` 组件中内部存储为四元数，因此使用四元数更有效率。
 
-## 两种尺寸间的比例
+## 平滑缩放
 
 如果希望实体平滑地改变大小而不改变其比例，请使用 `Scalar` 对象的 _lerp_（线性插值）算法。
 
@@ -308,7 +305,7 @@ export class LerpMove {
 
 上面的示例将 `time` 字段添加到自定义组件中。 每帧 `time` 值递增，然后 `fraction` 被设置为该值的 _正弦函数_。由于 _sin_ 函数的性质，实体将在两个点之间来回反复。
 
-## 沿着路径移动
+## 沿着线路移动
 
 `Path3` 对象存储一系列描述路径的向量，实体可以在向量列表中循环，在每个向量之间执行 lerp 移动。
 
