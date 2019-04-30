@@ -90,20 +90,11 @@ import * as EthereumController from "@decentraland/EthereumController"
 
 下面介绍一些使用此控制器执行的操作。
 
-#### Signing messages
 #### 消息签名
-
-A user can sign a message using their Ethereum public key. This signature is a secure way to give consent or to register an accomplishment or action that is registered with the block chain.
-
-The signing of a message isn't a transaction, so it doesn't imply paying any gas fees on the Ethereum network, it does however open a pop-up to ask the user for consent.
 
 用户可以使用他们的以太坊公钥对消息进行签名。 此签名是一种安全的方式来表示同意或注册区块链操作事件。
 
 签署消息不是交易，因此并不意味要在以太坊网络上支付交易费用，但它会打开一个弹出窗口，要求用户同意。
-
-Messages that can be signed need to follow a specific format to match safety requirements. They must include the “Decentraland signed header” at the top, this prevents the possibility of any mismanagement of the user’s wallet.
-
-Signable messages should follow this format:
 
 可以签名的消息需要遵循特定格式以符合安全要求。 他们必须在顶部包含“Decentraland 签名标题”，这可以防止用户钱包管理不善的可能性。
 
@@ -117,7 +108,6 @@ Signable messages should follow this format:
 Timestamp: <time stamp>
 ```
 
-For example, a signable message for a game might look like this:
 例如，游戏的可签名消息可能如下所示：
 
 ```ts
@@ -126,8 +116,6 @@ Attacker: 10
 Defender: 123
 Timestamp: 1512345678
 ```
-
-Before a user can sign a message, you must first convert it from a string into an object using the `convertMessageToObject()` function, then it can be signed with the `signMessage()` function.
 
 在用户签署消息之前，必须首先使用 `convertMessageToObject()` 函数将其从字符串转换为对象，然后可以使用 `signMessage()` 函数进行签名。
 
@@ -149,10 +137,7 @@ executeTask(async () => {
 ```
 
 
-#### Checking if a message is correct
 #### 检查消息是否正确
-
-To verify that the message that the user signed is in fact the one that you want to send, you can use the `toHex()` function from `eth-connect` library, to convert it and easily compare it. See further below for instructions on how to import the `eth-connect` library.
 
 要验证用户签名的消息实际上就是您要发送的消息，可以使用 `eth-connect` 库中的 `toHex()` 函数进行转换并轻松进行比较。 有关如何导入 `eth-connect` 库的说明，请参见下文。
 
@@ -185,12 +170,7 @@ function signMessage(msg: string){
 signMessage(messageToSign)
 ```
 
-#### Require a payment
 #### 请求付款
-
-The `requirePayment()` function prompts the user to accept paying a sum to an Ethereum wallet of your choice. 
-
-Users must always accept payments manually, a payment can never be implied directly from the user's actions in the scene.
 
 `requirePayment()` 函数提示用户接受向您选择的以太坊钱包支付一笔款项。
 
@@ -200,15 +180,9 @@ Users must always accept payments manually, a payment can never be implied direc
 eth.requirePayment(receivingAddress, amount, currency)
 ```
 
-The function requires that you specify an Ethereum wallet address to receive the payment, an amount for the transaction and a specific currency to use (for example, MANA or ETH).
-
-If accepted by the user, the function returns the hash number of the transaction.
-
 该功能要求您指定以太坊钱包地址以接收付款，交易金额和要使用的特定货币（例如，MANA 或 ETH）。
 
 如果用户接受，则该函数返回交易的哈希值。
-
-> Warning: This function informs you that a transaction was requested, but not that it was confirmed. If the gas price is too low, or it doesn't get mined for any reason, the transaction won't be completed.
 
 > 警告：此功能通知您已请求交易，但未通知确认。 如果 gas 价格太低，或因任何原因末被矿工确认交易，则交易将无法完成。
 
@@ -236,23 +210,13 @@ button.addComponent(new OnClick( e => {
 engine.addEntity(button)
 ```
 
-
-The example above listens for clicks on a _button_ entity. When clicked, the user is prompted to make a payment in MANA to a specific wallet for a given amount. Once the user accepts this payment, the rest of the function can be executed. If the user doesn't accept the payment, the rest of the function won't be executed.
-
 上面的示例侦听 _button_ 实体的点击。 单击时，系统会提示用户使用给定金额 MANA 支付给特定钱包。 一旦用户接受此付款，就可以执行该功能的其余部分。 如果用户不接受付款，则不会执行该功能的其余部分。
 
 ![](/images/media/metamask_confirm.png)
 
-> Tip: We recommend defining the wallet address and the amount to pay as global constants at the start of the _.ts_ file. These are values you might need to change in the future, setting them as constants makes it easier to update the code.
-
 > 提示：我们建议在 _.ts_ 文件的开头定义钱包地址和支付金额作为全局常量。您将来可能需要更改这些值，将它们设置为常量可以更轻松地更新代码。
 
-#### Wait for a transaction to be mined
 #### 等待交易确认
-
-The Ethereum controller allows you to check if a specific transaction has been already mined. It looks for a specific transaction's hash number and verifies that it has been validated by a miner and added to the blockchain. 
-
-> Important: Because of how a blockchain works, there might be [reorgs]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-01-01-ethereum-essentials %}#blockchain-reorgs) of the network that can lead to a mined transaction being reverted. A transaction that was confirmed once by one node has no guarantee of ending up in the official consensus of the network. We don't advise relying on this function for dealing with things that are of value.
 
 在 Ethereum controller 中可以检查特定交易是否已经确认。 它会查找特定交易的哈希值，并验证它是否已由矿工确认添加到区块链中。
 
@@ -261,8 +225,6 @@ The Ethereum controller allows you to check if a specific transaction has been a
 ```ts
 await this.eth.waitForMinedTx(currency, tx, receivingAddress)
 ```
-
-The function requires that you specify a currency to use (for example, MANA or ETH), a transaction hash number and the Ethereum wallet address that received the payment.
 
 该功能需要指定使用的货币（例如，MANA 或 ETH），交易哈希值和收款的以太坊钱包地址。
 
@@ -290,13 +252,9 @@ button.addComponent(new OnClick( e => {
 engine.addEntity(button)
 ```
 
-The example above first requires the user to accept a transaction, if the user accepts it, then `requirePayment` returns a hash that can be used to track the transaction and see if it's been mined. Once the transaction is mined and accepted as part of the blockchain, the `openDoor()` function is called.
-
 上面的例子首先要求用户确认交易，如果用户确认，那么 `requirePayment` 返回一个可用于跟踪交易并查看它是否被确认的哈希值。 一旦交易确认并作为区块链的一部分被接受，就会调用 `openDoor()` 函数。
 
 #### 异步发送
-
-Use the function `sendAsync()` to send messages over [RPC protocol](https://en.wikipedia.org/wiki/Remote_procedure_call).
 
 使用函数 `sendAsync()` 通过[RPC 协议](https://en.wikipedia.org/wiki/Remote_procedure_call)发送消息。
 
@@ -307,43 +265,23 @@ import * as EthereumController from "@decentraland/EthereumController"
 await eth!.sendAsync(myMessage)
 ```
 
-
-## Lower level operations
 ## 较低级别的操作
-
-The eth-connect library is made and maintained by Decentraland. It's based on the popular [Web3.js](https://github.com/ethereum/web3.js/) library, but it's fully written in TypeScript and features a few security improvements.
-
-
-This controller operates at a lower level than the _Ethereum controller_ (in fact the _Ethereum controller_ is built upon it) so it's tougher to use but more flexible.
 
 eth-connect 库由 Decentraland 制作和维护。 它基于流行的 [Web3.js](https://github.com/ethereum/web3.js/)库，但它完全用 TypeScript 编写，并进行了一些安全性改进。
 
 该控制器运行于 _Ethereum controller_ （实际上 _Ethereum controller_ 是基于它构建的）的底层，因此使用起来更难，但更灵活。
 
-It's main use is to call functions in a contract, it also offers a number of helper functions for various tasks. Check it out on [GitHub](https://github.com/decentraland/eth-connect).
-
-> Note: The eth-connect library is currently lacking more in-depth documentation. Since this library is mostly based on the Web3.js library and most of the function names are intentionally kept identical to those in Web3.js, it can often help to refer to [Web3's documentation](https://web3js.readthedocs.io/en/1.0/).
-
 它的主要用途是在合约中调用函数，它还为各种任务提供了许多辅助函数。 在[GitHub](https://github.com/decentraland/eth-connect)上查看。
 
 > 注意：eth-connect 库目前缺少更深入的文档。 由于这个库主要基于 Web3.js 库，并且大多数函数名称都与 Web3.js 中的函数名称保持一致，因此通常可以参考[Web3的文档](https://web3js.readthedocs.io/en/1.0/)。
 
-#### Download and import the eth-connect library
 #### 下载并导入 eth-connect 库
-
-To use eth-connect library, you must manually install the package via `npm` in your scene's folder. To do so, run the following command in the scene folder:
 
 使用 eth-connect 库，必须在场景文件夹中使用 `npm` 手动安装软件包。 为此，请在场景文件夹中运行以下命令：
 
 ```
 npm install eth-connect
 ```
-
-> Note: Decentraland scenes don't support older versions than 4.0 of the eth-connect library.
-
-> Note: Currently, we don't allow installing other dependencies via npm that are not created by Decentraland. This is to keep scenes well sandboxed and prevent malicious code.
-
-Once installed, you must import `eth-connect` to the scene's code:
 
 > 注意：Decentraland 场景不支持 eth-connect 库 4.0 以下的旧版本。
 
@@ -355,14 +293,10 @@ Once installed, you must import `eth-connect` to the scene's code:
 import * as EthConnect from '../node_modules/eth-connect/esm'
 ```
 
-#### Import a contract ABI
 #### 导入合约 ABI
-
-An ABI (Application Binary Interface) describes how to interact with an Ethereum contract, determining what functions are available, what inputs they take and what they output. Each Ethereum contract has its own ABI, you should import the ABIs of all the contracts you wish to use in your project.
 
 ABI（应用程序二进制接口）描述了如何与以太坊合约交互，有哪些可用的函数，它们有哪些输入，以及输出什么。 每个以太坊合约都有自己的 ABI，您应该导入您希望在项目中使用的所有合同的 ABI。
 
-For example, here's an example of one function in the MANA ABI:
 例如，这是 MANA ABI 中一个函数的示例：
 
 ```ts
@@ -385,15 +319,12 @@ For example, here's an example of one function in the MANA ABI:
 }
 ```
 
-ABI definitions can be quite lengthy, as they often include a lot of functions, so we recommend pasting the JSON contents of an ABI file into a separate `.ts` file and importing it into other scene files from there. We also recommend holding all ABI files in a separate folder of your scene, named `/contracts`.
-
 ABI 定义可能非常冗长，因为它们通常包含很多函数，因此我们建议将 ABI 文件的 JSON 内容粘贴到单独的 `.ts` 文件中，然后将其导入到其他场景文件中。 我们还建议将所有 ABI 文件保存到命名为 `/contracts` 的单独文件夹中。
 
 ```ts
 import {abi} from '../contracts/mana'
 ```
 
-Here are links to some useful ABI definitions:
 以下是一些有用的 ABI 定义的链接：
 
 - [MANA ABI](https://etherscan.io/address/0x0f5d2fb29fb7d3cfee444a200298f468908cc942#code)
@@ -404,12 +335,7 @@ Here are links to some useful ABI definitions:
 - LAND?
 -->
 
-#### Instance a contract
 #### 合约实例
-
-After importing the `eth-connect` library and a contract's _abi_, you must instance several objects that will allow you to use the functions in the contract and connect to Metamask in the user's browser.
-
-You must also import the web3 provider. This is because Metamask in the user's browser uses web3, so we need a way to interact with that.
 
 在导入 `eth-connect` 库和合同的 _abi_ 之后，您必须实例化多个对象，这些对象将允许您使用合约中的函数并在用户的浏览器中连接到 Metamask。
 
@@ -432,18 +358,11 @@ executeTask(async () => {
 })
 ```
 
-Note that several of these functions must be called using `await`, since they rely on fetching external data and can take some time to be completed.
-
-> Tip: For contracts that follow a same standard, such as ERC20 or ERC721, you can import a single generic ABI for all. You then generate a single `ContractFactory` object with that ABI and use that same factory to instance interfaces for each contract.
-
 请注意，必须使用 `await` 调用其中一些函数，因为它们依赖于外部数据获取，并且可能需要一些时间才能完成。
 
 > 提示：对于遵循相同标准的合同，例如 ERC20 或 ERC721，可以导入单个通用 ABI。 然后，您使用该ABI 生成一个 `ContractFactory` 对象，并将相同 factory 来对实便每个合约的接口。
 
-#### Call the methods in a contract
 #### 调用合同中的方法
-
-Once you've created a `contract` object, you can easily call the functions that are defined in its ABI, passing it the specified input parameters.
 
 一旦创建了 `contract` 对象，就可以轻松调用其 ABI 中定义的函数，并将指定的输入参数传递给它。
 
@@ -471,20 +390,9 @@ executeTask(async () => {
 
 ```
 
-The example above uses the abi for the Ropsten MANA contract and transfers 100 _fake MANA_ to your account in the Ropsten test network.
-
 上面的示例使用 Ropsten MANA 合约 abi，并将 100 _测试用 MANA_ 转移到 Ropsten 测试网络中的帐户。
 
-#### Other functions
 #### 其他功能
-
-The eth-connect library includes a number of other helpers you can use. For example to:
-
-- Get an estimated gas price
-- Get the balance of a given address
-- Get a transaction receipt
-- Get the number of transactions sent from an address
-- Convert between various formats including hexadecimal, binary, utf8, etc.
 
 eth-connect 库包含许多您可以使用的其他帮助程序。 例如：
 
@@ -620,28 +528,15 @@ const signerAddress = await requestManager.personal_ecRecover(message, signature
 
 -->
 
-## Using the Ethereum test network
 ## 使用以太坊测试网络
-
-While testing your scene, to avoid transferring real MANA currency, you can use the _Ethereum Ropsten test network_ and transfer fake MANA instead.
-
-To use the test network you must set your Metamask Chrome extension to use the _Ropsten test network_ instead of _Main network_.
 
 在测试场景时，为避免使用真正的 MANA 货币，您可以使用 _Ethereum Ropsten 测试网络_ 来交易 MANA。
 
 要使用测试网络，您必须将 Metamask Chrome 扩展程序设置为使用 _Ropsten test network_ 而不是 _Main network_。
 
-You must also own MANA in the Ropsten blockchain. To obtain free Ropsten mana in the test network, go to our [MANA faucet](https://faucet.decentraland.today/).
-
-> Tip: To run the transaction of transferring Ropsten MANA to your wallet, you will need to pay a gas fee in Ropsten Ether. If you don't have Ropsten Ether, you can obtain it for free from various external faucets like [this one](https://faucet.ropsten.be/).
-
 您还必须在 Ropsten 区块链中拥有 MANA。 要在测试网络中获得免费的 Ropsten MANA，请访问[MANA faucet](https://faucet.decentraland.today/)。
 
 > 提示：要运行将 Ropsten MANA 转移到钱包的交易，您需要在 Ropsten Ether 支付 gas 费用。 如果您没有 Ropsten Ether，您可以[在这里](https://faucet.ropsten.be/)免费获得。
-
-To preview your scene using the test network, add the `DEBUG` property to the URL you're using to access the scene preview on your browser. For example, if you're accessing the scene via `http://127.0.0.1:8000/?position=0%2C-1`, you should set the URL to `http://127.0.0.1:8000/?DEBUG&position=0%2C-1`.
-
-Any transactions that you accept while viewing the scene in this mode will only occur in the test network and not affect the MANA balance in your real wallet.
 
 要使用测试网络预览场景，请将 `DEBUG` 属性添加到浏览器场景预览的 URL 上。 例如，如果您通过`http://127.0.0.1:8000/?position=0%2C-1` 访问场景，则应将 URL 设置为 `http://127.0.0.1:8000/?DEBUG&position=0%2C-1`。
 
