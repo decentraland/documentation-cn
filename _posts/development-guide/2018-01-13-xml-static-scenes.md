@@ -1,13 +1,17 @@
 ---
 date: 2018-01-12
-title: XML static scenes
-description: How to create a static XML scene
+title: XML 静态场景
+description: 如何创建 XML 静态场景
 categories:
   - development-guide
 type: Document
 set: development-guide
 set_order: 13
 ---
+
+> 注意：不再支持 XML 静态场景。 因为内容编辑器是非开发人员创建静态内容的更好选择。
+
+<!--
 
 You can create a static scene with XML. The advantage of this is that the code is simpler and straight forward, very similar to the code of an [A-frame](aframe.io) scene. The disadvantage is that you can't make the scene dynamic or interactive in any way, users will only be able to walk around it and interact with each other.
 
@@ -84,10 +88,11 @@ See [entity interfaces]({{ site.baseurl }}{% post_url /development-guide/2018-01
 
 To migrate a scene that was developed in A-frame into decentraland:
 
-- Create a new static scene with the CLI as explained in [Create scene]({{ site.baseurl }}{% post_url /getting-started/2018-01-03-create-scene %}).
+- Create a new static scene with the CLI as explained in Create scene.
   > Note: If the size of the A-frame scene is larger than 1 Decentraland parcel, make sure you configure the scene to have enough parcels to fit it.
 - Copy the entire entity structure from your the A-Frame's _index.html_ file. Paste it in the Decentraland's _scene.xml_ file, in between the `<scene>` and `</scene>` lines. Delete the existing boilerplate box, sphere and cylinder primitives from the scene.
 - Make the following changes to the A-frame primitives:
   - In every tag name that starts with _a-_ remove the _a-_. So tags like `<a-entity>` and `<a-gltf-model>` become `<entity>` and `<gltf-model>`.
   - For all _position_ attributes, inverse the z axis. For example `position=”10 5 15”` should become `position=”10 5 -15”`.
 
+-->
