@@ -1,7 +1,7 @@
 ---
 date: 2018-02-11
 title: 场景文件
-description: 新建场景生成的缺省文件
+description: 场景缺省文件
 categories:
   - development-guide
 redirect_from:
@@ -15,7 +15,7 @@ set_order: 4
 
 ## 本地场景中的文件
 
-*场景*包括以下文件：
+场景包括以下文件：
 
 - **src/game.ts**: ：场景的入口。
 - **scene.json**: 包含场景元数据的清单。
@@ -25,7 +25,7 @@ set_order: 4
 
 #### game.ts
 
-This is the entry point to your scene's code. You could fit your entire scene's logic into this file, although for clarity in most cases we recommend spreading out your code over several other _.ts_ files and importing them into _game.ts_.
+game.ts 是场景代码的入口点。您可以将整个场景的逻辑放入这个文件中，但为了清晰起见，在大多数情况下，我们建议将您的代码分散到几个_.ts_ 文件中，然后再将文件导入到 _game.ts_ 中。
 
 在大多数情况下，您只需编辑此文件即可创建场景。它包含生成实体树的代码，即最终用户看到的您的地块内容。
 
@@ -69,7 +69,7 @@ engine.addSystem(new RotatorSystem())
 
 _scene.json_ 是虚拟土地上场景的 JSON 格式清单文件。场景可以跨越单个或多个 LAND 土地。 _scene.json_ 清单描述了场景中存在的对象，渲染场景时所需的材质列表，地块所有者的联系信息以及安全设置。_scene.json_ 文件的更多信息，请访问 [Decentraland 规范建议](https://github.com/decentraland/proposals/blob/master/dsp/0020.mediawiki) 。
 
-All of this metadata is optional for previewing the scene locally, but part of it is needed for deploying. You can change this information manually at any time.
+所有这些数据对于场景本地预览是可选的，但是部署时却需要使用其中的一部分。您可以随时手动更改此信息。
 
 #### package.json
 
@@ -90,7 +90,6 @@ All of this metadata is optional for previewing the scene locally, but part of i
 
 > 只要将脚本包含在单个 Javascript 文件（scene.js）中，您也可以使用其他工具或语言而不是 TypeScript 。但是提供的所有类型声明都是由 TypeScript 生成的，其他语言和转换器不受官方支持。
 
-
 ## 推荐的文件位置
 
 请记住，将场景部署到 Decentraland 时，场景所需的任何资源或外部库都必须打包在场景文件夹中，或者通过远程服务器提供。
@@ -106,14 +105,13 @@ All of this metadata is optional for previewing the scene locally, but part of i
 - _.ts_ 组件定义 `/src/components`
 - _.ts_ systems 定义 `/src/systems`
 
-> Note: Supporting files for glTF models, like their texture image files or _.bin_ files, should always be placed in the same folder as the model's _.gltf_ or _.glb_ file.
+> 注: glTF 模型文件的支持文件，如纹理图像文件或 _.bin_ 文件，应该始终与模型的放在同一个文件夹中。
 
-##  dclignore 文件
+## dclignore 文件
 
 所有场景都包含一个 _.dclignore_ 文件，此文件指定在将场景部署到 Decentraland 时要忽略的场景文件夹中哪些文件。
 
 例如，您可能希望在场景文件夹中保存场景中 3D 模型的 Blender 文件，但是您不希望将这些文件部署到 Decentraland。在这种情况下，您可以将 `*.blend` 添加到 _.dclignore_ 以忽略具有该扩展名的所有文件。
-
 
 | 需要忽略的 | 示例         | 说明                                                  |
 | ---------- | ------------ | ----------------------------------------------------- |

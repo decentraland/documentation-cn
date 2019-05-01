@@ -1,7 +1,7 @@
 ---
 date: 2018-01-10
-title: About remote scenes
-description: Tips and tricks for remote scenes with multiple users
+title: 多人场景
+description: 开发多用户远程场景技巧
 redirect_from:
   - /documentation/remote-scene-considerations/
 categories:
@@ -11,41 +11,42 @@ set: development-guide
 set_order: 30
 ---
 
-By default, the current version of Decentraland runs scenes locally in a user's machine. This is the simplest way to code a scene, but it has its limitations. Users are able to see each other and interact directly, but each interacts with the environment independently. If a user opens a door and walks into a house, other users will see that door still closed and the user will appear to walk directly through the closed door.
+默认情况下，当前版本的 Decentraland 在用户的计算机本地运行场景。这是开发场景的最简单方法，但有其局限性。用户可以相互看到彼此并直接进行交互，但是每个用户与环境的交互都是独立的。如果某个玩家打开门并走进房屋里，其他的用户看到的却是门仍然关闭，玩家直接穿过了关闭的门。
 
-Remote scenes use a remote server to synchronize data amongst all users in a scene, which allows them to see the same content and to interact in more meaningful ways.
+远程场景使用远程服务器同步场景中的所有用户间数据，这样他们就能看到相同的内容并以更有意义的方式进行交互。
 
-## Create remote scenes
+## 创建远程场景
 
-To copy one of the [sample scenes]({{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %}) that implements a remote server, follow the steps in the [create scene]({{ site.baseurl }}{% post_url /getting-started/2018-01-03-create-scene %}) to clone a sample scene.
+可以复制一个实现远程服务器的场景示例，请按照[复制场景示例]({{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %}#clone-an-example-scene)中的步骤进行操作。
 
-To transform an existing local scene into remote, we recommend cloning the [remote door scene]() and then copying the _game.ts_ file of the old scene into the new remote scene folder.
+要将现有的本地场景转换为远程场景，我们建议克隆[远程门场景](https://github.com/decentraland-scenes/Remote-door)，然后将旧场景的 _game.ts_ 文件复制到新场景文件夹中。
 
-## Preview remote scenes
+## 预览远程场景
 
-To preview a remote scene, you must run both the scene and the server it relies on. The server can also be run locally in the same machine as the preview.
+要预览远程场景，您必须同时运行场景和它所依赖的服务器。服务器也可以在与预览相同的机器中本地运行。
 
-To start the server, go to the `/server` folder and run `npm start`.
+要启动服务器，请在 `/server` 文件夹下运行 `npm start`。
 
-Once the server is running, either remotely or locally, you can run `dcl start` on the scene as you normally do for local scenes.
+一旦服务器运行，不管是远程还是本地，您就可以像本地场景一样运行 `dcl start`。
 
-Once the scene preview is running, you can open multiple browser tabs pointing at the same local address. Each tab will instantiate a separate user in the same scene, these users will share the same scene state.
+场景预览运行后，您可以打开指向同一本地地址的多个浏览器选项卡。每个选项卡将在同一场景中实例化一个单独的用户，这些用户将共享相同的场景状态。
 
-See [preview a scene]({{ site.baseurl }}{% post_url /getting-started/2018-01-04-preview-scene %}) for more details.
+有关详细信息，请参阅[场景预览]({{ site.baseurl }}{% post_url /getting-started/2018-01-04-preview-scene %})。
 
-## Multiplayer persistance
+## 多人游戏的持久性
 
-Unlike local scenes that are newly mounted each time a user walks into them, remote scenes have a life span that extends well beyond when the user enters and leaves the scene.
+与每次用户走进时重新加载的本地场景不同，远程场景的寿命远远超出用户进入和离开场景时的寿命。
 
-You must therefore design the experience taking into account that users won't always find the scene in the same initial state.
-Any changes made to the scene will linger on for other users to find, you must make sure that these don't interfere with future user's experiences in an undesired way.
+因此，您必须在设计同时，考虑到用户不会总是在相同的初始状态下进入场景。
 
-#### Reset the state
+对场景所做的任何更改都可能会让其他用户发觉，您必须确保这些更改不会以不希望的方式干扰未来用户的体验。
 
-When loading the scene, make sure its built based on the shared information stored in the server, and not in a default state.
+#### 重置状态
 
-In some cases, it makes sense to include some kind of reset button in the scene. Pressing the reset button would reset the scene gracefully.
+加载场景时，请确保基于存储在服务器中的共享信息构建场景，而不是处于默认状态。
 
-Sometimes, this just implies setting the variables in the scene state back to default values. But resetting the scene might also involve unsubscribing listeners and stopping loops in the server side. If empty loops remain each time the scene is reset, these would keep piling up and will have an ill effect on the scene's performance. 
+在某些情况下，在场景中包含某种重置按钮是有意义的。按下重置按钮可以优雅地重置场景。
 
-> Tip: To stop a time-based loop, you can use `clearInterval()`, passing it the loop's id.
+有时，这只是意味着将场景状态中的变量设置回默认值。但重置场景可能还涉及取消事件侦听并停止服务器端的循环。如果每次重置场景时仍然保留空循环，那么这些循环就会不断堆积，并对场景的性能产生不良影响。
+
+> 提示：要停止基于时间的循环，可以使用 `clearInterval()`，并将 loop id 传递给它。

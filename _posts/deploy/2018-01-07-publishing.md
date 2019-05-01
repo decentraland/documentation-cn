@@ -1,7 +1,7 @@
 ---
 date: 2018-01-06
 title: 发布场景
-description: 如何发布我的项目?
+description: 如何发布项目?
 redirect_from:
   - /documentation/publishing/
 categories:
@@ -15,11 +15,13 @@ set_order: 7
 
 确保以下内容：
 
-- 您的场景符合所有[场景限制](({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %}))。 每次运行场景预览时，大多数限制都会得到验证。
+- 您的场景符合所有[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})。 每次运行场景预览时，大多数限制都会一一验证。
 
 - 您有一个 [Metamask](https://metamask.io/) 帐户，并为其分配了 LAND 地块。该帐户还必须持有最低金额以支付交易费。
 
-- 您拥有必要数量的相邻 LAND 地块。 否则，您可以在[虚拟市场](({{ site.baseurl }}{% post_url /blockchain-interactions/2018-01-01-marketplace %}))中购买 LAND。
+- 您拥有必要数量的相邻 LAND 地块。 否则，您可以在[虚拟市场]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-01-01-marketplace %})中购买 LAND。
+
+> 注意：多块土地的场景只能部署到相邻地块中。
 
 <!--
 - 如果要将单个场景部署到多个相邻地块，则必须先将它们合并到 _连块土地_ 中，然后才能部署到它们。有关如何创建连块土地的说明，请参阅[虚拟市场]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-01-01-marketplace %})。
@@ -37,60 +39,70 @@ set_order: 7
 - **Parcels**：场景占用的地块坐标
 
 - **Base**：场景中视为[0,0]坐标的土地坐标。
+
 <!--
-- **Estate**：部署连块土地的 ID。如果要部署到单块土地，则不需要此字段。
+- **Estate**: The ID of the estate you're deploying to. If you're deploying to a single parcel, this field isn't necessary.
 
-  > 注意：要查看连块土地 ID，请在市场中打开该连块土地的详细信息页面。在 URL 中有包含 ID 编号。 例如，如果 URL 是 _market.decentraland.org/estates/84/detail_，则该连块土地的 ID 为 _84_。
+  > Note: To find your estate's id, open the estate's detail page in the Marketplace. The URL should include a number for the ID. For example if the URL is _market.decentraland.org/estates/84/detail_, the estate's ID is _84_.
 -->
-## 发布您的场景：
 
-1. 确保最近更改的场景已经在本地完成构建。如果还没有，请运行 `npm run build` 。
+## 发布场景：
+
+1. 确保更改的场景已经在本地完成构建。如果还没有，请运行 `npm run build` 。
 2. 使用跟您的 Decentraland 土地相关联的地址来登录 Metamask 帐户。
 3. 在场景的文件夹中运行 `dcl deploy`。
-4.  The command line lists the files it will upload. Confirm with _Y_.
-
-    > Tip: If there are files in your project folder that you don't want to deploy, list them in the _.dclignore_ file.
-    If you only want to deploy the files that have changed since your last deploy, add the flag `--p` to the deploy command.
-
-5.  A browser tab will open, showing what parcels you're deploying to. Click **Sign and Deploy**.
-6.  Metamask opens, notifying you that your signature is requested. Click **Sign** to confirm this action.
+4. 命令行列出了将要上传的文件。按 _Y_ 确认。
+   > 提示: 如果项目中有不想部署的文件，可以在 _.dclignore_ 文件中列出。
+   如果只想部署自上次部署以来已更改的文件，可以在 deploy 命令中添加 `--p` 标志。
+5. 会自动打开浏览器，显示要部署到的地块。请单击 **Sign and Deploy** 。
+6. Metamask 会打开提示，告知需要您的签名。请单击 **Sign** 确认此操作。
 
 <!--
 Currently, as a measure to improve performance and your visitor's experience, your content will be pinned to Decentraland’s main server to ensure that the data needed to render your parcel is always readily available.
 -->
 
-> Note: Although this command deploys your scene to your parcels, remember that users can’t currently explore Decentraland, so your content won’t be discoverable “in-world” yet.
+> 注意: 虽然这个命令将您的场景部署到您的土地中，但是用户目前还不能使用 Decentraland，所以您的内容还不能在“这个世界”显示。
 
-> Tip: If you're implementing a continuous integration flow, where changes to your scene are deployed automatically, then you can use the `--y` flag to skip the manual confirmations when running the deploy command.
+> 提示: 如果使用持续集成，需要自动部署对场景的更改，那么您可以在运行 deploy 命令时使用 `--y` 标志跳过手动确认。
 
 ## 使用 Ledger 硬件钱包发布
 
 将 LAND 存储在插入计算机的 [Ledger](https://www.ledger.com/) 硬件钱包中比存储在 Metamask 帐户更安全。
 
-如果您使用了其中的一种钱包，则上传的过程略有不同。
+如果您使用了这些钱包，则上传的过程略有不同。
 
-1. 要确保在修改场景后已经在本地构建过场景，请运行`npm run build`。
+1. 确保在修改场景后已经在本地构建过场景，请运行 `npm run build`。
 2. 将您的 Ledger 设备插入。您在 Decentraland 的地块应该与这个钱包相关联。
 3. 从场景的文件夹中运行`dcl deploy --https`。
-4. The command line lists the files it will upload. Confirm with _Y_.
+4. 命令行列出了将要上传的文件。按 _Y_ 确认。
+   
+   > 提示:如果项目中有不想部署的文件，可以在 _.dclignore_ 文件中列出。
 
-    > Tip: If there are files in your project folder that you don't want to deploy, list them in the _.dclignore_ file.
+5. 将打开浏览器，显示要部署到的地块。单击 **Sign and Deploy** 。
 
-5.  A browser tab will open, showing what parcels you're deploying to. Click **Sign and Deploy**.
+   > 注意:目前证书是自签名的，因此浏览器可能会在启动页面之前发出警告。警告只是因为证书是由您的机器自签名而显示的，请忽略它并继续。
 
-    > Note: Currently, the certificate is self-signed, so your browser might give you a warning before launching the page. The warning is displayed only because the certificate is self-signed by your machine, please ignore it and carry on.
+6. Ledger 然后会要求你确认，通过按设备的按钮来进行确认。
 
-6.  The Ledger device will then ask you for a confirmation, which you must give by pushing the device's buttons.
+> 提示: 如果使用持续集成，需要自动部署对场景的更改，那么您可以在运行 deploy 命令时使用 `--y` 标志跳过手动确认。
 
-> Tip: If you're implementing a continuous integration flow, where changes to your scene are deployed automatically, then you can use the `--y` flag to skip the manual confirmations when running the deploy command.
+## 场景覆盖
 
-## What is the content server
+当部署一个新场景时，它会覆盖它所使用的土地上存在的旧内容。
 
-The content server has a filesystem that's content-addressed, meaning that each file is identified by its contents, not an arbitrary file name.
+如果一个场景使用了多块土地，而另一个场景只覆盖了其中的一部分，那么剩下的土地就无法渲染。场景只能全部渲染。
 
-We use the content server to host and distribute all scene content in a similar way to BitTorrent, keeping the Decentraland network distributed.
+假设您将场景 _A_ 部署在两块土地上 _[100,100]_ 和 _[100,101]_。然后您将地块 _[100,101]_ 出售给拥有相邻土地的用户，该用户将一个大场景(_B_)部署到多个地块，其中包括 _[100,101]_。
 
-1.  The content server stores and distributes all of the assets required to render your scenes.
-2.  The `dcl deploy` command links these assets to the LAND parcel specified in your **scene.json** file. Whenever you redeploy your scene, the CLI will update your LAND smart contract, if needed, to point to the most recent content available on the content server.
+您的场景 _A_ 不能在一块地中部分渲染，因此 _[100,100]_ 不会显示任何内容。您必须构建一个新版本的只使用一块土地的场景 _A_，并将其部署到土地 _[100,100]_。
 
-Anyone willing to host a copy of the content server will be free to replicate it. The information on each copy of the server will be verifiable, as each scene is signed by the LAND owner's hash. This means that someone hosting a copy of the server won't be able to tamper with the content to display something illegitimate.
+## 什么是内容服务器
+
+内容服务器使用内容寻址的文件系统，这意味着文件都由它的内容来标识，而不是通过其文件名。
+
+内容服务器以类似于 BitTorrent 的方式托管和分发所有场景内容，保持 Decentraland 网络的分布。
+
+1. 内容服务器存储和分发显示场景所需的所有文件。
+2. `dcl deploy` 命令将这些文件链接到 **scene.json** 文件指定的土地中。每当您重新部署场景时，如果需要，CLI 会更新您的 LAND 智能合约，使之指向内容服务器上的最新内容。
+
+任何愿意托管内容服务器副本的人都可以自由地复制这些内容。每个服务器副本上的信息都是可验证的，因为每个场景都经过土地所有者的签名。意味着托管服务器副本的人也无法篡改内容以显示不合法的内容。
