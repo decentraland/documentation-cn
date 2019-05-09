@@ -25,6 +25,17 @@ set_order: 1
 
 ## 基础
 
+#### 具有动画的静态场景
+
+显示一个具有移动的蝴蝶，火焰等的动画的 3D 模型的静态场景。
+
+![](/images/media/example-muna.png)
+
+[代码](https://github.com/decentraland-scenes/the-munastery)
+
+[浏览场景](https://the-munastery-lwbodqmcwg.now.sh/?position=-13%2C-14)
+
+
 #### 催眠轮
 
 这个简单的场景有几个轮子，可以点击让它们旋转。
@@ -42,6 +53,8 @@ set_order: 1
 
 [浏览场景](https://hypno-wheels-owyfnqfimw.now.sh/?position=0%2C-1)
 
+[有关此场景的教程](https://decentraland.org/blog/tutorials/intro-to-sdk-v5) 
+
 #### 动画鲨鱼
 
 介绍了如何将动画添加到 `GLTFComponent` 并处理单击事件。
@@ -55,6 +68,11 @@ set_order: 1
 [代码](https://github.com/decentraland-scenes/Shark-animation)
 
 [浏览场景](https://shark-animation-xriykgapld.now.sh/)
+
+有关此场景的教程:
+
+- [第一部分]((https://decentraland.org/blog/tutorials/motion-animations-in-SDK-5))
+- 第二部分 (即将发布)
 
 #### 可打开的门
 
