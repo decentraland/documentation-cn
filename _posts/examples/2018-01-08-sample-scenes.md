@@ -85,7 +85,7 @@ set_order: 1
  - 自定义组件
  - 组件组
 
-![](/images/home/door.png)
+![](/images/media/example-door.png)
 
 [代码](https://github.com/decentraland-scenes/Open-door)
 
@@ -163,7 +163,7 @@ set_order: 1
 
 单击树会生成蜂鸟。 每只鸟自己随机移动位置。
 
-![](/images/home/hummingbirds.png)
+![](/images/media/example-hummingbirds.png)
 
 [代码](https://github.com/decentraland-scenes/Hummingbirds)
 
@@ -202,7 +202,7 @@ set_order: 1
 - 创建 REST 服务
 - 调用 REST API
 
-![](/images/home/door.png)
+![](/images/media/example-door.png)
 
 [代码](https://github.com/decentraland-scenes/Remote-door)
 
@@ -219,6 +219,9 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Remote-mural)
 
+<!--
+ [Explore the scene]()		 [Explore the scene]()
+-->
 
 ## 高级示例
 

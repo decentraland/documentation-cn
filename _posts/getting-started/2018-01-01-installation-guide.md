@@ -24,7 +24,6 @@ Decentraland CLI 通过 [npm](https://www.npmjs.com/get-npm?utm_source=house&utm
 在安装 CLI 之前，请安装以下的依赖项目：
 
 * [Node.js](https://github.com/decentraland/cli#nodejs-installation) (version 8)
-* [Python 2.7.x](https://www.python.org/downloads/)
 
 ## 安装 CLI
 
@@ -64,15 +63,22 @@ npm update -g decentraland
 
 ## 更新场景的 SDK 版本
 
-通过更新 CLI，您用它新创建的场景将使用最新版本的 SDK。在更新 CLI 之前创建的项目将继续使用创建它们时所用的 SDK 版本。更升级，唯一方法是手动更新场景中的 SDK 版本。
+如果你的 CLI 是最新的，使用用它新创建的场景将使用最新版本的 SDK。
 
-> Note: To migrate from versions that are older than 5.0 to 5.0 or newer, you're going to have to create a new scene project and migrate content manually.
+更新 CLI，现有项目使用的 SDK 版本不会更改。您需要手动更新项目中的 SDK 版本。
+
+> 注意：使用 `npm` 检查已安装的 SDK 版本并不会告诉您在预览特定场景时使用的 SDK 版本。
 
 更新 Decentraland SDK 版本：
 
-1. 在场景文件夹中打开文件 _package-lock.json_。
-2. 查找正在使用的 _decentraland-ecs_ 版本，并手动将其更改为最新版本的 SDK。
+要更新项目使用的 Decentraland SDK的版本：
 
-> 提示：如果您不确定最新版本是哪个，请查看发行说明。
+1. 在项目文件夹中打开文件 `package.json`。
+2. 在此文件中，查找 `decentraland-ecs`：
+   * 如果值为 `latest`，请保留。
+   * 如果是数字或版本不是 SDK 的最新版本，请将其更改为`latest`。
+   * 如果您的项目是[静态XML场景]({{ site.baseurl }}{% post_url /development-guide/2018-01-13-xml-static-scenes %})，则没有此字段配置。请将字段`decentraland-api`设置为`latest`。
+   * 如果你的场景使用 TypeScript 编写，你找不到字段`decentraland-ecs`，但能找到 `decentraland-api` 这个字段，那么你的项目是用 5.0 以前的旧版本编写的。使用 CLI 创建一个新项目并[手工迁移](https://decentraland.org/blog/tutorials/sdk-migration)。
 
-> 注意：使用 `npm` 查看已安装的 SDK 版本有可能跟预览特定场景时使用的 SDK 版本不一致。要了解所使用的版本的唯一方法是查看 _package-lock.json_ 文件。
+3. 从项目中删除文件 `package-lock.json` 和文件夹 `node-modules`。
+4. 使用`dcl start`运行场景预览。根据 `package.json` 中指定的版本，应该会自动重新安装所有的依赖项。
