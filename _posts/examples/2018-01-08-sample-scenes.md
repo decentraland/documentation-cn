@@ -21,7 +21,7 @@ set_order: 1
 
 ![](/images/media/example-static.png)
 
-[代码](https://github.com/decentraland/sample-scene-static-xml)
+[代码](https://github.com/decentraland-scenes/XML-static-scene)
 
 ## 基础
 
