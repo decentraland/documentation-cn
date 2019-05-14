@@ -9,6 +9,11 @@ set: blockchain-interactions
 set_order: 4
 ---
 
+在 SDK 的未来版本中，可以在 Decentraland 场景中显示您拥有的 NFT（不能替换通证）。 在 NFT 上方会出现一个发光的徽章，用以证明您确实拥有此通证。
+
+目前尚不支持此功能，但在路线图中。
+
+<!---
 您可以在 Decentraland 场景中显示您拥有的 NFT（不能替换通证）。在 NFT 上方会出现一个发光的徽章，用以证明您确实拥有此通证。
 
 <img src="/images/media/verified-nft.png" alt="nested entities" width="300"/>
@@ -25,12 +30,12 @@ set_order: 4
 const nft = new Entity()
 
 // position entity
-nft.add(new Transform({
+nft.addComponent(new Transform({
   position: new Vector3(1, 1.2, 1)
   }))
 
 // add an NFTShape, instanced with a token contract and token id
-nft.add(new NFTShape("0x06012c8cf97bead5deae237070f9587f8e7a266d", "475577"))
+nft.addComponent(new NFTShape("0x06012c8cf97bead5deae237070f9587f8e7a266d", "475577"))
 
 // add entity to engine
 engine.addEntity(nft)
@@ -56,3 +61,5 @@ The `NFTShape` component must be instanced with two parameters:
 在通证图像上方，会显示了一个用于验证真实性的徽章。这个闪烁的徽章构成了一个难以伪造的印章。
 
 > 注意：如果您想显示一个您并不拥有的通证，或者要在没有真品徽章的情况下显示，您可以从[OpenSea's API](https://docs.opensea.io/reference#api-overview) 获取 NFT 图像，并将其设置为材质的纹理。然后，就可以在场景中的任何基本对象上使用。
+
+--->

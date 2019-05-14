@@ -11,7 +11,7 @@ set: development-guide
 set_order: 4
 ---
 
-在使用 CLI [创建新场景]({{ site.baseurl }}{% post_url /getting-started/2018-01-03-create-scene %})之后，场景文件夹将包含一系列具有缺省内容的文件。
+在使用 CLI [创建新场景](https://docs.decentraland.org/#create-your-first-scene) 之后，场景文件夹将包含一系列具有缺省内容的文件。
 
 ## 本地场景中的文件
 
@@ -41,7 +41,7 @@ export class RotatorSystem {
   update() {
     // Cycle over the entities in the component group
     for (let entity of group.entities) {
-      const transform = entity.get(Transform)
+      const transform = entity.getComponent(Transform)
       transform.rotation.y += 2
     }
   }
@@ -51,10 +51,10 @@ export class RotatorSystem {
 const cube = new Entity()
 
 // Add a cube shape to the entity
-cube.add(new BoxShape())
+cube.addComponent(new BoxShape())
 
 // Add a transform component to the entity
-cube.add(new Transform({
+cube.addComponent(new Transform({
   position: new Vector3(5, 0, 5)
 }))
 
@@ -115,7 +115,7 @@ _scene.json_ 是虚拟土地上场景的 JSON 格式清单文件。场景可以�
 
 | 需要忽略的 | 示例         | 说明                                                  |
 | ---------- | ------------ | ----------------------------------------------------- |
-| 具体文件   | `BACKUP.tsx` | 忽略特定文件                                          |
+| 具体文件   | `BACKUP.ts` | 忽略特定文件                                          |
 | 目录       | `drafts/`    | 忽略文件夹及其子文件夹的全部内容                      |
 | 扩展名     | `*.blend`    | 忽略具有给定扩展名的所有文件                          |
 | 文件名    | `test*`      | 忽略所有匹配的文件。 这里是以 _test_ 文件名开头的文件 |

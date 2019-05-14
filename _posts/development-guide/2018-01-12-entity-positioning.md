@@ -13,24 +13,22 @@ set_order: 5
 
 可以使用 `Transform` 组件设置实体的 _position_，_rotation_ 和 _scale_。并可在任何实体、或基本形状组件（立方体，球体，平面等）或 3D 模型组件（glTF，Obj）上使用。
 
-
 <img src="/images/media/ecs-simple-components.png" alt="nested entities" width="400"/>
-
 
 ```ts
 // Create a new entity
 const ball = new Entity()
 
 // Add a transform component to the entity
-ball.add(new Transform())
-ball.get(Transform).position.set(5, 1, 5)
-ball.get(Transform).scale.set(2, 2, 2)
+ball.addComponent(new Transform())
+ball.getComponent(Transform).position.set(5, 1, 5)
+ball.getComponent(Transform).scale.set(2, 2, 2)
 ```
 
 为简洁起见，还可以创建一个 `Transform` 实体，并在一条语句中提供初始值，参数为可选的包含 _position_，_rotation_ 和 _scale_ 属性的对象。
 
 ```ts
-myEntity.add(new Transform({ 
+myEntity.ddComponent(new Transform({ 
     position: new Vector3(5, 1, 5), 
     rotation: new Quaternion(0, 0, 0, 0),
     scale: new Vector3(2, 2, 2)
@@ -64,14 +62,18 @@ myTransform.position = new Vector3(5, 1, 5)
 
 设置位置时，请注意以下事项：
 
-- 位置向量中的数字单位为_米_。
+- 位置向量中的数字单位为_米_(除非该实体是缩放实体的子实体)。
 
   > 注意：如果您正在定位一个缩放值不为 1 的父实体的子项，position 向量也会相应缩放。
+
+- 一块土地组成的场景长 16 米 x 16 米。场景的中心(地面)位于`x:8, y:0, z:8`。如果场景由多块土地组成，那么中心将根据土地的排列而变化。
 
 - `x:0, y:0, z:0` refers to the _South-East_ corner of the scene's base parcel, at ground level.
 - `x:0, y:0, z:0` 位于场景基块的东南角，位于地面。
 
   > 提示：查看场景预览时，场景的（0,0,0）点会有一个坐标，并且每轴都设有标签以供参考。
+
+  > 提示：用你的左手，食指(指向前方)是 _z_ 轴，中指(指向侧面)是 _x_ 轴，大拇指(指向上方)是 _y_ 轴。
 
   > 注意：您可以通过编辑 _scene.json_ 的 `base` 属性来更改场景的基块。
 
@@ -120,41 +122,58 @@ myTransform.rotation.eulerAngles = new Vector3(0, 90, 0)
 查询实体的旋转度时，默认情况下返回四元数。要获得以欧拉角表示的旋转，使用 `.eulerAngles` 字段：
 
 ```ts
-myEntity.get(Transform).rotation.eulerAngles
+myEntity.getComponent(Transform).rotation.eulerAngles
 ```
+
 ## 面向用户旋转
 
-您可以将形状组件设置为 _billboard_，这意味着它会始终旋转实体来面对用户。基本形状和 glTF 模型的所有组件都有一个可设置的 `billboard` 字段。
+将 _billboard_ 组件添加到实体，这样它会始终旋转实体来面对用户。
 
 Billboards 是 90 年代 3D 游戏中常用的技术，大部分实体是始终面向玩家的 2D 平面，但同样也可用于旋转 3D 模型。
 
-您也可以选择仅在其中一个轴上以这种方式旋转形状。例如，如果将立方体的 billboard 模式设置为仅在 Y 轴上旋转，则用户在地面移动时它会转向用户，但用户将能够从上方或从下方查看。
-
-使用 `BillboardMode` 枚举中的值设置 `billboard` 字段。例如，要在所有轴上旋转，请将值设置为 `BillboardMode.BILLBOARDMODE_ALL`。
-
-- `BILLBOARDMODE_NONE` (0): 任何轴都不旋转（默认值）
-- `BILLBOARDMODE_X` (1): 仅 **X** 轴，其他轴不旋转。
-- `BILLBOARDMODE_Y` (2): 仅 **Y** 轴，其他轴不旋转。
-- `BILLBOARDMODE_Z` (4): 仅 **Z** 轴，其他轴不旋转。
-- `BILLBOARDMODE_ALL` (7): 跟随用户在所有轴上旋转。
-
 ```ts
-// Create a transform
-let box = new BoxShape()
-
-// Set its billboard mode
-box.billboard = BillboardMode.BILLBOARDMODE_Y
+let box = new Entity()
+box.addComponent(new BoxShape())
+box.addComponent(new Transform({
+  position: new Vector3(5, 1, 5)
+}))
+box.addComponent(new Billboard())
+engine.addEntity(box)
 ```
 
-Billboards 对 _text_ 实体非常有用，因为它能使它们始终清晰易读。
+您可以选择旋转哪个轴。例如，如果一个立方体的 Billboard 只在 Y 轴上旋转，则用户在地面移动时它会转向用户，但用户将能够从上方或从下方查看。
 
-如果实体同时配置了 Transform 组件的 `rotation` 及 `billboard` 值不为 0 的形状组件，则该实体将根据 billboard 模式运行。
+创建 `Billboard` 组件时，三个可选参数 _x_、_y_ 和 _z_ 轴的布尔值。默认情况下，它们都是 `true`。
 
-> 注意：如果同时有多个用户在场，则每个用户都会看到面向自己的 billboard 模式实体。
+```ts
+// rotate on all three axis
+let FullBillboard = new Billboard())
+
+// rotate only in the X axis
+let XBillboard = new Billboard(true, false ,false)
+
+// rotate only in theY axis
+let YBillboard = new Billboard(false, true ,false)
+
+// rotate only in the Z axis
+let ZBillboard = new Billboard(false, false ,true)
+```
+
+提示：如果想要实体在地平面上跟随用户旋转，可设为沿 _Y_ 轴旋转。
+
+可以将 _text_ 实体设为 Billboards ，能让用户能始终清晰看到内容。
+
+If an entity has both a `Billboard` component and `Transform` component with `rotation` values, users will see the entity rotating as a billboard. If the billboard doesn't affect all axis, the remaining axis will be rotated according to the `Transform` component.
+
+实体 `Transform` 组件的 `rotation` 值不会因为跟随用户旋转而改变。
+
+如果一个实体同时具有 `Billboard` 组件和带有 `rotation` 值 `Transform` 组件，用户将看到该实体按 billboard 旋转。 如果 billboard 设置不影响所有轴，则剩余的轴将根据 `Transform` 组件旋转。
+
+> 注意：如果同时有多个用户在场，则每个用户都会看到设有 billboard 的实体面向自己。
 
 ## 面向坐标点
 
-您可以在 Transform 组件上使用 `lookAt()`，通过简单地该点的坐标来设置面向空间中特定点的实体。这是一种避免数学角度计算的方法。
+您可以在 Transform 组件上使用 `lookAt()`，可以简单地设置面向空间特定点的坐标。这样可以避免角度计算。
 
 ```ts
 // Create a transform
@@ -164,15 +183,18 @@ let myTransform = new Transform()
 myTransform.lookAt(new Vector3(4, 1, 2))
 ```
 
-在此使用 _Vector3_ 对象，或者具有 _x_，_y_ 和 _z_ 属性的任何对象。此向量表示要朝向的场景中点的位置坐标。
+在此使用 Vector3 对象，或者具有 x，y 和 z 属性的任何对象。此向量表示要朝向的场景中点的位置坐标。
 
-`lookAt()` 函数还有一个可选参数，设置要用作参考的全局方向。在大多数情况下，您无需设置此值。
+<!---
+The `lookAt()` function has a second optional argument that sets the global direction for _up_ to use as reference. For most cases, you won't need to set this field.
+`lookAt()` 函数还有一个可选参数，用于设置up用作引用的全局方向设置要用作参考的全局方向。在大多数情况下，您无需设置此值。
+--->
 
 ## 缩放
 
-`scale` 也是一个_3D vector_，存储为 `Vector3` 对象，包括 _x_，_y_ 和 _z_ 轴上的缩放比例。无论是基本模型还是 3D 模型，实体的形状都会被相应地放大和缩小。
+`scale` 也是一个_3D vector_，存储为 `Vector3` 对象，包括 _x_, _y_ 和 _z_ 轴上的缩放比例。无论是基本模型还是 3D 模型，实体的形状都会被相应地放大和缩小。
 
-您可以使用 `set()` 为三个轴分别设置值，或者使用 `setAll()` 设置同一数值，以在缩放时保持实体的比例。
+您可以使用 `set()` 为三个轴分别设置值，或者使用 `setAll()` 设置相同的缩放比例，以在缩放时保持实体的比例。
 
 默认 scale 比例为 1，因此大于 1 的值会放大实体，而小于 1 会缩小实体。
 
@@ -197,7 +219,7 @@ myTransform.scale.setAll(2)
 myTransform.scale = new Vector3(1, 1, 1.5)
 ```
 
-使用对象设置缩放时，可以使用 `Vector3` 对象，也可以使用带有 _x_，_y_ 和 _z_ 字段的任何其他对象。
+使用对象设置缩放时，可以使用 `Vector3` 对象，也可以使用带有 x，y 和 z 字段的任何其他对象。
 
 ## 继承
 
@@ -205,7 +227,8 @@ myTransform.scale = new Vector3(1, 1, 1.5)
 
 如果缩放父实体，则还会缩放其子项的所有位置值。
 
-```tsx
+
+```ts
 // Create entities
 const parentEntity = new Entity()
 const childEntity = new Entity()
@@ -219,14 +242,14 @@ let parentTransform = new Transform({
   scale: new Vecot3(0.5, 0.5, 0.5)
 })
 
-parentEntity.add(parentTransform)
+parentEntity.addComponent(parentTransform)
 
 // Create a transform for the child
 let childTransform = new Transform({
   position: new Vector3(0, 1, 0)
 })
 
-childEntity.add(childTransform)
+childEntity.addComponent(childTransform)
 
 // Add entities to the engine
 engine.addEntity(childEntity)

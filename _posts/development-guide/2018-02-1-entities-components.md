@@ -48,19 +48,17 @@ _Components（组件）_ 定义实体的特征。 例如，`transform` 组件确
 const cube = new Entity()
 
 // Create and add a `Transform` component to that entity
-cube.add(new Transform())
+cube.addComponent(new Transform())
 
 // Set the fields in the component
-cube.get(Transform).position.set(3, 1, 3)
+cube.getComponent(Transform).position.set(3, 1, 3)
 
 // Create and apply a `CubeShape` component to give the entity a visible form
-cube.add(new CubeShape())
+cube.addComponent(new CubeShape())
 
 // Add the entity to the engine
 engine.addEntity(cube)
 ```
-
-注意：也可以在[XML]({{ site.baseurl }}{% post_url /development-guide/2018-01-13-xml-static-scenes %})中声明实体和组件。 以这种方式编写场景更容易但功能非常有限。您无法使场景中的实体移动或以任何方式进行交互。
 
 ## 将实体添加到 engine（引擎）
 
@@ -73,7 +71,7 @@ engine 是场景的一部分，处于中间位置并且管理着所有其他事�
 const cube = new Entity()
 
 // Give the entity a shape
-cube.add(new CubeShape())
+cube.addComponent(new CubeShape())
 
 // Add the entity to the engine
 engine.addEntity(cube)
@@ -106,21 +104,7 @@ engine.removeEntity(cube)
 
 如果场景中有一个引用到已删除实体的指针，它会保留在内存中，您仍然可以访问并更改其组件的值，并在需要时重新添加到 engine。
 
-如果删除的实体还带有子实体，则可以通过 `.removeEntity()` 函数的第二和第三个可选参数来确定如何处理它们。
-
-- `removeChildren`：布尔值，用于确定是否也删除了子实体。 默认 _false_。
-- `newParent`：为被删除实体的所有子实体设置一个新的父实体。
-
-```ts
-/* These are the arguments being used:
- - Entity to remove: cube
- - removeChildren: false
- - newParent: cube2
-*/
-engine.removeEntity(cube, false, cube2)
-```
-
-> 注意：请记住，子实体的位置、旋转和比例始终相对于其父实体。 如果实体的子节点未与父节点一起移除，则它们现在将相对于场景（或其新的父实体）进行定位。
+如果删除的实体还带有子实体，所有的子实体也将被删除。
 
 ## 嵌套实体
 
@@ -193,7 +177,7 @@ const myMaterial = new Material()
 myMaterial.albedoColor = Color3.Red()
 
 // Add component
-cube.add(myMaterial)
+cube.addComponent(myMaterial)
 ```
 
 也可以使用一行代码来创建组件的新实例并将其添加到实体：
@@ -203,79 +187,77 @@ cube.add(myMaterial)
 cube = new Entity()
 
 // Create and add component
-cube.add(new Material())
+cube.addComponent(new Material())
 
 // Configure component
-cube.get(Material).albedoColor = Color3.Red()
+cube.getComponent(Material).albedoColor = Color3.Red()
 ```
 
-> 注意：在上面的示例中，由于未定义指向实体材质组件的指针，因此需要使用父实体的 `.get()` 函数取得。
+> 注意：在上面的示例中，由于未定义指向实体材质组件的指针，因此需要使用父实体的 `.getComponent()` 函数取得。
 
-#### set 或 add
+#### 添加或更换组件
 
-您可以通过 `.set()` 或 `.add()` 将组件添加到实体。它们之间的唯一区别是，使用 `.set()` 时，如果将相同类型的组件分配给实体，就会覆盖原组件。
-
-使用 `.add()` 添加的组件不会被覆盖。要更改，必须先删除它，然后再添加要替换的组件。
-
-例如，如果先在实体实体上执行 `.set(new BoxShape())`，然后又对同一实体执行 `.set(nwe SphereShape())`，则原形状将被覆盖。 如果改用 `.add()` 来指定形状，就没办法覆盖。
+使用 `.addComponentOrReplace()` 而不是 `.addComponent()`，您可以覆盖特定实体上相同类型的任何现有组件。
 
 ## 从实体中删除组件
 
-从实体中删除组件，可以使用实体的 `remove()` 方法。
+从实体中删除组件，可以使用实体的 `removeComponent()` 方法。
 
 ```ts
-myEntity.remove(Material)
+myEntity.removeComponent(Material)
 ```
+
+如果试图删除实体中不存在的组件，此操作不会报错。
 
 删除的组件即使在删除后仍可能仍保留在内存中。 如果您的场景定期添加新组件然后删除，这些删除的组件将会累积并导致内存问题。 建议尽可能使用[对象池](#pooling-entities-and-components)来处理这些组件。
 
-如果您尝试删除实体中不存在的组件，则此操作不会引发任何错误。
-
-如果使用 `.set()` 添加组件，则可以由同一类别的组件直接覆盖它，而无需先将其删除。
-
 ## 从实体访问组件
 
-您可以使用实体的 `.get()` 函数通过其父实体访问组件。
-
+您可以使用实体的 `.getComponent()` 函数通过其父实体访问组件。
 
 ```ts
 // Create entity and component
 cube = new Entity()
 
 // Create and add component
-cube.add(new Transform())
+cube.addComponent(new Transform())
 
 // Using get
-let transform = cube.get(Transform)
+let transform = cube.getComponent(Transform)
 
 // Edit values in the component
 transform.position = (5, 0, 5)
-```
 
-`get()` 函数取得组件对象的引用。 如果更改此函数返回的值，则表示您正在更改组件本身。 例如，在上面的例子中，我们将组件中存储的 `position` 设置为_(5, 0, 5)_。
+`getComponent()` 函数取得组件对象的引用。 如果更改此函数返回的值，则表示您正在更改组件本身。 例如，在上面的例子中，我们将组件中存储的 `position` 设置为_(5, 0, 5)_。
 
 ```ts
-let XScale = cube.get(Transform).scale.x
+let XScale = cube.getComponent(Transform).scale.x
 XScale = Math.random() * 10
 ```
 
 上面的示例直接修改 Transform 组件上缩放值 _x_ 。
 
-如果你不能确定实体是否有需要的组件，请使用 `getOrNull()` 或 `getOrCreate()`
+如果你不能确定实体是否有需要的组件，请使用 `getComponentOrNull()` 或 `getComponentOrCreate()`
 
 ```ts
-//  getOrNull
-scale = cube.getOrNull(Transform)
+//  getComponentOrNull
+scale = cube.getComponentOrNull(Transform)
 
-// getOrCreate
-scale = cube.getOrCreate(Transform)
+// getComponentOrCreate
+scale = cube.getComponentOrCreate(Transform)
 ```
 
 如果您要检索的组件在实体中不存在：
 
- - `get()` 会返回错误。
- - `getOrNull()` 返回 `Null`。
- - `getOrCreate()` 会实例化一个新组件并返回。
+ - `getComponent()` 会返回错误。
+ - `getComponentOrNull()` 返回 `Null`。
+ - `getComponentOrCreate()` 会实例化一个新组件并返回。
+
+当您处理[可互换组件](#可互换的组件)时，您还可以按 _space name_ 而不是按类型获取组件。 例如，`BoxShape` 和 `SphereShape` 都在实体的`shape` 命名空间中。 如果想知道实体有哪个组件，您可以获取实体的 `shape`，它将返回 `shape` 命名空间的组件。
+
+```ts
+let entityShape = myEntity.getComponent(shape)
+```
 
 ## 自定义组件
 
@@ -293,7 +275,7 @@ export class WheelSpin {
 }
 ```
 
-在这里，我们在组件中定义了 `wheelSpin` 和 `WheelSpin`。 类名称（大写的名称）是用于将组件添加到实体。 另一个小写的名称，除了你想要将它用作[可互换组件](#interchangeable-components)之外，大多可以被忽略。
+请注意，这里我们为组件定义了两个名称：`wheelSpin` 和 `WheelSpin`。 _class name 类名称_（大写的名称）是用于将组件添加到实体的名称。 _space name 命名空间_（以小写字母开头的那个）通常可以忽略，除非你想将它用作[可互换组件](#可互换的组件)。
 
 定义后，您可以在场景的实体中使用该组件：
 
@@ -303,13 +285,13 @@ wheel = new Entity()
 wheel2 = new Entity()
 
 // Create instances of the component
-wheel.add(new WheelSpin())
-wheel2.add(new WheelSpin())
+wheel.addComponent(new WheelSpin())
+wheel2.addComponent(new WheelSpin())
 
 // Set values on component
-wheel.get(WheelSpin).spinning = true
-wheel.get(WheelSpin).speed = 10
-wheel2.get(WheelSpin).spinning = false
+wheel.getComponent(WheelSpin).spinning = true
+wheel.getComponent(WheelSpin).speed = 10
+wheel2.getComponent(WheelSpin).spinning = false
 ```
 
 添加组件的每个实体，都会实例化一个组件的新副本，用于保存该实体的特定数据。
@@ -337,7 +319,7 @@ export class WheelSpin {
 wheel = new Entity()
 
 // Create instance of component and set its values
-wheel.add(new WheelSpin(true, 10))
+wheel.addComponent(new WheelSpin(true, 10))
 ```
 
 > 提示：如果使用代码编辑器，在实例化具有构造函数的组件时，可以通过将鼠标置于表达式上来查看参数。
@@ -362,7 +344,7 @@ export class WheelSpin {
 wheel = new Entity()
 
 // Create instance of component with default values
-wheel.add(new WheelSpin())
+wheel.addComponent(new WheelSpin())
 ```
 
 #### 从其他组件继承
@@ -383,7 +365,7 @@ export class Velocity extends Vector3 {
 
 #### 可互换的组件
 
-某些组件不能在单个实体中共同存在。 例如，实体不能同时有 `BoxShape` 和 `PlaneShape` 组件。 如果使用 `.set()` 指定了一个，则另一个（如果存在）会被覆盖。
+某些组件不能在单个实体中共同存在。 例如，实体不能同时有 `BoxShape` 和 `PlaneShape` 组件。 如果使用 `.addComponentOrReplace()` 指定了一个，则另一个（如果存在）会被覆盖。
 
 可以创建这一类自定义组件，每个实体只能分配其中一个组件。
 
@@ -403,7 +385,7 @@ export class Cat {
 
 在上面的示例中，请注意两个组件都使用 _animal_ 空间。 场景中的每个实体只能分配一个 _animal_ 组件。
 
-如果使用 `.set()` 将 _Dog_ 组件分配给具有 _Cat_ 组件的实体，则 _Dog_ 组件将覆盖 _Cat_ 组件。
+如果使用 `.addComponentOrReplace()` 将 _Dog_ 组件分配给具有 _Cat_ 组件的实体，则 _Dog_ 组件将覆盖 _Cat_ 组件。
 
 ## 将组件作为标记使用
 
@@ -435,7 +417,7 @@ const spawner = {
     if (!ent) return
 
     // Add a transform component to the entity
-    let t = ent.getOrCreate(Transform)
+    let t = ent.getComponentOrCreate(Transform)
     t.scale.setAll(0.5)
     t.position = (5, 0, 5)
 
