@@ -20,8 +20,8 @@ set_order: 12
 ```ts
 export class SimpleMove {
   update() {
-    let transform = myEntity.get(Transform)
-    let distance = Vector3.Forward.scale(0.1)
+    let transform = myEntity.getComponent(Transform)
+    let distance = Vector3.Forward().scale(0.1)
     transform.translate(distance)
   }
 }
@@ -29,8 +29,8 @@ export class SimpleMove {
 engine.addSystem(new SimpleMove())
 
 const myEntity = new Entity()
-myEntity.set(new Transform())
-myEntity.set(new BoxShape())
+myEntity.addComponent(new Transform())
+myEntity.addComponent(new BoxShape())
 
 engine.addEntity(myEntity)
 ```
@@ -38,6 +38,79 @@ engine.addEntity(myEntity)
 在这个例子中，我们每帧移动实体 0.1 米。
 
 `Vector3.Forward()` 返回面向前方长度为 1 米的向量。这个例子中，我们然后用 `scale()` 将这个向量缩小到它的长度的 1/10。如果我们的场景每秒有 30 帧，则实体会以每秒 3 米的速度移动。
+
+<img src="/images/media/gifs/move.gif" alt="Move entity" width="300"/>
+
+## 旋转
+
+旋转实体的最简单方法是使用 `rotate()` 函数逐步更改 Transform 组件中的值，并将其作为系统 `update()` 函数的一部分运行。
+
+`rotate()` 函数有两个参数：
+- 旋转的方向（_Vector3_）
+- 旋转量，[euler](https://en.wikipedia.org/wiki/Euler_angles) 度数（从 0 到 360）
+
+```ts
+export class SimpleRotate {
+  update() {
+    let transform = myEntity.getComponent(Transform)
+    transform.rotate(Vector3.Left(), 3)
+  }
+}
+
+engine.addSystem(new SimpleRotate())
+```
+
+> 提示：要使实体始终旋转以面向用户，您可以添加[`Billboard` 组件]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %}#face-the-user)。
+
+<img src="/images/media/gifs/rotate.gif" alt="Move entity" width="300"/>
+
+## 旋转轴心
+
+旋转实体时，会始终按照实体的中心坐标旋转。要使用另一组坐标作为轴心点旋转实体，请创建第二个（不可见）实体，位置设为将要旋转的轴心点，并使其成为要旋转的实体的父实体。
+
+旋转父实体时，其子项将全部使用父项的位置作为轴心点旋转。请注意，子实体的 `position` 是引用了父实体的 `position`。
+
+```ts
+// Create entity you wish to rotate
+const myEntity = new Entity()
+myEntity.addComponent(redMaterial)
+myEntity.addComponent(new BoxShape())
+
+// Create the pivot entity
+const pivot = new Entity()
+
+// Position the pivot entity on the pivot point of the rotation
+pivot.addComponent(new Transform({
+  position: new Vector3(3, 2, 3)
+}))
+
+// Set pivot as the parent
+myEntity.setParent(pivot)
+
+// Position child in reference to parent
+myEntity.addComponent(new Transform({
+  position: new Vector3(0, 0.5, 0.5)
+}))
+
+// Add both entities to the engine
+engine.addEntity(myEntity)
+engine.addEntity(pivot)
+
+// Define a system that updates the rotation on every frame
+export class PivotRotate {
+  update() {
+    let transform = pivot.getComponent(Transform)
+    transform.rotate(Vector3.Left(), 3 )
+  }
+}
+
+// Add the system
+engine.addSystem(new PivotRotate())
+```
+
+请注意，在此示例中，系统正在旋转 `pivot` 实体，该实体是 `door` 实体的父实体。
+
+<img src="/images/media/gifs/pivot-rotate.gif" alt="Move entity" width="300"/>
 
 ## 根据延迟时间调整移动量
 
@@ -57,76 +130,6 @@ export class SimpleMove {
 ```
 
 即使帧速率下降，上述示例仍将保持与之前大致相同的速度。当以每秒 30 帧的速度运行时，`dt` 的值为 1/30。
-
-## 旋转
-
-旋转实体的最简单方法是使用 `rotate()` 函数逐步更改 Transform 组件中的值，并将其作为系统 `update()` 函数的一部分运行。
-
-`rotate()` 函数有两个参数：
-- 旋转的方向（_Vector3_）
-- 旋转量，[euler](https://en.wikipedia.org/wiki/Euler_angles) 度数（从 0 到 360）
-
-```ts
-export class SimpleRotate {
-  update() {
-    let transform = myEntity.get(Transform)
-    let distance = dt * 3
-    transform.rotate(Vector3.Left(), distance)
-  }
-}
-
-engine.addSystem(new SimpleRotate())
-```
-
-> 提示：要使实体始终旋转以面向用户，可以使用 `billboardMode` 设置。有关详细信息，请参阅[实体位置设置]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %}#face-the-user)。
-
-## 旋转轴心
-
-旋转实体时，会始终按照实体的中心坐标旋转。要使用另一组坐标作为轴心点旋转实体，请创建第二个（不可见）实体，位置设为将要旋转的轴心点，并使其成为要旋转的实体的父实体。
-
-旋转父实体时，其子项将全部使用父项的位置作为轴心点旋转。请注意，子实体的 `position` 是引用了父实体的 `position`。
-
-```ts
-// Create entity you wish to rotate
-const door = new Entity()
-
-// Create the pivot entity
-const pivot = new Entity()
-
-// Position the pivot entity on the pivot point of the rotation
-pivot.set(new Transform({
-  position: new Vector3(4, 1, 3)
-}))
-
-// Set pivot as the parent
-door.setParent(pivot)
-
-// Position child in reference to parent
-door.set(new Transform({
-  position: new Vector3(0.5, 0, 0)
-}))
-
-// Rotate the parent. The child rotates using the parent's location as a pivot point.
-pivot.get(Transform).rotation.setEuler(0, 90, 0)
-
-// Add both entities to the engine
-engine.addEntity(door)
-engine.addEntity(pivot)
-
-// Define a system that updates the rotation on every frame
-export class PivotRotate {
-  update() {
-    let transform = myEntity.get(pivot)
-    let distance = dt * 3
-    transform.rotate(Vector3.Left(), distance )
-  }
-}
-
-// Add the system
-engine.addSystem(new PivotRotate())
-```
-
-请注意，在此示例中，系统正在旋转 `pivot` 实体，该实体是 `door` 实体的父实体。
 
 ## 两点间移动
 
@@ -166,8 +169,8 @@ export class LerpData {
 // a system to carry out the movement
 export class LerpMove {
   update(dt: number) {
-    let transform = myEntity.get(Transform)
-    let lerp = myEntity.get(LerpData)
+    let transform = myEntity.getComponent(Transform)
+    let lerp = myEntity.getComponent(LerpData)
     if (lerp.fraction < 1) {
       transform.position = Vector3.Lerp(
         lerp.origin,
@@ -183,15 +186,17 @@ export class LerpMove {
 engine.addSystem(new LerpMove())
 
 const myEntity = new Entity()
-myEntity.set(new Transform())
-myEntity.set(new BoxShape())
+myEntity.addComponent(new Transform())
+myEntity.addComponent(new BoxShape())
 
-myEntity.set(new LerpData())
-myEntity.get(LerpData).origin = new Vector3(1, 1, 1)
-myEntity.get(LerpData).target = new Vector3(8, 1, 3)
+myEntity.addComponent(new LerpData())
+myEntity.getComponent(LerpData).origin = new Vector3(1, 1, 1)
+myEntity.getComponent(LerpData).target = new Vector3(8, 1, 3)
 
 engine.addEntity(myEntity)
 ```
+
+<img src="/images/media/gifs/lerp-move.gif" alt="Move entity" width="300"/>
 
 ## 在两个角度间旋转
 
@@ -227,12 +232,13 @@ export class SlerpData {
 export class SlerpRotate implements ISystem {
  
   update(dt: number) {
-      let slerp = myEntity.get(SlerpData)
-      let transform = myEntity.get(Transform)
-
-      slerp.fraction += dt
-      let rot = Quaternion.Slerp(slerp.originRot, slerp.targetRot, slerp.fraction)
-      transform.rotation = rot   
+      let slerp = myEntity.getComponent(SlerpData)
+      let transform = myEntity.getComponent(Transform)
+      if (slerp.fraction < 1) {
+        let rot = Quaternion.Slerp(slerp.originRot, slerp.targetRot, slerp.fraction)
+        transform.rotation = rot  
+        slerp.fraction += dt/5 
+      }
   }
 }
 
@@ -240,17 +246,19 @@ export class SlerpRotate implements ISystem {
 engine.addSystem(new SlerpRotate())
 
 const myEntity = new Entity()
-myEntity.set(new Transform())
-myEntity.set(new BoxShape())
+myEntity.addComponent(new Transform())
+myEntity.addComponent(new BoxShape())
 
-myEntity.set(new SlerpData())
-myEntity.get(SlerpData).originRot = Quaternion.Euler(0, 90, 0)
-myEntity.get(SlerpData).targetRot = Quaternion.Euler(0, 0, 0)
+myEntity.addComponent(new SlerpData())
+myEntity.getComponent(SlerpData).originRot = Quaternion.Euler(0, 90, 0)
+myEntity.getComponent(SlerpData).targetRot = Quaternion.Euler(0, 0, 0)
 
 engine.addEntity(myEntity)
 ```
 
 > 注意：您可以使用 `Vector3` 代替 `Lerp()` 函数表示旋转，但这意味着每帧需要将 `Vector3` 转换到 `Quaternion` 。因为旋转值在 `Transform` 组件中内部存储为四元数，因此使用四元数更有效率。
+
+<img src="/images/media/gifs/lerp-rotate.gif" alt="Move entity" width="300"/>
 
 ## 平滑缩放
 
@@ -264,6 +272,7 @@ engine.addEntity(myEntity)
 - 目标比例值
 - 数值，从 0 到 1 的值，表示要进行的缩放比例。
 
+
 ```ts
 const originScale = 1
 const targetScale = 10
@@ -272,6 +281,48 @@ let newScale = Scalar.Lerp(originScale, targetScale, 0.6)
 ```
 
 要在场景中实现此 lerp ，我们建议您创建一个自定义组件来存储必要的信息。您还需要定义一个在每帧中实现渐变缩放的系统。
+
+```ts
+@Component("lerpData")
+export class LerpSizeData {
+  origin: number = 0.1
+  target: number = 2
+  fraction: number = 0
+}
+
+// a system to carry out the movement
+export class LerpSize {
+  update(dt: number) {
+    let transform = myEntity.getComponent(Transform)
+    let lerp = myEntity.getComponent(LerpSizeData)
+    if (lerp.fraction < 1) {
+      let newScale = Scalar.Lerp(
+        lerp.origin,
+        lerp.target,
+        lerp.fraction
+      )
+      transform.scale.setAll(newScale)
+      lerp.fraction += dt / 6
+    }
+  }
+}
+
+// Add system to engine
+engine.addSystem(new LerpSize())
+
+
+const myEntity = new Entity()
+myEntity.addComponent(new Transform())
+myEntity.addComponent(new BoxShape())
+
+myEntity.addComponent(new LerpSizeData())
+myEntity.getComponent(LerpSizeData).origin = 0.1
+myEntity.getComponent(LerpSizeData).target = 2
+
+engine.addEntity(myEntity)
+```
+
+ <img src="/images/media/gifs/lerp-scale.gif" alt="Move entity" width="300"/>
 
 ## 在两点之间以不规则的速度移动
 
@@ -285,15 +336,13 @@ export class LerpData {
   origin: Vector3 = Vector3.Zero()
   target: Vector3 = Vector3.Zero()
   fraction: number = 0
-  time: number = 0
 }
 
 export class LerpMove {
   update(dt: number) {
-    let transform = lerpEntity.get(Transform)
-    let lerp = lerpEntity.get(LerpData)
-    lerp.time += dt / 6
-    lerp.fraction = Math.sin(lerp.time)
+    let transform = myEntity.getComponent(Transform)
+    let lerp = myEntity.getComponent(LerpData)
+    lerp.fraction += (dt + lerp.fraction)/10
     transform.position = Vector3.Lerp(
       lerp.origin,
       lerp.target,
@@ -301,9 +350,14 @@ export class LerpMove {
     )
   }
 }
+
+// Add system to engine
+engine.addSystem(new LerpMove())
 ```
 
-上面的示例将 `time` 字段添加到自定义组件中。 每帧 `time` 值递增，然后 `fraction` 被设置为该值的 _正弦函数_。由于 _sin_ 函数的性质，实体将在两个点之间来回反复。
+上面的示例跟之前的线性 lerp 示例很相似，但是 `fraction` 字段以非线性方式增加，导致曲线在每个帧上以更大的增量移动实体。
+
+ <img src="/images/media/gifs/lerp-speed-up.gif" alt="Move entity" width="300"/>
 
 ## 沿着线路移动
 
@@ -327,8 +381,8 @@ export class PathData {
 
 export class PatrolPath {
   update(dt: number) {
-    let transform = myEntity.get(Transform)
-    let path = myEntity.get(PathData)
+    let transform = myEntity.getComponent(Transform)
+    let path = myEntity.getComponent(PathData)
     if (path.fraction < 1) {
       transform.position = Vector3.Lerp(
         path.origin,
@@ -351,9 +405,9 @@ export class PatrolPath {
 engine.addSystem(new PatrolPath())
 
 const myEntity = new Entity()
-myEntity.set(new Transform())
-myEntity.set(new BoxShape())
-myEntity.set(new PathData())
+myEntity.addComponent(new Transform())
+myEntity.addComponent(new BoxShape())
+myEntity.addComponent(new PathData())
 
 engine.addEntity(myEntity)
 ```
@@ -361,6 +415,9 @@ engine.addEntity(myEntity)
 上面的示例定义了由四个 3D 矢量组成的 3D 路径。我们还定义了一个自定义的 `PathData` 组件，它包含与上面 _lerp_ 示例中自定义组件使用的相同数据，但添加了一个 `nextPathIndex` 字段来跟踪路径中接下来要使用的向量。
 
 该系统与 _lerp_ 示例中的系统非常相似，但是当一个 lerp 动作完成时，它将 `target` 和`origin` 字段设置为新值。如果我们到达路径的末尾，我们返回使用路径中的第一个值。
+
+ <img src="/images/media/gifs/lerp-path.gif" alt="Move entity" width="300"/>
+
 
 <!--
 
