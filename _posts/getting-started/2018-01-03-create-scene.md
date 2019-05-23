@@ -16,13 +16,13 @@ tag: introduction
 
 ## CLI 安装
 
-确保首先安装 CLI 工具。在 Mac OS 中，您可以通过运行以下命令来执行此操作：
+确保首先安装 CLI 工具：
 
 ```bash
 npm install -g decentraland
 ```
 
-针对 Windows 和 Linux 系统的更多详细信息和特定说明，请参阅[安装指南]({{ site.baseurl }}{% post_url /getting-started/2018-01-01-installation-guide %})。
+更多详细信息和特定说明，请参阅[安装指南]({{ site.baseurl }}{% post_url /getting-started/2018-01-01-installation-guide %})。
 
 ## 创建默认场景
 
@@ -38,8 +38,6 @@ npm install -g decentraland
 `dcl init` 命令在当前工作目录中创建包含一个 **场景** 的 Decentraland **项目**。
 
 > 提示：要创建[XML静态场景]({{ site.baseurl }}{% post_url /development-guide/2018-01-13-xml-static-scenes %})，请运行 `dcl init --boilerplatestatic`。
-
-默认场景在 TypeScript 文件中定义，其中包含一个可以打开的门的示例。 场景具有基本状态并能处理点击事件。
 
 有关在场景中创建的默认文件的概述，请参阅[场景文件]({{ site.baseurl }}{% post_url /development-guide/2018-01-11-scene-files %})。
 
@@ -65,9 +63,9 @@ dcl start
 
 每次对场景进行更改时，预览都会自动重新加载和更新，因此无需再次运行该命令。
 
-有关在场景预览中可以看到的内容以及如何运行远程场景预览的说明，请参阅[场景预览]({{ site.baseurl }}{% post_url /getting-started/2018-01-04-preview-scene %})。
+有关场景预览，请参阅[场景预览]({{ site.baseurl }}{% post_url /getting-started/2018-01-04-preview-scene %})。
 
-您也可以通过使用 CLI 运行命令将场景部署到第三方服务器。这也是与他人共享场景的好方法，而无需安装任何本地构建场景所需的开发工具。 请参阅[Now 部署]({{ site.baseurl }}{% post_url /deploy/2018-01-01-deploy-to-now %})。
+您也可以通过使用 CLI 命令将场景部署到第三方服务器。这也是使用简单链接与他人共享场景的好方法，其它人无需安装任何本地构建场景所需的开发工具。 请参阅[Now 部署]({{ site.baseurl }}{% post_url /deploy/2018-01-01-deploy-to-now %})。
 
 ## 编辑你的场景
 

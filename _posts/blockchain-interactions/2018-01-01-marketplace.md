@@ -102,6 +102,46 @@ set_order: 1
 
 > 注意：除了以太坊网络向交易矿工支付的费用外，Decentraland 不会收取任何其它的交易费用。
 
+## Make a bid on a parcel or Estate
+
+  If a parcel or estate isn't listed on sale, you can still place a bid on it and offer to buy it at a specific price.
+
+  1. To enable the _bid_ feature on the Marketplace, navigate to your Settings, and check the box next to _Assets using MANA (bid)_. You’ll have to pay a small gas fee, just like any other Ethereum transaction.
+
+  2. Navigate back to the LAND you want to bid on, then click _Bid_ to make an offer!
+
+  3. Enter the amount of MANA you want to offer the seller. 
+
+  4. Set the date for when you want your offer to expire. Bids can be open for no more than six months. After six months, you’ll have to place another bid.
+
+  5. Click Submit.
+
+  6. Re-enter your offer amount one more time to confirm the bid.
+
+  To view a list of your open and pending bids, click _MY LAND_ on the top navbar and select _Bids_. 
+
+  From this screen you can also change the price of your bid by clicking _Update_.
+
+## 对土地或连块土地出价
+
+   如果土地或连块土地没出售，您还是可以对其出价以特定价格购买。
+
+   1. 要在市场上启用_出价_功能，请打开设置，然后选中 _Assets using MANA (bid)_。 如同其他以太坊交易一样，您需要支付少量 gas 费用。
+
+   2. 回到您要出价的 LAND，然后单击_出价_！
+
+   3. 输入您要购买的 MANA 金额。
+
+   4. 设置合约到期的日期。 出价时间不超过六个月。 六个月后，您可以再次出价。
+
+   5. 单击“提交”。
+
+   6. 再次输入您的出价金额以确认出价。
+
+   要查看出价或待定的出价的列表，请点击顶部导航栏上的 _我的 LAND_，然后选择_出价_。
+
+   在此屏幕中，您还可以点击 _更新_ 来更改出价。
+
 ## 出售领地或连块土地
 
 为了出售 LAND:

@@ -1,26 +1,26 @@
 ---
-  layout: null
+layout: null
 ---
 
-  function indexData(data) {
-    var index = lunr(function () {
-      this.field('id')
-      this.field('title', { boost: 10 })
-      this.field('categories')
-      this.field('url')
-      this.field('content')
-    })
+function indexData(data) {
+  var index = lunr(function() {
+    this.field('id')
+    this.field('title', { boost: 10 })
+    this.field('categories')
+    this.field('url')
+    this.field('content')
+  })
 
-    for (var key in data) {
-      index.add(data[key])
-    }
-
-    window.index = index
-    window.data = data
+  for (var key in data) {
+    index.add(data[key])
   }
 
+  window.index = index
+  window.data = data
+}
+
 if (!document.location.pathname.match('/search')) {
-  $.getJSON('{{ site.baseurl }}/data.json?{{ site.time | date: "%s%N" }}', function (data) {
+  $.getJSON('{{ site.baseurl }}/data.json?{{ site.time | date: "%s%N" }}', function(data) {
     indexData(data)
   })
 }
@@ -73,7 +73,7 @@ function getPreview(query, content, previewLength) {
   return preview
 }
 
-$(function () {
+$(function() {
   // HEADER ==>
 
   const $header = $('header')
@@ -104,30 +104,30 @@ $(function () {
     $header.find('.search-overlay').removeClass('open')
   }
 
-  $header.find('.dropdown-trigger').click(function (event) {
+  $header.find('.dropdown-trigger').click(function(event) {
     event.preventDefault()
     $(this).hasClass('open') ? closeDropdown() : openDropdown()
   })
 
-  $header.find('.dropdown-overlay').click(function (event) {
+  $header.find('.dropdown-overlay').click(function(event) {
     event.preventDefault()
     closeDropdown()
   })
 
-  $header.find('.search-overlay').click(function (event) {
+  $header.find('.search-overlay').click(function(event) {
     event.preventDefault()
     closeSearchResults()
   })
 
   const $searchInput = $headerSearch.find('input[type="text"]')
 
-  $header.find('.close').click(function (event) {
+  $header.find('.close').click(function(event) {
     event.preventDefault()
     closeSearchResults()
     $searchInput.val('')
   })
 
-  $searchInput.on('focus click', function () {
+  $searchInput.on('focus click', function() {
     closeSidebar()
     closeDropdown()
     showSearchResults()
@@ -150,11 +150,11 @@ $(function () {
   ]
   const $inputs = $(touchableInputs.join(','))
 
-  $inputs.on('touchstart', function () {
+  $inputs.on('touchstart', function() {
     zoomDisable()
   })
 
-  $inputs.on('touchend', function () {
+  $inputs.on('touchend', function() {
     setTimeout(zoomEnable, 500)
   })
 
@@ -186,15 +186,15 @@ $(function () {
 
       $list.append(
         '<li>' +
-        '<a href="' + result.url + '">' +
-        '<div class="icon">' +
-        '<img src="{{ site.baseurl }}/images/sets/' + category + '.svg" />' +
-        '</div>' +
-        '<div>' +
-        '<span class="title">' + result.title + '</span>' +
-        '<span class="description">' + getPreview(userInput, result.content, 120) + '</span>' +
-        '</div>' +
-        '</a>' +
+          '<a href="' + result.url + '">' +
+            '<div class="icon">' +
+              '<img src="{{ site.baseurl }}/images/sets/' + category + '.svg" />' +
+            '</div>' +
+            '<div>' +
+              '<span class="title">' + result.title + '</span>' +
+              '<span class="description">' + getPreview(userInput, result.content, 120) + '</span>' +
+            '</div>' +
+          '</a>' +
         '</li>'
       )
     }
@@ -202,7 +202,7 @@ $(function () {
     if (items.length > limit) {
       $list.append(
         '<li class="more-results">' +
-        '<a href="{{ site.baseurl }}/search/?q=' + userInput + '">See more results</a>' +
+          '<a href="{{ site.baseurl }}/search/?q=' + userInput + '">See more results</a>' +
         '</li>'
       )
     }
@@ -210,26 +210,26 @@ $(function () {
     if (results.length === 0) {
       $list.append(
         '<li class="no-results">' +
-        '<div class="image">' +
-        '{% include search-big.svg %}' +
-        '</div>' +
-        '<strong>Sorry, we couldn\'t find any matches</strong>' +
-        '<span>Try searching for a different keyword</span>' +
+          '<div class="image">' +
+            '{% include search-big.svg %}' +
+          '</div>' +
+          '<strong>Sorry, we couldn\'t find any matches</strong>' +
+          '<span>Try searching for a different keyword</span>' +
         '</li>'
       )
     }
 
     $list.find('li:not(.no-results)')
-      .mouseenter(function () {
+      .mouseenter(function() {
         $list.find('li.selected').removeClass('selected')
         $(this).addClass('selected')
       })
-      .mouseleave(function () {
+      .mouseleave(function() {
         $(this).removeClass('selected')
       })
   }
 
-  $searchInput.keydown(function (event) {
+  $searchInput.keydown(function(event) {
     const $list = $headerSearch.find('.search-results')
     const $selected = $list.find('li.selected')
 
@@ -275,7 +275,7 @@ $(function () {
 
   let fetching = false
 
-  $searchInput.on('input', function () {
+  $searchInput.on('input', function() {
     if (fetching) return
 
     if (window.data) {
@@ -286,7 +286,7 @@ $(function () {
     fetching = true
     $headerSearch.addClass('fetching')
 
-    $.getJSON('{{ site.baseurl }}/data.json?{{ site.time | date: "%s%N" }}', function (data) {
+    $.getJSON('{{ site.baseurl }}/data.json?{{ site.time | date: "%s%N" }}', function(data) {
       fetching = false
       $headerSearch.removeClass('fetching')
 
@@ -304,19 +304,19 @@ $(function () {
     $sidebar.removeClass('open')
   }
 
-  $sidebarDropdown.click(function (event) {
+  $sidebarDropdown.click(function(event) {
     event.preventDefault()
     $sidebar.addClass('open')
     $('body').addClass('modal-open')
   })
 
-  $sidebar.find('.close').click(function (event) {
+  $sidebar.find('.close').click(function(event) {
     event.preventDefault()
     closeSidebar()
     $('body').removeClass('modal-open')
   })
 
-  $sidebar.find('.toggle-item').click(function (event) {
+  $sidebar.find('.toggle-item').click(function(event) {
     event.preventDefault()
     const data = $(event.target).attr('data-toggle')
     $('.toggle[data-id!="' + data + '"]').hide('fast')
@@ -346,7 +346,7 @@ $(function () {
     headings[i].appendChild(anchorLink)
   }
 
-  $('a[href*=\\#]').not('.no-smooth').on('click', function () {
+  $('a[href*=\\#]').not('.no-smooth').on('click', function() {
     const $el = $(this.hash)
     if ($el.length > 0) {
       $('html,body').animate({ scrollTop: $el.offset().top - 30 }, 500)
@@ -360,7 +360,7 @@ $(function () {
     $('.select-language').removeClass('visible')
   }
 
-  $('select#lang').on('change', function () {
+  $('select#lang').on('change', function() {
     const value = $(this).val()
     dismissLanguageBar()
     $('select#lang').val(value)
@@ -376,7 +376,7 @@ $(function () {
     document.location.href = sites[value] + document.location.pathname
   })
 
-  $('.select-language .dismiss').click(function () {
+  $('.select-language .dismiss').click(function() {
     dismissLanguageBar()
   })
 
@@ -406,11 +406,11 @@ $(function () {
     $textarea.click()
   }
 
-  $feedback.find('.yes').click(function () {
+  $feedback.find('.yes').click(function() {
     sendingFeedback('yes')
   })
 
-  $feedback.find('.no').click(function () {
+  $feedback.find('.no').click(function() {
     sendingFeedback('no')
   })
 
@@ -426,9 +426,9 @@ $(function () {
     }
 
     {% if jekyll.environment == 'production' and site.segment_write_key != '' %}
-    analytics.track('Article Feedback', payload)
+      analytics.track('Article Feedback', payload)
     {% else %}
-    console.log(payload)
+      console.log(payload)
     {% endif %}
 
     $send.prop({ disabled: true })
@@ -438,26 +438,26 @@ $(function () {
       .addClass('sent')
   }
 
-  $send.click(function () {
+  $send.click(function() {
     sendFeedback(true)
   })
 
-  $feedback.find('.skip').click(function () {
+  $feedback.find('.skip').click(function() {
     sendFeedback(false)
   })
 
-  $textarea.on('click', function () {
+  $textarea.on('click', function() {
     zoomDisable()
     $input.focus()
   })
 
-  $input.on('keydown keyup', function (event) {
+  $input.on('keydown keyup', function(event) {
     const value = event.target.value;
     $send.prop({ disabled: value.trim().length === 0 })
     $mirror.text(value)
   })
 
-  $input.on('keydown', function (event) {
+  $input.on('keydown', function(event) {
     switch (event.key) {
       case 'Enter':
         if (!$send.attr('disabled')) {
@@ -470,7 +470,6 @@ $(function () {
   })
 
   // SCROLLABLE TABLES ==>
-
   $('.tutorial-main table').wrap('<div class="scrollable"></div>')
 
   // TOPBAR ==>
@@ -483,4 +482,28 @@ $(function () {
     $('.top').addClass('visible')
   }
 
+  // Fetch CLI release notes
+  const cliDiv = document.getElementById('cli-releases')
+
+  if(cliDiv) {
+    fetch('https://api.github.com/repos/decentraland/cli/releases')
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      const converter = new showdown.Converter()
+      const releases = data
+        .filter(release => !release.prerelease)
+        .map(release => ({
+          version: release.tag_name,
+          notes: converter.makeHtml(release.body.indexOf('Credits') !== -1
+            ? release.body.substring(0, release.body.indexOf('Credits'))
+            : release.body)
+        }))
+        .filter(release => release.notes && release.notes.trim() !== '')
+      const text = releases.map(({ version, notes }) => `<h2>${version}<h2><div>${notes}</div>`)
+      console.log(text)
+      document.getElementById('cli-releases').innerHTML = releases.map(({ version, notes }) => `<h1>${version}:</h1><div>${notes}</div>`).join('')
+    })
+  }
 })

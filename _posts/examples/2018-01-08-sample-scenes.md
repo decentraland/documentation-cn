@@ -21,9 +21,20 @@ set_order: 1
 
 ![](/images/media/example-static.png)
 
-[代码](https://github.com/decentraland/sample-scene-static-xml)
+[代码](https://github.com/decentraland-scenes/XML-static-scene)
 
 ## 基础
+
+#### 具有动画的静态场景
+
+显示一个具有移动的蝴蝶，火焰等的动画的 3D 模型的静态场景。
+
+![](/images/media/example-muna.png)
+
+[代码](https://github.com/decentraland-scenes/the-munastery)
+
+[浏览场景](https://the-munastery-lwbodqmcwg.now.sh/?position=-13%2C-14)
+
 
 #### 催眠轮
 
@@ -42,6 +53,8 @@ set_order: 1
 
 [浏览场景](https://hypno-wheels-owyfnqfimw.now.sh/?position=0%2C-1)
 
+[有关此场景的教程](https://decentraland.org/blog/tutorials/intro-to-sdk-v5) 
+
 #### 动画鲨鱼
 
 介绍了如何将动画添加到 `GLTFComponent` 并处理单击事件。
@@ -56,6 +69,11 @@ set_order: 1
 
 [浏览场景](https://shark-animation-xriykgapld.now.sh/)
 
+有关此场景的教程:
+
+- [第一部分]((https://decentraland.org/blog/tutorials/motion-animations-in-SDK-5))
+- 第二部分 (即将发布)
+
 #### 可打开的门
 
 一个简单的交互式场景，可以打开和关闭一扇门。
@@ -67,7 +85,7 @@ set_order: 1
  - 自定义组件
  - 组件组
 
-![](/images/home/door.png)
+![](/images/media/example-door.png)
 
 [代码](https://github.com/decentraland-scenes/Open-door)
 
@@ -145,7 +163,7 @@ set_order: 1
 
 单击树会生成蜂鸟。 每只鸟自己随机移动位置。
 
-![](/images/home/hummingbirds.png)
+![](/images/media/example-hummingbirds.png)
 
 [代码](https://github.com/decentraland-scenes/Hummingbirds)
 
@@ -184,7 +202,7 @@ set_order: 1
 - 创建 REST 服务
 - 调用 REST API
 
-![](/images/home/door.png)
+![](/images/media/example-door.png)
 
 [代码](https://github.com/decentraland-scenes/Remote-door)
 
@@ -201,6 +219,9 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Remote-mural)
 
+<!--
+ [Explore the scene]()		 [Explore the scene]()
+-->
 
 ## 高级示例
 

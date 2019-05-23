@@ -36,7 +36,6 @@ CLI 可以让你在本地编译和预览场景。场景在本地测试后，您�
 > **注意**: 在安装 CLI 之前，请安装以下的依赖项目：
 >
 > - [Node.js](https://github.com/decentraland/cli#nodejs-installation) (version 8)
-> - [Python 2.7.x](https://www.python.org/downloads/)
 
 请在命令行工具中运行以下命令安装 CLI：
 

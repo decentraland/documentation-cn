@@ -8,6 +8,8 @@ redirect_from:
   - /docs/command-line-interface/
   - /docs/sdk-quick-start-guide/
   - /sdk-reference/introduction/
+  - /decentraland/SDK-Overview/
+  - /sdk-reference/SDK-Overview/
 categories:
   - getting-started
 type: Document
