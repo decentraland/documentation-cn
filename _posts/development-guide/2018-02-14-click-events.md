@@ -73,10 +73,6 @@ input.subscribe("BUTTON_UP", e => {
 })
 ```
 
-Both the`BUTTON_DOWN` and the `BUTTON_UP` events contain various properties that might be useful for the function. See [Properties of button events](#properties-of-button-events) for more details.
-
-> Note: This code only needs to be executed once for the `subscribe()` method to keep polling for the event. Don't add this into a system's `update()` function, as that would register a new listener on every frame.
-
 `BUTTON_DOWN` 和 `BUTTON_UP` 事件都包含有函数可能需要的各种属性。 有关详细信息，请参阅[按钮事件的属性](#properties-of-button-events)。
 
 > 注意：这个代码只需要执行 `subscribe()` 方法一次，以保持对事件的轮询。 不要将它添加到系统的 `update()` 函数中，因为这会在每个帧上注册一个新的监听器。

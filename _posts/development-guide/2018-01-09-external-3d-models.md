@@ -224,16 +224,6 @@ show how to change a model with an unsopported shader. Delete material, create n
 
 3D 模型是由三角形的 _面_ 组成的 _网格_。 这些面交叉形成 _边_（面跟面交叉形成的线）和 _点_ 。
 
-#### Scene limits
-
-All 3D models in your scene must fit within the limits of its parcels. If they extend beyond these limits when running a preview, the meshes will be marked in red and bounding boxes will be highlighted in white.
-
-For performance reasons, Decentraland checks the positions of the _bounding boxes_ around meshes (not the vertices in the meshes themselves) to verify that they are within the scene's limits. 
-
-If you have a model that has all of its vertices neatly inside the scene area, but that has large bounding boxes that are mostly empty and extend beyond the scene limits, the entire model will be marked as outside the scene limits.
-
-To avoid this problem, you can clean up your 3D models to reset positions and rotations of meshes so that bounding boxes don't extend beyond the meshes they wrap.
-
 #### 场景限制
 
 场景中的所有 3D 模型都必须符合其土地的限制。 如果超出限制，在运行预览时则网格将标记为红色，边界框将以白色突出显示。
@@ -315,8 +305,6 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 - 所有 collider 对象名称必须以 \__collider_结尾。例如，_tree_collider_。
 
-- If you use a _plane_ as a collider, it will only block in one direction. If you want colliders to block from both sides, for example for a wall, you need to create two planes with their normals facing in opposite directions.
-
 - 如果使用 _plane_ 作为 collider，它只能在一个方向上阻挡用户。 如果您希望 collider 可以在两侧阻挡，例如墙壁，则需要创建两个 _plane_，其法线朝向相反的方向。
 
 - 复制 collider 对象时，请注意其名称。有些程序会在文件名的末尾附加一个 \__1_ 以避免重复，例如_tree_collider_1_。像这样命名的物体将被 Decentraland 的虚拟世界引擎解释为普通物体，而不是 collider。
@@ -326,10 +314,6 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 ## 动画
 
 可以使用 animations 在 Decentraland 场景中对 3D 模型进行动画处理。 3D 模型的所有动画必须嵌入其 _glTF_ 文件中，您不能在单独的文件中引用动画。
-
-Most 3D model animations are [_skeletal animations_](https://en.wikipedia.org/wiki/Skeletal_animation). These animations simplify the complex geometry of the model into a "stick figure", linking every vertex in the mesh to the closest _bone_ in the _skeleton_. Modelers adjust the skeleton into different poses, and the mesh stretches and bends to follow these movements.
-
-As an alternative, _vertex animations_ animate a model without the need of a skeleton. These animations specify the position of each vertex in the model directly. Decentraland supports these animations as well.
 
 大多数3D模型动画都是[骨骼动画](https://en.wikipedia.org/wiki/Skeletal_animation)。 这些动画将模型的复杂几何形状简化为“剪贴画”，将网格中的每个顶点链接到骨架中最近的骨骼。 建模者将骨架调整为不同的姿势，网格伸展和弯曲以跟随这些运动。
 
