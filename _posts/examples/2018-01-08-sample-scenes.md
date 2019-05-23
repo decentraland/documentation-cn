@@ -13,6 +13,19 @@ set_order: 1
 
 其中一些场景还有部署在远程服务器上的链接。 点击后可以直接交互，就像在本地运行 `dcl start` 一样。
 
+## 克隆示例场景
+
+可以克隆现有的示例场景来开始项目，而不是从头开始创建新场景。
+
+为此：
+
+1. 从下面列出的示例中找到您喜欢的示例。
+2. 点击 **代码** 链接访问 GitHub 仓库。
+3. 从那里你可以：
+   1. _Fork 代码_ 克隆到自己的 GitHub 仓库中，然后在你自己的版本中修改。
+   2. 单击 **Clone or Download** 然后下载为 _.zip_ 文件，这样在本地处理文件，而不涉及GitHub。
+
+<!--
 ## 静态 XML 场景
 
 #### 静态 XML 场景
@@ -22,6 +35,7 @@ set_order: 1
 ![](/images/media/example-static.png)
 
 [代码](https://github.com/decentraland-scenes/XML-static-scene)
+-->
 
 ## 基础
 
@@ -33,7 +47,7 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/the-munastery)
 
-[浏览场景](https://the-munastery-lwbodqmcwg.now.sh/?position=-13%2C-14)
+[浏览场景](https://the-munastery-bsapskmwaq.now.sh)
 
 
 #### 催眠轮
@@ -89,6 +103,7 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Open-door)
 
+[浏览场景](https://open-door-gssoyhoyrt.now.sh)
 
 #### 滑行门
 
@@ -124,7 +139,9 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Jukebox)
 
+<!--
 [浏览场景]()
+-->
 
 #### 舞池
 一个有动画、声音和的变色地板的场景，地板会根据节拍随机改变颜色。
@@ -140,7 +157,19 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Dance-floor)
 
+<!--
 [浏览场景]()
+-->
+
+#### 烟雾
+
+此场景演示如何用粒子系统来创建烟雾。每个烟雾是一个沿特定方向移动的实体。这些实体在对象池中重用，而不是创建新实体。当一个实体浮动远离火焰时，它将从场景中移除并在对象池中等待重用。
+
+![](/images/media/example-smoke.png)
+
+[代码](https://github.com/decentraland-scenes/Smoke)
+
+[浏览场景](https://smoke-iqntujtjgb.now.sh)
 
 #### 记忆游戏
 
@@ -156,6 +185,9 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Memory-game)
 
+<!--
+[Explore the scene]()
+-->
 
 ## 动作
 
@@ -179,6 +211,17 @@ set_order: 1
 
 [浏览场景](https://gnark-patrol-azhbtehsge.now.sh/)
 
+#### 游泳的鲨鱼
+
+场景展示了鲨鱼在一个弯曲的圆形路径上绕圈，每部分路径使用 lerp。并通过一个球形的 lerp函数平滑地旋转。
+
+鲨鱼的速度和游动的强度取决于这一段曲线的陡度。
+
+![](/images/media/example-shark-animation.png)
+
+[Code](https://github.com/decentraland-scenes/Swimming-shark)
+
+[Explore the scene](https://swimming-shark-mfakqegnto.now.sh)
 
 ## 网络联接
 
@@ -206,7 +249,6 @@ set_order: 1
 
 [代码](https://github.com/decentraland-scenes/Remote-door)
 
-
 #### 壁画
 
 使用服务器和 REST API 在多个用户之间同步场景状态的场景。 您可以在壁画中绘制像素，同时其他用户也可以看到。 每个像素的颜色存储在远程服务器中。
@@ -220,8 +262,30 @@ set_order: 1
 [代码](https://github.com/decentraland-scenes/Remote-mural)
 
 <!--
- [Explore the scene]()		 [Explore the scene]()
+[Explore the scene]()
 -->
+
+## 区块链交易
+
+#### MANA 交易
+
+使用 MANA 智能合约和 EthConnect 库在 Ropsten 测试网络上发送 MANA 给用户。
+
+[代码](https://github.com/decentraland-scenes/MANA-Transaction)
+
+[浏览场景](https://mana-transaction-sxjmryeayj.now.sh)
+
+#### MANA 祭坛
+
+虚拟市场收取的手续费用存储在钱包中。这个场景与 MANA 合同相互作用，将这些 MANA 燃烧销毁。
+
+火焰被作为一个粒子系统，用以处理各个旋转并变换颜色的实体。
+
+![](/images/media/example-mana-altar.png)
+
+[代码](https://github.com/decentraland-scenes/MANA-Burning-Altar)
+
+[浏览场景](https://mana-altar-master-iehcppnlvz.now.sh/)
 
 ## 高级示例
 

@@ -65,7 +65,9 @@ dcl start
 
 使用代码编辑器打开场景文件夹中的 `src/game.ts` 文件。
 
-```tsx
+> 提示：我们建议使用如[Visual Studio Code](https://code.visualstudio.com/)或[Atom](https://atom.io/)这样的源代码编辑器。 可以帮助您标记语法错误，自动完成，甚至可以提示基于上下文的智能建议。 还可以单击对象以查看其类的完整定义。
+
+```ts
 /// --- Set up a system ---
 
 class RotatorSystem {
@@ -76,7 +78,7 @@ class RotatorSystem {
     // iterate over the entities of the group
     for (let entity of this.group.entities) {
       // get the Transform component of the entity
-      const transform = entity.get(Transform)
+      const transform = entity.getComponent(Transform)
 
       // mutate the rotation
       transform.rotate(Vector3.Up(), dt * 10) 
@@ -94,10 +96,10 @@ function spawnCube(x: number, y: number, z: number) {
   const cube = new Entity()
 
   // set a transform to the entity
-  cube.add(new Transform({ position: new Vector3(x, y, z) }))
+  cube.addComponent(new Transform({ position: new Vector3(x, y, z) }))
 
   // set a shape to the entity
-  cube.add(new BoxShape())
+  cube.addComponent(new BoxShape())
 
   // add the entity to the engine
   engine.addEntity(cube)
@@ -109,10 +111,10 @@ function spawnCube(x: number, y: number, z: number) {
 
 const cube = spawnCube(5, 1, 5)
 
-cube.add(
+cube.addComponent(
   new OnClick(() => {
-    cube.get(Transform).scale.z *= 1.1
-    cube.get(Transform).scale.x *= 0.9
+    cube.getComponent(Transform).scale.z *= 1.1
+    cube.getComponent(Transform).scale.x *= 0.9
 
     spawnCube(Math.random() * 8 + 1, Math.random() * 8, Math.random() * 8 + 1)
   })
@@ -131,8 +133,8 @@ cube.add(
 
 ```tsx
 let avocado = new Entity()
-avocado.add(new GLTFShape("models/avocado.gltf"))
-avocado.add(new Transform({ 
+avocado.addComponent(new GLTFShape("models/avocado.gltf"))
+avocado.addComponent(new Transform({ 
     position: new Vector3(3, 1, 3), 
     scale: new Vector3(10, 10, 10)
     }))
@@ -143,12 +145,17 @@ engine.addEntity(avocado)
 
 ![](/images/media/landing_avocado_in_scene.png)
 
-添加的行创建了一个新的[实体]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %})，然后给了它一个基于您下载的 3D 模型的[形状]({{ site.baseurl }}{% post_url /development-guide/2018-02-6-shape-components %})，并[设置了位置]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %})。
+添加的行创建了一个新的[实体]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %})，然后给了它一个基于您下载的 3D 模型的[形状]({{ site.baseurl }}{% post_url /development-guide/2018-02-6-shape-components %})，并[设置了位置和缩放]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %})。
 
-请注意，您添加的鳄梨会旋转，就像场景中的所有其他实体一样。 那是因为在这个场景中定义的 `RotatorSystem` [系统]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %})遍历了场景中的所有实体然后将它旋转。
+请注意，您添加的鳄梨会旋转，就像场景中的所有其他实体一样。 那是因为在这个场景的默认代码中定义的 `RotatorSystem` [系统]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %})遍历了场景中的所有实体然后将它旋转。
 
 要深入了解 Decentraland 场景的运作方式，请阅读[场景开发]({{ site.baseurl }}{% post_url /getting-started/2018-01-02-coding-scenes %}) 。
 
+有关向场景添加内容的更多说明，请参阅**开发指南**部分。
+
+## 发布场景
+
+创建场景完成后要将其上传到 LAND ，请参阅[发布]({{ site.baseurl }}{% post_url /deploy/2018-01-07-publishing %})。
 
 ## 场景示例
 

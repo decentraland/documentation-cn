@@ -224,6 +224,16 @@ show how to change a model with an unsopported shader. Delete material, create n
 
 3D 模型是由三角形的 _面_ 组成的 _网格_。 这些面交叉形成 _边_（面跟面交叉形成的线）和 _点_ 。
 
+#### 场景限制
+
+场景中的所有 3D 模型都必须符合其土地的限制。 如果超出限制，在运行预览时则网格将标记为红色，边界框将以白色突出显示。
+
+出于性能原因，Decentraland 检查网格周围的 _bounding boxes_ 的位置（不是网格本身中的顶点），以验证它们是否在场景的限制范围内。
+
+如果您的模型的所有顶点都位于场景区域内，但是它有很大的边界框，这些边界框大部分是空的，并且超出了场景限制，那么整个模型将被标记为超出场景限制。
+
+为避免此问题，您可以清理 3D 模型以重置网格的位置和旋转，以便边界框不会延伸到它们包裹的网格之外。
+
 #### 平滑形状
 
 您可以将网格配置为 _smooth_。这告诉引擎在渲染形状时，如同是用无数个中间面围绕形成的。此设置可以极大地帮助您减少圆角形状的三角形数量。
@@ -295,8 +305,6 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 - 所有 collider 对象名称必须以 \__collider_结尾。例如，_tree_collider_。
 
-- If you use a _plane_ as a collider, it will only block in one direction. If you want colliders to block from both sides, for example for a wall, you need to create two planes with their normals facing in opposite directions.
-
 - 如果使用 _plane_ 作为 collider，它只能在一个方向上阻挡用户。 如果您希望 collider 可以在两侧阻挡，例如墙壁，则需要创建两个 _plane_，其法线朝向相反的方向。
 
 - 复制 collider 对象时，请注意其名称。有些程序会在文件名的末尾附加一个 \__1_ 以避免重复，例如_tree_collider_1_。像这样命名的物体将被 Decentraland 的虚拟世界引擎解释为普通物体，而不是 collider。
@@ -305,15 +313,15 @@ Colliders 目前不会影响模型和实体之间的相互作用，它们可以�
 
 ## 动画
 
-可以使用骨骼动画在 Decentraland 场景中对 3D 模型进行动画处理。 3D 模型的所有动画必须嵌入其 _glTF_ 文件中，您不能在单独的文件中引用动画。
+可以使用 animations 在 Decentraland 场景中对 3D 模型进行动画处理。 3D 模型的所有动画必须嵌入其 _glTF_ 文件中，您不能在单独的文件中引用动画。
 
-目前，不支持不基于 armatures （骨架）的其他形式的动画。
+大多数3D模型动画都是[骨骼动画](https://en.wikipedia.org/wiki/Skeletal_animation)。 这些动画将模型的复杂几何形状简化为“剪贴画”，将网格中的每个顶点链接到骨架中最近的骨骼。 建模者将骨架调整为不同的姿势，网格伸展和弯曲以跟随这些运动。
+
+作为一种替代方法，_vertex 动画_不需要骨架。这些动画直接指定模型中每个顶点的位置。Decentraland 也支持这些动画。
 
 关于动画必须具有的名称没有具体规则。您可以通过使用文本编辑器打开 _.gltf_ 文件的内容来验证导出模型中动画的名称。通常，动画名称由其 armature 名称，下划线及其动画名称组成。例如`myArmature_animation1`。
 
 您可以在 _glTF 模型中包含任意数量的动画。在将模型加载到 Decentraland 场景时，默认情况下，_glTF_ 模型中的所有动画都是不可用的。有关如何激活和处理场景中动画的说明，请参阅[3D 模型动画]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %})。
-
-> 注意：目前无法更改场景中显示的动画的帧速率，速度固定为默认设置。要更改动画的速度，您必须更改帧数。
 
 在 Decentraland 场景中，您可以使用 `weight` 来混合多个动画或使动画更精细。
 

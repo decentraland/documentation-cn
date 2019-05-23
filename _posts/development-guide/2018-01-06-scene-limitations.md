@@ -147,6 +147,10 @@ executeTask(async () => {
 
 运行预览时，位于土块边界外的任何内容在渲染时都会以红色突出显示。如果内容超出这些边界，将不允许将场景部署到 Decentraland。
 
+如果大物体的尖端离开边界，则该对象也被视为超出边界。
+
+单个土地场景尺寸为 16米 x 16米。 如果场景具有多个连块土地，则尺寸会根据土地的排列而有所不同。
+
 ## Shader 限制
 
 在 decentraland 中使用的 3D 模型必须使用支持的 shaders 和材质。有关支持的着色器列表，请参阅 [3D 模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}) 。
