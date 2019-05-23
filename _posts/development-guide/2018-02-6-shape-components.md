@@ -35,7 +35,7 @@ Decentraland 中的三维场景是基于[实体 - 组件](https://en.wikipedia.o
 
 ```ts
 
-myEntity.add(new SphereShape())
+myEntity.addComponent(new SphereShape())
 
 ```
 
@@ -46,7 +46,7 @@ myEntity.add(new SphereShape())
 
 let shpere = new SphereShape()
 
-myEntity.add(sphere)
+myEntity.addComponent(sphere)
 
 ```
 
@@ -60,7 +60,7 @@ myEntity.add(sphere)
 
 ```ts
 
-myEntity.add(new GLTFShape("models/House.gltf"))
+myEntity.addComponent(new GLTFShape("models/House.gltf"))
 
 ```
 
@@ -119,7 +119,7 @@ Decentraland 目前没有物理引擎，因此如果实体需要掉落、碰撞�
   ```ts
   let box = new BoxShape()
   box.withCollisions = true
-  myEntity.add(box)
+  myEntity.addComponent(box)
   ```
 
 > 注意：Planes 仅阻止一个方向的移动。
@@ -142,8 +142,8 @@ _collider_ 可以是一组几何形状或平面，用来定义模型的哪些部
 
 ```ts
 const myEntity = new Entity()
-myEntity.add(new BoxShape())
-myEntity.get(BoxShape).visible = false
+myEntity.addComponent(new BoxShape())
+myEntity.getComponent(BoxShape).visible = false
 ```
 
 ## 优化 3D 模型
@@ -154,9 +154,9 @@ myEntity.get(BoxShape).visible = false
 
 - 如果您有多个共享相同纹理的模型，请将纹理导出到一个单独的文件中。这样多个模型可以使用仅需要加载一次的单个纹理文件。
 
-- 如果您有多个使用相同 3D 模型且没有动画的实体，可以仅实例化一个 `GLTFShape` 组件，然后将相同的组件分配给需要使用它的实体。
+- 如果有多个实体使用相同 3D 模型，可以仅实例化一个 `GLTFShape` 组件，然后将相同的组件分配给需要使用它的实体。
 
-- 如果您的场景中有实体经常显示和消失，最好将这些实体集中在一起，保持已定义，然后在需要时从引擎中删除。这有助于更快显示，缺点是在不使用时它们也会占用内存。请参阅({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}#pooling-entities-and-components)
+- 如果您的场景中有实体经常显示和消失，最好将这些实体集中在一起，保持已定义，然后在需要时从引擎中删除。这有助于更快显示，缺点是在不使用时它们也会占用内存。请参阅[实体和组件]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}#pooling-entities-and-components)
 
 ## 复用形状
 
@@ -176,11 +176,11 @@ const mySecondEntity = new Entity()
 const myThirdEntity = new Entity()
 
 // Assign shape component to entities
-myEntity.add(house)
-mySecondEntity.add(house)
-myThirdEntity.add(house)
+myEntity.addComponent(house)
+mySecondEntity.addComponent(house)
+myThirdEntity.addComponent(house)
 ```
 
 共享形状的每个实体可以应用不同的比例、旋转或甚至材质（在基本形状的情况下），而不影响其他实体的呈现方式。
 
-除了制作动画的 3D 模型之外，通常建议重复使用形状组件。如果您为在多个实体之间共享的 3D 模型设置动画，则所有实体将一起移动。如果您希望能够单独为实体设置动画，则每个实体都必须拥有一个单独的 `GLTFComponent` 来跟踪当前正在播放哪部分动画。
+共享使用同一个 3D 模型实例的实体也可以有独立运行的动画。每个组件必须有一个单独的 `Animator` 组件，以及单独的 `AnimationClip` 对象，以跟踪当前正在播放的动画的哪个部分。参见[3D 模型动画]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %})

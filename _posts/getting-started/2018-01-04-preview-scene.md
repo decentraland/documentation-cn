@@ -12,7 +12,7 @@ set_order: 5
 tag: introduction
 ---
 
-一旦你[构建了一个新场景]({{ site.baseurl }}{% post_url /getting-started/2018-01-03-create-scene %}) 或下载了[示例场景]({{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %}) ，你就可以在本地预览。
+一旦你[构建了一个新场景](https://docs.decentraland.org/#create-your-first-scene) 或下载了[示例场景]({{ site.baseurl }}{% post_url /examples/2018-01-08-sample-scenes %}) ，你就可以在本地预览。
 
 ## 开始前
 
@@ -109,7 +109,7 @@ dcl start
 
 ## 场景大小预览
 
-预览中显示的场景大小基于场景的配置，您在使用 CLI 构建场景时的设置。默认情况下，场景占用一个地块（10 x 10 米）。
+预览中显示的场景大小基于场景的配置，您在使用 CLI 构建场景时的设置。默认情况下，场景占用一个地块（16 x 16 米）。
 
 如果您构建的场景上传所用地块比预览的要多，则可以编辑 _scene.json_ 文件，在“parcels”字段中列出所需的多个地块。
 

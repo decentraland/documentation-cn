@@ -77,8 +77,10 @@ npm update -g decentraland
 2. 在此文件中，查找 `decentraland-ecs`：
    * 如果值为 `latest`，请保留。
    * 如果是数字或版本不是 SDK 的最新版本，请将其更改为`latest`。
+   <!--
    * 如果您的项目是[静态XML场景]({{ site.baseurl }}{% post_url /development-guide/2018-01-13-xml-static-scenes %})，则没有此字段配置。请将字段`decentraland-api`设置为`latest`。
-   * 如果你的场景使用 TypeScript 编写，你找不到字段`decentraland-ecs`，但能找到 `decentraland-api` 这个字段，那么你的项目是用 5.0 以前的旧版本编写的。使用 CLI 创建一个新项目并[手工迁移](https://decentraland.org/blog/tutorials/sdk-migration)。
+   -->
+   * 如果你找不到字段 `decentraland-ecs`，但能找到 `decentraland-api`，那么你的项目是用 5.0 以前的旧版本编写的。 使用 CLI 创建一个新项目并[手动迁移](https://decentraland.org/blog/tutorials/sdk-migration)。
 
 3. 从项目中删除文件 `package-lock.json` 和文件夹 `node-modules`。
 4. 使用`dcl start`运行场景预览。根据 `package.json` 中指定的版本，应该会自动重新安装所有的依赖项。

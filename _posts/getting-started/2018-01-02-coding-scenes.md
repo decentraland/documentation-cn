@@ -54,15 +54,17 @@ set_order: 4
 
 #### TypeScript (推荐)
 
-我们使用 [TypeScript（.tsx）](https://www.typescriptlang.org/docs/handbook/jsx.html) 创造场景。
+我们使用 [TypeScript（.ts）](https://www.typescriptlang.org/docs/handbook/jsx.html) 创造场景。
 
 TypeScript 是 JavaScript 的一个超集，因此如果您熟悉 JavaScript，您会发现它们几乎相同，但是 TypeScript 允许您使用面向对象的编程和类型声明。自动完成和类型检查等功能可以加快开发时间，并能创建可靠的代码库。这些功能是优秀的开发体验的关键组成部分。
 
+<!--
 #### XML
 
 对于仅呈现静态内容且不具有交互性的场景，可以使用 [XML](https://en.wikipedia.org/wiki/XML)。学习和使用 XML 会比较容易。
 
 我们鼓励开发人员使用 TypeScript 来构建他们的场景。 这会为场景带来更多有趣的可能。
+-->
 
 #### 其他语言
 
@@ -72,7 +74,7 @@ TypeScript 是 JavaScript 的一个超集，因此如果您熟悉 JavaScript，�
 
 部署到 LAND 的内容我们称为 **场景**。 场景是一个显示内容的交互式程序，它可以是游戏、互动体验、艺术画廊，或任何你想要的内容！
 
-场景被部署到 Decentraland 中的虚拟土地上，LAND 是一个保存在以太坊智能合约中的稀缺和不可替代的资产。场景可以部署到单个**地块**，一个 10 米乘 10 米的虚拟土地 LAND，也可以部署到由多块相邻地块组成的**连块土地**上。
+场景被部署到 Decentraland 中的虚拟土地上，LAND 是一个保存在以太坊智能合约中的稀缺和不可替代的资产。场景可以部署到单个**地块**，一个 16 米乘 16 米的虚拟土地 LAND，也可以部署到由多块相邻地块组成的**连块土地**上。
 
 我们正在开发允许用户探索 Decentraland 的 Web 客户端。您上传到 LAND 的所有内容都可以通过此客户端呈现和查看。我们在 SDK 中包含了一个预览工具，同时您可以预览、测试或与您的内容进行交互。
 
@@ -142,7 +144,7 @@ export class RotatorSystem implements ISystem {
   update() {
     // The function iterates over all the entities in myGroup
     for (let entity of myGroup.entities) {
-      const transform = entity.get(Transform)
+      const transform = entity.getComponent(Transform)
       transform.rotate(Vector3.Left(), 0.1)
     }
   }
@@ -155,12 +157,12 @@ engine.addSystem(new RotatorSystem())
 const cube = new Entity()
 
 // Give the entity a transform component
-cube.set(new Transform({
+cube.addComponent(new Transform({
     position: new Vector3(5, 1, 5)
   }))
 
 // Give the entity a box shape
-cube.set(new BoxShape())
+cube.addComponent(new BoxShape())
 
 // Add the entity to the engine
 engine.addEntity(cube)
