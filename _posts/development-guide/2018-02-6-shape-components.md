@@ -34,20 +34,15 @@ Decentraland 中的三维场景是基于[实体 - 组件](https://en.wikipedia.o
 要将组件应用于实体，可以在一个操作中实例化一个新组件并将其分配到实例：
 
 ```ts
-
 myEntity.addComponent(new SphereShape())
-
 ```
 
 也可以先创建组件实例，然后将其分配给实体。
 
 
 ```ts
-
 let shpere = new SphereShape()
-
 myEntity.addComponent(sphere)
-
 ```
 
 基本形状不包括材质。要为其指定颜色或纹理，可以将[材质组件]({{ site.baseurl }}{% post_url /development-guide/2018-02-7-materials %}) 添加给同一实体。
@@ -59,9 +54,7 @@ myEntity.addComponent(sphere)
 将外部模型添加到场景中，可以使用 `GLTFShape` 组件，将其 `src` 设置为包含模型的 glTF 文件的路径。
 
 ```ts
-
 myEntity.addComponent(new GLTFShape("models/House.gltf"))
-
 ```
 
 由于 `src` 字段是必需的，因此在构造组件时必须赋值。
@@ -83,17 +76,11 @@ myEntity.addComponent(new GLTFShape("models/House.gltf"))
 以下是免费或相对便宜的 3D 内容库：
 
 - [Google Poly](https://poly.google.com)
-
 - [SketchFab](https://sketchfab.com/)
-
 - [Clara.io](https://clara.io/)
-
 - [Archive3D](https://archive3d.net/)
-
 - [SketchUp 3D Warehouse](https://3dwarehouse.sketchup.com/)
-
 - [Thingiverse](https://www.thingiverse.com/) (主要用于 3D 打印，但适用于虚拟世界)
-
 - [ShareCG](https://www.sharecg.com/)
 
 > 注意：请注意您下载的内容许可。
@@ -126,9 +113,8 @@ Decentraland 目前没有物理引擎，因此如果实体需要掉落、碰撞�
 
 - 要在 _glTF_ 形状中启用碰撞，您可以：
 
-- 外面套一个基本形状的不可见实体，并将其 `withCollisions` 字段设置为 _true_。
-
-- 使用 Blender 等外部工具编辑模型，加一个 _collider 对象_。collider 必须命名为 _x_collider_，其中_x_是模型的名称。因此，对于名为 _house_ 的模型，collider 必须命名为 _house_collider_。
+  - 外面套一个基本形状的不可见实体，并将其 `withCollisions` 字段设置为 _true_。
+  - 使用 Blender 等外部工具编辑模型，加一个 _collider 对象_。collider 必须命名为 _x_collider_，其中_x_是模型的名称。因此，对于名为 _house_ 的模型，collider 必须命名为 _house_collider_。
 
 _collider_ 可以是一组几何形状或平面，用来定义模型的哪些部分是碰撞的。这样可以有更多的控制并且对系统的要求也低得多，因为碰撞对象通常比原始模型更简单（具有更少的顶点）。
 
@@ -151,11 +137,8 @@ myEntity.getComponent(BoxShape).visible = false
 要确保场景中的 3D 模型加载速度更快，占用的内存更少，请遵循以下最佳实践：
 
 - 以 _.glb_ 格式保存模型，这是 _.gltf_ 格式的轻量版本。
-
 - 如果您有多个共享相同纹理的模型，请将纹理导出到一个单独的文件中。这样多个模型可以使用仅需要加载一次的单个纹理文件。
-
 - 如果有多个实体使用相同 3D 模型，可以仅实例化一个 `GLTFShape` 组件，然后将相同的组件分配给需要使用它的实体。
-
 - 如果您的场景中有实体经常显示和消失，最好将这些实体集中在一起，保持已定义，然后在需要时从引擎中删除。这有助于更快显示，缺点是在不使用时它们也会占用内存。请参阅[实体和组件]({{ site.baseurl }}{% post_url /development-guide/2018-02-1-entities-components %}#pooling-entities-and-components)
 
 ## 复用形状
@@ -183,4 +166,4 @@ myThirdEntity.addComponent(house)
 
 共享形状的每个实体可以应用不同的比例、旋转或甚至材质（在基本形状的情况下），而不影响其他实体的呈现方式。
 
-共享使用同一个 3D 模型实例的实体也可以有独立运行的动画。每个组件必须有一个单独的 `Animator` 组件，以及单独的 `AnimationClip` 对象，以跟踪当前正在播放的动画的哪个部分。参见[3D 模型动画]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %})
+共享使用同一个 3D 模型实例的实体也可以有独立运行的动画。每个组件必须有一个单独的 `Animator` 组件，以及单独的 `AnimationState` 对象，以跟踪当前正在播放的动画的哪个部分。参见[3D 模型动画]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %})
