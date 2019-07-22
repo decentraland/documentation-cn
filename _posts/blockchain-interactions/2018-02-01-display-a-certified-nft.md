@@ -13,6 +13,8 @@ set_order: 4
 
 目前尚不支持此功能，但在路线图中。
 
+> 注意：作为一种解决方法，如果要显示通证，可以从[OpenSea's API](https://docs.opensea.io/reference#api-overview)获取 NFT 图像，并将其设置为材质的纹理。然后，就可以在场景中的任何基本对象上使用。
+
 <!---
 您可以在 Decentraland 场景中显示您拥有的 NFT（不能替换通证）。在 NFT 上方会出现一个发光的徽章，用以证明您确实拥有此通证。
 
@@ -59,7 +61,5 @@ The `NFTShape` component must be instanced with two parameters:
 每次 `NFTShape` 组件的实体添加到引擎时，用户加载场景时都会进行验证。
 
 在通证图像上方，会显示了一个用于验证真实性的徽章。这个闪烁的徽章构成了一个难以伪造的印章。
-
-> 注意：如果您想显示一个您并不拥有的通证，或者要在没有真品徽章的情况下显示，您可以从[OpenSea's API](https://docs.opensea.io/reference#api-overview) 获取 NFT 图像，并将其设置为材质的纹理。然后，就可以在场景中的任何基本对象上使用。
 
 --->
