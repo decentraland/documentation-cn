@@ -18,7 +18,7 @@ set_order: 12
 移动实体的最简单方法是使用 `translate()` 函数来更改存储在 `Transform` 组件中的_ position_ 值。
 
 ```ts
-export class SimpleMove {
+export class SimpleMove implements ISystem {
   update() {
     let transform = myEntity.getComponent(Transform)
     let distance = Vector3.Forward().scale(0.1)
@@ -50,7 +50,7 @@ engine.addEntity(myEntity)
 - 旋转量，[euler](https://en.wikipedia.org/wiki/Euler_angles) 度数（从 0 到 360）
 
 ```ts
-export class SimpleRotate {
+export class SimpleRotate implements ISystem {
   update() {
     let transform = myEntity.getComponent(Transform)
     transform.rotate(Vector3.Left(), 3)
@@ -58,6 +58,12 @@ export class SimpleRotate {
 }
 
 engine.addSystem(new SimpleRotate())
+
+const myEntity = new Entity()
+myEntity.addComponent(new Transform())
+myEntity.addComponent(new BoxShape())
+
+engine.addEntity(myEntity)
 ```
 
 > 提示：要使实体始终旋转以面向用户，您可以添加[`Billboard` 组件]({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %}#face-the-user)。
@@ -71,9 +77,10 @@ engine.addSystem(new SimpleRotate())
 旋转父实体时，其子项将全部使用父项的位置作为轴心点旋转。请注意，子实体的 `position` 是引用了父实体的 `position`。
 
 ```ts
+
 // Create entity you wish to rotate
 const myEntity = new Entity()
-myEntity.addComponent(redMaterial)
+
 myEntity.addComponent(new BoxShape())
 
 // Create the pivot entity
@@ -84,6 +91,9 @@ pivot.addComponent(new Transform({
   position: new Vector3(3, 2, 3)
 }))
 
+// add pivot entity
+engine.addEntity(pivot)
+
 // Set pivot as the parent
 myEntity.setParent(pivot)
 
@@ -92,12 +102,12 @@ myEntity.addComponent(new Transform({
   position: new Vector3(0, 0.5, 0.5)
 }))
 
-// Add both entities to the engine
+// Add child entity to the engine
 engine.addEntity(myEntity)
-engine.addEntity(pivot)
+
 
 // Define a system that updates the rotation on every frame
-export class PivotRotate {
+export class PivotRotate implements ISystem {
   update() {
     let transform = pivot.getComponent(Transform)
     transform.rotate(Vector3.Left(), 3 )
@@ -119,7 +129,7 @@ engine.addSystem(new PivotRotate())
 您可以使用 `dt` 参数来调整运动的比例来对这种不均匀的时间补偿。
 
 ```ts
-export class SimpleMove {
+export class SimpleMove implements ISystem {
   update(dt: number) {
     let transform = myEntity.get(Transform)
     let distance = Vector3.Forward.scale(dt * 3)
@@ -160,7 +170,7 @@ let newPos = Vector3.Lerp(originVector, targetVector, 0.6)
 
 ```ts
 @Component("lerpData")
-export class LerpData {
+export class LerpData implements ISystem {
   origin: Vector3 = Vector3.Zero()
   target: Vector3 = Vector3.Zero()
   fraction: number = 0
@@ -222,7 +232,7 @@ let newRotation = Scalar.Lerp(originRotation, targetRotation, 0.6)
 
 ```ts
 @Component('slerpData')
-export class SlerpData {
+export class SlerpData implements ISystem {
   originRot: Quaternion = Quaternion.Euler(0, 90, 0)
   targetRot: Quaternion = Quaternion.Euler(0, 0, 0)
   fraction: number = 0
@@ -291,7 +301,7 @@ export class LerpSizeData {
 }
 
 // a system to carry out the movement
-export class LerpSize {
+export class LerpSize implements ISystem {
   update(dt: number) {
     let transform = myEntity.getComponent(Transform)
     let lerp = myEntity.getComponent(LerpSizeData)
@@ -338,7 +348,7 @@ export class LerpData {
   fraction: number = 0
 }
 
-export class LerpMove {
+export class LerpMove implements ISystem {
   update(dt: number) {
     let transform = myEntity.getComponent(Transform)
     let lerp = myEntity.getComponent(LerpData)
@@ -379,7 +389,7 @@ export class PathData {
   nextPathIndex: number = 1
 }
 
-export class PatrolPath {
+export class PatrolPath implements ISystem {
   update(dt: number) {
     let transform = myEntity.getComponent(Transform)
     let path = myEntity.getComponent(PathData)
