@@ -109,7 +109,7 @@ let gray = Color3.FromHexString("#CCCCCCC")
 
 #### 颜色渐变
 
-可以使用 `.lerp()` 函数，在两种颜色之间使用线性插值逐渐改变颜色。
+可以使用 `.Lerp()` 函数，在两种颜色之间使用线性插值逐渐改变颜色。
 
 ```ts
 // This variable will store the ratio between both colors
@@ -125,7 +125,7 @@ const myMaterial = new Material()
 // This system changes the value of colorRatio every frame, and sets a new color on the material
 export class ColorSystem implements ISystem {
   update(dt: number) {
-    myMaterial.albedoColor = Color3.lerp(red, yellow, colorRatio)
+    myMaterial.albedoColor = Color3.Lerp(red, yellow, colorRatio)
     if (colorRatio < 1) {
       colorRatio += 0.01
     }

@@ -68,8 +68,7 @@ myTransform.position = new Vector3(5, 1, 5)
 
 - 一块土地组成的场景长 16 米 x 16 米。场景的中心(地面)位于`x:8, y:0, z:8`。如果场景由多块土地组成，那么中心将根据土地的排列而变化。
 
-- `x:0, y:0, z:0` refers to the _South-East_ corner of the scene's base parcel, at ground level.
-- `x:0, y:0, z:0` 位于场景基块的东南角，位于地面。
+- `x:0, y:0, z:0` 位于场景基块的西南角，位于地面。
 
   > 提示：查看场景预览时，场景的（0,0,0）点会有一个坐标，并且每轴都设有标签以供参考。
 

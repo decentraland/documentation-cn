@@ -170,8 +170,6 @@ engine.addEntity(cube)
 
 在上面的例子中，一个 `cube` 实体和一个 `RotatorSystem` 系统（system）被添加到引擎（engine）中。 `cube` 实体有一个 `Transform` 和一个 `BoxShape` 组件。 在游戏循环的每一帧中，会调用 `RotationSystem` 的 `update（）` 函数，改变 `cube` 实体的 `Transform` 组件中的旋转值。
 
-[DIAGRAM]
-
 请注意，加载场景时，上面的大多数代码只执行一次。 唯一的例外是系统的 `update（）` 方法，它会在游戏循环的每一帧中被调用。
 
 ## 场景隔离
