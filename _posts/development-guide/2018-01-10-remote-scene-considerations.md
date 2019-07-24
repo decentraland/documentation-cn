@@ -42,19 +42,19 @@ const sceneMessageBus = new MessageBus()
 
 box1.AddComponent(
   new OnClick(e => {
-    sceneMessageBus.emit("box1Clicked")
+    sceneMessageBus.emit("box1Clicked", {})
 }))
 
 ```
 
-每条消息的第二个参数可以包含您希望发送的任何相关数据，可以是任何类型。
+每条消息的第二个参数是一个 `Object` 类型，可以包含您希望发送的任何相关数据。
 
 ```ts
 const sceneMessageBus = new MessageBus()
 
 let spawnPos = new Vector3(5, 0, 5)
 
-sceneMessageBus.emit("spawn", spawnPos)
+sceneMessageBus.emit("spawn", {position: spawnPos })
 ```
 
 > 提示：如果需要单条消息来发送包含多个变量的数据，请创建一个自定义类型以将所有这些数据保存在单个对象中。
@@ -83,26 +83,6 @@ sceneMessageBus.on("spawn", (info: NewBoxPosition) => {
 此示例使用消息总线在每次单击主立方体时发送新消息，从而在随机位置生成新的立方体。 该消息包括新立方体的位置，以便所有玩家在相同位置看到这些新立方体。
 
 ```ts
-/// --- Set up a system ---
-
-class RotatorSystem {
-  // this group will contain every entity that has a Transform component
-  group = engine.getComponentGroup(Transform);
-  
-  update(dt: number) {
-     // iterate over the entities of the group
-    for (let entity of this.group.entities) {
-      // get the Transform component of the entity
-      const transform = entity.getComponent(Transform);
-  
-      // mutate the rotation
-      transform.rotate(Vector3.Up(), dt * 10);
-      }
-    }
-  }
-  
-  // Add a new instance of the system to the engine
-  engine.addSystem(new RotatorSystem());
   
   /// --- Spawner function ---
   

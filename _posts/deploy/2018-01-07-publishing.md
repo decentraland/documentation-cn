@@ -40,11 +40,7 @@ set_order: 7
 
 - **Base**：场景中视为[0,0]坐标的土地坐标。
 
-<!--
-- **Estate**: The ID of the estate you're deploying to. If you're deploying to a single parcel, this field isn't necessary.
-
-  > Note: To find your estate's id, open the estate's detail page in the Marketplace. The URL should include a number for the ID. For example if the URL is _market.decentraland.org/estates/84/detail_, the estate's ID is _84_.
--->
+> 注意：有关如何设置这些参数的更多详细信息，请参阅[场景元数据]({{ site.baseurl }}{% post_url /development-guide/2018-02-26-scene-metadata %})。
 
 ## 发布场景：
 
