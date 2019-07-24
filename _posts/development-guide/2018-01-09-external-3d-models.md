@@ -160,6 +160,18 @@ show how to change a model with an unsopported shader. Delete material, create n
 
 -->
 
+##### 默认纹理
+
+默认 Decentraland 资源库中（在场景编辑器中或作为可穿戴设备）的所有资源共享一组优化的平面纹理。 玩家在打开浏览器时会预先加载这些纹理，这样可以加快这些资源的加载。
+
+如果您构建自己的自定义 3D 模型并使用了这些 Decentraland 默认纹理，当玩家走到您的地块时，资源加载速度也会更快。
+
+这些纹理由纯色调色板组成，您可以将其映射到 3D 模型的不同部分。
+
+<img src="/images/media/MiniTown_TX.png" alt="Minitown texture" width="250"/>
+
+你可以在[这个库](https://github.com/decentraland/builder-assets/tree/master/textures)中找到Decentrlanad 全部的默认纹理。
+ 
 #### 纹理大小限制
 
 纹理大小必须使用与以下数字匹配的宽度和高度数字（以像素为单位）：
@@ -216,6 +228,7 @@ show how to change a model with an unsopported shader. Delete material, create n
 
 - 如果场景中包含有多个使用相同纹理的模型，请将纹理引用为外部文件，而不是将其嵌入到 3D 模型中。因为嵌入的纹理会在每个模型中复制，从而增加场景的大小。
    > 注意：在引用未嵌入的纹理的文件后，请确保不会移动或重命名该文件，否则将丢失对该文件的引用。 该文件也必须位于场景文件夹中，以便与场景一起上传。
+- 使用可由玩家预先加载的 Decentraland [默认纹理](https://github.com/decentraland/builder-assets/tree/master/textures)，能加快资源渲染速度。
 - 阅读[本文](https://www.khronos.org/blog/art-pipeline-for-gltf)，详细了解在 glTF 模型中使用 PBR 纹理的完整流程。
 - 在[cgbookcase](https://cgbookcase.com/) 上可以找到免费高质量 PBR 纹理。
 
