@@ -71,7 +71,7 @@ Decentraland 正致力于创建一种 _侧链_（一种特殊的区块链），�
 
 在 Decentraland 中，您可以使用通证来表示与您的游戏或体验相关的物品，例如武器或奖杯等。由于通证保存在用户的钱包中，它们可以在场景之间存在，因此每个场景可以选择是否以及如何对现有的通证作出反应。
 
-请阅读我们的博客[《什么是NFT》](https://decentraland.org/blog/technology/what-are-nfts)，以便更深入地了解不可互换的通证发展。
+请阅读我们的博客[《什么是NFT》](https://decentraland.org/blog/technology/what-are-nfts/)，以便更深入地了解不可互换的通证发展。
 
 #### 可互换通证
 
