@@ -226,13 +226,12 @@ cube.addComponent(new Transform())
 let transform = cube.getComponent(Transform)
 
 // Edit values in the component
-transform.position = (5, 0, 5)
+transform.position = new Vector3(5, 0, 5)
 
 `getComponent()` 函数取得组件对象的引用。 如果更改此函数返回的值，则表示您正在更改组件本身。 例如，在上面的例子中，我们将组件中存储的 `position` 设置为_(5, 0, 5)_。
 
 ```ts
-let XScale = cube.getComponent(Transform).scale.x
-XScale = Math.random() * 10
+cube.getComponent(Transform).scale.x = Math.random() * 10
 ```
 
 上面的示例直接修改 Transform 组件上缩放值 _x_ 。
@@ -419,7 +418,7 @@ const spawner = {
     // Add a transform component to the entity
     let t = ent.getComponentOrCreate(Transform)
     t.scale.setAll(0.5)
-    t.position = (5, 0, 5)
+    t.position.set(5, 0, 5)
 
     //add entity to engine
     engine.addEntity(ent)

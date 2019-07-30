@@ -16,6 +16,7 @@ set_order: 14
 
 > 注: 点击时距离实体最大可达 10 米。
 
+<!--
 ## OnPointerDown
 
 处理单击事件的最简单方法是将 `OnPointerDown` 组件添加到要单击的实体。
@@ -146,7 +147,7 @@ input.subscribe("BUTTON_DOWN", e => {
   }
 })
 ```
-
+-->
 
 ## OnClick
 
