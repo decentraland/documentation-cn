@@ -124,6 +124,7 @@ myTransform.rotation.eulerAngles = new Vector3(0, 90, 0)
 myEntity.getComponent(Transform).rotation.eulerAngles
 ```
 
+<!--
 ## 面向用户旋转
 
 将 _billboard_ 组件添加到实体，这样它会始终旋转实体来面对用户。
@@ -188,7 +189,7 @@ myTransform.lookAt(new Vector3(4, 1, 2))
 The `lookAt()` function has a second optional argument that sets the global direction for _up_ to use as reference. For most cases, you won't need to set this field.
 `lookAt()` 函数还有一个可选参数，用于设置up用作引用的全局方向设置要用作参考的全局方向。在大多数情况下，您无需设置此值。
 --->
-
+-->
 ## 缩放
 
 `scale` 也是一个_3D vector_，存储为 `Vector3` 对象，包括 _x_, _y_ 和 _z_ 轴上的缩放比例。无论是基本模型还是 3D 模型，实体的形状都会被相应地放大和缩小。

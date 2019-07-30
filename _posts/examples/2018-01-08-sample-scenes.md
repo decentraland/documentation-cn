@@ -67,7 +67,7 @@ set_order: 1
 
 [浏览场景](https://hypno-wheels-xmirhqdurz.now.sh)
 
-[有关此场景的教程](https://decentraland.org/blog/tutorials/intro-to-sdk-v5) 
+[有关此场景的教程](https://decentraland.org/blog/tutorials/intro-to-sdk-v5/) 
 
 ## 动画鲨鱼
 
@@ -206,8 +206,8 @@ set_order: 1
 [浏览场景]((https://gnark-patrol-ypvlmwbkhe.now.sh)
 
 博客教程:
-- [第 1 部分](https://decentraland.org/blog/tutorials/motion-animations-in-SDK-5))
-- [第 2 部分](https://decentraland.org/blog/tutorials/motion-animations-in-SDK-5-part-2)
+- [第 1 部分](https://decentraland.org/blog/tutorials/motion-animations-in-SDK-5/))
+- [第 2 部分](https://decentraland.org/blog/tutorials/motion-animations-in-SDK-5-part-2/)
 
 ## 游泳的鲨鱼
 

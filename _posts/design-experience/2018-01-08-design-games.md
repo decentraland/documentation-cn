@@ -158,7 +158,7 @@ SDK 的未来版本将支持工具包并包括具有实现 UI 小部件的更简
 
 **您可以使用特殊的不可替代通证（NFT）来表示游戏物品、自定义头像或可穿戴设备。**如果用户拥有其中一个通证，您的场景可以以不同方式对其进行响应。
 
-阅读[此博文](https://decentraland.org/blog/technology/what-are-nfts)中有关NFT的内容。
+阅读[此博文](https://decentraland.org/blog/technology/what-are-nfts/)中有关 NFT 的内容。
 
 #### 游戏内交易
 

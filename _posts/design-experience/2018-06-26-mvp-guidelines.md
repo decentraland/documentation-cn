@@ -123,7 +123,7 @@ set_order: 9
 
 即使 Decentraland 可供所有人使用，我们仍然建议在将新版本的场景上传到 Decentraland 之前，首先在单独的预览服务器中让测试用户先进行测试。
 
-阅读[此博文](https://decentraland.org/blog/tutorials/developer-tutorial-deploy-and-share-live-scene-previews)，了解有关如何将场景预览上传到免费服务器的详细信息。
+阅读[此博文](https://decentraland.org/blog/tutorials/developer-tutorial-deploy-and-share-live-scene-previews/)，了解有关如何将场景预览上传到免费服务器的详细信息。
 
 
 ## 其他考虑因素

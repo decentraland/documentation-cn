@@ -73,6 +73,8 @@ text.value = 'Hello world!'
 - `with`，`height`：设置屏幕中组件的大小。如果值为数字则以像素为单位。要将这些字段设置为父项测量值的百分比，请将值写为以 "%" 结尾的字符串，例如 `10 %`。
 
 ```ts
+const canvas = new UICanvas()
+
 const message = new UIText(canvas)
 message.value = 'Close UI'
 message.fontSize = 15
@@ -99,6 +101,8 @@ message.positionX = -80
 这两种形状都具有设置颜色和线条粗细的属性。
 
 ```ts
+const canvas = new UICanvas()
+
 const inventoryContainer = new UIContainerStack(canvas)
 inventoryContainer.adaptWidth = true
 inventoryContainer.width = '40%'
@@ -125,6 +129,8 @@ inventoryContainer.stackOrientation = UIStackOrientation.VERTICAL
 
 
 ```ts
+const canvas = new UICanvas()
+
 const scrollableContainer = new UIScrollRect(canvas)
 scrollableContainer.width = '50%'
 scrollableContainer.height = '50%'
@@ -145,6 +151,8 @@ scrollableContainer.onChanged = new OnChanged(() => {
 
 
 ```ts
+const canvas = new UICanvas()
+
 const rect = new UIContainerRect(canvas)
 rect.width = '100%'
 rect.height = '100%'
@@ -192,6 +200,8 @@ rect.opacity = 0.5
 let imageAtlas = "images/image-atlas.jpg"
 let imageTexture = new Texture(imageAtlas)
 
+const canvas = new UICanvas()
+
 const playButton = new UIImage(canvas, imageTexture)
 playButton.sourceLeft = 26
 playButton.sourceTop = 128
@@ -224,6 +234,8 @@ expandButton.sourceHeight = 128
 可点击 UI 元素还有一个 `OnClick` 属性，可以添加函数，以便在每次单击时执行。
 
 ```ts
+const canvas = new UICanvas()
+
 const clickableImage = new UIImage(canvas, new Texture('icon.png'))
 clickableImage.name = 'clickable-image'
 clickableImage.width = '92px'
@@ -251,6 +263,8 @@ clickableImage.onClick = new OnClick(() => {
 可以将输入框添加到 UI 用以输入文本。 添加 `UIInputText` 组件。 玩家必须先点击此框才能输入。
 
 ```ts
+const canvas = new UICanvas()
+
 const textInput = new UIInputText(canvas)
 textInput.width = '80%'
 textInput.height = '25px'
@@ -259,8 +273,7 @@ textInput.hAlign = 'center'
 textInput.fontSize = 10
 textInput.placeholder = 'Write message here'
 textInput.placeholderColor = Color4.Gray()
-textInput.positionX = '25px'
-textInput.positionY = '25px'
+textInput.positionY = '200px'
 textInput.isPointerBlocker = true
 
 textInput.onTextSubmit = new OnTextSubmit(x => {
@@ -346,6 +359,8 @@ engine.addEntity(uiTrigger)
 
 
 ```ts
+const canvas = new UICanvas()
+
 const close = new UIImage(canvas, new Texture('icon.png'))
 close.name = 'clickable-image'
 close.width = '120px'
