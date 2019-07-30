@@ -32,7 +32,7 @@ game.ts 是场景代码的入口点。您可以将整个场景的逻辑放入这
 以下是 _game.ts_ 文件的基本示例：
 
 ```ts
-// Create a component group to track entities with Transition components
+// Create a component group to track entities with Transform components
 let group = engine.getComponentGroup(Transform)
 
 // Create a system
@@ -94,7 +94,7 @@ _scene.json_ 是虚拟土地上场景的 JSON 格式清单文件。场景可以�
 
 请记住，将场景部署到 Decentraland 时，场景所需的任何资源或外部库都必须打包在场景文件夹中，或者通过远程服务器提供。
 
-任何要在用户的客户端中运行的东西都必须位于场景文件夹中。您不应该引用本地计算机在其他位置安装的库，因为对部署的场景它们不可用。
+任何要在用户的客户端中运行的东西都必须位于场景文件夹中。不能引用安装在本地计算机上的其它文件或库，因为部署的场景不能访问它们。
 
 我们建议始终使用这些文件夹名称来存储场景可能需要的不同类型的资源：
 

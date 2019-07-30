@@ -57,7 +57,7 @@ const myMaterial = new BasicMaterial()
 所有颜色字段都是 `Color3` 类型，它们包含三个值，分别为 _Red_，_Green_ 和 _Blue_。这些数字中的每一个都在 0 和 1 之间。
 
 ```ts
-myMaterial.albedoColor = new Color3.(0.5, 0, 0.5)
+myMaterial.albedoColor = new Color3(0.5, 0, 0.5)
 ```
 
 您还可以使用 `Color3` 对象的以下功能选择预定的颜色：
