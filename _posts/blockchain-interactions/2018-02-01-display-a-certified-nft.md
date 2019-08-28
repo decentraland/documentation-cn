@@ -24,6 +24,8 @@ NTF 的图像数据通过通证合约和 id 从 API 中获取。
 - HyperDragons
 - Chainbreakers
 - Chainguardians
+- Cryptomorph
+- Josie
 
 显示的相框大小会根据 NFT 图像的尺寸进行调整。如果图像是 512 X 512 像素，则相框会保持其原来的大小。如果图像大小不同，相框将调整自己尺寸来匹配。
 
