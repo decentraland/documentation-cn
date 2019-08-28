@@ -1,7 +1,7 @@
 ---
 date: 2018-01-06
-title: Tutorials
-description: Blogposts walking you through how to create scenes in Decentraland.
+title: 教程
+description: 带您了解如何在 Decentraland 创建场景的博客文章。
 categories:
   - examples
 type: Document
@@ -10,33 +10,59 @@ set_order: 2
 ---
 
 
+#### ECS简介（实体组件系统）
 
-#### Introduction to the ECS (Entity Component System)
+这篇博客文章将引导您创建具有基本交互的第一个场景。 它解释了实体组件系统架构（ECS）的一些基本概念。
 
-This blogpost walks you through creating a first scene with basic interactions. It explains some of the basic concepts of the Entity Component System architecture (ECS).
-
-Read the [blog post](https://decentraland.org/blog/tutorials/intro-to-sdk-v5/)
+阅读 [博文](https://decentraland.org/cn/blog/tutorials/intro-to-sdk-v5/)
 
 ![](/images/media/example-hypno-wheel.png)
 
 
-#### Motion and animations in ECS
+#### ECS 中的移动和动画效果
 
-This blogpost shows different ways to move an entity, as well as how to apply animations to a 3D model.
+此博客文章介绍了移动实体的不同方法，以及如何将动画应用于 3D 模型。
 
-Read the blog post:
+阅读博文:
 
-- [Part 1](https://decentraland.org/blog/tutorials/motion-animations-in-SDK-5/)
-- [Part 2](https://decentraland.org/blog/tutorials/motion-animations-in-SDK-5-part-2/)
+- [第一部分](https://decentraland.org/cn/blog/tutorials/motion-animations-in-SDK-5/)
+- [第二部分](https://decentraland.org/cn/blog/tutorials/motion-animations-in-SDK-5-part-2/)
 
 ![](/images/media/example-gnark.png)
 
 
-#### Migrate scenes from the old SDK to the latest
+#### 使用 UI 界面
 
-This blogpost is a reference for migrating content that was written for earlier versions of the Decentraland SDK to version 5.0.
+Surz 的这篇博客文章展示了如何在场景中添加自定义 UI。
 
-Read the [blog post](https://decentraland.org/blog/tutorials/sdk-migration/)
+阅读[博文](https://decentraland.org/cn/blog/tutorials/adding-a-ui/)
+
+
+#### 在场景中挑选和拖动对象
+
+这篇来自 Interweaver 的博客文章展示了玩家如何在场景中拾取物体并随身携带它们。
+
+阅读[博文](https://decentraland.org/cn/blog/announcements/building-blocks/)
+
+
+
+#### 将场景从旧 SDK 版本迁移到最新版本
+
+将早期版本的 Decentraland SDK 编写的内容场景迁移到 5.0 版的参考。
+
+阅读[博文](https://decentraland.org/cn/blog/tutorials/sdk-migration/)
+
+
+#### 使用区块链
+
+Miles 的这一系列教程展示了如何构建场景，从基础开始到使用以太坊网络中的区块链交易。
+
+- [第一部分](https://www.decentral.games/tutorial-1-setting-up-the-decentraland-environment-and-building-your-first-scene)
+- [第二部分](https://www.decentral.games/tutorial-2-using-custom-models-and-introduction-to-scripting)
+- [第三部分](https://www.decentral.games/decentral-games-tutorial-3-advanced-scripting-with-systems)
+- [第四部分](https://www.decentral.games/tutorial-4-using-the-ethereum-blockchain-in-your-scene)
+
+
 
 <!--
 ## Simple interactive scene
