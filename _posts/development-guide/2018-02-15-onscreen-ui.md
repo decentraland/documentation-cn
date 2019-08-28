@@ -60,9 +60,9 @@ text.value = 'Hello world!'
 
 所有 UI 组件都有几个字段用以设置组件在屏幕空间上的位置。
 
-- `hAlign` 相对于父级的垂直对齐。 可能的值：`Top`，`Botton`，`Center`。
+- `hAlign` 相对于父级的垂直对齐。 可能的值：`left`，`right`，`center`。
 
-- `vAlign` 相对于父级的水平对齐。 可能的值：`Left`, `Right`, `Center`。
+- `vAlign` 相对于父级的水平对齐。 可能的值：`top`, `bottom`, `center`。
 
 - `positionX`，`positionY`：组件左上角相对于父组件的位置。 默认情况下，位于其父级的左上角。 如果设置了 `hAlign` 或 `vAlign` 属性，则 `positionX` 和 `positionY` 相对于这些对齐属性的位置偏移 UI 组件。
 
