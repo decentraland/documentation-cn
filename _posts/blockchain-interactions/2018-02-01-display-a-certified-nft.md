@@ -1,7 +1,7 @@
 ---
 date: 2018-02-07
 title: 在场景中显示 NFT
-description: 在场景中如何显示您拥有的通过认证的 NFT
+description: 如何在场景中显示您拥有的通过认证的 NFT
 categories:
   - blockchain-interactions
 type: Document
@@ -9,49 +9,63 @@ set: blockchain-interactions
 set_order: 4
 ---
 
-在 SDK 的未来版本中，可以在 Decentraland 场景中显示您拥有的 NFT（不能替换通证）。 在 NFT 上方会出现一个发光的徽章，用以证明您确实拥有此通证。
+可以在 Decentraland 场景中显示您拥有的 2D NFT（不可替换通证）。 在 NFT 四周会出现一个发光的相框，以证明您确实拥有它。
 
-目前尚不支持此功能，但在路线图中。
+NTF 的图像数据通过通证合约和 id 从 API 中获取。
 
-> 注意：作为一种解决方法，如果要显示通证，可以从[OpenSea's API](https://docs.opensea.io/reference#api-overview)获取 NFT 图像，并将其设置为材质的纹理。然后，就可以在场景中的任何基本对象上使用。
+目前，只支持有限几种 NFT:
 
-<!---
-您可以在 Decentraland 场景中显示您拥有的 NFT（不能替换通证）。在 NFT 上方会出现一个发光的徽章，用以证明您确实拥有此通证。
+- CriptoKitties
+- Axie Infinity
+- MyCryptoHeroes
+- MLB Champions
+- Chibi Fighters
+- Blockchain Cuties
+- HyperDragons
+- Chainbreakers
+- Chainguardians
 
-<img src="/images/media/verified-nft.png" alt="nested entities" width="300"/>
+显示的相框大小会根据 NFT 图像的尺寸进行调整。如果图像是 512 X 512 像素，则相框会保持其原来的大小。如果图像大小不同，相框将调整自己尺寸来匹配。
 
-> 注意：NTF 的图像数据取自[OpenSea](https://opensea.io/) API，基于通证的的合约地址和 ID。请注意，OpenSea API 中的大多数都是 2D 图像，但在[Chainbreakers](https://opensea.io/assets/chainbreakerspresale) 这样的类别中会返回 3D 的素材。
+> 提示：如果您想拉伸或调整默认生成的图像的大小，您可以更改实体的 `Transform` 组件中的 `scale` 属性。
+
+> 注意：在未来的版本中，当使用 `NFTShape` 组件时，引擎将自动运行验证。拥有布署 LAND 通证的以太钱包必须拥有此通证，如果地址不匹配，图像将不会显示在场景中。
 
 ## 添加 NFT
 
 将 `NFTShape` 组件添加到实体以便在场景中显示 2D 通证。
 
-
 ```ts
-// create entity
-const nft = new Entity()
-
-// position entity
-nft.addComponent(new Transform({
-  position: new Vector3(1, 1.2, 1)
-  }))
-
-// add an NFTShape, instanced with a token contract and token id
-nft.addComponent(new NFTShape("0x06012c8cf97bead5deae237070f9587f8e7a266d", "475577"))
-
-// add entity to engine
-engine.addEntity(nft)
+const entity = new Entity()
+const shapeComponent = new NFTShape('ethereum://0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/558536')
+entity.addComponent(shapeComponent)
+entity.addComponent(
+  new Transform({
+    position: new Vector3(4, 1.5, 4)
+  })
+)
+engine.addEntity(entity)
 ```
-
-The `NFTShape` component must be instanced with two parameters:
 
 `NFTShape` 组件有两个参数：
 
 - 通证的_合约地址_（例如，CryptoKitties 合约）
 - 您拥有的特定通证的 _id_
 
-通证显示为为平面对象。无阴影的，就像一种基本材质。
+上面的示例使用合约地址 `0x06012c8cf97BEaD5deAe237070F9587f8E7A266d` 和特定的标识 `558536` 获取 NFT。 相应的资源可以在 OpenSea 的 [https://opensea.io/assets/0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/558536](https://opensea.io/assets/0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/558536) 中找到。
 
+通证显示时，四周会有一个发光的相框。
+
+可以通过更改 `NFTShape` 中的 `color` 来更改框架的背景颜色。 也会改变模型的背面，以及在 NFT 图像具有透明度的情况下图像的背景。
+
+```ts
+const shapeComponent = new NFTShape('ethereum://0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/558536', Color3.Green())
+```
+
+ <img src="/images/media/nft-cat.png" alt="Move entity" width="300"/>
+
+
+<!--
 ## 通证验证
 
 使用 `NFTShape` 组件时，引擎会自动进行验证。部署场景的 LAND 通证的同一个以太坊地址也必须有该通证。
