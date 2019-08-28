@@ -26,6 +26,15 @@ Decentraland 场景可以与以太坊区块链进行交互。 可用于获取有
 
 所有有关区块链操作需作为[异步函数]({{ site.baseurl }}{% post_url /development-guide/2018-02-25-async-functions %})调用，因为所需时间取决于外部事件。
 
+When running a preview of a scene that uses one of the ethereum libraries, you must have Metamask or Dapper open and you must add the following string to the end of the URL:
+
+运行使用了以太坊库的场景的预览时，必须打开 Metamask 或 Dapper，并且必须将以下字符串添加到 URL 的末尾：
+
+```
+&ENABLE_WEB3
+```
+
+
 <!--
 
 ## User identity
@@ -89,6 +98,23 @@ import * as EthereumController from "@decentraland/EthereumController"
 ```
 
 下面介绍一些使用此控制器执行的操作。
+
+#### 取用户以太帐户
+
+使用 EthereumController 的 `getUserAccount()` 函数取得用户以太坊公钥.
+
+```ts
+import { getUserAccount } from '@decentraland/EthereumController'
+
+executeTask(async () => {
+    try {
+      const address = await getUserAccount()
+      log(address)
+    } catch (error) {
+      log(error.toString())
+    }
+  })
+```
 
 #### 消息签名
 
