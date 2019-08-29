@@ -124,10 +124,10 @@ myTransform.rotation.eulerAngles = new Vector3(0, 90, 0)
 myEntity.getComponent(Transform).rotation.eulerAngles
 ```
 
-<!--
+
 ## 面向用户旋转
 
-将 _billboard_ 组件添加到实体，这样它会始终旋转实体来面对用户。
+将 _billboard_ 组件添加到实体，这样它会始终旋转实体来面对玩家。
 
 Billboards 是 90 年代 3D 游戏中常用的技术，大部分实体是始终面向玩家的 2D 平面，但同样也可用于旋转 3D 模型。
 
@@ -141,7 +141,7 @@ box.addComponent(new Billboard())
 engine.addEntity(box)
 ```
 
-您可以选择旋转哪个轴。例如，如果一个立方体的 Billboard 只在 Y 轴上旋转，则用户在地面移动时它会转向用户，但用户将能够从上方或从下方查看。
+您可以选择旋转哪个轴。例如，如果一个立方体的 Billboard 只在 Y 轴上旋转，则用户在地面移动时它会转向玩家，但玩家将能够从上方或从下方查看。
 
 创建 `Billboard` 组件时，三个可选参数 _x_、_y_ 和 _z_ 轴的布尔值。默认情况下，它们都是 `true`。
 
@@ -163,13 +163,11 @@ let ZBillboard = new Billboard(false, false ,true)
 
 可以将 _text_ 实体设为 Billboards ，能让用户能始终清晰看到内容。
 
-If an entity has both a `Billboard` component and `Transform` component with `rotation` values, users will see the entity rotating as a billboard. If the billboard doesn't affect all axis, the remaining axis will be rotated according to the `Transform` component.
-
 实体 `Transform` 组件的 `rotation` 值不会因为跟随用户旋转而改变。
 
-如果一个实体同时具有 `Billboard` 组件和带有 `rotation` 值 `Transform` 组件，用户将看到该实体按 billboard 旋转。 如果 billboard 设置不影响所有轴，则剩余的轴将根据 `Transform` 组件旋转。
+如果一个实体同时具有 `Billboard` 组件和带有 `rotation` 值 `Transform` 组件，玩家将看到该实体按 billboard 旋转。 如果 billboard 设置不影响所有轴，则剩余的轴将根据 `Transform` 组件旋转。
 
-> 注意：如果同时有多个用户在场，则每个用户都会看到设有 billboard 的实体面向自己。
+> 注意：如果同时有多个玩家在场，则每个玩家都会看到设有 billboard 的实体面向自己。
 
 ## 面向坐标点
 
@@ -185,11 +183,8 @@ myTransform.lookAt(new Vector3(4, 1, 2))
 
 在此使用 Vector3 对象，或者具有 x，y 和 z 属性的任何对象。此向量表示要朝向的场景中点的位置坐标。
 
-<!---
-The `lookAt()` function has a second optional argument that sets the global direction for _up_ to use as reference. For most cases, you won't need to set this field.
-`lookAt()` 函数还有一个可选参数，用于设置up用作引用的全局方向设置要用作参考的全局方向。在大多数情况下，您无需设置此值。
---->
--->
+`lookAt()` 函数还有第二个可选的参数，用于设置 _up_ 的全局方向引用。在大多数情况下，您无需设置此值。
+
 ## 缩放
 
 `scale` 也是一个_3D vector_，存储为 `Vector3` 对象，包括 _x_, _y_ 和 _z_ 轴上的缩放比例。无论是基本模型还是 3D 模型，实体的形状都会被相应地放大和缩小。

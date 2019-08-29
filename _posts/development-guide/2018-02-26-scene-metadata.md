@@ -56,15 +56,109 @@ set_order: 30
 
 ## 用户出现位置
 
-`policy` 部分中的 `teleportPosition` 字段定义用户直接访问场景时出现的位置，方法是直接在浏览器中输入坐标。
+`spawnPoints` 字段定义用户直接访问场景时出现的位置，或直接在浏览器中输入坐标。
 
-您的场景可能具有可阻止用户移动的对象（如果恰好在树上或楼梯上），或者您的场景可能具有高架地形。 如果用户一进入就不能移动，对用户来说将是一次糟糕的体验。 这就是为什么您可以选择设置不同于默认值的自定义出现位置。
+您的场景可能具有可阻止用户移动的对象（如果恰好在树上或楼梯上），或者您的场景可能具有高架地形。 如果用户一进入就不能移动，对用户来说将是一次糟糕的体验。 这就是为什么可以设置多个出现位置。
 
 ```json
-  "policy": {
-    "teleportPosition": "3, 0, 3"
-  }
+"spawnPoints": [
+    {
+      "name": "spawn1",
+      "default": true,
+      "position": {
+        "x": 5,
+        "y": 1,
+        "z": 4
+      }
+    }
+  ],
 ```
+
+位置由场景内的坐标组成。 这些数字为地块中的位置，类似于您在 Transform 组件场景代码中用于定位的[实体位置](({{ site.baseurl }}{% post_url /development-guide/2018-01-12-entity-positioning %}))。
+
+### 多个出现点
+
+单个场景可以有多个出现点。 如果多个玩家同时访问场景，这有助于玩家重叠在一起。 要设置多个出现点，只需将它们列为数组即可。
+
+
+```json
+"spawnPoints": [
+    {
+      "name": "spawn1",
+      "default": true,
+      "position": {
+        "x": 5,
+        "y": 1,
+        "z": 4
+      }
+	},
+	{
+      "name": "spawn2",
+      "default": true,
+      "position": {
+        "x": 3,
+        "y": 1,
+        "z": 1
+      }
+    }
+  ],
+```
+
+
+Spawn points marked as `default` are given preference. When there are multiple spawn points marked as `default`, one of them will be picked randomly from the list.
+
+标记为 `default` 的出现点被优先考虑。 当多个出现点标记为 `default` 时，将从列表中随机挑选一个。
+
+> 注意：在将来的版本中，当玩家试图出现在场景中并其他玩家占用了默认的出现点时，玩家将被发送到列出的其他位置。 这将允许玩家根据出现点名称传送到出现点，如 `scene.json` 中所述。
+
+
+### 出现区域
+
+可以在场景中设置整个区域以充当出现点。 通过在位置的任何维度上指定两个数字的数组，玩家将出现在该数字范围内的随机位置。 这有助于防止玩家进入时重叠。
+
+
+```json
+"spawnPoints": [
+    {
+      "name": "spawn1",
+      "default": true,
+      "position": {
+        "x": [1,5],
+        "y": 1,
+        "z": [2,4]
+      }
+    }
+  ],
+```
+
+在上面的例子中，玩家可能出现在广场上 _1,1,2_ 和 _5,1,4_ 间的任何角落。
+
+### 朝向
+
+还可以指定玩家出现时的朝向，让他们出现时面向特定的方向。 这使您可以更好地控制他们的第一印象，并希望他们能朝向特定方向非常有用。
+
+只需在出现点数据中添加 `cameraTarget` 字段即可。
+
+
+```json
+"spawnPoints": [
+    {
+      "name": "spawn1",
+      "default": true,
+      "position": {
+        "x": 5,
+        "y": 1,
+        "z": 4
+	  },
+	  "cameraTarget": {
+		"x": 0,
+        "y": 90,
+        "z": 0
+	  }
+    }
+  ],
+```
+
 
 ## 自定义数据
 
