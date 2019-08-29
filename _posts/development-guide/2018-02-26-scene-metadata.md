@@ -137,7 +137,7 @@ Spawn points marked as `default` are given preference. When there are multiple s
 
 还可以指定玩家出现时的朝向，让他们出现时面向特定的方向。 这使您可以更好地控制他们的第一印象，并希望他们能朝向特定方向非常有用。
 
-只需在出现点数据中添加 `cameraTarget` 字段即可。
+只需在出现点数据中添加 `cameraTarget` 字段即可。 `cameraTarget` 的值应引用空间中的位置，相对于场景的 _x_，_y_ 和 _z_ 坐标，就像 `position` 字段一样。
 
 
 ```json
@@ -149,16 +149,17 @@ Spawn points marked as `default` are given preference. When there are multiple s
         "x": 5,
         "y": 1,
         "z": 4
-	  },
-	  "cameraTarget": {
-		"x": 0,
-        "y": 90,
-        "z": 0
-	  }
+      },
+      "cameraTarget": {
+        "x": 10,
+        "y": 1,
+        "z": 4
+      }
     }
-  ],
+],
 ```
 
+上例玩家在 _5,1,4_ 位置并朝向 _10, 1, 4_ 出现。 如果生成位置是范围，则玩家的朝向将始终与指示的目标匹配。 如果有多个出现点，则每个出现点都可以有自己独立的目标。
 
 ## 自定义数据
 
