@@ -143,6 +143,7 @@ executeTask(async () => {
 ```
 
 例如，如果您的场景当时只渲染一个 box 实体，则`limits.entities` 应该为 `1`。
+
 -->
 
 ## 场景边界
