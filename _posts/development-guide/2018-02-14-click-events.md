@@ -16,7 +16,7 @@ set_order: 14
 
 > 注: 点击时距离实体最大可达 10 米。
 
-<!--
+
 ## OnPointerDown
 
 处理单击事件的最简单方法是将 `OnPointerDown` 组件添加到要单击的实体。
@@ -51,6 +51,25 @@ myEntity.addComponent(
 
 > 注意：没有形状组件或其形状 `visible` 设置为 _false_ 的实体不能产生单击事件。
 
+
+## OnPointerUp
+
+类似地，可以将 `OnPointerUp` 组件添加到实体，以跟踪玩家在指向实体时释放鼠标按钮的时间。
+
+通过在 `OnPointerUp` 组件中编写 lambda 函数，可以声明在释放鼠标按钮时要执行的操作。
+
+```ts
+const myEntity = new Entity()
+myEntity.addComponent(new BoxShape())
+
+myEntity.addComponent(
+  new OnPointerUp(e => {
+    log("poiner up")
+  })
+)
+```
+
+<!--
 ## 通用按钮按下和释放事件
 
 只要用户按下或释放输入控制器，就会触发 _button down_ 和 _button up_ 事件。
@@ -77,6 +96,7 @@ input.subscribe("BUTTON_UP", e => {
 `BUTTON_DOWN` 和 `BUTTON_UP` 事件都包含有函数可能需要的各种属性。 有关详细信息，请参阅[按钮事件的属性](#properties-of-button-events)。
 
 > 注意：这个代码只需要执行 `subscribe()` 方法一次，以保持对事件的轮询。 不要将它添加到系统的 `update()` 函数中，因为这会在每个帧上注册一个新的监听器。
+-->
 
 ## 按钮事件的属性
 
@@ -95,6 +115,7 @@ input.subscribe("BUTTON_UP", e => {
     - `worldNormal`: The normal of the hit, in world space, as a _Vector3_
     - `entityId`：实体的ID（如果适用）_string_
 
+<!--
 ## 指针状态
 
 您可以使用 _Input_ 对象检查按钮的当前状态，而不用监听按钮状态更改事件。
@@ -123,6 +144,7 @@ class ButtonChecker {
 
 engine.addSystem(new ButtonChecker())
 ```
+-->
 
 ## 区分模型中的网格
 
@@ -136,18 +158,20 @@ engine.addSystem(new ButtonChecker())
 
 也可以访问由 click 事件返回的 `hit` 对象的 `meshName` 属性。
 
+In the example below we have a house model that includes a mesh named `firePlace`. We want to turn on the fireplace only when that mesh is clicked.
+
+在下面的示例中，有一个房屋模型，包含一个名为 `firePlace` 的网格。 在点击网格时需要打开壁炉。
+
 ```ts
-const input = Input.instance
-
-input.subscribe("BUTTON_DOWN", e => {
-  log("button A Down", e.hit.meshName)
-
-  if (e.hit.meshName === "firePlace"){
-    // light fire
-  }
-})
+houseEntity.addComponent(
+  new OnPointerDown(e => {
+    log("button A Down", e.hit.meshName)
+	if (e.hit.meshName === "firePlace"){
+		// light fire
+	}
+  })
+)
 ```
--->
 
 ## OnClick
 
