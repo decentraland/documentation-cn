@@ -58,7 +58,6 @@ _Alpha Clip_ 设置模型的每个部分是 100％ 不透明或 100％ 透明。
 ![](/images/media/materials_transparent_emissive.png)
 
 
-To make a material emissive in Blender, simply add an `emission` shader to the material.
 要在 Blender 中制作发光材质，只需在材质上添加 `emission` 着色器即可。
 
 ![](/images/media/simple-emissive.png)
@@ -67,20 +66,9 @@ To make a material emissive in Blender, simply add an `emission` shader to the m
 
 ![](/images/media/apply-emissive.png)
 
-> Tip: By using a color atlas as a texture, you can get away with having various possible colors counted as a single texture. This is useful for making sure you don't exceed the [scene limitations]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %}).
-
 > 提示：通过将颜色图集作为纹理，可以将各种可能的颜色计算为单个纹理。 这对于确保您不超过[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})非常有用。
 
 ![](/images/media/neon-texture.png)
-
-
-#### Soften an emissive
-
-The `emission` shader has a `strength` property that can lower the glow of an emissive material. However, due to a known issue with the _.glTF_ specification, an exported _.glTF_ or _.glb_ file doesn't retain this property. When importing the model into a Decentraland scene it will always have the emissive strength at 100%.
-
-To make a material glow less, the best workaround is to set the `color` property on the `emission` shader to something less bright, or to reference a color from a texture that is less bright.
-
-For example, if using the below color map, you can achieve a less bright emissive material by picking a color from the bottom half of the image. Anything on the top half will be fully emissive, but as you go lower the material will have less glow.
 
 #### 减弱发光
 
@@ -190,5 +178,5 @@ what special layers PBR uses?
    > 注意：在引用未嵌入的纹理的文件后，请确保不会移动或重命名该文件，否则将丢失对该文件的引用。 该文件也必须位于场景文件夹中，以便与场景一起上传。
 - 使用可由玩家预先加载的 Decentraland [默认纹理](https://github.com/decentraland/builder-assets/tree/master/textures)，能加快资源渲染速度。
 - 阅读[本文](https://www.khronos.org/blog/art-pipeline-for-gltf)，详细了解在 glTF 模型中使用 PBR 纹理的完整流程。
-- 在[cgbookcase](https://cgbookcase.com/) 上可以找到免费高质量 PBR 纹理。
+- 在 [cgbookcase](https://cgbookcase.com/) 上可以找到免费高质量 PBR 纹理。
 - 设置材质的透明度时，请尝试始终使用 _Alpha clip_ 而不是 _Alpha blend_，除非您特别需要具有部分透明的材质（如玻璃）。 这能避免引擎在其它模型之前显示错误模型的问题。
