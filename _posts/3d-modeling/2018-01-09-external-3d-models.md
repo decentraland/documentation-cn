@@ -4,10 +4,11 @@ title: 3D 模型考虑因素
 description: 外部 3D 模型支持哪些资产和组件，将它们导入 Decentraland 之前如何配置
 redirect_from:
   - /sdk-reference/external-3d-models/
+  - /development-guide/external-3d-models/
 categories:
-  - development-guide
+  - 3d-modeling
 type: Document
-set: development-guide
+set: 3d-modeling
 set_order: 9
 ---
 
