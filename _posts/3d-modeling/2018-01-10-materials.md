@@ -1,7 +1,7 @@
 ---
 date: 2018-01-10
-title: 3D model materials
-description: Learn what material properties and textures are supported on 3D models imported to Decentraland.
+title: 材质
+description: 导入到 Decentraland 的 3D 模型上支持哪些材质属性和纹理。
 
 categories:
   - 3d-modeling
@@ -10,66 +10,68 @@ set: 3d-modeling
 set_order: 10
 ---
 
-Materials are embedded into a _.gltf_ or _.glb_ file. 
+材质被嵌入到 _.gltf_ 或 _.glb_ 文件中。
 
-This document refers to materials that are imported in a 3D model. For materials defined via code to apply onto primitive shapes, see [materials]({{ site.baseurl }}{% post_url /development-guide/2018-02-7-materials %}).
+本文档涉及在 3D 模型中导入的材质。 对于通过代码定义的材质应用于基本形状，请参阅[材质]({{ site.baseurl }}{% post_url /development-guide/2018-02-7-materials %})。
 
-> Note: You can't currently dynamically change the materials of a 3D model from your scene's code, unless this is a primitive shape.
+> 注意：您当前无法从场景代码中动态更改 3D 模型的材质，除非是基本形状。
 
-## Shader support
+#### Shader 着色器支持
 
-Not all shaders can be used in models that are imported into Decentraland. Make sure you use one of the following:
+并非所有着色器都可导入 Decentraland 的模型。 如果您正在使用 Blender，确保使用以下的一种方式：
 
-- Standard materials: any shaders are supported, for example diffuse, specular, transparency, etc.
+- 标准材质：支持任何着色器，例如漫反射，镜面反射，透明度等。
 
-  > Tip: When using Blender, these are the materials supported by _Blender Render_ rendering.
+  > 提示：使用 Blender 时，这些是 Blender Render 渲染支持的材质。
 
-- PBR (Physically Based Rendering) materials: This shader is extremely flexible, as it includes properties like diffuse, roughness, metalness and emission that allow you to configure how a material interacts with light.
+- PBR（基于物理的渲染）材质：此着色器非常灵活，因为它包含漫反射，粗糙度，金属度和辐射等属性，允许您配置材质与光的交互方式。
 
-  > Tip: When using Blender, you can use PBR materials by setting _Cycles_ rendering and adding the _Principled BSDF_ shader. Note that none of the other shaders of the _Cycles_ renderer are supported.
+  > 提示：使用 Blender 时，可以通过设置 Cycles 渲染器并添加 Principled BSDF 着色器来使用 PBR 材质。请注意，Cycles 渲染器的其他着色器均不受支持。
 
-The image below shows two identical models, created with the same colors and textures. The model on the left uses all _PBR_ materials, some of them include _metalness_, _transparency_, and _emissiveness_. The model on the right uses all _standard_ materials, some including _transparency_ and _emissiveness_.
 
-![](/images/media/materials_pbr_basic.png)
+下图显示了两个相同的模型，使用相同的颜色和纹理创建。左侧的模型使用所有_PBR_材质，其中一些包括 _metalness_，_transparency_ 和 _emissiveness_ 效果。 右侧的模型全部使用 _standard_ 材质，一些包括 _transparency_ 和 _emissiveness_ 效果。
 
-## Transparent materials
+![](/images/media/materials_pbr_basic.png)  
 
-You can set a material to be _transparent_. Transparent materials can be seen through to varying degrees, depending on their _alpha_. To do this, activate the transparency property of the material and then set its _alpha_ to the desired amount. An alpha of 1 will make the material completely opaque, an alpha of 0 will make it invisible.
+## 透明材质
 
-The image below shows two identical models created with standard materials. The one on the left uses only opaque materials, the one on the right uses both transparent and opaque materials in some of its parts.
+您可以将材质设置为 _transparent 透明_。 透明的程序取决于 _alpha_ 设置。为此，请设置材质的透明属性，然后将其 _alpha_ 设置为所需的量。_alpha_ 设为 1 将使材料完全不透明，0 的将会完全透明而不可见。
+
+下图显示了使用标准材料创建的两个相同模型。 左侧的材料仅使用不透明材料，右侧的材料在其某些部分使用透明和发光材料。
 
 ![](/images/media/materials_transparent_emissive.png)
 
-There are two main different transparency modes: _Aplha Clip_ and _Aplha Blend_. 
+有两种主要的不同透明度模式：_Aplha Clip_ 和 _Aplha Blend_。
 
-_Alpha Clip_ sets that each part of a model is either 100% opaque or 100% transparent. _Alpha Blend_ allows you to pick intermediate values per region.
+_Alpha Clip_ 设置模型的每个部分是 100％ 不透明或 100％ 透明。 _Alpha Blend_ 可以为每个区域选择中间值。
 
 ![](/images/media/transparency-modes.png)
 
-Unless you specifically want to be able to have an intermediate level of transparency, it's always better to use _Alpha Clip_.
+除非您特别希望能够具有中间级透明度，否则最好使用 _Alpha Clip_。
 
-## Emissive materials
+## 发光材质
 
-You can also make a material _emissive_. Emissive materials cast their own light. Note that when rendered, they don't actually illuminate nearby objects in the scene, they just seem to have a blurred glow around them.
+你也可以制作_发光_材质。发光材质能自己发光。请注意，在渲染时，实际上它们并不能照亮场景中的附近物体，而是似乎在它们周围有模糊的光晕。
 
-The image below shows two identical models created with standard materials. The one on the right has glowing emissive materials on some of its surfaces.
+下图显示了使用标准材料创建的两个相同模型。 右侧的那个在其一些表面上使用了发光材质。
 
 ![](/images/media/materials_transparent_emissive.png)
 
 
 To make a material emissive in Blender, simply add an `emission` shader to the material.
+要在 Blender 中制作发光材质，只需在材质上添加 `emission` 着色器即可。
 
 ![](/images/media/simple-emissive.png)
 
-
-To make a material both emissive and have a texture, you can use two shaders in parallel, one of the `emission` and another `principled BDSF` for the texture. You can then use a `mix shader` node to join them.
+为了使材料既具有发光性又具有纹理，您可以并行使用两个着色器，一个是`emission`，另一个是纹理的 `principled BDSF` 。 然后，您可以使用 `mix shader` 节点将它们联接起来。
 
 ![](/images/media/apply-emissive.png)
 
 > Tip: By using a color atlas as a texture, you can get away with having various possible colors counted as a single texture. This is useful for making sure you don't exceed the [scene limitations]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %}).
 
-![](/images/media/neon-texture.png)
+> 提示：通过将颜色图集作为纹理，可以将各种可能的颜色计算为单个纹理。 这对于确保您不超过[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})非常有用。
 
+![](/images/media/neon-texture.png)
 
 
 #### Soften an emissive
@@ -80,13 +82,20 @@ To make a material glow less, the best workaround is to set the `color` property
 
 For example, if using the below color map, you can achieve a less bright emissive material by picking a color from the bottom half of the image. Anything on the top half will be fully emissive, but as you go lower the material will have less glow.
 
+#### 减弱发光
+
+`emission` 着色器具有 `strength` 属性，可以降低发光材质的发光度。 但是，由于 _.glTF_ 规范存在的问题，导出的 _.glTF_ 或 _.glb_ 文件不会保留此属性。 将模型导入 Decentraland 场景时，它的发光度始终为 100％。
+
+为了减少材质发光度，最好的解决方法是将 `emission` 着色器上的 `color` 属性设置为不太明亮的颜色，或者从不太明亮的纹理中引用颜色。
+
+例如，如果使用下面的颜色贴图，则可以通过从图像的下半部分选择颜色来实现不太明亮的发光材质。 上半部分都是完全发光的，选择更低的，材料的发光会降低。
+
 ![](/images/media/neon-texture.png)
 
 
+#### 纹理
 
-## Textures
-
-Textures can be embedded into the exported glTF file or referenced from an external file. Both ways are supported.
+纹理可以嵌入到导出的 glTF 文件中，也可以从外部文件中引用。 这两种方式都是支持的。
 
 <!--
 
@@ -110,33 +119,33 @@ what special layers PBR uses?
 
 -->
 
-### Default textures
+##### 默认纹理
 
-All of the assets from the default Decentraland asset libraries (available in the Builder or as wearables) share a set of optimized plane textures. These textures are pre-loaded by players when they open the explorer, which makes these assets a lot faster to load. 
+默认 Decentraland 资源库中（在场景编辑器中或作为可穿戴设备）的所有资源共享一组优化的平面纹理。 玩家在打开浏览器时会预先加载这些纹理，这样可以加快这些资源的加载。
 
-If you build your own custom 3D models and use these same Decentraland default textures, your assets will also load faster when players walk to your parcels.
+如果您构建自己的自定义 3D 模型并使用了这些 Decentraland 默认纹理，当玩家走到您的地块时，资源加载速度也会更快。
 
-These textures are composed of a palette of plain colors, that you can map to different parts of a 3D model.
+这些纹理由纯色调色板组成，您可以将其映射到 3D 模型的不同部分。
 
 <img src="/images/media/MiniTown_TX.png" alt="Minitown texture" width="250"/>
 
-You can find the full collection of Decentrlanad default textures in [this repo](https://github.com/decentraland/builder-assets/tree/master/textures)
+你可以在[这个库](https://github.com/decentraland/builder-assets/tree/master/textures)中找到Decentrlanad 全部的默认纹理。
 
-### Texture size constraints
+#### 纹理大小限制
 
-Texture sizes must use width and height numbers (in pixels) that match the following numbers:
+纹理大小必须使用与以下数字匹配的宽度和高度数字（以像素为单位）：
 
 ```
 1, 2, 4, 8, 16, 32, 64, 128, 256, 512
 ```
 
-> This sequence is made up of powers of two: `f(x) = 2 ^ x` . 512 is the maximum number we allow for a texture size. This is a fairly common requirement among other rendering engines, it's there due internal optimizations of the graphics processors.
+> 该序列由 2 的幂组成：f(x) = 2 ^ x。 512 是我们允许的纹理大小的最大数量。 这在其他渲染引擎中也是相当普遍的要求，它与图形处理器内部优化有关。
 
-The width and height don't need to have the same number, but they both need to belong to this sequence.
+宽度和高度不需要具有相同的数字，但它们都必需属于此序列中。
 
-**The recommended size for textures is 512x512**, we have found this to be the optimal size to be transported through domestic networks and to provide reasonable loading/quality experiences.
+**纹理的建议大小为 512x512**，我们发现这是通过国内网络传输的最佳尺寸，并提供合理的加载/品质体验。
 
-Examples of other valid sizes:
+其他有效尺寸的示例:
 
 ```
 32x32
@@ -145,43 +154,41 @@ Examples of other valid sizes:
 512x512
 ```
 
-> Although textures of arbitrary sizes work in the alpha release, the engine displays an alert in the console. We will enforce this restriction in coming releases and invalid texture sizes will cease to work.
+> 虽然任意大小的纹理在 alpha 版本中能起作用，但引擎会在控制台中显示警报。 我们将在即将发布的版本中强制执行此限制，并且无效的纹理大小将停止工作。
 
-## How to swap a material
+#### 如何更换材质
 
-Suppose you've imported a 3D model that uses a material that's not supported by Decentraland. You can easily change this material while still keeping the same texture and its mapping.
+假设您已导入了具有 Decentraland 所不支持的材质的 3D 模型。 您可以轻松更改此材质，同时仍保持相同的纹理及其贴图。
 
 <img src="/images/media/materials-not-supported.png" alt="Model without valid material" width="250"/>
 
-To swap the material:
+更换材质:
 
-1. Check the current material's settings to see what texture files are being used and how they are configured.
-2. Delete the current material from the mesh.
+1. 检查当前材质设置，以查看正在使用的纹理文件及其配置方式。
+2. 从网格中删除当前材质。
 
    ![](/images/media/materials_delete_material.png)
 
-3. Create a new material.
+3. 创建一个新材质。
 
     <img src="/images/media/materials_new_material.png" alt="New default basic material" width="400"/>
 
-   > Tip: If you're using Blender and are on the _Blender Render_ tab, it creates a basic material by default, which is supported by Decentraland.
+   > 提示：如果您正在使用 Blender 并且在 _Blender Render_ 选项卡上，它默认会创建一个基本材质，这是Decentraland支持的。
 
-4. Open the _Textures_ settings and create a new texture, importing the same image file that the original material used.
+4. 打开 _Textures_ 设置并创建新纹理，导入与原始材质相同的图像文件。
 
    <img src="/images/media/materials_new_texture.png" alt="New default basic texture" width="300"/>
 
-5. The texture should be mapped to the new material just as it was mapped to the old material.
+5. 纹理应该映射到新材质，就像它映射到旧材质一样。
 
    <img src="/images/media/materials_final.png" alt="Model with valid material" width="300"/>
 
+#### 材质的最佳实践
 
+- 如果场景中包含有多个使用相同纹理的模型，请将纹理引用为外部文件，而不是将其嵌入到 3D 模型中。因为嵌入的纹理会在每个模型中复制，从而增加场景的大小。_.glb_ 文件默认嵌入了纹理，但您可以使用[glTF pipeline]（https://github.com/AnalyticalGraphicsInc/gltf-pipeline）将其提取到外部。
 
-## Best practices for materials
-
-- If your scene includes multiple models that use the same texture, reference the texture as an external file instead of having it embedded in the 3D model. Embedded textures get duplicated for each model and add to the scene's size. _.glb_ files have their textures embedded by default, but you can use [glTF pipeline](https://github.com/AnalyticalGraphicsInc/gltf-pipeline) to extract it outside.
-
-  > Note: After referencing a file for a texture that won’t be embedded, make sure that file won’t be moved or renamed, as otherwise the reference to the file will be lost. The file must also be inside the scene folder so that it’s uploaded together with the scene.
-- Use the Decentraland [default textures](https://github.com/decentraland/builder-assets/tree/master/textures), which are pre-loaded by players, making your assets render a lot faster. 
-- Read [this article](https://www.khronos.org/blog/art-pipeline-for-gltf) for a detailed overview of a full art pipeline that uses PBR textures in glTF models.
-- Find free, high quality PBR textures in [cgbookcase](https://cgbookcase.com/).
-- When setting transparency of a material, try to always use _Alpha clip_ rather than _Alpha blend_, unless you specifically need to have a material that's partially transparent (like glass). This will avoid problems where the engine renders the wrong model in front of the other.
+   > 注意：在引用未嵌入的纹理的文件后，请确保不会移动或重命名该文件，否则将丢失对该文件的引用。 该文件也必须位于场景文件夹中，以便与场景一起上传。
+- 使用可由玩家预先加载的 Decentraland [默认纹理](https://github.com/decentraland/builder-assets/tree/master/textures)，能加快资源渲染速度。
+- 阅读[本文](https://www.khronos.org/blog/art-pipeline-for-gltf)，详细了解在 glTF 模型中使用 PBR 纹理的完整流程。
+- 在[cgbookcase](https://cgbookcase.com/) 上可以找到免费高质量 PBR 纹理。
+- 设置材质的透明度时，请尝试始终使用 _Alpha clip_ 而不是 _Alpha blend_，除非您特别需要具有部分透明的材质（如玻璃）。 这能避免引擎在其它模型之前显示错误模型的问题。

@@ -1,7 +1,7 @@
 ---
 date: 2018-01-11
-title: Colliders
-description: Learn how to add colliders to 3D models imported to Decentraland.
+title: 碰撞
+description: 如何将碰撞添加到导入 Decentraland 的 3D 模型中。
 
 categories:
   - 3d-modeling
@@ -10,56 +10,55 @@ set: 3d-modeling
 set_order: 10
 ---
 
-To enable collisions between a 3D model and users of your scene, you must create a new object to serve as a collider. Without a collider, users are able to walk through models as if they weren't there. For performance reasons, colliders usually have a much simpler geometry than the model itself.
+要启用 3D 模型与场景用户之间的碰撞，必须创建一个新对象作为 collider 。如果没有 collider，用户就可以如同模型不存在一样穿越过模型。出于性能原因，Colliders 通常比模型本身的几何形状简单得多。
 
-Colliders currently don't affect how models and entities interact with each other, they can always overlap. Colliders only affect how the model interacts with the user's avatar.
+Colliders 目前不会影响模型和实体之间的相互作用，它们可以重叠。Colliders 仅影响模型与用户游戏化身的交互方式。
 
-For an object to be recognized by a Decentraland scene as a collider, all it needs is to be named in a certain way. The object's name must include the the suffix “\_collider” at the end.
+要被 Decentraland 场景识别为 collider 对象，只需要以某种方式命名。即对象的名称必须在末尾包含后缀 “\_collider”。
 
-For example, to create a collider for a tree, you can create a simple box object surrounding its trunk. Users of the scene won't see this box, but it will block their path.
+例如，要为树创建 collider ，可以在其主干周围创建一个简单的方框对象。场景的用户不会看到此框，但系统会阻止他们的前进。
 
 <img src="/images/media/collision-tree.png" alt="Entity tree" width="500"/>
 
-In this case, we can name the box "Box*Tree_collider" and export both the tree and the box as a single \_gltf* model. The \_collider tag alerts the Decentraland world engine that the box object belongs to the collection of colliders, making the \_collider mesh invisible.
+在这种情况下，我们可以将方框命名为“Box*Tree_collider”，并将树和方框导出为单个 \_gltf* 模型文件。 \_collider 标签告诉 Decentraland 的虚拟世界引擎，方框对象属于 collider 集合，使得 \__collider 网格不可见。
 
 <img src="/images/media/collision-hierarchy.png" alt="Entity tree" width="350"/>
 
-Whenever a player views the tree model in your scene, they will see the complex model for your tree. However, when they walk into your tree, they will collide with the box, not the tree.
+每当玩家在场景中查看树模型时，他们都会看到树的复杂模型。然而，当他们走近树时，他们就会与方框相撞，而不是树。
 
-## Add a collider to a staircase
+#### 如何为楼梯添加 Collider
 
-Stairs are a very common use-case for collider objects. In order for users to climb stairs, there must be a corresponding \_collider object that the users are able to step on.
+楼梯是 Collider 对象非常常见的用例。用户爬楼梯时，必须有一个用户可以踩到的对应的 \_collider 对象。
 
-We recommend using a ramp object for your stair colliders, this provides a much better experience when walking up or down. When they climb up your stairs, it will appear as a smooth ascent or descent, instead of requiring them to “jump” up each individual step.
+我们建议您将楼梯 Collider 设为斜坡物体，这样可以在上下行走时提供更好的体验。当他们爬上你的楼梯时，它会显得平滑上升或下降，而不是要他们毎步“跳跃”着走。
 
-Using a ramp object also avoids creating unnecessary geometry, saving room for other more complicated models. Keep in mind that collider geometry is also taken into account when calculating the [scene limitations]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})
+使用斜坡对象还可以避免创建不必要的几何图形，从而为其他更复杂的模型节省空间。请记住，在计算[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})时会考虑 Collider 几何体
 
-1.  Create a new object in the shape of a ramp that resembles the size and proportions of the original stairs.
+1. 创建一个类似于原始楼梯的大小和比例的斜坡形状的新对象。
 
-    <img src="/images/media/collision-stairs-both.png" alt="Staircase mesh and collider side by side" width="300"/>
+   <img src="/images/media/collision-stairs-both.png" alt="Staircase mesh and collider side by side" width="300"/>
 
-2.  Name the ramp object something similar to _stairs_collider_. It must end in \__collider_.
+2. 将渐变对象命名为类似于 _stairs_collider_ 。 必须以 \__collider_ 结尾。
 
-3.  Overlay the ramp object to the stairs so that they occupy the same space.
+3. 将斜坡物体叠加到楼梯上，使它们占据相同的空间。
 
-     <img src="/images/media/collision-stairs-collider.png" alt="Overlaid mesh and collider" width="300"/>
+   <img src="/images/media/collision-stairs-collider.png" alt="Overlaid mesh and collider" width="300"/>
 
-4.  Export both objects together as a single _glTF_ model.
+4. 将两个对象一起导出为单个_glTF_模型。
 
-    <img src="/images/media/collision-stairs.png" alt="Exported 3D model with invisible collider" width="300"/>
+   <img src="/images/media/collision-stairs.png" alt="Exported 3D model with invisible collider" width="300"/>
 
-Now when users view the stairs in your scene, they’ll see the more elaborate model of the stairs, but when they climb them, they’ll collide with the ramp.
+现在，当用户在你的场景中查看楼梯时，他们会看到更精细的楼梯模型，但是当他们爬楼梯时，他们会与斜坡相撞。
 
-## Best practices with colliders
+#### 碰撞的最佳实践
 
-- Always use the smallest number of triangles possible when creating colliders. Avoid making a copy of a complex object to use as a collider. Simple colliders guarantee a good user-experience in and keep your scene within the triangle limitations.
-- Collider objects shouldn't have any material, as users of your scene will never see it. Colliders are invisible to users.
-  > Note: Remember that each scene is limited to log2(n+1) x 10000 triangles, where n is the number of parcels in your scene.
-- All collider objects names must end with \__collider_. For example, _tree_collider_.
-- If you use a _plane_ as a collider, it will only block in one direction. If you want colliders to block from both sides, for example for a wall, you need to create two planes with their normals facing in opposite directions.
+- 创建 collider 时，始终使用最少数量的三角形。避免复制复杂对象用作 collider。简单的 collider 可确保良好的用户体验并使您的场景保持在三角形限制之内。
+- 碰撞对象不能有任何材质，因为用户永远不会看到它。collider 对用户是不可见的。
+  > 注意：请记住，每个场景受限于 log2（n + 1）x 10000 个三角形，其中 n 是场景中地块的数量。
+- 所有 collider 对象名称必须以 \__collider_结尾。例如，_tree_collider_。
+- 如果使用 _plane_ 作为 collider，它只能在一个方向上阻挡用户。 如果您希望 collider 可以在两侧阻挡，例如墙壁，则需要创建两个 _plane_，其法线朝向相反的方向。
 
-- When duplicating collider objects, pay attention to their names. Some programs append a \__1_ to the end of the filename to avoid duplicates, for example _tree_collider_1_. Objects that are named like this will be interpreted by the Decentraland World Engine as normal objects, not colliders.
+- 复制 collider 对象时，请注意其名称。有些程序会在文件名的末尾附加一个 \__1_ 以避免重复，例如_tree_collider_1_。像这样命名的物体将被 Decentraland 的虚拟世界引擎解释为普通物体，而不是 collider。
+- 要查看 Decentraland 场景中所有 collider 的网格限制，请使用 `dcl start` 启动场景预览，然后单击 `c`。会显示绘制的蓝色线条，用于区分所有 collider 的位置。
 
-- To view the limits of all collider meshes in a Decentraland scene, launch your scene preview with `dcl start` and then click `c`. This draws blue lines that delimit all colliders in place.
-
-- You can avoid adding a collider mesh if you add an invisible primitive shape that overlaps to your 3D model in your scene. Primitive shapes have collisions on by default. For example, an entity with a BoxShape() component, and its `visible` property set to false can do the trick.
+- 如果添加与场景中的 3D 模型重叠的不可见基本形状，则可以不用添加 collider 网格。 默认情况下，原始形状使用了碰撞。 例如，具有 BoxShape() 组件的实体，也可将其 `visible` 属性设置为 false 来解决这个问题。

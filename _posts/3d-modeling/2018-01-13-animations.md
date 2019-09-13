@@ -1,7 +1,7 @@
 ---
 date: 2018-01-13
-title: Animations
-description: Learn how to create animations that can be embedded on 3D models imported to Decentraland.
+title: 动画
+description: 如何创建可嵌入的导入 Decentraland 的 3D 模型的动画。
 
 categories:
   - 3d-modeling
@@ -11,77 +11,77 @@ set_order: 10
 ---
 
 
-3D models can be animated in a Decentraland scene using animations. All animations of a 3D model must be embedded inside its _glTF_ file, you can't reference animations in separate files.
+可以使用 animations 在 Decentraland 场景中对 3D 模型进行动画处理。 3D 模型的所有动画必须嵌入其 _glTF_ 文件中，您不能在单独的文件中引用动画。
 
-Most 3D model animations are [_skeletal animations_](https://en.wikipedia.org/wiki/Skeletal_animation). These animations simplify the complex geometry of the model into a "stick figure", linking every vertex in the mesh to the closest _bone_ in the _skeleton_. Modelers adjust the skeleton into different poses, and the mesh stretches and bends to follow these movements.
+大多数3D模型动画都是[骨骼动画](https://en.wikipedia.org/wiki/Skeletal_animation)。 这些动画将模型的复杂几何形状简化为“剪贴画”，将网格中的每个顶点链接到骨架中最近的骨骼。 建模者将骨架调整为不同的姿势，网格伸展和弯曲以跟随这些运动。
 
-As an alternative, _vertex animations_ animate a model without the need of a skeleton. These animations specify the position of each vertex in the model directly. Decentraland supports these animations as well.
+作为一种替代方法，_vertex 动画_不需要骨架。这些动画直接指定模型中每个顶点的位置。Decentraland 也支持这些动画。
 
-There's no specific rule about the names animations must have. You can verify the names of the animations in an exported model by opening the contents of a _.gltf_ file with a text editor. Typically, an animation name is comprised of its armature name, an underscore and its animation name. For example `myArmature_animation1`.
+关于动画必须具有的名称没有具体规则。您可以通过使用文本编辑器打开 _.gltf_ 文件的内容来验证导出模型中动画的名称。通常，动画名称由其 armature 名称，下划线及其动画名称组成。例如`myArmature_animation1`。
 
-You can include any number of animations in a _glTF model_. All animations in a _glTF_ model are disabled by default when loading the model into a Decentraland scene. 
+您可以在 _glTF 模型中包含任意数量的动画。在将模型加载到 Decentraland 场景时，默认情况下，_glTF_ 模型中的所有动画都是不可用的。有关如何激活和处理场景中动画的说明，请参阅[3D 模型动画]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %})。
 
-In a Decentraland scene, you can use `weight` to blend several animations or to make an animation more subtle.
+在 Decentraland 场景中，您可以使用 `weight` 来混合多个动画或使动画更精细。
 
-> Tip: Instead of creating your own animations, you can also download generic animations and apply them to your model. For example, for 3D characters with human-like characteristics, you can download free or paid animations from [Mixamo](https://www.mixamo.com/#/).
+> 提示：您也可以下载通用动画并将其应用于模型，而不是创建自己的动画。例如，对于具有类似人类特征的 3D 角色，您可以从 [Mixamo](https://www.mixamo.com/#/) 下载免费或付费动画。
 
-This document covers how to add animations into a 3D model. See [handle animations]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %}) for instructions on how to activate and handle animations in a scene.
+本文档介绍了如何将动画添加到 3D 模型中。 有关如何激活和处理场景中动画，请参阅[使用动画]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %})。
 
-## How to create an animation
+#### 如何创建动画
 
-You can use a tool like Blender to create animations for a 3D model.
+您可以使用 Blender 之类的工具为 3D 模型创建动画。
 
-1.  Create an armature, following the shape of your model and the parts you wish to move. You do this by adding an initial bone and then extruding all other bones from the vertices of that one. Bones in the armature define the points that can be articulated. The armature must be positioned overlapping the mesh.
+1. 根据模型的形状和要移动的部分来创建 armature (骨架) 。你要做的是添加一个初始骨骼然后从这个骨骼顶点伸出其它骨骼。armature (骨架)中的骨头定义可以铰接的点。骨架必须与网格重叠。
 
-    <img src="/images/media/armature_hummingbird1.png" alt="Armature" width="300"/>
+   <img src="/images/media/armature_hummingbird1.png" alt="Armature" width="300"/>
 
-2.  Make both the armature and the mesh child assets of the same object.
+2. 使得骨架和网络为同一物体的子资源。
 
-3.  Check that the mesh moves naturally when rotating its bones in the ways you plan to move it. If parts of the mesh get stretched in undesired ways, use weight paint to change what parts of the model are affected by each bone in the armature.
+3. 按照您计划移动的方式旋转骨骼时，检查网格是否自然移动。如果网格的某些部分以不希望的方式拉伸，请使用 weight paint 来更改模型的哪些部分受到骨架中骨骼的影响。
 
     <img src="/images/media/animations_hummingbird_wp1.png" alt="Weight paint view for one bone" width="300"/>
 
     <img src="/images/media/animations_hummingbird_wp2.png" alt="Weight paint view for another bone" width="300"/>
 
-> Note: There's a reported bug with Babylon.js that prevents some faces of a mesh from being rendered when they're not related to any bone in the armature. So if you paint some faces with weight 0 and then animate the model, you might see these faces dissappear. To solve this, we recommend making sure that each face is related to at least one bone of the armature and painted with a weight of at least 0.01.
+> 注意：Babylon.js 报告了一个错误，网格的某些面没有渲染当它们与骨架中的任何骨骼无关时。因此，如果您绘制一些weight 为 0 的面，然后为模型设置动画，您可能会看到这些面消失。为了解决这个问题，我们建议确保每个面至少与骨架的一个骨骼相关，并且 weight 至少为 0.01。
 
-4.  Move the armature to a desired pose, all bones can be rotated or scaled. Then lock the rotation and scale of the bones you wish to control with this animation.
+4. 将骨架移动到所需姿势，所有骨骼都可以旋转或缩放。然后锁定你要控制的动画的骨骼的旋转和比例。
 
-    <img src="/images/media/armature_hummingbird2.png" alt="Shifted armature" width="300"/>
+   <img src="/images/media/armature_hummingbird2.png" alt="Shifted armature" width="300"/>
 
-5.  Switch to a different frame in the animation, position the armature into a new pose and lock it again. Repeat this process for all the key frames you want to set to describe the animation.
+5. 切换到动画中的其他帧，将骨架定位到新姿势并再次锁定。对要设置的所有关键帧重复此过程以描述动画。
 
-    <img src="/images/media/armature_hummingbird_animation.png" alt="Frames in animation" width="450"/>
+   <img src="/images/media/armature_hummingbird_animation.png" alt="Frames in animation" width="450"/>
 
-6.  By default all frames in between the ones you defined will transition linearly from one pose to the next. You can also configure these transitions to behave exponentially, ease-in, bounce, etc.
+6. 默认情况下，您定义的所有帧之间将从一个姿势线性转换到下一个姿势。您还可以将这些过渡配置为 exponentially, ease-in, bounce 等。
 
-## How to handle multiple animations with Blender
+#### 如何在 Blender 中处理多个动画
 
-To export a model with several embedded animations in Blender, you must create multiple _actions_ from the _Dope-Sheet_.
+在 Blender 中，要在一个模型中导出多个动画，需要在 _Dope-Sheet_ 动画摄影表创建多个 _actions 动作_。
 
 <img src="/images/media/blender-dope-sheet.png" alt="Open dope sheet" width="250"/>
 
-You can also edit the animation from the Dope-Sheet view, for example you can adjust the distance between two key frames.
+您也可以在 Dope-Sheet 动画摄影表视图中编辑动画，例如您可以调整调整两个关键帧之间的距离。
 
-To preview the different actions, open the _Action Editor_ (only accessible once you're in the Dope Sheet).
+要预览不同的动作，请打开 _Action Editor 动作编辑器_（只有在 Dope Sheet 动画摄影表中才能访问）。
 
 <img src="/images/media/blender-action-editor.png" alt="Open action editor" width="250"/>
 
-In order to export multiple animations, you need to stash all the actions using the _NLA Editor_. We recommend opening the NLA editor on a separate editor tab while keeping the Dope sheet also open.
+要导出多个动画，您需要使用 _NLA Editor_ 存储所有操作。 我们建议在单独的编辑器选项卡上打开 NLA 编辑器，同时保持 Dope Sheet 动画摄影表 也打开。
 
 <img src="/images/media/blender-nla-editor.png" alt="Open NLA editor" width="250"/>
 
-In the NLA Editor, select each action that you want to embed in the glTF model and click _Stash_.
+在 NLA 编辑器中，选择要嵌入 glTF 模型的每个动作，然后单击 _Stash_。
 
 <img src="/images/media/blender-nla-editor2.png" alt="Stash actions into glTF model" width="600"/>
 
-When adding the model to your Decentraland scene, you must activate animations by configuring the _gltf-model_ entity. See [3D model animations]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %}) for instructions.
+将模型添加到 Decentraland 场景时，必须通过配置 _gltf-model_ 实体来激活动画。 有关说明，请参阅[3D 模型动画]({{ site.baseurl }}{% post_url /development-guide/2018-02-13-3d-model-animations %})。
 
-## Best practices for animations
+#### 动画的最佳实践
 
-- Keep the armature simple, only create bones for the parts of the model that you intend to animate.
-- If the animation will be looped in your scene, make sure the final pose is identical to the starting pose to avoid jumps.
-- Sometimes in an animation you might want to only control the movements of parts of the armature, and leave other bones undefined. This can make it easier to combine animations together.
-- Animated characters in your scene shouldn't ever stay completely still, even when they aren't doing anything. It's best to create an "idle" animation to use for when the character is still. The idle animation can include subtle movements like breathing and perhaps occasional glances.
-- Make sure your model only has one armature when you export it. Sometimes, when importing another animation to the program where you're editing your model, it will bring in a copy of the armature. You want all animations of the model to be performed by the same base armature.
-- When exporting the _glTF_ model, make sure you're exporting all the objects and animations. Some exporters will only export the _currently selected_ by default.
+- 保持 armature 骨架简单，仅为要制作动画的模型部分创建骨骼。
+- 如果动画将在场景中循环，请确保最终姿势与起始姿势相同，以避免引起跳跃感。
+- 有时在动画中你可能只想控制骨架部分的运动，并保留其他骨骼未定义。这可以更容易地将动画组合在一起。
+- 场景中的动画角色不应该完全静止，即使他们没有做任何事情。最好创建一个“空闲”动画，以便于角色静止时使用。“空闲”动画可以包括一些细微的动作，比如呼吸和偶尔的一瞥。
+- 确保模型在导出时只有一个骨架。有时，当您将另一个动画导入到您正在编辑模型的程序时，它会引入一个骨架的副本。您希望模型的所有动画都由相同的基础骨架执行。
+- 导出 _glTF_ 模型时，请确保导出所有对象和动画。某些导出器默认只导出 _当前选择的物体_。
