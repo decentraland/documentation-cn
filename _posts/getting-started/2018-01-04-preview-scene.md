@@ -156,7 +156,7 @@ dcl start
 
 ![](/images/media/collision-meshes.png)
 
-碰撞网格可以添加到外部 3D 建模工具（如 Blender）中的任何模型中。像房屋这样的大型模型通常包括碰撞网格，它们通常比原始形状更为简单，因为这样可以减少计算要求。楼梯通常使用简化的碰撞网格，如斜坡，便于攀爬。更多细节，请查看 [外部 3D 模型]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}) 。
+碰撞网格可以添加到外部 3D 建模工具（如 Blender）中的任何模型中。像房屋这样的大型模型通常包括碰撞网格，它们通常比原始形状更为简单，因为这样可以减少计算要求。楼梯通常使用简化的碰撞网格，如斜坡，便于攀爬。更多细节，请查看 [colliders]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-12-colliders %}) 。
 
 ## 查看边界框
 

@@ -187,5 +187,5 @@ engine.addEntity(avocado)
 ## 其他有用的信息
 
 - [游戏设计限制]({{ site.baseurl }}{% post_url /design-experience/2018-01-08-design-games %})
-- [3D 模型考虑因素]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})
+- [3D 模型]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-09-3d-models %})
 - [场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})
