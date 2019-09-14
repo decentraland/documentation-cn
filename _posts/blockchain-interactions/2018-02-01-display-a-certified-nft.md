@@ -15,7 +15,7 @@ NTF 的图像数据通过通证合约和 id 从 API 中获取。
 
 目前，只支持有限几种 NFT:
 
-- CriptoKitties
+- CryptoKitties
 - Editional
 - Makersplace
 - KnownOrigin
