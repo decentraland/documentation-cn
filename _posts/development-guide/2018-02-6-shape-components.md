@@ -63,7 +63,7 @@ myEntity.addComponent(new GLTFShape("models/House.gltf"))
 
 > 提示：我们建议您将模型与其它文件分开，放在场景中的 `/models` 文件夹中。
 
-在 glTF 模型可以嵌入纹理、材质、碰撞器和动画。有关详细信息，请参阅[3D 模型考虑因素]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})。
+在 glTF 模型可以嵌入纹理、材质、碰撞器和动画。有关详细信息，请参阅[3D 模型]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-09-3d-models %})。
 
 请记住，所有模型、着色器和纹理都必须在[场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})的参数范围内。
 
@@ -118,7 +118,7 @@ Decentraland 目前没有物理引擎，因此如果实体需要掉落、碰撞�
 
 _collider_ 可以是一组几何形状或平面，用来定义模型的哪些部分是碰撞的。这样可以有更多的控制并且对系统的要求也低得多，因为碰撞对象通常比原始模型更简单（具有更少的顶点）。
 
-有关如何将 colliders 添加到 3D 模型的更多详细信息，请参阅[3D模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})。
+有关如何将 colliders 添加到 3D 模型的更多详细信息，请参阅[3D模型]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-09-3d-models %})。
 
 ## 不可见实体
 

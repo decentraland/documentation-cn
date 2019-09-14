@@ -156,7 +156,7 @@ executeTask(async () => {
 
 ## Shader 限制
 
-在 decentraland 中使用的 3D 模型必须使用支持的 shaders 和材质。有关支持的着色器列表，请参阅 [3D 模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}) 。
+在 decentraland 中使用的 3D 模型必须使用支持的 shaders 和材质。有关支持的着色器列表，请参阅 [3D 模型]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-10-materials %}) 。
 
 ## 灯光效果
 

@@ -15,7 +15,7 @@ set_order: 13
 
 作为一种替代方法，_顶点动画_不需要骨架就可以对模型进行动画。这些动画直接指定模型中每个顶点的位置。Decentraland 也支持这些动画。
 
-有关如何创建模型和动画的详细信息，请参阅[3D模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %})。阅读[形状组件]({{ site.baseurl }}{% post_url /development-guide/2018-02-6-shape-components %})，了解有关如何将 3D 模型导入场景的说明。
+有关如何创建模型和动画的详细信息，请参阅[动画]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-13-animations %})。阅读[形状组件]({{ site.baseurl }}{% post_url /development-guide/2018-02-6-shape-components %})，了解有关如何将 3D 模型导入场景的说明。
 
 > 提示：动画通常更适合移动某个位置，而不是更改实体的位置。 例如，您可以设置动画以将角色的脚移动到位，但是要更改实体的位置，最好使用 “Transform” 组件。 有关详细信息，请参阅[定位实体]（{{site.baseurl}} {％post_url / development-guide / 2018-02-12-move-entities％}）。
 

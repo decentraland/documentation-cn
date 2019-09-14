@@ -1,6 +1,6 @@
 ---
 date: 2018-02-7
-title: 材质
+title: 在代码中使用材质
 description: 如何给基本形状的实体添加材质和纹理。
 categories:
   - development-guide
@@ -17,7 +17,7 @@ set_order: 7
 
 不能向 _glTF_ 模型添加材质组件。 _glTF_ 模型中包括有它们自己的材质，这些材质与模型一起隐式导入到场景中。
 
-使用自己的材质导入 3D 模型时，请记住，并非所有着色器都受到 Decentraland 引擎的支持。仅支持标准材质和 PBR（基于物理的渲染）材质。有关详细信息，请参阅[外部 3D 模型注意事项]({{ site.baseurl }}{% post_url /development-guide/2018-01-09-external-3d-models %}#materials)。
+使用自己的材质导入 3D 模型时，请记住，并非所有着色器都受到 Decentraland 引擎的支持。仅支持标准材质和 PBR（基于物理的渲染）材质。有关详细信息，请参阅[外部 3D 模型注意事项]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-10-materials %})。
 
 ## 创建并使用材质
 
