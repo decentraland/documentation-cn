@@ -15,7 +15,10 @@ NTF 的图像数据通过通证合约和 id 从 API 中获取。
 
 目前，只支持有限几种 NFT:
 
-- CriptoKitties
+- CryptoKitties
+- Editional
+- Makersplace
+- KnownOrigin
 - Axie Infinity
 - MyCryptoHeroes
 - MLB Champions
@@ -26,12 +29,13 @@ NTF 的图像数据通过通证合约和 id 从 API 中获取。
 - Chainguardians
 - Cryptomorph
 - Josie
+- Blockcities
 
 显示的相框大小会根据 NFT 图像的尺寸进行调整。如果图像是 512 X 512 像素，则相框会保持其原来的大小。如果图像大小不同，相框将调整自己尺寸来匹配。
 
 > 提示：如果您想拉伸或调整默认生成的图像的大小，您可以更改实体的 `Transform` 组件中的 `scale` 属性。
 
-> 注意：在未来的版本中，当使用 `NFTShape` 组件时，引擎将自动运行验证。拥有布署 LAND 通证的以太钱包必须拥有此通证，如果地址不匹配，图像将不会显示在场景中。
+> 注意：在未来的版本中，当使用 `NFTShape` 组件时，引擎将自动运行验证。拥有布署 LAND 通证的以太钱包必须拥有此通证，如果地址不匹配，图像将显示在场景中，但不会发光来标志这是个普通 NFT。
 
 ## 添加 NFT
 
