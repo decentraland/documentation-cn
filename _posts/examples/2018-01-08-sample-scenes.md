@@ -141,6 +141,25 @@ set_order: 1
 
 [浏览场景](https://jukebox-ilgtrpcfvb.now.sh)
 
+## 基本互动
+
+包含玩家互动方式的简单示例。 每种形状的颜色都通过与其相互作用而激活。
+
+- 点击事件
+- PointerUp 和 PointerDown 事件
+- 玩家位置
+- 全局指针事件
+- 动画
+
+
+![](/images/media/example-basic-interactions.png)
+
+[Code](https://github.com/decentraland-scenes/Basic-Interactions)
+
+<!--
+ [Explore the scene]()
+-->
+
 ## 舞池
 一个有动画、声音和的变色地板的场景，地板会根据节拍随机改变颜色。
 
@@ -263,6 +282,14 @@ set_order: 1
 [Explore the scene]()
 -->
 
+## 相框
+
+在相框中显示加密可收集 NFT 的场景。有关详细信息，请参阅[显示经过认证的 NFT]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-02-01-display-a-certified-nft %})。
+
+![](/images/media/example-kitty.png)
+
+[Code](https://github.com/decentraland-scenes/Certified-criptokitty)
+
 # 自定义 UI
 
 ## 采矿岩石
@@ -307,6 +334,18 @@ set_order: 1
 [代码](https://github.com/decentraland-scenes/Block-dog)
 
 [浏览场景](https://blockdog-flbnuykvwf.now.sh)
+
+
+## 密室逃生
+
+一个完整的密室逃生游戏，每个房间都是一道题，并以不同的方式交互。
+
+这个场景由[视频教程系列](https://www.youtube.com/watch?v=OtkrvHOHIDg&list=PLAcRraQmr_GPi-8qgv17ewdGl50OHuOhH)展示，从基本概念开始，引导您学习完成所有概念。
+
+![](/images/media/example-escaperoom.png)
+
+[Code](https://github.com/decentraland-scenes/Escape-Room) 
+ 
 
 ## 塔防游戏（WIP）
 
