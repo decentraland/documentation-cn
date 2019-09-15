@@ -44,6 +44,18 @@ set_order: 30
   }
 ```
 
+## 场景标题
+
+当玩家进入您的场景时，他们将能够从小地图下方读取场景名称。
+
+<img src="/images/media/scene-name.png" alt="Scene name" width="200"/>
+
+```json
+  "display": {
+    "title": "My Cool Scene",
+    "favicon": "favicon_asset"
+  }
+```
 
 ## 联系信息
 
@@ -63,7 +75,7 @@ set_order: 30
 您的场景可能具有可阻止用户移动的对象（如果恰好在树上或楼梯上），或者您的场景可能具有高架地形。 如果用户一进入就不能移动，对用户来说将是一次糟糕的体验。 这就是为什么可以设置多个出现位置。
 
 ```json
-"spawnPoints": [
+  "spawnPoints": [
     {
       "name": "spawn1",
       "default": true,
@@ -84,7 +96,7 @@ set_order: 30
 
 
 ```json
-"spawnPoints": [
+  "spawnPoints": [
     {
       "name": "spawn1",
       "default": true,
@@ -120,7 +132,7 @@ Spawn points marked as `default` are given preference. When there are multiple s
 
 
 ```json
-"spawnPoints": [
+  "spawnPoints": [
     {
       "name": "spawn1",
       "default": true,
@@ -143,7 +155,7 @@ Spawn points marked as `default` are given preference. When there are multiple s
 
 
 ```json
-"spawnPoints": [
+  "spawnPoints": [
     {
       "name": "spawn1",
       "default": true,
@@ -158,7 +170,7 @@ Spawn points marked as `default` are given preference. When there are multiple s
         "z": 4
       }
     }
-],
+  ],
 ```
 
 上例玩家在 _5,1,4_ 位置并朝向 _10, 1, 4_ 出现。 如果生成位置是范围，则玩家的朝向将始终与指示的目标匹配。 如果有多个出现点，则每个出现点都可以有自己独立的目标。
