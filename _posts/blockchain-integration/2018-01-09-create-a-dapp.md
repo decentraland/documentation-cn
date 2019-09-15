@@ -3,9 +3,11 @@ date: 2018-01-01
 title: 创建 DApp 应用
 description: 创建自己的去中心化应用程序参考
 categories:
-  - blockchain-interactions
+  - blockchain-integration
 type: Document
-set: blockchain-interactions
+redirect_from:
+  - /blockchain-interactions/create-a-dapp
+set: blockchain-integration
 set_order: 20
 ---
 

@@ -6,9 +6,9 @@ redirect_from:
   - /docs/land-manager
 description: LAND 虚拟市场
 categories:
-  - blockchain-interactions
+  - blockchain-integration
 type: Document
-set: blockchain-interactions
+set: blockchain-integration
 set_order: 1
 ---
 

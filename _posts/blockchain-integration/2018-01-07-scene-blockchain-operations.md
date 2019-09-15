@@ -5,9 +5,9 @@ description: SDK 以太坊区块链操作功能
 redirect_from:
   - /sdk-reference/blockchain-operations/
 categories:
-  - blockchain-interactions
+  - blockchain-integration
 type: Document
-set: blockchain-interactions
+set: blockchain-integration
 set_order: 5
 ---
 
@@ -246,7 +246,7 @@ engine.addEntity(button)
 
 在 Ethereum controller 中可以检查特定交易是否已经确认。 它会查找特定交易的哈希值，并验证它是否已由矿工确认添加到区块链中。
 
-> 重要提示：由于区块链的工作方式，确认的交易有可能会[回滚]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-01-01-ethereum-essentials %}#blockchain-reorgs) 。只由一个节点确认一次的交易无法保证最终达到网络共识。 我们不建议依靠此功能来处理有价值的事情。
+> 重要提示：由于区块链的工作方式，确认的交易有可能会[回滚]({{ site.baseurl }}{% post_url /blockchain-integration/2018-01-01-ethereum-essentials %}#blockchain-reorgs) 。只由一个节点确认一次的交易无法保证最终达到网络共识。 我们不建议依靠此功能来处理有价值的事情。
 
 ```ts
 await this.eth.waitForMinedTx(currency, tx, receivingAddress)
