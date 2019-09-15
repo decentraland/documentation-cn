@@ -13,6 +13,8 @@ set_order: 12
 
 可以在 [system]({{ site.baseurl }}{% post_url /development-guide/2018-02-3-systems %}) 的 `update()` 函数调用时，通过毎次少量移动实体来轻松地执行这些增量更改。
 
+> 提示：您可以使用[utils library](https://www.npmjs.com/package/decentraland-ecs-utils)中的辅助函数来完成本文档中描述的大多数任务。 这些示例中显示的代码可以由库在后台处理，因此在大多数情况下，使用它只需要一行代码。
+
 ## 移动
 
 移动实体的最简单方法是使用 `translate()` 函数来更改存储在 `Transform` 组件中的_ position_ 值。

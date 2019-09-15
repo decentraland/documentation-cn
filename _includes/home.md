@@ -186,6 +186,7 @@ engine.addEntity(avocado)
 
 ## 其他有用的信息
 
+- [Utils 库](https://www.npmjs.com/package/decentraland-ecs-utils)
 - [游戏设计限制]({{ site.baseurl }}{% post_url /design-experience/2018-01-08-design-games %})
 - [3D 模型]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-09-3d-models %})
 - [场景限制]({{ site.baseurl }}{% post_url /development-guide/2018-01-06-scene-limitations %})

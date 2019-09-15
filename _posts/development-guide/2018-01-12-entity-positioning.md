@@ -35,7 +35,7 @@ myEntity.ddComponent(new Transform({
     }))
 ```
 
-要在场景中移动、旋转或调整实体大小，需要逐帧逐步更改此组件上的值。有关详细信息和最佳做法，请参阅[移动实体]({{ site.baseurl }}{% post_url /development-guide/2018-02-12-move-entities %})。
+要在场景中移动、旋转或调整实体大小，需要逐帧逐步更改此组件上的值。有关详细信息和最佳做法，请参阅[移动实体]({{ site.baseurl }}{% post_url /development-guide/2018-02-12-move-entities %})。您还可以使用[utils 库](https://www.npmjs.com/package/decentraland-ecs-utils)中的辅助函数来更轻松地实现此目的。
 
 ## 定位
 
