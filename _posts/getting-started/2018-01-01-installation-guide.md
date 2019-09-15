@@ -23,7 +23,7 @@ Decentraland CLI 通过 [npm](https://www.npmjs.com/get-npm?utm_source=house&utm
 
 在安装 CLI 之前，请安装以下的依赖项目：
 
-* [Node.js](https://www.npmjs.com/) (version 8 或以上)
+* [Node.js](https://nodejs.org) (version 8 或以上)
 
 ## 安装 CLI
 
