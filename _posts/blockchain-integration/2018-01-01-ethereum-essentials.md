@@ -3,9 +3,11 @@ date: 2018-01-01
 title: 以太坊概要
 description: Decentraland 如何使用以太坊区块链
 categories:
-  - blockchain-interactions
+  - blockchain-integration
 type: Document
-set: blockchain-interactions
+redirect_from:
+  - /blockchain-interactions/ethereum-essentials
+set: blockchain-integration
 set_order: 2
 ---
 
@@ -118,7 +120,7 @@ _dApps_（去中心化应用程序）是基于智能合约和区块链构建的�
 
 dApp 可以像验证您的钱包是否具有某个通证来决定是否允许您使用服务这么简单。也可以是具有自己的 UI 的完全成熟的应用程序，例如 Decentraland 的虚拟市场。
 
-如果您想基于 Decentrlanad 构建自己的 dApp，请参阅[创建 dApp]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-01-09-create-a-dapp %})。
+如果您想基于 Decentrlanad 构建自己的 dApp，请参阅[创建 dApp]({{ site.baseurl }}{% post_url /blockchain-integration/2018-01-09-create-a-dapp %})。
 
 ## Ropsten 测试网络
 

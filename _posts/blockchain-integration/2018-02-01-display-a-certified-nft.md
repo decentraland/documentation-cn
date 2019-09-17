@@ -3,9 +3,11 @@ date: 2018-02-07
 title: 在场景中显示 NFT
 description: 如何在场景中显示您拥有的通过认证的 NFT
 categories:
-  - blockchain-interactions
+  - blockchain-integration
 type: Document
-set: blockchain-interactions
+redirect_from:
+  - /blockchain-interactions/display-a-certified-nft
+set: blockchain-integration
 set_order: 4
 ---
 

@@ -284,7 +284,7 @@ set_order: 1
 
 ## 相框
 
-在相框中显示加密可收集 NFT 的场景。有关详细信息，请参阅[显示经过认证的 NFT]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-02-01-display-a-certified-nft %})。
+在相框中显示加密可收集 NFT 的场景。有关详细信息，请参阅[显示经过认证的 NFT]({{ site.baseurl }}{% post_url /blockchain-integration/2018-02-01-display-a-certified-nft %})。
 
 ![](/images/media/example-kitty.png)
 

@@ -19,12 +19,12 @@ set_order: 7
 
 - 您有一个 [Metamask](https://metamask.io/) 帐户，并为其分配了 LAND 地块。该帐户还必须持有最低金额以支付交易费。
 
-- 您拥有必要数量的相邻 LAND 地块。 否则，您可以在[虚拟市场]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-01-01-marketplace %})中购买 LAND。
+- 您拥有必要数量的相邻 LAND 地块。 否则，您可以在[虚拟市场]({{ site.baseurl }}{% post_url /blockchain-integration/2018-01-01-marketplace %})中购买 LAND。
 
 > 注意：多块土地的场景只能部署到相邻地块中。
 
 <!--
-- 如果要将单个场景部署到多个相邻地块，则必须先将它们合并到 _连块土地_ 中，然后才能部署到它们。有关如何创建连块土地的说明，请参阅[虚拟市场]({{ site.baseurl }}{% post_url /blockchain-interactions/2018-01-01-marketplace %})。
+- 如果要将单个场景部署到多个相邻地块，则必须先将它们合并到 _连块土地_ 中，然后才能部署到它们。有关如何创建连块土地的说明，请参阅[虚拟市场]({{ site.baseurl }}{% post_url /blockchain-integration/2018-01-01-marketplace %})。
 
 -->
 
