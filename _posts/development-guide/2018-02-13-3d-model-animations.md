@@ -131,18 +131,34 @@ clipSwim.restart()
 
 ```ts
 // Create animation clip
-const clipSwim = new AnimationState("swim")
+const biteClip = new AnimationState("swim")
 
 // Set loop to false
-clipSwim.looping = false
+biteClip.looping = false
 
 // Start playing the clip
-clipSwim.play()
+biteClip.play()
 ```
 
 如果 `looping` 设置为 _false_，则动画播放一次后即停止。
 
 > 注意：非循环动画播放完毕后，即使 3D 模型保持静止，它仍将继续处于 `playing = true` 状态。 如果您尝试播放其他动画，这可能会给您带来麻烦。 在播放动画之前，请确保已停止所有其他动画，包括已完成的非循环动画。
+
+```ts
+  
+   const biteClip = new AnimationState("bite")
+   biteClip.looping = false
+
+   shark.getComponent(Animator).addClip(biteClip)
+
+   shark.addComponent(
+     new OnClick((): void => {
+ 		// stop previous animation
+ 		biteClip.stop()
+ 		// play bite animation
+ 		biteClip.play()
+ 	}
+ ```
 
 ## 重置动画
 

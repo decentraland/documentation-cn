@@ -88,6 +88,21 @@ set_order: 1
 - [第一部分]((https://decentraland.org/blog/tutorials/motion-animations-in-SDK-5))
 - 第二部分 (即将发布)
 
+## 河豚鱼
+
+这个简单的场景显示了如何使用 [utils 库](https://www.npmjs.com/package/decentraland-ecs-utils)逐步缩放实体。
+
+- glTF 模型
+- 实体缩放
+- 延迟函数
+- 添加声音片段
+
+![](/images/media/example-puffer.png)
+
+[代码](https://github.com/decentraland-scenes/Puffer)
+
+[浏览场景](https://puffer.decentraland1.now.sh/?position=-132,-40)
+
 ## 可打开的门
 
 一个简单的交互式场景，可以打开和关闭一扇门。

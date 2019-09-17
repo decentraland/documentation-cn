@@ -9,15 +9,21 @@ set: tutorials
 set_order: 3
 ---
 
-More coming soon!
+## 密室逃生教程系列
 
-<!--
-## 简单的互动场景
+这一系列短视频涵盖了许多基本概念，游戏机制和编码最佳实践。
 
-这个简单的教程将引导您创建一个简单的场景，并且用户的点击可以使实体旋转。
+它由几个 5 分钟的视频组成，每个视频都包含不同的功能。 视频将带您完成构建完整的密室逃生游戏的整个过程。
 
-{%  include youtube.html video_id='OtkrvHOHIDg'  %}
--->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/j7XbiTZ9GN0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[观看视频](https://hardlydifficult.github.io/dcl-escape-room-tutorial/)
+
+> 提示：视频在上面的链接中，附带书面内容，包括所有代码，便于复制和粘贴部分内容。
+
+[本教程的完整代码](https://github.com/HardlyDifficult/dcl-escape-room-tutorial).
+
+
 ## 在 Decentraland 中使用 3D 模型
 
 #### 将预定义动画添加到 3D 模型

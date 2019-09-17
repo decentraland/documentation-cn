@@ -9,8 +9,16 @@ set: tutorials
 set_order: 2
 ---
 
+## 向 Builder 场景添加功能
 
-#### ECS简介（实体组件系统）
+这篇嘉宾的博客文章讲述了如何导出 Builder 场景并通过 SDK 添加功能。
+
+阅读[博客文章](https://decentraland.org/blog/tutorials/adding-functionality-builder-scene/)
+
+![](/images/media/tutorial-builder.jpg)
+
+
+## ECS简介（实体组件系统）
 
 这篇博客文章将引导您创建具有基本交互的第一个场景。 它解释了实体组件系统架构（ECS）的一些基本概念。
 
@@ -19,7 +27,7 @@ set_order: 2
 ![](/images/media/example-hypno-wheel.png)
 
 
-#### ECS 中的移动和动画效果
+## ECS 中的移动和动画效果
 
 此博客文章介绍了移动实体的不同方法，以及如何将动画应用于 3D 模型。
 
@@ -31,29 +39,39 @@ set_order: 2
 ![](/images/media/example-gnark.png)
 
 
-#### 使用 UI 界面
+## 使用 UI 界面
 
 Surz 的这篇博客文章展示了如何在场景中添加自定义 UI。
 
 阅读[博文](https://decentraland.org/cn/blog/tutorials/adding-a-ui/)
 
+![](/images/media/tutorial-ui.png)
 
-#### 在场景中挑选和拖动对象
+## 在场景中挑选和拖动对象
 
 这篇来自 Interweaver 的博客文章展示了玩家如何在场景中拾取物体并随身携带它们。
 
 阅读[博文](https://decentraland.org/cn/blog/announcements/building-blocks/)
 
+![](/images/media/tutorial-blocks.png)
+
+## 制作精灵动画
+
+Brent 的这篇博客文章展示了如何使用精灵序列添加类似 gif 的动画。
+
+阅读[博文](https://decentraland.org/blog/tutorials/creating-a-sprite-fire/)
 
 
-#### 将场景从旧 SDK 版本迁移到最新版本
+![](/images/media/tutorial-sprites.png)
+
+## 将场景从旧 SDK 版本迁移到最新版本
 
 将早期版本的 Decentraland SDK 编写的内容场景迁移到 5.0 版的参考。
 
 阅读[博文](https://decentraland.org/cn/blog/tutorials/sdk-migration/)
 
 
-#### 使用区块链
+## 使用区块链
 
 Miles 的这一系列教程展示了如何构建场景，从基础开始到使用以太坊网络中的区块链交易。
 
