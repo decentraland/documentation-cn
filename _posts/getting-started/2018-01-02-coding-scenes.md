@@ -44,7 +44,7 @@ set_order: 4
 
 早期版的 SDK 需要用户熟悉代码和终端的使用。须要有：
 
-- **npm**（Node 包管理器）：终端中用于处理场景依赖。[下载链接](https://www.npmjs.com/)
+- **npm**（Node 包管理器）：终端中用于处理场景依赖。[下载链接](nodejs.org)
 
 - **源代码编辑器**：可以帮助您更快地创建场景并减少错误，编辑器可以提示语法错误、代码自动提示，甚至根据您所处的上下文向您显示智能建议。单击代码中的对象上能查看其类的完整定义以及它所支持的属性。我们建议使用 [Visual Studio Code](https://code.visualstudio.com/)或 [Atom](https://atom.io/)。
 
