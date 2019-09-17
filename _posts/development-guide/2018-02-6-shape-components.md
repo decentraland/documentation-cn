@@ -75,6 +75,7 @@ myEntity.addComponent(new GLTFShape("models/House.gltf"))
 
 以下是免费或相对便宜的 3D 内容库：
 
+- [Assets from the Builder](https://github.com/decentraland/builder-assets/tree/master/assets)
 - [Google Poly](https://poly.google.com)
 - [SketchFab](https://sketchfab.com/)
 - [Clara.io](https://clara.io/)
