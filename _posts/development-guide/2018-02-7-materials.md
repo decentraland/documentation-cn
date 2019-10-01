@@ -54,11 +54,13 @@ const myMaterial = new BasicMaterial()
 
 为了给材质颜色。在 `BasicMaterial` 组件中，可以设置 `color` 字段。在 `Material` 组件中，设置 `albedoColor` 字段就可以。Albedo Color 响应光线照射，并且可以包含阴影。
 
-所有颜色字段都是 `Color3` 类型，它们包含三个值，分别为 _Red_，_Green_ 和 _Blue_。这些数字中的每一个都在 0 和 1 之间。
+所有颜色字段都是 `Color3` 类型，它们包含三个值，分别为 _Red_，_Green_ 和 _Blue_。这些数字中的每一个都在 _0_ 和 _1_ 之间。
 
 ```ts
 myMaterial.albedoColor = new Color3(0.5, 0, 0.5)
 ```
+
+> 注意：如果您在 `albedoColor` 中将任何颜色的值设置为高于 _1_，则将显示发光_emissive_，值越高，强度越大。 例如，`new Color3(15, 0, 0)` 将产生非常明亮的红色发光颜色。
 
 您还可以使用 `Color3` 对象的以下功能选择预定的颜色：
 
