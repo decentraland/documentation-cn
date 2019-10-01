@@ -74,6 +74,8 @@ let clipSwim = animator.getClip("swim")
 
 `AnimationState` 对象不存储进入动画的实际转换，这些都在 .glTF 文件中。 相反，`AnimationState` 对象具有一个状态来跟踪它沿动画前进的程度。
 
+> 注意：如果 3D 模型包含嵌入式动画，但是其实体没有 `Animator` 组件来控制它们，则当将实体添加到引擎时，动画将开始播放。 如果实体存在 `Animator` 组件，则所有动画状态默认为 `stopped`，需要手动播放。
+
 ## 获取动画
 
 如果没有剪辑对象的引用，可以使用名称调用 `getClip()` 函数从 `Animator` 中获取剪辑。

@@ -119,6 +119,14 @@ what special layers PBR uses?
 
 你可以在[这个库](https://github.com/decentraland/builder-assets/tree/master/textures)中找到Decentrlanad 全部的默认纹理。
 
+### Lighting conditions照明条件
+
+当前 Decentraland 场景不支持自定义光源。可以考虑将光源转换成纹理，例如使用墙壁上的光亮焦点来模拟。
+
+注意，对象在其他对象上投射阴影。 默认光源在所有三个轴上的位置均为 45 度。
+
+发光材质不受其他对象阴影的影响，但会投射自己的阴影。
+
 #### 纹理大小限制
 
 纹理大小必须使用与以下数字匹配的宽度和高度数字（以像素为单位）：
