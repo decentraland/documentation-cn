@@ -113,14 +113,14 @@ input.subscribe("BUTTON_UP", ActionButton.POINTER, false, e => {
 
 ### 检测命中实体
 
-如果 `subscribe()` 函数中 `useRaycast` 字段为 true，并且玩家的指针指向实体，则事件对象包括嵌套的 `hit` 对象。 `hit` 对象包括命中的碰撞实体的信息。
+如果 `subscribe()` 函数中 `useRaycast` 字段（第三个参数）为 true，并且玩家的指针指向实体，则事件对象包括嵌套的 `hit` 对象。 `hit` 对象包括命中的碰撞实体的信息。
 
 全局按钮事件的射线仅检测具有碰撞网格的实体。 默认情况下，原始形状具有碰撞网格，但 3D 模型需要设置碰撞网格。
 
 > 提示：有关如何向 3D 模型添加碰撞器网格的详细信息，请参见[碰撞]({{ site.baseurl }}{% post_url /3d-modeling/2018-01-12-colliders %})。
 
 ```ts
-input.subscribe("BUTTON_DOWN",  e => {
+input.subscribe("BUTTON_DOWN",  ActionButton.POINTER, true, e => {
   if ( e.hit){
 	let hitEntity = engine.entities[e.hit.entityId]
 	hitEntity.addComponent(greenMaterial)
